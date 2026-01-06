@@ -1,0 +1,34 @@
+﻿site_name: notebOOOOOOk
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: black
+      accent: grey
+  features:
+    - navigation.sections
+    - toc.follow
+extra_css:
+  - styles/mono.css
+markdown_extensions:
+  - toc:
+      toc_depth: 2-3
+      permalink: true
+  - pymdownx.mark
+nav:
+  - Home: index.md
+  - EDA:
+      - EDA4PR: EDA4PR.md
+      - EDA4PR-Analog: EDA4PR-Analog.md
+      - EDA4PR-Digtal: EDA4PR-Digtal.md
+      - EDA4PR-LCM: EDA4PR-LCM.md
+      - Flow: flow.md
+  - Tools:
+      - Algorithms: Algorithms.md
+      - Hardware: Hardware.md
+      - OS: OS.md
+      - Program: Program.md
+      - Tools: Tools.md
+  - Other:
+      - Literature: Literature.md
+
