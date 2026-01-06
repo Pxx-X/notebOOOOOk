@@ -563,13 +563,15 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 ## latex in vscode
 
-华工课程论文和毕设Latex模板：https://github.com/mengchaoheng/SCUT_thesis
+[华工课程论文和毕设Latex模板](https://github.com/mengchaoheng/SCUT_thesis)
+
+教程：
 
 - [texlive2023+vscode安装与配置（简洁版） - 知乎](https://zhuanlan.zhihu.com/p/624932249)
 
 - [Visual Studio Code (vscode)配置LaTeX - 知乎](https://zhuanlan.zhihu.com/p/166523064)
 
-LaTeX 配置（放到 settings.json)
+LaTeX 配置（放到 `settings.json`)
 
 ```json
       //------------------------------LaTeX 配置----------------------------------
