@@ -1,10 +1,11 @@
 ﻿# notebOOOOOOk
 
-<img src="Avatar.jpg" alt="Avatar" width="240" />
-
 - 笔记，随手记
 
+<img src="Avatar.jpg" alt="Avatar" width="120" />
+
 - Author: PxmmmmGH
+
 
 - Field: EDA/Programming/AI
 
@@ -32,7 +33,6 @@
 ### Other
 
 - [Good Thing](Literature.md)
-    - 可惜还有一些忘记记下来了
 
 ## TODO
 - 随手记，格式将就一下
