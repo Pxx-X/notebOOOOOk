@@ -1,15 +1,14 @@
 ﻿# notebOOOOOOk
 
-- 笔记，随手记
-
 <img src="Avatar.jpg" alt="Avatar" width="120" />
+
+- 笔记，随手记, 格式将就
 
 - Author: PxmmmmGH
 
 - Field: EDA/Programming/AI
 
 - Email: [icpengxuan@scut.edu.cn]()
-
 
 ## Notes
 
