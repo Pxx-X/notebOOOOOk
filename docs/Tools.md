@@ -385,13 +385,9 @@ linux下vscode支持的调试器为gdb
 
 
 
-
-
 ## install
 
 [Ubuntu 安装 Docker_ubuntu 重新安装 docker-CSDN 博客](https://blog.csdn.net/breakaway_01/article/details/141285685)
-
-
 
 
 
@@ -527,9 +523,7 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 
 
-# ssh
-
-## 设置密钥
+## ssh 设置密钥
 
 >fatal: unable to access 'https://github.com/xx/xxx.git/': GnuTLS recv error (-110): The TLS connection was non-properly terminated.
 
@@ -552,20 +546,12 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
   git init                          //初始化
   git add README.md                
   git commit -m "first commit"       
-  git branch -M main                //确定为main分支
+  git branch -M main                //确定为main分支, 老版本默认是master
   git remote add origin https://github.com/lion-kng/HarmonyOS-Health-app.git    //关联github与本地代码，这一步最重要！！！
   git push -u origin main            //上传代码
   ```
 
   > remember to set git user
-
-
-
-## win11配置windows ssh server
-
-[Windows 上的 OpenSSH：安装、配置和服务器连接指南 - 系统极客](https://www.sysgeek.cn/openssh-windows/)
-
-
 
 ### reference
 
@@ -577,14 +563,16 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 ## latex in vscode
 
->  注意安装了以后需要重启
+华工课程论文和毕设Latex模板：https://github.com/mengchaoheng/SCUT_thesis
 
 - [texlive2023+vscode安装与配置（简洁版） - 知乎](https://zhuanlan.zhihu.com/p/624932249)
 
 - [Visual Studio Code (vscode)配置LaTeX - 知乎](https://zhuanlan.zhihu.com/p/166523064)
 
-- ```json
-          //------------------------------LaTeX 配置----------------------------------
+LaTeX 配置（放到 settings.json)
+
+```json
+      //------------------------------LaTeX 配置----------------------------------
       // 设置是否自动编译
       "latex-workshop.latex.autoBuild.run": "onSave",
       //右键菜单
@@ -669,24 +657,7 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
                   "pdflatex"
               ]
           },
-          // {
-          //     "name": "LuaLaTeX",
-          //     "tools": [
-          //         "lualatex"
-          //     ]
-          // },
-          // {
-          //     "name": "BibTeX",
-          //     "tools": [
-          //         "bibtex"
-          //     ]
-          // },
-          // {
-          //     "name": "LaTeXmk",
-          //     "tools": [
-          //         "latexmk"
-          //     ]
-          // },
+
           {
               "name": "xelatex -> bibtex -> xelatex*2",
               "tools": [
@@ -714,15 +685,7 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
                   "pdflatex"
               ]
           },
-          // {
-          //     "name": "pdflatex -> biber -> pdflatex*2",
-          //     "tools": [
-          //         "pdflatex",
-          //         "biber",
-          //         "pdflatex",
-          //         "pdflatex"
-          //     ]
-          // }
+
       ],
       
       //文件清理。此属性必须是字符串数组
@@ -763,22 +726,20 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
       "editor.renderControlCharacters": false,
       "security.workspace.trust.untrustedFiles": "newWindow", // 
       "files.autoSave": "afterDelay",// 自动保存
-  ```
+```
 
   
 
-### ppt
+## ppt
+
+> 感觉Beamer缺点就是插入图片太麻烦
 
 - [Beamer——基于LaTeX制作学术PPT - 知乎](https://zhuanlan.zhihu.com/p/665090820)
 - https://mpetroff.net/files/beamer-theme-matrix/
 
 
 
-# Hugo
 
-### 参考
-
-[如何用 GitHub Pages + Hugo 搭建个人博客 · KrislinBlog](https://krislinzhao.github.io/docs/create-a-wesite-using-github-pages-and-hugo/#9-reference)
 
 
 
@@ -1200,6 +1161,16 @@ TaskD
 # 代理
 
 [windows11 搭建 WSL2 运行环境（2024）-CSDN 博客](https://blog.csdn.net/qq_39316962/article/details/139927197)
+
+
+
+# Hugo/mkdoc
+
+> hugo 有点麻烦，mkdoc简单点
+
+### 参考
+
+[如何用 GitHub Pages + Hugo 搭建个人博客 · KrislinBlog](https://krislinzhao.github.io/docs/create-a-wesite-using-github-pages-and-hugo/#9-reference)
 
 
 

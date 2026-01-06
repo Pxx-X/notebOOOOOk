@@ -722,6 +722,189 @@ void sharedPointerExample() {
 
 
 
+### 深拷贝
+
+当一个对象的有一个指针的时候，复制对象需要特别注意，要看是否两个对象管理同一片内存！如果不要，需要使用深拷贝，创建新的内存空间和指针
+
+```c++
+#include <bits/stdc++.h>
+
+class Foo {
+public:
+    Foo() = default;
+
+    /**
+     * @brief Construct with an initializer list of values.
+     */
+    Foo(std::initializer_list<int> values) {
+        data_.reserve(values.size());
+        for (int v : values) {
+            data_.push_back(std::make_unique<int>(v));
+        }
+    }
+
+    /**
+     * @brief Deep-copy constructor: allocate new ints with the same values.
+     */
+    Foo(const Foo& other) {
+        data_.reserve(other.data_.size());
+        for (const auto& p : other.data_) {
+            if (p) {
+                data_.push_back(std::make_unique<int>(*p));
+            } else {
+                data_.push_back(nullptr);
+            }
+        }
+    }
+
+    /**
+     * @brief Deep-copy assignment via copy-and-swap for strong exception safety.
+     */
+    Foo& operator=(const Foo& other) {
+        if (this == &other) return *this;
+        Foo tmp(other);
+        swap(tmp);
+        return *this;
+    }
+
+    Foo(Foo&&) noexcept = default;
+    Foo& operator=(Foo&&) noexcept = default;
+    ~Foo() = default;
+
+    /**
+     * @brief Append a new value by allocating a fresh int.
+     */
+    void Add(int value) { data_.push_back(std::make_unique<int>(value)); }
+
+    /**
+     * @brief Overwrite a value at the given index.
+     */
+    void SetValue(std::size_t idx, int value) {
+        CheckIndex(idx);
+        *data_[idx] = value;
+    }
+
+    /**
+     * @brief Return number of stored elements.
+     */
+    std::size_t Size() const noexcept { return data_.size(); }
+
+    /**
+     * @brief Read a value at the given index.
+     */
+    int ValueAt(std::size_t idx) const {
+        CheckIndex(idx);
+        return *data_[idx];
+    }
+
+    /**
+     * @brief Expose the raw pointer at index (for tests).
+     */
+    const int* PtrAt(std::size_t idx) const {
+        CheckIndex(idx);
+        return data_[idx].get();
+    }
+
+private:
+    std::vector<std::unique_ptr<int>> data_;
+
+    void swap(Foo& other) noexcept { data_.swap(other.data_); }
+
+    void CheckIndex(std::size_t idx) const {
+        if (idx >= data_.size()) {
+            throw std::out_of_range("Foo index out of range");
+        }
+    }
+};
+
+static void Require(bool ok, std::string_view msg) {
+    if (!ok) {
+        std::cerr << "Test failed: " << msg << "\n";
+        std::exit(1);
+    }
+}
+
+int main() {
+    std::cout << "Case 1: copy constructor deep-copies values.\n";
+    Foo a{1, 2, 3};
+    Foo b = a;
+    Require(a.Size() == b.Size(), "copy size matches");
+    for (std::size_t i = 0; i < a.Size(); ++i) {
+        Require(a.ValueAt(i) == b.ValueAt(i), "copy value matches");
+        Require(a.PtrAt(i) != b.PtrAt(i), "copy pointer differs");
+    }
+    b.SetValue(0, 99);
+    Require(a.ValueAt(0) == 1, "copy isolation after mutation");
+
+    std::cout << "Case 2: copy assignment deep-copies values.\n";
+    Foo c{7, 8};
+    c = a;
+    Require(c.Size() == a.Size(), "assign size matches");
+    for (std::size_t i = 0; i < c.Size(); ++i) {
+        Require(c.ValueAt(i) == a.ValueAt(i), "assign value matches");
+        Require(c.PtrAt(i) != a.PtrAt(i), "assign pointer differs");
+    }
+
+    std::cout << "Case 3: self-assignment keeps identity.\n";
+    std::vector<const int*> before;
+    before.reserve(a.Size());
+    for (std::size_t i = 0; i < a.Size(); ++i) {
+        before.push_back(a.PtrAt(i));
+    }
+    a = a;
+    for (std::size_t i = 0; i < a.Size(); ++i) {
+        Require(a.PtrAt(i) == before[i], "self-assign pointer unchanged");
+    }
+
+    std::cout << "Case 4: move transfers ownership.\n";
+    Foo moved = std::move(a);
+    Require(moved.Size() == 3, "moved size preserved");
+    std::cout << "moved-from size (unspecified) = " << a.Size() << "\n";
+
+    std::cout << "All tests passed.\n";
+    return 0;
+}
+
+```
+
+>  basic/ptr/copy.cpp 里的 operator= 用的是 copy-and-swap：
+>
+>   Foo tmp(other);
+>   swap(tmp);
+>
+>   原因是：
+>
+>   - 强异常安全：先构造 tmp，如果拷贝分配抛异常，原对象完全不变；只有 tmp 成功后才 swap。
+>   - 复用拷贝构造：只写一套深拷贝逻辑，避免重复代码。
+>   - 自赋值安全：即使没有显式 if (this == &other)，也不会出错（只是多一次拷贝）。
+>
+>   如果你不关心强异常安全，确实可以直接清空再逐个复制，但一旦中途失败对象就处于部分修改状态。复制后再 swap 可以避免这一点。
+>
+> • 举个具体例子：
+>
+>   假设 Foo 里有很多元素，正在做 a = b;。
+>   如果你用“直接复制”的写法（先清空再逐个 new）：
+>
+>   // 伪代码
+>   clear(a);
+>   for (p in b) {
+>       a.push_back(new int(*p));  // 这里可能抛异常
+>   }
+>
+>   如果在中途分配失败（std::bad_alloc），a 已经被清空了一半，对象状态被破坏。
+>
+>   而 copy-and-swap：
+>
+>   Foo tmp(b);   // 先完整拷贝到临时对象
+>   swap(tmp);    // 再一次性交换
+>
+>   如果拷贝时抛异常，tmp 构造失败，a 完全没动；
+>   拷贝成功后再 swap，操作是常量时间且不会抛异常，a 要么旧值，要么新值，永远不会处于“半成品”状态。
+>
+>   这就是 copy-and-swap 的核心价值：强异常安全 + 代码复用。
+>
+>   如果你确定拷贝过程不会抛异常（比如全是 int），直接复制也没问题；但有动态分配时，copy-and-swap 更稳。
+
 
 
 

@@ -80,14 +80,9 @@ win+r打开运行
 
 
 
-## cmd指令
+## win11配置windows ssh server
 
-```
-D: #进入d盘
-cd ..
-dir
-ipconfig
-```
+[Windows 上的 OpenSSH：安装、配置和服务器连接指南 - 系统极客](https://www.sysgeek.cn/openssh-windows/)
 
 
 

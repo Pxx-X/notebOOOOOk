@@ -14,6 +14,10 @@ markdown_extensions:
   - toc:
       toc_depth: 2-3
       permalink: true
+  - fenced_code
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
   - pymdownx.mark
 nav:
   - Home: index.md
@@ -31,4 +35,5 @@ nav:
       - Tools: Tools.md
   - Other:
       - Good Thing: Literature.md
+
 

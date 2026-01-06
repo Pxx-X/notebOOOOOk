@@ -6,10 +6,9 @@
 
 - Author: PxmmmmGH
 
-
 - Field: EDA/Programming/AI
 
-- Email: icpengxuan@scut.edu.cn
+- Email: [icpengxuan@scut.edu.cn]()
 
 
 ## Notes
