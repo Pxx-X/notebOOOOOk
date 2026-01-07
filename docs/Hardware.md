@@ -108,7 +108,8 @@
 
 #### 定点数/ 浮点数
 
-> 浮点数就是小数点位置是变的
+!!! note
+    浮点数就是小数点位置是变的
 
 `定点数`也有反码和补码
 
@@ -507,7 +508,8 @@ CISC 和 RIS
 
 ![image-20251008165329871](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008165329871.png)
 
-> 类似程序
+!!! note
+    类似程序
 
  **结构：**
 
@@ -569,9 +571,9 @@ CM/CMDR/CMAR
 
   ![image-20251008173615909](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173615909.png)
 
-!!! warning
-    
-    注意这种图纵坐标是stage
+  !!! warning
+      
+      注意这种图纵坐标是stage
 
 - 加速比
 
@@ -978,15 +980,17 @@ Block(擦除单位)->Page(读写单位)
 
 ![image-20250923214301217](assets/image-20250923214301217-1761878610219-117.png)
 
-> 汇编指令和机器码是一一对应的
->
-> HDL语言属于硬件语言
->
-> 软硬件可以实现相同功能，只是过程不同
+!!! note
+    汇编指令和机器码是一一对应的
+    
+    HDL语言属于硬件语言
+    
+    软硬件可以实现相同功能，只是过程不同
 
 ![image-20250924114046856](assets/image-20250924114046856-1761878610219-118.png)
 
-> 微指令：就是一个指令流程中的每一个小步骤，比如PC+1
+!!! note
+    微指令：就是一个指令流程中的每一个小步骤，比如PC+1
 
 #### 系统软件/应用软件
 
@@ -1125,9 +1129,10 @@ RISC-V 的起源可以追溯到 加利福尼亚大学伯克利分校，最初是
 
 ### 核心和线程
 
-> CPU可以想象成是一个银行，CPU核心就相当于柜员，而线程数就相当于开通了几个窗口，柜员和窗口越多，那么同时办理的业务就越多，速度也就越快。
->
-> 通常情况下，一个柜员对应的是一个窗口，通过超线程技术相当于一个柜员管理着两个窗口，使用左右手同时办理两个窗口的业务，大大提高了核心的使用效率，增加了办理业务的速度。
+!!! note
+    CPU可以想象成是一个银行，CPU核心就相当于柜员，而线程数就相当于开通了几个窗口，柜员和窗口越多，那么同时办理的业务就越多，速度也就越快。
+    
+    通常情况下，一个柜员对应的是一个窗口，通过超线程技术相当于一个柜员管理着两个窗口，使用左右手同时办理两个窗口的业务，大大提高了核心的使用效率，增加了办理业务的速度。
 
 ```bash
 #查看物理 cpu 数：
@@ -1147,23 +1152,25 @@ cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
 
 ```
 
->2
->
->48
->
->96
->
->Intel(R) Xeon(R) Platinum 8255C CPU @ 2.50GHz
->
->Thread(s) per core:    1
+!!! note
+    2
+    
+    48
+    
+    96
+    
+    Intel(R) Xeon(R) Platinum 8255C CPU @ 2.50GHz
+    
+    Thread(s) per core:    1
 
 `lscpu `命令可以同时看到上述信息。比如：
 
-> CPU(s):                24
-> On-line CPU(s) list:   0-23
-> Thread(s) per core:    2
-> Core(s) per socket:    6
-> Socket(s):             2
+!!! note
+    CPU(s):                24
+    On-line CPU(s) list:   0-23
+    Thread(s) per core:    2
+    Core(s) per socket:    6
+    Socket(s):             2
 
 #### 核心（core)
 
@@ -1213,15 +1220,17 @@ context类似于CPU上的进程上下，表示了，管理了由Driver层分配�
 
 ![image-20250319163047563](assets/image-20250319163047563-1761878610220-135.png)
 
->对于context的创建与管理，CUDA runtime和CUDA driver API的方式稍有不同：
->
->CUDA runtime软件库通过***延迟初始化\***（deferred initialization）来创建context，也就是lazy initialization。具体意思是在调用每一个CUDART库函数时，它会检查当前是否有context存在，假如需要context，那么才自动创建。也就是说需要创建上面这些对象的时候就会创建context。runtime也可以通过调用cudaFree(0)来强制显式地初始化context。cuda runtime将context和device的概念合并了，即在一个gpu上操作可看成在一个context下。
->
->而在驱动这一层的Driver API里，创建的context是针对一个线程的，即一个device，对应多个context，每个context对应多个线程，线程之间的context可以转移。在driver API中，每一个cpu线程必须要创建 context，或者从其他cpu线程转移context。如果没有创建context，直接调用 driver api创建上面那些对象，就会报错。
+!!! note
+    对于context的创建与管理，CUDA runtime和CUDA driver API的方式稍有不同：
+    
+    CUDA runtime软件库通过***延迟初始化\***（deferred initialization）来创建context，也就是lazy initialization。具体意思是在调用每一个CUDART库函数时，它会检查当前是否有context存在，假如需要context，那么才自动创建。也就是说需要创建上面这些对象的时候就会创建context。runtime也可以通过调用cudaFree(0)来强制显式地初始化context。cuda runtime将context和device的概念合并了，即在一个gpu上操作可看成在一个context下。
+    
+    而在驱动这一层的Driver API里，创建的context是针对一个线程的，即一个device，对应多个context，每个context对应多个线程，线程之间的context可以转移。在driver API中，每一个cpu线程必须要创建 context，或者从其他cpu线程转移context。如果没有创建context，直接调用 driver api创建上面那些对象，就会报错。
 
->CUDA runtime软件库和driver API的区别：
->
->我们平常安装使用的CUDA，即runtime软件库，是构建在Driver API上的另一层封装，所有的API都是以4个字母cuda开头。在编译时其cu代码可以和C/C++代码混合编译。而CUDA还有另外一个功能更强大，当然使用起来也更麻烦的API接口Driver API。Driver API将完整的CUDA功能展现给用户，功能更加强大，但是用起来较为繁琐，所有的Driver API，则都是2个字母cu开头。
+!!! note
+    CUDA runtime软件库和driver API的区别：
+    
+    我们平常安装使用的CUDA，即runtime软件库，是构建在Driver API上的另一层封装，所有的API都是以4个字母cuda开头。在编译时其cu代码可以和C/C++代码混合编译。而CUDA还有另外一个功能更强大，当然使用起来也更麻烦的API接口Driver API。Driver API将完整的CUDA功能展现给用户，功能更加强大，但是用起来较为繁琐，所有的Driver API，则都是2个字母cu开头。
 
 #### CUDA Stream
 

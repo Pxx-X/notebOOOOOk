@@ -155,7 +155,8 @@ AIPlacer:
 
 `multiplier`是指器件被复制的次数。比如，设置multiplier为4，相当于把这个MOS管**复制**4个，==并联==在一起。这种情况下，==每个MOS管都是独立的，它们的源、漏、栅都分别连接在一起==。这样==总宽度是单个MOS宽度的4倍==，电流能力也变成四倍。
 
-> 一般来说，fingers数取偶数会好一些
+!!! note
+    一般来说，fingers数取偶数会好一些
 
 `fin`
 
@@ -402,7 +403,8 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 - square-like pattern offers the best matching performance [14] [11] --cite-->![image-20251204173246462](assets/image-20251204173246462.png)![image-20251204173254929](assets/image-20251204173254929.png)
 
-  > 并没有说方形会带来更好的性能
+  !!! note
+      并没有说方形会带来更好的性能
 
 - One of the fundamental rules for CC layouts underscores the importance of achieving the maximum degree of dispersion [1]
 
@@ -526,7 +528,8 @@ minimizing only the dummy count leads to inferior results --cite-->[Multiobjecti
 
 <img src="assets/image-20251125100646967.png" alt="image-20251125100646967" style="zoom: 70%;" />
 
-> m和nf用户定下了，我们应该改不了。这也约束了算法的通用性。
+!!! note
+    m和nf用户定下了，我们应该改不了。这也约束了算法的通用性。
 
 
 
@@ -718,7 +721,8 @@ When we are talking about structures that require **maximum precision** - such a
 
 ![image-20251125090815543](assets/image-20251125090815543.png)
 
-> 也不一定，我看也有挺多电流镜用CC的
+!!! note
+    也不一定，我看也有挺多电流镜用CC的
 
 <img src="assets/image-20251204154957700.png" alt="image-20251204154957700" style="zoom: 90%;" />
 
@@ -792,7 +796,8 @@ https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&v=mca7NKcT
   
   - 差分对必须采用双排的==共质心ABBA==形式。除非在不重要的cell，得到电路准许才可画一排。==必须加dummy==(一排，两排)
   
-    > ！一定是一对的吗
+    !!! note
+        ！一定是一对的吗
   
   - 在m<4的情况下，s/D端不合并的画法匹配度比源漏合并的高一些。具体看长度差距分析，超过4个不建议用s、D不合并方法
   
@@ -1238,9 +1243,9 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
     ![image-20251014140806211](assets/image-20251014140806211.png)
 
-!!! tip
-    
-    这里只写了一个方向的
+    !!! tip
+        
+        这里只写了一个方向的
 
   - 更详细的目标：
 
@@ -1546,9 +1551,9 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   ![image-20251020133252845](assets/image-20251020133252845.png)
 
-!!! tip
-    
-    都比手工的差 
+  !!! tip
+      
+      都比手工的差 
 
 #### [-Priority-based+associated constraints -COR24-CO+heuristic+RL-]()
 
@@ -1650,11 +1655,12 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
     <img src="assets/image-20251022103121263.png" alt="image-20251022103121263" style="zoom: 40%;" />
 
-  - > [! WARNING]
-    >
-    > 这里的非监督其实和 NLP 是差不多的概念？⚠️ 非监督但是也分了测试集和训练集
-    >
-    > 没有提 `Legalization`？是不需要吗？
+  - !!! note
+  -     [! WARNING]
+  -     
+  -     这里的非监督其实和 NLP 是差不多的概念？⚠️ 非监督但是也分了测试集和训练集
+  -     
+  -     没有提 `Legalization`？是不需要吗？
 
 ##### background
 
@@ -1690,9 +1696,10 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
         - ![image-20251022101101592](assets/image-20251022101101592.png)
 
-        - > [! WARNING]
-          >
-          >固定只能有 5 个 dim 感觉电路如果再大点就不适配了
+        - !!! note
+        -     [! WARNING]
+        -     
+        -     固定只能有 5 个 dim 感觉电路如果再大点就不适配了
 
       - init positional info (2 dim)  
 
@@ -1704,19 +1711,19 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
       - 𝑴1 matrix: ![image-20251022103442426](assets/image-20251022103442426.png)
 
-!!! warning
-    
-    是否会有例外？
+        !!! warning
+            
+            是否会有例外？
 
       - 𝑴2 matrix: 
 
         对称信息
 
-!!! tip
-    
-    没有区分 x/y 对称，还有对称组？
-    
-    感觉还有很大提升空间
+        !!! tip
+            
+            没有区分 x/y 对称，还有对称组？
+            
+            感觉还有很大提升空间
 
       - 𝑴3 matrix: 
 
@@ -1733,7 +1740,8 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
 ###### loss
 
-  > 无监督感觉就是想 NLP 一样找最小值？
+  !!! note
+      无监督感觉就是想 NLP 一样找最小值？
 
   ![image-20251022112547681](assets/image-20251022112547681.png)
 
@@ -1769,7 +1777,8 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   - ![image-20251022113931810](assets/image-20251022113931810.png)
 
-    > `global position` 分开的很明确
+    !!! note
+        `global position` 分开的很明确
 
   - Ablation Study  
 
@@ -1841,7 +1850,8 @@ action space A ensures symmetrical actions
 
 ###### MARL
 
-> 没看懂
+!!! note
+    没看懂
 
 
 
@@ -1849,7 +1859,8 @@ action space A ensures symmetrical actions
 
 ![image-20251023144002040](assets/image-20251023144002040.png)
 
-> SAGERoute!
+!!! note
+    SAGERoute!
 
 ##### experiment
 
@@ -1857,9 +1868,10 @@ action space A ensures symmetrical actions
 
 - ![image-20251023144230270](assets/image-20251023144230270.png)
 
-  > 都是和 RL 的方法比较，和 Virtuoso 的自动布局布线
-  >
-  > Virtuoso, struggles to adequately meet symmetry constraints  
+  !!! note
+      都是和 RL 的方法比较，和 Virtuoso 的自动布局布线
+      
+      Virtuoso, struggles to adequately meet symmetry constraints  
 
 - ![image-20251023144422911](assets/image-20251023144422911.png)
 
@@ -1950,9 +1962,9 @@ action space A ensures symmetrical actions
 
 ###### topo-sort based legalization  
 
-!!! tip
-    
-    前面没怎么看懂，之后再看看
+  !!! tip
+      
+      前面没怎么看懂，之后再看看
 
   ![image-20251015105642908](assets/image-20251015105642908.png)
 
@@ -1962,9 +1974,9 @@ action space A ensures symmetrical actions
 
   ![image-20251015110029781](assets/image-20251015110029781.png)
 
-!!! warning
-    
-    A~2~是什么？
+  !!! warning
+      
+      A~2~是什么？
 
   比 MAGICAL（基于 LP）的快很多
 
@@ -2202,7 +2214,8 @@ action space A ensures symmetrical actions
 
 ![image-20251021193203544](assets/image-20251021193203544.png)
 
-> DFS-based
+!!! note
+    DFS-based
 
 
 
@@ -2350,7 +2363,8 @@ templates and knowledge-based
 
 <img src="assets/image-20251205095313179.png" alt="image-20251205095313179" style="zoom: 135%;" />
 
-> diffusion share
+!!! note
+    diffusion share
 
 ![image-20251203152941324](assets/image-20251203152941324.png)
 
@@ -2463,9 +2477,10 @@ the follow five rules should beconsidered [9].
 
    ![image-20251230161311247](assets/image-20251230161311247.png)
 
-> 只适合两个器件，同时不考虑abut
->
-> 大数量的二管差分对和电流镜可以用
+!!! note
+    只适合两个器件，同时不考虑abut
+    
+    大数量的二管差分对和电流镜可以用
 
 
 
@@ -2675,9 +2690,9 @@ result
 
 - ![image-20251205103152625](assets/image-20251205103152625.png)
 
-!!! caution
-    
-    这里是分开来相等，但是在[DATE24]()中，每个component和起来相等
+  !!! caution
+      
+      这里是分开来相等，但是在[DATE24]()中，每个component和起来相等
 
 - ![image-20251205103505575](assets/image-20251205103505575.png)
 
@@ -2742,7 +2757,8 @@ impact of secondorder gradients increases significantly with the ==layout size==
 
 ![image-20251205142350505](assets/image-20251205142350505.png)
 
-> Intel(R) Core i7 8665U CPU @1.90 GHz
+!!! note
+    Intel(R) Core i7 8665U CPU @1.90 GHz
 
 ![image-20251205142509367](assets/image-20251205142509367.png)
 
@@ -2770,7 +2786,8 @@ impact of secondorder gradients increases significantly with the ==layout size==
 
 - 可以也没给run time
 
-  > 之后可能往高频/routing/Post-Layout Aware去做？
+  !!! note
+      之后可能往高频/routing/Post-Layout Aware去做？
 
 
 
@@ -2814,7 +2831,8 @@ XY/180◦ transformation can be applied only to devices having the same number o
 
 we store the solution==s== in new-pts（AMOSA store one solution）
 
-> TOREAD
+!!! note
+    TOREAD
 
 ![image-20251204212726442](assets/image-20251204212726442.png)
 
@@ -2858,17 +2876,20 @@ Virtuoso schematic and GXL layout environment
 
 ==manually== create  the topology (i.e., the pattern) using the Modgen feature  
 
-> Modgen feature 是什么？
+!!! note
+    Modgen feature 是什么？
 
 Calibre nmLVS and PEX  
 
-> 不用过DRC，也难过
+!!! note
+    不用过DRC，也难过
 
 Labels and NWELL are created ==manually==  
 
 ![image-20251204220537174](assets/image-20251204220537174.png)
 
-> 感觉case的单元数量都挺大的。不过小的话好像也没什么优化必要
+!!! note
+    感觉case的单元数量都挺大的。不过小的话好像也没什么优化必要
 
 ##### experiment
 
@@ -3159,7 +3180,8 @@ hierarchical
 
    ![image-20251022170056167](assets/image-20251022170056167.png)
 
-   >It is important to note that the best layout hierarchy may sometimes differ from a logical netlist hierarchy
+   !!! note
+       It is important to note that the best layout hierarchy may sometimes differ from a logical netlist hierarchy
 
 ###### Design rule capture
 
@@ -3316,7 +3338,8 @@ router
 
 These layers are used by the `cell generator` and may vary based on the `PDK`.
 
-> 一些关于衬底的，比如 PC 层
+!!! note
+    一些关于衬底的，比如 PC 层
 
 
 
@@ -3365,11 +3388,12 @@ Cell fabric module defines the common structure for cell generation utilities wh
        解压然后指定 CMAKE_ARGS 到对应路径
     
 
-> 学校服务器 g++版本太低，需要自己下
->
-> ` conda install -y -c conda-forge gcc_linux-64=10 gxx_linux-64=10 cmake=3.29.3 make gdb`
->
-> 
+!!! note
+    学校服务器 g++版本太低，需要自己下
+    
+    ` conda install -y -c conda-forge gcc_linux-64=10 gxx_linux-64=10 cmake=3.29.3 make gdb`
+    
+    
 
 ```bash
 conda create -y -n align python=3.10
@@ -3528,7 +3552,8 @@ ImportError: /home/pengxuan/Software/miniconda3/envs/align/bin/../lib/libstdc++.
 
 ```
 
-> fix: `conda install -c conda-forge "libstdcxx-ng>=13.2.0"`
+!!! note
+    fix: `conda install -c conda-forge "libstdcxx-ng>=13.2.0"`
 
 
 
@@ -3568,7 +3593,8 @@ ImportError: /home/pengxuan/Software/miniconda3/envs/align/bin/../lib/libstdc++.
 
 ##### install
 
->  无 sudo 权限 local 下载
+!!! note
+    无 sudo 权限 local 下载
 
 ```bash
   535  rm -rf ../local/

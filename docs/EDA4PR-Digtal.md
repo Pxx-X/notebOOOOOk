@@ -267,54 +267,55 @@ cell type 不是没起作用吗
 
   ![image-20250301142650331](assets/image-20250301142650331.png)
 
-  >打个比方：假设你有一个班级的座位表，每个学生的位置用坐标（比如 x, y）表示。现在隔壁班也有一个座位表，座位形状和你们班完全一样，但可能：
-  >
-  >1. 他们的座位整体旋转了某个角度（比如你们班正北方向是讲台，他们班正东方向是讲台）
-  >2. 学生的座位编号顺序被打乱了（比如你们班 1 号坐在前排左，他们班 1 号可能坐在后排右）
-  >
-  >\# 对应到图中的概念：
-  >
-  >1. **图嵌入（Node Embedding）**
-  >     就像把每个学生用坐标表示，这里的 "坐标" 就是算法生成的 d 维向量 X。这些坐标要保留同学之间的关系（比如经常互动的同学坐标更接近）。
-  >2. **正交变换矩阵 Q**
-  >     相当于旋转或镜像整个座位表（比如把整个班级的座位顺时针转 90 度）。这种变换不改变同学之间的相对距离——原本坐在一起的同学，旋转后还是坐在一起。
-  >3. **排列矩阵 P**
-  >     相当于重新给座位编号。比如把原本 1 号同学的标签贴到 5 号座位上，但座位本身的位置没变。这就像洗牌一样打乱顺序，但实际座位布局不变。
-  >
-  >\# 具体到你的问题：
-  >
-  >- **第一步：对齐旋转/镜像（找 Q）**
-  >  假设两个班级座位布局完全一样，但方向不同。我们需要找到一个 "旋转角度" Q，让两个班级的座位表方向一致。
-  >
-  >  比如你们班座位表是正常方向，隔壁班被旋转了 90 度。通过 Q 这个旋转矩阵，可以把他们的座位表转回来，这样两个班级的座位坐标就能对齐。
-  >
-  >- **第二步：对齐编号顺序（找 P）**
-  >  即使座位方向对齐了，同学的编号可能还是乱的。比如你们班 1 号同学坐在(1,1)，而隔壁班 1 号可能坐在(1,1)的是他们班的 5 号同学。这时候需要一个 "编号重排" 矩阵 P，把他们的编号顺序调整到和你们班一致。
-  >
-  >\# 实际应用场景：
-  >
-  >假设淘宝和京东都有用户关系网图：
-  >
-  >1. **淘宝图**：用户 A、B、C 的嵌入坐标是 X
-  >2. **京东图**：同样的用户被称作 X'、Y、Z，嵌入坐标是 X'
-  >
-  >即使两个平台的用户关系完全相同：
-  >
-  >- 京东可能用了不同的嵌入算法（导致需要旋转 Q）
-  >- 用户的 ID 编号不同（导致需要重新排列 P）
-  >
-  >通过找到 Q 和 P，就能判断 "淘宝用户 A" 对应 "京东用户 X"，实现跨平台用户对齐。
-  >
-  >\# 再简化总结：
-  >
-  >这个数学问题就像在做两件事：
-  >
-  >1. **纠正方向差异**：用 Q 旋转/镜像，让两个图的方向一致
-  >2. **纠正编号混乱**：用 P 重新排列，让对应的节点找到彼此
-  >
-  >最终目标：让两个图的节点坐标尽可能重合，即使它们最初看起来不一样。
-  >
-  >![image-20250301142650331](assets/image-20250301142650331.png)
+  !!! note
+      打个比方：假设你有一个班级的座位表，每个学生的位置用坐标（比如 x, y）表示。现在隔壁班也有一个座位表，座位形状和你们班完全一样，但可能：
+      
+      1. 他们的座位整体旋转了某个角度（比如你们班正北方向是讲台，他们班正东方向是讲台）
+      2. 学生的座位编号顺序被打乱了（比如你们班 1 号坐在前排左，他们班 1 号可能坐在后排右）
+      
+      ### 对应到图中的概念：
+      
+      1. **图嵌入（Node Embedding）**
+          就像把每个学生用坐标表示，这里的 "坐标" 就是算法生成的 d 维向量 X。这些坐标要保留同学之间的关系（比如经常互动的同学坐标更接近）。
+      2. **正交变换矩阵 Q**
+          相当于旋转或镜像整个座位表（比如把整个班级的座位顺时针转 90 度）。这种变换不改变同学之间的相对距离——原本坐在一起的同学，旋转后还是坐在一起。
+      3. **排列矩阵 P**
+          相当于重新给座位编号。比如把原本 1 号同学的标签贴到 5 号座位上，但座位本身的位置没变。这就像洗牌一样打乱顺序，但实际座位布局不变。
+      
+      ### 具体到你的问题：
+      
+      - **第一步：对齐旋转/镜像（找 Q）**
+       假设两个班级座位布局完全一样，但方向不同。我们需要找到一个 "旋转角度" Q，让两个班级的座位表方向一致。
+      
+       比如你们班座位表是正常方向，隔壁班被旋转了 90 度。通过 Q 这个旋转矩阵，可以把他们的座位表转回来，这样两个班级的座位坐标就能对齐。
+      
+      - **第二步：对齐编号顺序（找 P）**
+       即使座位方向对齐了，同学的编号可能还是乱的。比如你们班 1 号同学坐在(1,1)，而隔壁班 1 号可能坐在(1,1)的是他们班的 5 号同学。这时候需要一个 "编号重排" 矩阵 P，把他们的编号顺序调整到和你们班一致。
+      
+      ### 实际应用场景：
+      
+      假设淘宝和京东都有用户关系网图：
+      
+      1. **淘宝图**：用户 A、B、C 的嵌入坐标是 X
+      2. **京东图**：同样的用户被称作 X'、Y、Z，嵌入坐标是 X'
+      
+      即使两个平台的用户关系完全相同：
+      
+      - 京东可能用了不同的嵌入算法（导致需要旋转 Q）
+      - 用户的 ID 编号不同（导致需要重新排列 P）
+      
+      通过找到 Q 和 P，就能判断 "淘宝用户 A" 对应 "京东用户 X"，实现跨平台用户对齐。
+      
+      ### 再简化总结：
+      
+      这个数学问题就像在做两件事：
+      
+      1. **纠正方向差异**：用 Q 旋转/镜像，让两个图的方向一致
+      2. **纠正编号混乱**：用 P 重新排列，让对应的节点找到彼此
+      
+      最终目标：让两个图的节点坐标尽可能重合，即使它们最初看起来不一样。
+      
+      ![image-20250301142650331](assets/image-20250301142650331.png)
 
 - Pointwise Mutual Information (PMI) Matrices  
 
@@ -334,54 +335,55 @@ cell type 不是没起作用吗
 
     ![image-20250301145951825](assets/image-20250301145951825.png)
 
-  - >\# **举个例子**
-    >
-    >假设你有一个社交网络，有 3 个用户：A、B、C。他们的嵌入向量如下：
-    >
-    >- A 的嵌入向量：*X* 1 = [1,0]
-    >- B 的嵌入向量：*X* 2 = [0,1]
-    >- C 的嵌入向量：*X* 3 = [1,1]
-    >
-    >也就是 $X \in \mathbb{R}^{3 \times 2}$
-    >
-    >\# **1. 计算相似度**
-    >
-    >- A 和 B 的相似度：⟨ *X* 1, *X* 2⟩ = 1×0+0×1 = 0
-    >- A 和 C 的相似度：⟨ *X* 1, *X* 3⟩ = 1×1+0×1 = 1
-    >- B 和 C 的相似度：⟨ *X* 2, *X* 3⟩ = 0×1+1×1 = 1
-    >
-    >\# **2. 构建 PMI 矩阵**
-    >
-    >PMI 矩阵就是：
-    >
-    >![image-20250301145748553](assets/image-20250301145748553.png)
-    >
-    >- 第 (1,2) 项是 0，表示 A 和 B 不相似。
-    >- 第 (1,3) 项是 1，表示 A 和 C 相似。
-    >
-    >\# **3. 正交矩阵的作用**
-    >
-    >假设我们用一个正交矩阵 *Q* 旋转嵌入向量，比如：
-    >
-    >*Q* = [0110]
-    >
-    >新的嵌入矩阵 `X~=XQ` 就是：
-    >
-    >- A 的新嵌入向量：*X*~1 = [0,1]
-    >- B 的新嵌入向量：*X*~2 = [1,0]
-    >- C 的新嵌入向量：*X*~3 = [1,1]
-    >
-    >重新计算相似度：
-    >
-    >- A 和 B 的相似度：⟨ *X*~1, *X*~2⟩ = 0×1+1×0 = 0
-    >- A 和 C 的相似度：⟨ *X*~1, *X*~3⟩ = 0×1+1×1 = 1
-    >- B 和 C 的相似度：⟨ *X*~2, *X*~3⟩ = 1×1+0×1 = 1
-    >
-    >PMI 矩阵仍然是：
-    >
-    >![image-20250301150907011](assets/image-20250301150907011.png)
-    >
-    >也就是说，正交变换不会改变节点之间的相似度。
+  - !!! note
+  -     ### **举个例子**
+  -     
+  -     假设你有一个社交网络，有 3 个用户：A、B、C。他们的嵌入向量如下：
+  -     
+  -     - A 的嵌入向量：*X* 1 = [1,0]
+  -     - B 的嵌入向量：*X* 2 = [0,1]
+  -     - C 的嵌入向量：*X* 3 = [1,1]
+  -     
+  -     也就是 $X \in \mathbb{R}^{3 \times 2}$
+  -     
+  -     #### **1. 计算相似度**
+  -     
+  -     - A 和 B 的相似度：⟨ *X* 1, *X* 2⟩ = 1×0+0×1 = 0
+  -     - A 和 C 的相似度：⟨ *X* 1, *X* 3⟩ = 1×1+0×1 = 1
+  -     - B 和 C 的相似度：⟨ *X* 2, *X* 3⟩ = 0×1+1×1 = 1
+  -     
+  -     #### **2. 构建 PMI 矩阵**
+  -     
+  -     PMI 矩阵就是：
+  -     
+  -     ![image-20250301145748553](assets/image-20250301145748553.png)
+  -     
+  -     - 第 (1,2) 项是 0，表示 A 和 B 不相似。
+  -     - 第 (1,3) 项是 1，表示 A 和 C 相似。
+  -     
+  -     #### **3. 正交矩阵的作用**
+  -     
+  -     假设我们用一个正交矩阵 *Q* 旋转嵌入向量，比如：
+  -     
+  -     *Q* = [0110]
+  -     
+  -     新的嵌入矩阵 `X~=XQ` 就是：
+  -     
+  -     - A 的新嵌入向量：*X*~1 = [0,1]
+  -     - B 的新嵌入向量：*X*~2 = [1,0]
+  -     - C 的新嵌入向量：*X*~3 = [1,1]
+  -     
+  -     重新计算相似度：
+  -     
+  -     - A 和 B 的相似度：⟨ *X*~1, *X*~2⟩ = 0×1+1×0 = 0
+  -     - A 和 C 的相似度：⟨ *X*~1, *X*~3⟩ = 0×1+1×1 = 1
+  -     - B 和 C 的相似度：⟨ *X*~2, *X*~3⟩ = 1×1+0×1 = 1
+  -     
+  -     PMI 矩阵仍然是：
+  -     
+  -     ![image-20250301150907011](assets/image-20250301150907011.png)
+  -     
+  -     也就是说，正交变换不会改变节点之间的相似度。
 
 - PMI Matrix eigendecomposition for network embedding  
 
@@ -1458,11 +1460,13 @@ capture ==global information==
 
 ![image-20250524152522701](assets/image-20250524152522701.png)
 
-> 边的数量级会很大吧？
+!!! note
+    边的数量级会很大吧？
 
 ![image-20250528220917995](assets/image-20250528220917995.png)
 
-> 少见的
+!!! note
+    少见的
 
 ##### feature
 
@@ -1488,7 +1492,8 @@ capture ==global information==
 
 ![image-20250528223941835](assets/image-20250528223941835.png)
 
-> 怎么变少了
+!!! note
+    怎么变少了
 
 ![image-20250524160945464](assets/image-20250524160945464.png)
 
@@ -1530,9 +1535,9 @@ capture ==global information==
 
 - the homogeneous GNNs may exhibit poor performance when handling diverse netlists simultaneously  
 
-!!! warning
-    
-    他没解释这个是为什么，也没引用
+  !!! warning
+      
+      他没解释这个是为什么，也没引用
 
 - Recently, `multimodal fusion-based models` have attracted much attention due to their ability to provide various perspectives [19], [20], and current multimodal fusion-based congestion prediction models have demonstrated notable performance [8], [12]. However, they still lack the deep multimodal fusion of placement and netlist features  
 
@@ -1672,7 +1677,8 @@ ISPD 2015 Contest
 
     - employ the prevailing learning tricks, the performance of these datadriven models may be compromised once they are applied to other cell and timing libraries. Also, a huge amount of retraining time is unbearable for current fast-paced commercial design cycles. 
 
-    - > 感觉以后做非学习的模型都可以这么说？
+    - !!! note
+    -     感觉以后做非学习的模型都可以这么说？
 
   - Heuristic methods improved by Lagrangian relaxation (LR)- based formulation 
 
@@ -1729,7 +1735,8 @@ Given a set of `gates` and an `initial placement layout`, the objective is to mi
 
 ![image-20250513230131079](assets/image-20250513230131079.png)
 
-> 线性的。这里感觉还有开发空间
+!!! note
+    线性的。这里感觉还有开发空间
 
 
 
@@ -1860,7 +1867,8 @@ compare our newly developed flow with the open-source OpenROAD [3] flow
 
 ![image-20250617010201785](assets/image-20250617010201785.png)
 
-> 线性的。这里感觉还有开发空间
+!!! note
+    线性的。这里感觉还有开发空间
 
 ###### Differentiable Power and Area Objectives
 
@@ -1886,7 +1894,8 @@ With a deeper circuit logic level, this inaccuracy would be amplified
 2. In each iteration, we upsize the top k~1~% gates with the smallest gradients, as these gates will ==most likely benefit== from adjustments；
 3. Conversely, to mitigate unnecessary area and power consumption, our algorithm also downsizes the top k~2~% gates with the largest gradients, which are supposed to be oversized gates.   这是什么原理？
 
-> 启发式人工超参数又出现了
+!!! note
+    启发式人工超参数又出现了
 
 
 
@@ -1896,11 +1905,13 @@ gradient calibration
 
 ![image-20250514154700314](assets/image-20250514154700314.png)
 
-> 可以用到类似的其他工作中
+!!! note
+    可以用到类似的其他工作中
 
 在第一次迭代的时候使用Reference Timer进行对齐一次，计算一个Calibrate比例参数。通过相乘而不是以前工作的相加，让参数传递，最后对齐商业工具，而不是简单的数学模型
 
-> 但是迭代越久会越不准？
+!!! note
+    但是迭代越久会越不准？
 
  
 
@@ -2594,37 +2605,38 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
     4. step:
 
-       > 01: for tree in layer 1, **random** select a pin as root, then use DFS or DFS to get a **queue**, so get the edge **order**. It become a **DAG**
-       >
-       > ![image-20250208223956201](assets/image-20250208223956201.png)
-       >
-       > 02: 定义图 5(c)中, a 的父节点是 p2，定义 mvc(v, r)（minimum via cost）
-       >
-       > ![image-20250209140741895](assets/image-20250209140741895.png)
-       >
-       > 03: 
-       >
-       > ​	for pins who have not child, mvc:
-       >
-       > ![image-20250209143711603](assets/image-20250209143711603.png)
-       >
-       > ​	for pins who have child and not root:
-       >
-       > ​	这个公式其实就是为了确定下每个点下一步的 layer 在哪里。比如算出最小是 mvc(v, 1), 那么 e_(v, ch(e))就在第 r 层
-       >
-       > ![image-20250209143753884](assets/image-20250209143753884.png)
-       >
-       > ​	for root:
-       >
-       > ![image-20250209145157487](assets/image-20250209145157487.png)
-       >
-       > - the difference is excluding r in ∆  
-       >
-       > - because mvc(v, r) does not depend on the value of r when v 
-       >
-       >   is the root, we have mvc (v, 1) = mvc(v, 2) = · · · = mvc(v, k)
-       >
-       > 
+       !!! note
+           01: for tree in layer 1, **random** select a pin as root, then use DFS or DFS to get a **queue**, so get the edge **order**. It become a **DAG**
+           
+           ![image-20250208223956201](assets/image-20250208223956201.png)
+           
+           02: 定义图 5(c)中, a 的父节点是 p2，定义 mvc(v, r)（minimum via cost）
+           
+           ![image-20250209140741895](assets/image-20250209140741895.png)
+           
+           03: 
+           
+           ​	for pins who have not child, mvc:
+           
+           ![image-20250209143711603](assets/image-20250209143711603.png)
+           
+           ​	for pins who have child and not root:
+           
+           ​	这个公式其实就是为了确定下每个点下一步的 layer 在哪里。比如算出最小是 mvc(v, 1), 那么 e_(v, ch(e))就在第 r 层
+           
+           ![image-20250209143753884](assets/image-20250209143753884.png)
+           
+           ​	for root:
+           
+           ![image-20250209145157487](assets/image-20250209145157487.png)
+           
+           - the difference is excluding r in ∆  
+           
+           - because mvc(v, r) does not depend on the value of r when v 
+           
+             is the root, we have mvc (v, 1) = mvc(v, 2) = · · · = mvc(v, k)
+           
+           
 
     **APEC**(Accurate and Predictable Examination for Congestion constraints)  
 
@@ -4173,7 +4185,8 @@ ISPD'18
 
 ![image-20250424195528062](assets/image-20250424195528062.png)
 
-> 全都只是3次迭代？多一些可能更能让人信服
+!!! note
+    全都只是3次迭代？多一些可能更能让人信服
 
 
 
@@ -4181,7 +4194,8 @@ ISPD'18
 
 ![image-20250424200750987](assets/image-20250424200750987.png)
 
-> 这里的violation指的是overflow吗？
+!!! note
+    这里的violation指的是overflow吗？
 
 效果明显！
 
@@ -4619,9 +4633,10 @@ ICCAD2019 benchmarks
 
 - to accelerate the `multisource–multidestination shortest path problem` for VLSI routing  
 
-  > 什么是多源多汇最短路径问题？
-  >
-  > ![image-20250403210333648](assets/image-20250403210333648.png)
+  !!! note
+      什么是多源多汇最短路径问题？
+      
+      ![image-20250403210333648](assets/image-20250403210333648.png)
 
 - integrating `GAMER` into the state-of-the-art academic global router `CUGR` 
 
@@ -4661,9 +4676,10 @@ ICCAD2019 benchmarks
 
 2. Parallelization With Conditional Partial Sum  
 
-   > divide-and-conquer method:
-   >
-   > ![image-20250403215647910](assets/image-20250403215647910.png)
+   !!! note
+       divide-and-conquer method:
+       
+       ![image-20250403215647910](assets/image-20250403215647910.png)
 
 
 
@@ -5367,24 +5383,25 @@ background
 
 - `REST (Liu, Chen, and Young 2021)` achieved the first NN-based approach for RSMT by finding so-called rectilinear edge sequences using `RL`.  (Chen et al. 2022) designed an RL framework to find obstacleavoiding Steiner minimum trees.   Significant challenges in ==neural combinatorial optimization== (NCO) remain. NNs are often used in an `ad-hoc manner` with limited theoretical understanding of the resulting framework. It is also often not known if machine-learning pipelines have the capacity to solve a given combinatorial optimization problem, or how network-architecture design could leverage problem structure to design more effective and efficient neural models.  
 
-  > 在神经网络和机器学习领域，**"ad-hoc manner"（临时性/特定场景性方式）** 通常指一种 **缺乏系统性理论指导、依赖经验或直觉的设计和调整方法**
-  >
-  > 神经网络的设计和优化往往依赖实验结果而非数学证明（例如，无法严格证明某网络结构对组合优化问题的收敛性）。
-  >
-  > - 例如：Transformer 的注意力机制最初是启发式设计，后续才逐渐有理论分析其表达能力。
-  >
-  >  **为什么神经网络常被批评为 "ad-hoc"？**
-  >
-  > **历史原因**：
-  >
-  > - **黑箱性质**：神经网络的函数逼近能力强大，但内部工作机制难以解释。
-  > - **工程实践优先**：深度学习的发展长期由实验结果推动（如ImageNet竞赛），理论滞后于应用。
-  > - **灵活性与代价**：神经网络的通用性使其能适应多种任务，但这也导致设计时缺乏严格约束。
-  >
-  > **典型案例**：
-  >
-  > - **ResNet 的跳跃连接**：最初是实验发现“深度增加导致训练误差上升”后提出的解决方案，后续才有理论分析其梯度传播性质。
-  > - **激活函数选择**：ReLU 的普及源于实验中发现其训练效率优于Sigmoid，而非先验理论推导。
+  !!! note
+      在神经网络和机器学习领域，**"ad-hoc manner"（临时性/特定场景性方式）** 通常指一种 **缺乏系统性理论指导、依赖经验或直觉的设计和调整方法**
+      
+      神经网络的设计和优化往往依赖实验结果而非数学证明（例如，无法严格证明某网络结构对组合优化问题的收敛性）。
+      
+      - 例如：Transformer 的注意力机制最初是启发式设计，后续才逐渐有理论分析其表达能力。
+      
+       **为什么神经网络常被批评为 "ad-hoc"？**
+      
+      **历史原因**：
+      
+      - **黑箱性质**：神经网络的函数逼近能力强大，但内部工作机制难以解释。
+      - **工程实践优先**：深度学习的发展长期由实验结果推动（如ImageNet竞赛），理论滞后于应用。
+      - **灵活性与代价**：神经网络的通用性使其能适应多种任务，但这也导致设计时缺乏严格约束。
+      
+      **典型案例**：
+      
+      - **ResNet 的跳跃连接**：最初是实验发现“深度增加导致训练误差上升”后提出的解决方案，后续才有理论分析其梯度传播性质。
+      - **激活函数选择**：ReLU 的普及源于实验中发现其训练效率优于Sigmoid，而非先验理论推导。
 
 - Arora’s PTAS  1998
 
@@ -5517,7 +5534,8 @@ graph：
 
 ![image-20250921000724862](assets/image-20250921000724862.png)
 
-> shift-window的线性复杂度实现！
+!!! note
+    shift-window的线性复杂度实现！
 
 ##### data
 

@@ -71,7 +71,8 @@ https://blog.csdn.net/qq_43623902/article/details/136258880
 
   Instead of adding individual files manually, you can let VS Code find the right files from your codebase automatically. This can be useful when you don't know which files are relevant to your question.
 
-  > Make sure to enable the [github.copilot.chat.codesearch.enabled](vscode://settings/github.copilot.chat.codesearch.enabled) *(preview)* setting to get the best results
+  !!! note
+      Make sure to enable the [github.copilot.chat.codesearch.enabled](vscode://settings/github.copilot.chat.codesearch.enabled) *(preview)* setting to get the best results
 
 - [@-mentions](https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context?originUrl=%2Fdocs%2Fcopilot%2Fchat%2Fcopilot-chat#_atmentions)
 
@@ -186,7 +187,8 @@ project-root/
 
 - [在remote ssh上登录gemini cli的临时解决方案 - 搞七捻三 - LINUX DO](https://linux.do/t/topic/752327)
 
-  > 通过复制本地的`.gemini`到远端也可以
+  !!! note
+      通过复制本地的`.gemini`到远端也可以
 
 
 
@@ -253,9 +255,10 @@ bash Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
 
 - pycharm 无法添加 conda 环境时无法找到对应环境的 python.exe 文件 ![image-20240905112153852](C:\Users\Pxmmmm.DESKTOP-G18CTQU\AppData\Roaming\Typora\typora-user-images\image-20240905112153852.png)
 
-> Conda Executable 是 conda 的执行文件，不是填环境的 python 解释器 0.0
->
-> 看错两次了
+!!! note
+    Conda Executable 是 conda 的执行文件，不是填环境的 python 解释器 0.0
+    
+    看错两次了
 
 
 
@@ -369,8 +372,9 @@ linux下vscode支持的调试器为gdb
 
 ### centos 容器无法联网问题
 
->Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=container error was
->14: curl#6 - "Could not resolve host: mirrorlist.centos.org; Unknown error"
+!!! note
+    Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=container error was
+    14: curl#6 - "Could not resolve host: mirrorlist.centos.org; Unknown error"
 
 ```
 #还是不行。。。
@@ -522,7 +526,8 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 ### ssh 设置密钥
 
->fatal: unable to access 'https://github.com/xx/xxx.git/': GnuTLS recv error (-110): The TLS connection was non-properly terminated.
+!!! note
+    fatal: unable to access 'https://github.com/xx/xxx.git/': GnuTLS recv error (-110): The TLS connection was non-properly terminated.
 
 ![image-20250611222436757](assets/image-20250611222436757.png)
 
@@ -548,7 +553,8 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
   git push -u origin main            //上传代码
   ```
 
-  > remember to set git user
+  !!! note
+      remember to set git user
 
 #### reference
 
@@ -731,7 +737,8 @@ LaTeX 配置（放到 `settings.json`)
 
 ### ppt
 
-> 感觉Beamer缺点就是插入图片太麻烦
+!!! note
+    感觉Beamer缺点就是插入图片太麻烦
 
 - [Beamer——基于LaTeX制作学术PPT - 知乎](https://zhuanlan.zhihu.com/p/665090820)
 - https://mpetroff.net/files/beamer-theme-matrix/
@@ -1165,7 +1172,8 @@ TaskD
 
 ## Hugo/mkdoc
 
-> hugo 有点麻烦，mkdoc简单点
+!!! note
+    hugo 有点麻烦，mkdoc简单点
 
 #### 参考
 

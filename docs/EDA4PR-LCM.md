@@ -231,7 +231,8 @@ Solution Adapter Agent
 
 ![image-20251207223511757](assets/image-20251207223511757.png)
 
-> 只支持这些？感觉也不多
+!!! note
+    只支持这些？感觉也不多
 
 
 
@@ -258,7 +259,8 @@ Legalization]()进行演示
 
 ![image-20251207225237502](assets/image-20251207225237502.png)
 
-> 怎么把Magical的版图搬到Virtuoso做后仿的？
+!!! note
+    怎么把Magical的版图搬到Virtuoso做后仿的？
 
 ## Dataset
 

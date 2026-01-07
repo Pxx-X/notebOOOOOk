@@ -54,12 +54,13 @@ How to Install:
 2. User can get help by typing "SMIC_PDK_install -h", or refer to the quick start located at "smic28hkcPluslg_0925_oa_cds_vxx/docs/SMIC_OA_CDS_quick_start_28HKCPlusLG_0925_Vxx.pdf"for more details.
 ```
 
-> 有个点需要注意：
->
-> NOTICE: This PDK only contains RC extraction files for below metal options:
-> 1P8M for 8X + ultra thick Cu top metal layers ALPA2=28k,
-> For the other metal options, user can download RC files from SMICNOW, or raise request if 
-> no such supply, we will deliver upon request. 
+!!! note
+    有个点需要注意：
+    
+    NOTICE: This PDK only contains RC extraction files for below metal options:
+    1P8M for 8X + ultra thick Cu top metal layers ALPA2=28k,
+    For the other metal options, user can download RC files from SMICNOW, or raise request if 
+    no such supply, we will deliver upon request. 
 
 
 
@@ -106,32 +107,34 @@ How to Install:
 
 使用Stream In， 导入gds 文件
 
-> 和倒数数字模块一样
+!!! note
+    和倒数数字模块一样
 
 ##### 1.1.3 导入schematic
 
 有的标准库的verilog文件是可以在Verilog In 的时候导入的，但是有些不行（至少SMIC28不行）。
 使用Spice In, 通过`.cdl`文件导入
 
-> 注意`device_map`文件的书写, 貌似只要把`.cdl`文件里面的pmos, nmos, diode 写进来就行
->
-> 注意进行参数映射，`.cdl`的参数和pdk中的参数定义可能不一样，区分大小写
->
-> ```txt
-> -- Device Mapping file generated from SpiceIn GUI
-> devSelect := p09_ckt p09_ckt
-> 	propMap := W w L l
-> 
-> devSelect := n09_ckt n09_ckt
-> 	propMap := W w L l
-> 
-> devSelect := ndio09 ndio09
-> 	propMap := AREA area
-> 
-> 
-> ```
->
-> 
+!!! note
+    注意`device_map`文件的书写, 貌似只要把`.cdl`文件里面的pmos, nmos, diode 写进来就行
+    
+    注意进行参数映射，`.cdl`的参数和pdk中的参数定义可能不一样，区分大小写
+    
+    ```txt
+    -- Device Mapping file generated from SpiceIn GUI
+    devSelect := p09_ckt p09_ckt
+    	propMap := W w L l
+    
+    devSelect := n09_ckt n09_ckt
+    	propMap := W w L l
+    
+    devSelect := ndio09 ndio09
+    	propMap := AREA area
+    
+    
+    ```
+    
+    
 
 !!! warning
     
@@ -177,13 +180,14 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
       `-- cds.lib
   ```
 
-  > ./scripts：下放所有脚本
-  >
-  > ./runspace: virtuoso的启动路径，运行后virtuoso会在这个目录下生成一些log文件。我这里在`runspace`下建了一个`scripts/cds.lib`的软链
-  >
-  > ./docs：放一些相关文档
-  >
-  > ./mylib: 之后放有一些新建的`library`
+  !!! note
+      ./scripts：下放所有脚本
+      
+      ./runspace: virtuoso的启动路径，运行后virtuoso会在这个目录下生成一些log文件。我这里在`runspace`下建了一个`scripts/cds.lib`的软链
+      
+      ./docs：放一些相关文档
+      
+      ./mylib: 之后放有一些新建的`library`
 
 - bash CMD: `virtuoso`
 
@@ -195,13 +199,14 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   ![image-20250526111128540](assets/image-20250526111128540.png)
 
-  > my_div_lib是我已经建好的，按照教程现在其实是没有的
-  >
-  > 红框内就是对应的器件
-  >
-  > 中间的`Cell`是各种器件
-  >
-  > 右边的`View`就是每个`Cell`的一些原理图`schematic`, 图标`symbol`, 版图`layout`, 测试环境`state`&`maestro`, `constraint`等
+  !!! note
+      my_div_lib是我已经建好的，按照教程现在其实是没有的
+      
+      红框内就是对应的器件
+      
+      中间的`Cell`是各种器件
+      
+      右边的`View`就是每个`Cell`的一些原理图`schematic`, 图标`symbol`, 版图`layout`, 测试环境`state`&`maestro`, `constraint`等
 
 #### 3. new `Library`
 
@@ -213,35 +218,36 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   
 
-  >Compile an ASCII technology file (编译ASCII技术文件)
-  >
-  >- 当你有自定义的ASCII格式技术文件(.tf)时使用
-  >
-  >- 系统会根据此文件编译并创建新的技术库
-  >
-  >- 适用于:**需要自定义工艺规则的情况**
-  >
-  >Reference existing technology libraries (引用现有技术库)
-  >
-  >- 允许**引用多个已存在的技术库**
-  >
-  >- 不创建新的技术库，而是引用现有库的技术信息
-  >
-  >- 适用于:**需要多个技术库信息的设计**
-  >
-  >Attach to an existing technology library (附加到现有技术库) 
-  >
-  >- 直接将新库附加到一个现有的已编译技术库
-  >
-  >- **新库将完全继承该技术库的所有设置，包括层级定义、DRC规则等**
-  >
-  >- 适用于:在现有工艺下创建标准设计库(最常用选项)
-  >
-  >Do not need process information (不需要工艺信息)
-  >
-  >- 创建不含任何工艺信息的库
-  >
-  >- 适用于:仅含符号的库、行为模型库等不需物理版图信息的库
+  !!! note
+      Compile an ASCII technology file (编译ASCII技术文件)
+      
+      - 当你有自定义的ASCII格式技术文件(.tf)时使用
+      
+      - 系统会根据此文件编译并创建新的技术库
+      
+      - 适用于:**需要自定义工艺规则的情况**
+      
+      Reference existing technology libraries (引用现有技术库)
+      
+      - 允许**引用多个已存在的技术库**
+      
+      - 不创建新的技术库，而是引用现有库的技术信息
+      
+      - 适用于:**需要多个技术库信息的设计**
+      
+      Attach to an existing technology library (附加到现有技术库) 
+      
+      - 直接将新库附加到一个现有的已编译技术库
+      
+      - **新库将完全继承该技术库的所有设置，包括层级定义、DRC规则等**
+      
+      - 适用于:在现有工艺下创建标准设计库(最常用选项)
+      
+      Do not need process information (不需要工艺信息)
+      
+      - 创建不含任何工艺信息的库
+      
+      - 适用于:仅含符号的库、行为模型库等不需物理版图信息的库
 
   在SMIC 28nm设计中，选择第3个选项，附加到已有的工艺库(`smic28hkmg`)。
 
@@ -253,23 +259,25 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 ![image-20250526111825969](assets/image-20250526111825969.png)
 
-  > `cds.lib`现在变为：
-  >
-  > ```bash
-  > # File Created by  at Mon May 26 10:59:50 2025
-  > # assisted by CdsLibEditor
-  > DEFINE cdsDefTechLib $CDSHOME/tools/dfII/etc/cdsDefTechLib
-  > DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
-  > DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
-  > DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_1/smic28hkcPlusrf_0925_1P10M_8Ic_1TMc_1MTTc_ALPA2_oa_cds_2021_12_15_v1.0_rev5_1/smic28hkmg/
-  > DEFINE my_div_lib /SM05/home/phd2024/phd202411094979/project/cpicp25/mylib/my_div_lib
-  > DEFINE ropll /SM05/home/pgs2024/pgs202421065159/s28/ropll/ropll
-  > DEFINE test_library /SM05/home/phd2024/phd202411094979/project/cpicp25/mylib/test_library
-  > ```
+  !!! note
+      `cds.lib`现在变为：
+      
+      ```bash
+      # File Created by  at Mon May 26 10:59:50 2025
+      # assisted by CdsLibEditor
+      DEFINE cdsDefTechLib $CDSHOME/tools/dfII/etc/cdsDefTechLib
+      DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+      DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
+      DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_1/smic28hkcPlusrf_0925_1P10M_8Ic_1TMc_1MTTc_ALPA2_oa_cds_2021_12_15_v1.0_rev5_1/smic28hkmg/
+      DEFINE my_div_lib /SM05/home/phd2024/phd202411094979/project/cpicp25/mylib/my_div_lib
+      DEFINE ropll /SM05/home/pgs2024/pgs202421065159/s28/ropll/ropll
+      DEFINE test_library /SM05/home/phd2024/phd202411094979/project/cpicp25/mylib/test_library
+      ```
 
 ### 3. new Cell‘s schematic and symbol
 
-> import basic logic gate from imported digtal library
+!!! note
+    import basic logic gate from imported digtal library
 
 ![image-20250526114620071](assets/image-20250526114620071.png)
 
@@ -307,9 +315,10 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   - ![image-20250526120828088](assets/image-20250526120828088.png)
 
-    > 模拟电源一般命名为AVDD和AVSS
-    >
-    > 数字则是DVDD, DVSS
+    !!! note
+        模拟电源一般命名为AVDD和AVSS
+        
+        数字则是DVDD, DVSS
 
   - `Ctrl +s `保存`schematic`，再点击`Check and Save`
 
@@ -317,9 +326,10 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
     ![image-20250526154522915](assets/image-20250526154522915.png)
 
-    > 现在Library Manager 里面就有了相应的View， 其他也是一样的
-    >
-    > 对应的文件也在`./mylib/my_div_lib/NOR/下面
+    !!! note
+        现在Library Manager 里面就有了相应的View， 其他也是一样的
+        
+        对应的文件也在`./mylib/my_div_lib/NOR/下面
 
     ![image-20250526121721931](assets/image-20250526121721931.png)
 
@@ -333,7 +343,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   ![image-20250526122055209](assets/image-20250526122055209.png)
 
-  > 这里可以简单绘制一下，默认也行，就是一个矩形
+  !!! note
+      这里可以简单绘制一下，默认也行，就是一个矩形
 
   保存
 
@@ -345,7 +356,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   ![image-20250526122620277](assets/image-20250526122620277.png)
 
-  > NOR + INV = OR
+  !!! note
+      NOR + INV = OR
 
 
 ### 4. 搭建`testbench`
@@ -358,7 +370,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   ![image-20250526151643616](assets/image-20250526151643616.png)
 
-  > 一个分频器示例
+  !!! note
+      一个分频器示例
 
 - gnd, 直流源, clk等在`anlogLib`中
 
@@ -368,13 +381,15 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 - 简单的任务可以用`ADE L`, 复杂了可以用`ADE Explorer` 和`ADE Assembler`, 具体使用查看[这里](# simulation ADE)
 
-  > 貌似现在还用`ADE L`有点落伍了0.0
+  !!! note
+      貌似现在还用`ADE L`有点落伍了0.0
 
   <img src="assets/image-20250526152440163.png" alt="image-20250526152440163" style="zoom:67%;" /><img src="assets/image-20250526152535568.png" alt="image-20250526152535568" style="zoom:67%;" />
 
   
 
-  > 这里选择做一个简单的瞬态仿真
+  !!! note
+      这里选择做一个简单的瞬态仿真
 
   - 选择观察信号
 
@@ -386,9 +401,10 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
     ![image-20250526152823524](assets/image-20250526152823524.png)
 
-    > 简单选取`schematic`中的`wire`
-    >
-    > 也可以自定义一些表达式
+    !!! note
+        简单选取`schematic`中的`wire`
+        
+        也可以自定义一些表达式
 
   - ![image-20250526153028358](assets/image-20250526153028358.png)
 
@@ -396,9 +412,10 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
     ![image-20250526153118930](assets/image-20250526153118930.png)
 
-    > 点击`wire`是电压，`pin`是电流
-    >
-    > 可以给原理图一些`label`明确一下是哪个信号
+    !!! note
+        点击`wire`是电压，`pin`是电流
+        
+        可以给原理图一些`label`明确一下是哪个信号
 
   - 开启仿真
 
@@ -420,7 +437,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
     ![image-20250526171228577](assets/image-20250526171228577.png)
 
-    > 可以右键`split current strip-->trace`把波形分开，然后可以拖动、缩放波形
+    !!! note
+        可以右键`split current strip-->trace`把波形分开，然后可以拖动、缩放波形
 
   - 检查波形
 
@@ -454,15 +472,16 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
    ![image-20250529201519432](assets/image-20250529201519432.png)
 
-   > 别人给我的，不知道, 
-   >
-   > 安装目录有自带的，在`install/models/spectre/**.scs`, 或者`install/models/spectre/**.lib`
-   >
-   > `ADE Explorer`下也可以看到
-   >
-   > ![image-20250529173813929](assets/image-20250529173813929.png)<img src="assets/image-20250529173852265.png" alt="image-20250529173852265" style="zoom: 50%;" />
-   >
-   > 
+   !!! note
+       别人给我的，不知道,
+       
+       安装目录有自带的，在`install/models/spectre/**.scs`, 或者`install/models/spectre/**.lib`
+       
+       `ADE Explorer`下也可以看到
+       
+       ![image-20250529173813929](assets/image-20250529173813929.png)<img src="assets/image-20250529173852265.png" alt="image-20250529173852265" style="zoom: 50%;" />
+       
+       
 
    - smic28 的一个示例`.scs文件`
 
@@ -524,14 +543,15 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
      ![image-20250529165745924](assets/image-20250529165745924.png)
 
-     >1. Slow NMOS、slow PMOS、slow 电容
-     >2. Slow NMOS、slow PMOS、fast 电容
-     >3. Slow NMOS、fast PMOS、slow 电容
-     >4. Slow NMOS、fast PMOS、fast 电容
-     >5. Fast NMOS、slow PMOS、slow 电容
-     >6. Fast NMOS、slow PMOS、fast 电容
-     >7. Fast NMOS、fast PMOS、slow 电容
-     >8. Fast NMOS、fast PMOS、fast 电容
+     !!! note
+         1. Slow NMOS、slow PMOS、slow 电容
+         2. Slow NMOS、slow PMOS、fast 电容
+         3. Slow NMOS、fast PMOS、slow 电容
+         4. Slow NMOS、fast PMOS、fast 电容
+         5. Fast NMOS、slow PMOS、slow 电容
+         6. Fast NMOS、slow PMOS、fast 电容
+         7. Fast NMOS、fast PMOS、slow 电容
+         8. Fast NMOS、fast PMOS、fast 电容
 
      
 
@@ -748,17 +768,17 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
    ![image-20250905114644234](assets/image-20250905114644234.png)
 
-!!! note
-    
-    spectre方式提取的网表进行后仿真，是使==用带有寄生参数的网表替换原理图网表==，按照原理图仿真方式进行仿真。
-    
-    也可以使用`Calibreview`·
-    
-    Spectre是仿真器仿真时读取的网表格式。
-    
-    Calibreview会将产生的网表封装在一个schematic文件中，同时其后续选项中也可以选择生成对应的spectre网表。
-    
-    [模拟IC仿真验证：基于Cadence Virtuoso的电路寄生参数提取与后仿真 - 哔哩哔哩](https://www.bilibili.com/opus/888360753381244962)
+   !!! note
+       
+       spectre方式提取的网表进行后仿真，是使==用带有寄生参数的网表替换原理图网表==，按照原理图仿真方式进行仿真。
+       
+       也可以使用`Calibreview`·
+       
+       Spectre是仿真器仿真时读取的网表格式。
+       
+       Calibreview会将产生的网表封装在一个schematic文件中，同时其后续选项中也可以选择生成对应的spectre网表。
+       
+       [模拟IC仿真验证：基于Cadence Virtuoso的电路寄生参数提取与后仿真 - 哔哩哔哩](https://www.bilibili.com/opus/888360753381244962)
 
 4. 其他设置
 
@@ -944,7 +964,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
   - constraint.sdc：约束文件
   - flow.tcl: dc 脚本
   
-  > 不同设计差别很大，这里就不总结了，我也不熟, [详情](# DC)
+  !!! note
+      不同设计差别很大，这里就不总结了，我也不熟, [详情](# DC)
   
 - 在pdk中选择合适的标准单元库
   - 可以查看[SMIC](# SMIC)
@@ -1199,7 +1220,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
   
 - 一般做完综合之后要做一次网表等价性验证，[实例代码](# Formality)
 
-- > hjf师兄在紫光就是做这个
+- !!! note
+-     hjf师兄在紫光就是做这个
 
 ### 后端
 
@@ -1211,13 +1233,15 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
    `writeFlowTemplate -directory <输出目录路径>`
 
-   > 可以基于这个来做
-   >
-   > 但是他给的也不能直接跑，缺了文件，不知道为什么
-   >
-   > 我感觉这个`template`还是太臃肿了，还是自己写吧0.0
+   !!! note
+       可以基于这个来做
+       
+       但是他给的也不能直接跑，缺了文件，不知道为什么
+       
+       我感觉这个`template`还是太臃肿了，还是自己写吧0.0
 
-   >注意学校服务器目前(2025/06) 默认用的innovus 15, 其实可以改成innovus 19: `alias innovus="/SM01/eda/cadence/INNOVUS191/bin/innovus"`
+   !!! note
+       注意学校服务器目前(2025/06) 默认用的innovus 15, 其实可以改成innovus 19: `alias innovus="/SM01/eda/cadence/INNOVUS191/bin/innovus"`
 
 2. 准备整体输入文件：
 
@@ -1781,11 +1805,13 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 ### Formality
 
-> 这次没用了。。。
+!!! note
+    这次没用了。。。
 
 ### DRC
 
-> DFM 和[DRC](https://zhida.zhihu.com/search?content_id=259887039&content_type=Article&match_order=1&q=DRC&zhida_source=entity) 的区别在于，DRC 满足不了芯片大概率会废了，DFM 满足不了顶多是良率受损。所以有些关于DFM的DRC violation 可以选择waive掉
+!!! note
+    DFM 和[DRC](https://zhida.zhihu.com/search?content_id=259887039&content_type=Article&match_order=1&q=DRC&zhida_source=entity) 的区别在于，DRC 满足不了芯片大概率会废了，DFM 满足不了顶多是良率受损。所以有些关于DFM的DRC violation 可以选择waive掉
 
 #### 忽略部分violation
 
@@ -1805,9 +1831,10 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 导入了数字的schematic，然后添加drc rule文件就可以直接run了
 
-> 没有标准库的schematic无法做LVS？ 貌似也不是：
->
-> ![image-20250901170919173](assets/image-20250901170919173.png)
+!!! note
+    没有标准库的schematic无法做LVS？ 貌似也不是：
+    
+    ![image-20250901170919173](assets/image-20250901170919173.png)
 
 如果有错，这几个都可以点开来检查：
 
@@ -1851,12 +1878,14 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 ### StartRC
 
-> 注意有很多提取spef的方式
-> [后仿XRC、QRC 和 StarRC 的区别与联系_pex提取工具qrc-CSDN博客](https://blog.csdn.net/weixin_44996615/article/details/149334506)
->
-> `QRC`可以直接在innovus上用, 不过这次更具博客做一直报错没有解决😭
+!!! note
+    注意有很多提取spef的方式
+    [后仿XRC、QRC 和 StarRC 的区别与联系_pex提取工具qrc-CSDN博客](https://blog.csdn.net/weixin_44996615/article/details/149334506)
+    
+    `QRC`可以直接在innovus上用, 不过这次更具博客做一直报错没有解决😭
 
-> starRC可根据`数字集成电路课程设计`提到的脚本做，但是貌似一般PDK都会给相关脚本和文档，看了一下很复杂，没搞明白，不知道和课设的方法有什么区别。
+!!! note
+    starRC可根据`数字集成电路课程设计`提到的脚本做，但是貌似一般PDK都会给相关脚本和文档，看了一下很复杂，没搞明白，不知道和课设的方法有什么区别。
 
 输入：*.map*, *.nxtgrd*, *所有.lef*, *.def*
 
@@ -1919,9 +1948,10 @@ OPERATING_TEMPERATURE       : -40
 
 ### 后仿
 
-> 如果是单纯的数字模块可以在VCS上面跑
->
-> 如果是数模混仿的一部分，感觉在virtuoso上跑比较好
+!!! note
+    如果是单纯的数字模块可以在VCS上面跑
+    
+    如果是数模混仿的一部分，感觉在virtuoso上跑比较好
 
 #### VCS-纯数字
 
@@ -1931,7 +1961,8 @@ OPERATING_TEMPERATURE       : -40
 
 #### virtuoso
 
->  参考数模混合流程中的后仿方法
+!!! note
+    参考数模混合流程中的后仿方法
 
 
 
@@ -2491,7 +2522,8 @@ lappend search_path "memory"
 
   ![image-20250527222937984](assets/image-20250527222937984.png)
 
-  > 直接右键也可以添加`signal`
+  !!! note
+      直接右键也可以添加`signal`
 
   ![image-20250527222824102](assets/image-20250527222824102.png)
 
@@ -2545,7 +2577,8 @@ lappend search_path "memory"
 
 ##### 自动布线
 
-> 注意要打上pin
+!!! note
+    注意要打上pin
 
 [自动布局布线使用说明 - 小小桂花糕 - 博客园](https://www.cnblogs.com/jinzbr/p/18235464)
 
@@ -2691,7 +2724,8 @@ lappend search_path "memory"
 
    ![image-20250603232347629](assets/image-20250603232347629.png)
 
-   > 选择外部的HDL代码，也就是源码
+   !!! note
+       选择外部的HDL代码，也就是源码
 
 3. 画好testbench原理图
 
@@ -2707,21 +2741,23 @@ lappend search_path "memory"
 
 ![image-20250904093246434](assets/image-20250904093246434.png)
 
-> 这里主要是修改高低电平，根据使用的器件修改
+!!! note
+    这里主要是修改高低电平，根据使用的器件修改
 
-> 注意, 如果是综合后的，要加上数字库的functional
->
-> 导入每个数字标准单元的functional，把所有模块的verilog代码放到一个文件可以跑，分开来不知道为什么不行。。。
->
-> ![image-20250903230900752](assets/image-20250903230900752.png)
->
-> [cadence AMS数模混合仿真_ams仿真-CSDN博客](https://blog.csdn.net/qq_41990421/article/details/134294680)
->
-> [使用 Cadence AMS 仿真器进行数模混仿教程 – Analog-Life](https://www.analog-life.com/2023/02/using-cadence-ams-simulator-for-digital-analog-mixing-simulation/)
->
-> ![image-20250904093031897](assets/image-20250904093031897.png)
->
-> > 上图的两个框选模块`mydsm`的两个子模块，本来是红色的
+!!! note
+    注意, 如果是综合后的，要加上数字库的functional
+    
+    导入每个数字标准单元的functional，把所有模块的verilog代码放到一个文件可以跑，分开来不知道为什么不行。。。
+    
+    ![image-20250903230900752](assets/image-20250903230900752.png)
+    
+    [cadence AMS数模混合仿真_ams仿真-CSDN博客](https://blog.csdn.net/qq_41990421/article/details/134294680)
+    
+    [使用 Cadence AMS 仿真器进行数模混仿教程 – Analog-Life](https://www.analog-life.com/2023/02/using-cadence-ams-simulator-for-digital-analog-mixing-simulation/)
+    
+    ![image-20250904093031897](assets/image-20250904093031897.png)
+    
+    > 上图的两个框选模块`mydsm`的两个子模块，本来是红色的
 
 
 ![image-20250603232956525](assets/image-20250603232956525.png)
@@ -2750,9 +2786,9 @@ lappend search_path "memory"
 
    后面不分数字模拟地了，也被NWell去掉了，clean了
 
-!!! warning
-    
-    但是原因是什么？不分会有什么后果？
+   !!! warning
+       
+       但是原因是什么？不分会有什么后果？
 
 ### DRC
 
@@ -2820,7 +2856,8 @@ lappend search_path "memory"
 
 IO 电路的作用有几方面：ESD保护，level shifter，施密特触发器等等。还有提供电源环路。
 
-> **PAD Ring部分在设计项目中十分重要**，包括整个芯片的电源网络都在这部分完成，因此也会**占据很大一部分芯片面积**。在先进工艺设计中，核心电路的尺寸可能一直在减小，但是由于**电源线宽**、**PAD尺寸**、**ESD保护电路尺寸**等限制，PAD Ring的尺寸并没有按比例减小。**良好的PAD规划一方面可以节省芯片面积**
+!!! note
+    **PAD Ring部分在设计项目中十分重要**，包括整个芯片的电源网络都在这部分完成，因此也会**占据很大一部分芯片面积**。在先进工艺设计中，核心电路的尺寸可能一直在减小，但是由于**电源线宽**、**PAD尺寸**、**ESD保护电路尺寸**等限制，PAD Ring的尺寸并没有按比例减小。**良好的PAD规划一方面可以节省芯片面积**
 
 一个基本的pad library，应该可以提供如下几种pad：
 
@@ -2829,11 +2866,12 @@ IO 电路的作用有几方面：ESD保护，level shifter，施密特触发器�
 3. 模拟信号的pad，例如ANIN (analog的pad一般就是一块铁片，有的vendor推荐用户可以自己基于要求自己再加上一定的ESD保护电路)
 4. 数字信号的pad，一般有input和output的区别，里面还有包括level shifter(电平转换)，buffers之类的数字电路
 
-> 建议设计pad ring之前，先去读一下vendor的文档，文档一般会说明各种类型的pad的用法，还有各种注意事项。不同的vendor提供的pad library不一样，所以有时候还是谨慎一点。
->
-> 比如SMIC28的*SMIC_SPC28NHKCPD2OV3RNP_IO_DataBook_Ver0p5.pdf*:
->
-> SPC28NHKCPD2OV3RNP: Where SP  stands for SMIC pad, 28HKCP is 28nm Logic  HKC  plus  process  and  D2  means  2.5V  voltage  application, OV3  means  the  IO  Power can be  overdriven  3.3V,  R  means  regular,  N  means  narrow  and  the second P  is  DUP  (Device  Under Pad).  All  I/O  pads  are  matched  with  the  design  requirement  of  SMIC  28nm  Logic  HKC  plus 0.9V/1.8V/2.5V  Design  Rules  (TD-LO28-DR-2013).  Table  1  describes  the  process  and  physical specification  of  the  Library.  It  should  be  noted  that  SPC28NHKCPD2OV3RNP  support  design with  7,  8,  9  and  10  layers  of  metal  application.
+!!! note
+    建议设计pad ring之前，先去读一下vendor的文档，文档一般会说明各种类型的pad的用法，还有各种注意事项。不同的vendor提供的pad library不一样，所以有时候还是谨慎一点。
+    
+    比如SMIC28的*SMIC_SPC28NHKCPD2OV3RNP_IO_DataBook_Ver0p5.pdf*:
+    
+    SPC28NHKCPD2OV3RNP: Where SP  stands for SMIC pad, 28HKCP is 28nm Logic  HKC  plus  process  and  D2  means  2.5V  voltage  application, OV3  means  the  IO  Power can be  overdriven  3.3V,  R  means  regular,  N  means  narrow  and  the second P  is  DUP  (Device  Under Pad).  All  I/O  pads  are  matched  with  the  design  requirement  of  SMIC  28nm  Logic  HKC  plus 0.9V/1.8V/2.5V  Design  Rules  (TD-LO28-DR-2013).  Table  1  describes  the  process  and  physical specification  of  the  Library.  It  should  be  noted  that  SPC28NHKCPD2OV3RNP  support  design with  7,  8,  9  and  10  layers  of  metal  application.
 
 
 
@@ -2912,7 +2950,8 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
 ![image-20250901222820003](assets/image-20250901222820003.png)
 
-> 有很多，需要具体在文档看
+!!! note
+    有很多，需要具体在文档看
 
 ##### Data Sheet 
 
@@ -2941,9 +2980,9 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
    <img src="assets/image-20250907101526804.png" alt="image-20250907101526804" style="zoom: 70%;" />
 
-!!! warning
-    
-     又不会依旧会对不齐，不知道为什么，最后的小部分手动解决了
+   !!! warning
+       
+        又不会依旧会对不齐，不知道为什么，最后的小部分手动解决了
 
    
 
@@ -2960,7 +2999,8 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
 ### LVS/DRC
 
-> 再次做LVS和DRC
+!!! note
+    再次做LVS和DRC
 
 ### 加seal ring
 
@@ -3163,17 +3203,18 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
    
    ```
 
-   > 这里没有加fill via, 还有不知道为什么是OCCD和OCOVL，没见过所以也没加
+   !!! note
+       这里没有加fill via, 还有不知道为什么是OCCD和OCOVL，没见过所以也没加
 
 4. 根据文档`TD-LO28-DT-2074v4.pdf`示例cmd运行脚本，得到`Dummy.gds`
 
-!!! warning
-    
-    微电子学院的服务器的启动指令和文档的calibre指令不一样：
-    
-    ![image-20250909010020584](assets/image-20250909010020584.png)
-    
-    `calibre -64 -drc -hier -turbo 8 ../SMIC_Cal_Model_Based_Dummy_28HKCPlusLG_091825_V1.0_REV1_0_20210819.tvf`
+   !!! warning
+       
+       微电子学院的服务器的启动指令和文档的calibre指令不一样：
+       
+       ![image-20250909010020584](assets/image-20250909010020584.png)
+       
+       `calibre -64 -drc -hier -turbo 8 ../SMIC_Cal_Model_Based_Dummy_28HKCPlusLG_091825_V1.0_REV1_0_20210819.tvf`
 
 5. `Stream In`生成的`Dummy.gds`, 注意生成的是一个同名的`cellview`, 要新建一个library，避免覆盖（我没试过是否会被覆盖）
 
@@ -3181,7 +3222,8 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 7. 做DRC，打开密度检查选项
 
-   > SMIC28的IO附近有dummy的Block，有部分密度过不了，需要手动加一点
+   !!! note
+       SMIC28的IO附近有dummy的Block，有部分密度过不了，需要手动加一点
 
 
 
@@ -4035,9 +4077,10 @@ deleteRouteBlk -name $rblkg_prefix
 
   - -analysisType {single | bcwc  | onChipVariation}
 
-    > 其中(onChipVariation)模拟的 PVT 条件的偏差会更接近实际情况，会减少一些不必要的悲观量。
-    >
-    > 一般都用 OCV
+    !!! note
+        其中(onChipVariation)模拟的 PVT 条件的偏差会更接近实际情况，会减少一些不必要的悲观量。
+        
+        一般都用 OCV
 
   -  -cppr 是关于 clock line 上的 common path 的一个处理方式
 
@@ -4045,13 +4088,14 @@ deleteRouteBlk -name $rblkg_prefix
 
   - -addInstancePrefix, -addNetPrefix 
 
-    > 工具在优化的过程中会增加很多新的 Cell，对于这些 Cell，我们希望他们都带一个我们能快速辨别他们的名字。也就是 Prefix（前缀）。当然，可以给 Instance 加 Prefix，那么也可以给 Net 加 Prefix
-    >
-    > e.g.: 
-    >
-    > ```tcl
-    > setOptMode -addInstancePrefix "PRECTS_" -addNetPrefix "PRECTS_NET_"
-    > ```
+    !!! note
+        工具在优化的过程中会增加很多新的 Cell，对于这些 Cell，我们希望他们都带一个我们能快速辨别他们的名字。也就是 Prefix（前缀）。当然，可以给 Instance 加 Prefix，那么也可以给 Net 加 Prefix
+        
+        e.g.: 
+        
+        ```tcl
+        setOptMode -addInstancePrefix "PRECTS_" -addNetPrefix "PRECTS_NET_"
+        ```
 
   -  -powerEffort {none|low|high}
 
@@ -4458,11 +4502,12 @@ A Process Design Kit (PDK) serves as the fundamental building block for integrat
 
 多晶硅材质，电压就是压在他上面
 
-> gate 和 poly 的区别：
->
-> poly指的是多晶硅这种材料，gate指的是mos管的栅极、源级、漏级中的栅极
-> 在很多尺寸的工艺中，mos管的栅极是用poly这种材料制作的。
-> 但是poly不仅可以用在栅极这个地方，在一些小的cell中，poly可以用来做短距离的导线起连接的作用，以此来减少这个cell所用的metal的层数。
+!!! note
+    gate 和 poly 的区别：
+    
+    poly指的是多晶硅这种材料，gate指的是mos管的栅极、源级、漏级中的栅极
+    在很多尺寸的工艺中，mos管的栅极是用poly这种材料制作的。
+    但是poly不仅可以用在栅极这个地方，在一些小的cell中，poly可以用来做短距离的导线起连接的作用，以此来减少这个cell所用的metal的层数。
 
 #### PC
 
@@ -4597,12 +4642,13 @@ for FinFET
     - STEP 400 0：相邻重复的步长（X 步长 400，Y 步长 0），对应 site 宽度和行间距。
     - 每行末尾 ;：语句结束。
     
-    > 为什么是 STEP 400 0?
-    >
-    > 已知： UNITS DISTANCE MICRONS 2000
-    >
-    > CoreSite 宽度 0.2 微米 → 0.2 * 2000 = 400 DBU，因此 X
-    >     步长写成 400
+    !!! note
+        为什么是 STEP 400 0?
+        
+        已知： UNITS DISTANCE MICRONS 2000
+        
+        CoreSite 宽度 0.2 微米 → 0.2 * 2000 = 400 DBU，因此 X
+            步长写成 400
     
   - TRACK 信息：
   
@@ -4614,12 +4660,13 @@ for FinFET
   
     在 Y 方向的扫描线上放置 503 条平行于 X 轴的轨迹，起始于 y=950（DBU），间距 760（DBU），适用于 Metal9。
   
-    > 注意，根据TRACK算面积不是：200+977*400 = 391000
-    >
-    > 而是：
-    > ![image-20251214160016957](assets/image-20251214160016957.png)
-    >
-    > 这个可以不等于diearea
+    !!! note
+        注意，根据TRACK算面积不是：200+977*400 = 391000
+        
+        而是：
+        ![image-20251214160016957](assets/image-20251214160016957.png)
+        
+        这个可以不等于diearea
   
   -   ````
     GCELLGRID X 0 DO 65 STEP 6000 ;
@@ -4628,9 +4675,10 @@ for FinFET
   
     GCell
   
-    > （65-1）*6000 = 384000
-    >
-    > 384000+6800 = 390800 == die_are.width
+    !!! note
+        （65-1）*6000 = 384000
+        
+        384000+6800 = 390800 == die_are.width
 
 #### Lib
 
@@ -4731,9 +4779,10 @@ for FinFET
   - `qrcTechFile`由`ict`文件生成，其内容主要是电容电阻的查找表，通常由半导体厂提供。
 - 为了提高RC提取的精度，我们会使用更加精确的RC提取引擎或者RC提取工具（如`StarRC`），它们的输入是`nxtgrd`/`qrcTechfile`文件。同样，它们也可以由`itf`和`ict`文件转换而成，用的命令分别是`Techgen`和`grdgenxo`。
 
->32nm及以上工艺，要么用`qrcTechfile`文件，要么用`captable`。若`qrcTechfile`和`captable`都没有，Innovus会利用默认工艺参数生成一个captable，但精度会差很多。
->
->32nm及以下更先进工艺则必须要`qrcTechfile`。
+!!! note
+    32nm及以上工艺，要么用`qrcTechfile`文件，要么用`captable`。若`qrcTechfile`和`captable`都没有，Innovus会利用默认工艺参数生成一个captable，但精度会差很多。
+    
+    32nm及以下更先进工艺则必须要`qrcTechfile`。
 
 
 
@@ -4909,27 +4958,29 @@ w=(nfin-1)finpitch + findrawnwidth(单个fin的width，这里wdith=10nm)
 
 STDCELL文件夹下是不同类型的标准单元库
 
->|-- SCC28NHKCP_12T25OD33_RVT_V0p2
->|-- SCC28NHKCP_HDC30P140_PMK_RVT_V0p2
->|-- SCC28NHKCP_HDC30P140_PMK_ULVT_V0p2
->|-- SCC28NHKCP_HDC30P140_RVT_V0p2
->|-- SCC28NHKCP_HSC30P140_RVT_V0p2
->|-- SCC28NHKCP_VHSC30P140_PMK_LVT_V0p1a
->`-- SCC28NHKCP_VHSC30P140_PMK_RVT_V0p1a
+!!! note
+    |-- SCC28NHKCP_12T25OD33_RVT_V0p2
+    |-- SCC28NHKCP_HDC30P140_PMK_RVT_V0p2
+    |-- SCC28NHKCP_HDC30P140_PMK_ULVT_V0p2
+    |-- SCC28NHKCP_HDC30P140_RVT_V0p2
+    |-- SCC28NHKCP_HSC30P140_RVT_V0p2
+    |-- SCC28NHKCP_VHSC30P140_PMK_LVT_V0p1a
+    `-- SCC28NHKCP_VHSC30P140_PMK_RVT_V0p1a
 
 
 
 ##### 命名方式
 
->SCC28NHKCP_12T25OD33_RVT_V0p2
->│   │  │   │  │   │   │   │
->│   │  │   │  │   │   │   └── 版本号 (Version 0.2)
->│   │  │   │  │   │   └── 阈值电压类型 (RVT: Regular Vt)
->│   │  │   │  │   └── 栅氧厚度 (25OD33: 25Å)
->│   │  │   │  └── 晶体管类型 (12T: 12-track)
->│   │  │   └── 工艺节点 (28nm HKC+)
->│   │  └── 代工厂 (SMIC)
->│   └── 标准单元库 (Standard Cell)
+!!! note
+    SCC28NHKCP_12T25OD33_RVT_V0p2
+    │   │  │   │  │   │   │   │
+    │   │  │   │  │   │   │   └── 版本号 (Version 0.2)
+    │   │  │   │  │   │   └── 阈值电压类型 (RVT: Regular Vt)
+    │   │  │   │  │   └── 栅氧厚度 (25OD33: 25Å)
+    │   │  │   │  └── 晶体管类型 (12T: 12-track)
+    │   │  │   └── 工艺节点 (28nm HKC+)
+    │   │  └── 代工厂 (SMIC)
+    │   └── 标准单元库 (Standard Cell)
 
 
 
@@ -4961,23 +5012,25 @@ STDCELL文件夹下是不同类型的标准单元库
 
 ##### 命名规则
 
->scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_basic.lib
->│   │  │   │  │  │  │  │  │  │
->│   │  │   │  │  │  │  │  │  └── 时序模型类型 (basic)
->│   │  │   │  │  │  │  │  └── 温度 (25°C)
->│   │  │   │  │  │  │  └── 电压 (3.3V)
->│   │  │   │  │  │  └── 工艺角 (tt: typical)
->│   │  │   │  │  └── 阈值电压类型 (rvt)
->│   │  │   │  └── 栅氧厚度 (25OD33)
->│   │  │   └── 晶体管类型 (12T)
->│   │  └── 工艺节点 (28nm HKC+)
->│   └── 代工厂 (SMIC)
+!!! note
+    scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_basic.lib
+    │   │  │   │  │  │  │  │  │  │
+    │   │  │   │  │  │  │  │  │  └── 时序模型类型 (basic)
+    │   │  │   │  │  │  │  │  └── 温度 (25°C)
+    │   │  │   │  │  │  │  └── 电压 (3.3V)
+    │   │  │   │  │  │  └── 工艺角 (tt: typical)
+    │   │  │   │  │  └── 阈值电压类型 (rvt)
+    │   │  │   │  └── 栅氧厚度 (25OD33)
+    │   │  │   └── 晶体管类型 (12T)
+    │   │  └── 工艺节点 (28nm HKC+)
+    │   └── 代工厂 (SMIC)
 
 ![image-20250408202338574](assets/image-20250408202338574.png)
 
 ![image-20250408202404512](assets/image-20250408202404512.png)
 
-> ff/tt/ss貌似是根据电压区分的？
+!!! note
+    ff/tt/ss貌似是根据电压区分的？
 
 ```tcl
 # 不同corner
@@ -5015,10 +5068,11 @@ set_operating_conditions -library scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_ccs.db tt
 
 
 
-> LVT的变准单元库一般会有较多的电压域：
-> ![image-20250408203300284](assets/image-20250408203300284.png)
->
-> ![image-20250408203418440](assets/image-20250408203418440.png)
+!!! note
+    LVT的变准单元库一般会有较多的电压域：
+    ![image-20250408203300284](assets/image-20250408203300284.png)
+    
+    ![image-20250408203418440](assets/image-20250408203418440.png)
 
 ![image-20250408202435037](assets/image-20250408202435037.png)
 
@@ -5202,7 +5256,8 @@ OpenLane flow consists of several stages. By default all flow steps are run in s
 
 All tools in the OpenLane flow are free, libre and open-source software. While OpenLane itself as a script (and its associated build scripts) are under the Apache License, version 2.0, tools may fall under stricter licenses.
 
-> Everything in Floorplanning through Routing is done using [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) and its various sub-utilities, hence the name “OpenLane.”
+!!! note
+    Everything in Floorplanning through Routing is done using [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) and its various sub-utilities, hence the name “OpenLane.”
 
 ### PDK
 
@@ -5659,27 +5714,28 @@ apt-get install libboost-all-dev
 
 a bug:
 
->Ign:1 https://download.docker.com/linux/ubuntu focal InRelease
->
->Err:2 https://download.docker.com/linux/ubuntu focal Release                                               
->
->  Could not handshake: Error in the pull function. [IP: 13.35.210.84 443]
->
->Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease                                           
->
->Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease                                                     
->
->Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
->
->Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
->
->Reading package lists... Done
->
->E: The repository 'https://download.docker.com/linux/ubuntu focal Release' no longer has a Release file.
->
->N: Updating from such a repository can't be done securely, and is therefore disabled by default.
->
->N: See apt-secure(8) manpage for repository creation and user configuration details.
+!!! note
+    Ign:1 https://download.docker.com/linux/ubuntu focal InRelease
+    
+    Err:2 https://download.docker.com/linux/ubuntu focal Release                                               
+    
+     Could not handshake: Error in the pull function. [IP: 13.35.210.84 443]
+    
+    Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease                                           
+    
+    Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease                                                     
+    
+    Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+    
+    Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+    
+    Reading package lists... Done
+    
+    E: The repository 'https://download.docker.com/linux/ubuntu focal Release' no longer has a Release file.
+    
+    N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+    
+    N: See apt-secure(8) manpage for repository creation and user configuration details.
 
 ```bash
 build in docker, not in locally

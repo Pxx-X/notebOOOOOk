@@ -47,35 +47,77 @@ def normalize_markdown(text, title):
     fence_re = re.compile(r"^\s*(?:[-*+]\s+)?(?:>\s*)*(```|~~~)")
     h1_count = 0
     i = 0
+    admonition_re = re.compile(
+        r"^(?P<indent>\s*)(?P<list>(?:[-*+]|\d+\.)\s+)?(?P<quote>>+\s*)"
+        r"\[!(?P<kind>[A-Za-z]+)\]\s*(?P<rest>.*)$"
+    )
+    quote_re = re.compile(
+        r"^(?P<indent>\s*)(?P<list>(?:[-*+]|\d+\.)\s+)?(?P<quote>>+)\s?(?P<rest>.*)$"
+    )
 
     while i < len(lines):
         line = lines[i]
 
         if not in_fence:
-            alert_match = re.match(r"^\s*>\s*\[!([A-Za-z]+)\]\s*(.*)$", line)
+            alert_match = admonition_re.match(line)
             if alert_match:
-                kind = alert_match.group(1).lower()
+                indent = alert_match.group("indent") or ""
+                list_prefix = indent + (alert_match.group("list") or "")
+                kind = alert_match.group("kind").lower()
                 if kind == "important":
                     kind = "info"
                 content = []
-                inline = alert_match.group(2).strip()
+                inline = alert_match.group("rest").strip()
                 if inline:
                     content.append(inline)
                 i += 1
                 while i < len(lines):
                     next_line = lines[i]
-                    if re.match(r"^\s*>\s*(.*)$", next_line):
-                        stripped = re.sub(r"^\s*>\s?", "", next_line)
+                    if re.match(r"^\s*(?:[-*+]|\d+\.)\s+>+\s*(.*)$", next_line):
+                        stripped = re.sub(r"^\s*(?:[-*+]|\d+\.)\s+>+\s?", "", next_line)
+                        content.append(stripped)
+                        i += 1
+                    elif re.match(r"^\s*>+\s*(.*)$", next_line):
+                        stripped = re.sub(r"^\s*>+\s?", "", next_line)
                         content.append(stripped)
                         i += 1
                     else:
                         break
-                out.append(f"!!! {kind}")
+                out.append(f"{list_prefix}!!! {kind}")
                 if not content:
-                    out.append("    ")
+                    out.append(f"{list_prefix}    ")
                 else:
                     for item in content:
-                        out.append("    " + item)
+                        out.append(f"{list_prefix}    {item}")
+                continue
+
+            quote_match = quote_re.match(line)
+            if quote_match:
+                indent = quote_match.group("indent") or ""
+                list_prefix = indent + (quote_match.group("list") or "")
+                content = []
+                inline = quote_match.group("rest").strip()
+                if inline:
+                    content.append(inline)
+                i += 1
+                while i < len(lines):
+                    next_line = lines[i]
+                    if re.match(r"^\s*(?:[-*+]|\d+\.)\s+>+\s*(.*)$", next_line):
+                        stripped = re.sub(r"^\s*(?:[-*+]|\d+\.)\s+>+\s?", "", next_line)
+                        content.append(stripped)
+                        i += 1
+                    elif re.match(r"^\s*>+\s*(.*)$", next_line):
+                        stripped = re.sub(r"^\s*>+\s?", "", next_line)
+                        content.append(stripped)
+                        i += 1
+                    else:
+                        break
+                out.append(f"{list_prefix}!!! note")
+                if not content:
+                    out.append(f"{list_prefix}    ")
+                else:
+                    for item in content:
+                        out.append(f"{list_prefix}    {item}")
                 continue
 
         if not in_fence:
@@ -86,6 +128,7 @@ def normalize_markdown(text, title):
                 continue
             line = re.sub(r"^(\s*>+\s*)#{1,6}(?=\s)", r"\1\\#", line)
             line = re.sub(r"^(\s*(?:[-*+]|\d+\.)\s+>+\s*)#{1,6}(?=\s)", r"\1\\#", line)
+            line = re.sub(r"^(\s*(?:[-*+]|\d+\.)\s+)?(>+)(\S)", r"\1\2 \3", line)
 
         if fence_re.match(line):
             in_fence = not in_fence

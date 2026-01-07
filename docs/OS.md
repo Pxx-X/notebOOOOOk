@@ -22,7 +22,8 @@ FirPE:默认,全新制作
 
 输入：OOBE\BYPASSNRO
 
-> 如果一开始就连了网线就没有这个步骤
+!!! note
+    如果一开始就连了网线就没有这个步骤
 
 #### windows激活&office激活
 
@@ -36,7 +37,8 @@ power shell 下打开输入`irm win.zyqq.top | iex`,然后根据提示
 
 使用[dism++](https://github.com/Chuyu-Team/Dism-Multi-language/releases)
 
-> 貌似很久没更新了
+!!! note
+    貌似很久没更新了
 
 
 
@@ -92,11 +94,13 @@ win+r打开运行
 
 #### [dism++](https://github.com/Chuyu-Team/Dism-Multi-language/releases)
 
-> 貌似很久没有更新了
+!!! note
+    貌似很久没有更新了
 
 #### [PowerToy](https://github.com/microsoft/PowerToys?tab=readme-ov-file#-installation)
 
-> 看了一下感觉作用不大
+!!! note
+    看了一下感觉作用不大
 
 #### Geek
 
@@ -231,7 +235,8 @@ win+r打开运行
 
 对于Python脚本`#!/usr/bin/env python3`.使用 `/usr/bin/env` 是为了确保系统能够在任何安装了Python的位置找到Python解释器，而不是硬编码路径。
 
-> 类似的，也可以使用 `#!your/python/path`处理python脚本
+!!! note
+    类似的，也可以使用 `#!your/python/path`处理python脚本
 
 
 
@@ -406,22 +411,23 @@ fg %n 让后台运行的进程n到前台来
 
 - 阻止系统生成core文件:`ulimit -c 0`
 
->当您收到 `ulimit: command not found`错误时，这是因为 `ulimit`是 **bash 和 sh 等 shell 的内置命令**，而您可能正在使用 **csh 或 tcsh** 等不同的 shell。在 csh 中，对应的命令是 `limit`。
->
->```bash
-># 查看所有资源限制
->limit
->
-># 查看特定资源限制（如 core 文件大小）
->limit coredumpsize
-># 设置 core 文件大小为 0
->limit coredumpsize 0
->
->```
->
->> [!CAUTION]
->>
->> 永久生效要写到`.cshrc`
+!!! note
+    当您收到 `ulimit: command not found`错误时，这是因为 `ulimit`是 **bash 和 sh 等 shell 的内置命令**，而您可能正在使用 **csh 或 tcsh** 等不同的 shell。在 csh 中，对应的命令是 `limit`。
+    
+    ```bash
+    # 查看所有资源限制
+    limit
+    
+    # 查看特定资源限制（如 core 文件大小）
+    limit coredumpsize
+    # 设置 core 文件大小为 0
+    limit coredumpsize 0
+    
+    ```
+    
+    [!CAUTION]
+    
+    永久生效要写到`.cshrc`
 
 #### ref
 
@@ -485,7 +491,8 @@ wsl --set-default <DistroName> # 重新指定默认发行版
 
 UU远程/向日葵/ToDesk
 
-> ToDesk越来越垃圾了——2025/12/12
+!!! note
+    ToDesk越来越垃圾了——2025/12/12
 
 
 
@@ -593,7 +600,8 @@ scp/sftp/ftp
 
 `-p`指定端口，一般 `remote_ssh_port`为默认值 22
 
-> 貌似`clash`是7890， `clash verge`是 7897
+!!! note
+    貌似`clash`是7890， `clash verge`是 7897
 
 ##### 服务器配置
 

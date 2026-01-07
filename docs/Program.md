@@ -316,12 +316,13 @@ export LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
 ./my_program
 ```
 
->编译时和运行时：
->
->| 阶段                      | 变量/参数                    | 作用                                                         |
->| :------------------------ | :--------------------------- | :----------------------------------------------------------- |
->| **编译时 (Compile Time)** | `LIBRARY_PATH` (GCC) 或 `-L` | 告诉**编译器/链接器**去哪里验证符号（函数名等）以生成可执行文件。 |
->| **运行时 (Runtime)**      | `LD_LIBRARY_PATH`            | 告诉**操作系统**在程序启动后，去哪里**加载真正的库文件**。   |
+!!! note
+    编译时和运行时：
+    
+    | 阶段                      | 变量/参数                    | 作用                                                         |
+    | :------------------------ | :--------------------------- | :----------------------------------------------------------- |
+    | **编译时 (Compile Time)** | `LIBRARY_PATH` (GCC) 或 `-L` | 告诉**编译器/链接器**去哪里验证符号（函数名等）以生成可执行文件。 |
+    | **运行时 (Runtime)**      | `LD_LIBRARY_PATH`            | 告诉**操作系统**在程序启动后，去哪里**加载真正的库文件**。   |
 
 
 
@@ -597,7 +598,8 @@ std::weak_ptr 是 C++11 引入的一种非拥有型智能指针，它与 std::sh
 
 std::weak_pt==r只有指向对象的使用权，而没有管理权。==
 
-> 所以不会造成循环引用
+!!! note
+    所以不会造成循环引用
 
 当 weak_ptr 类型指针的指向和某一 shared_ptr 指针相同时，weak_ptr 指针并不会使所指堆内存的引用计数加 1；同样，当 weak_ptr 指针被释放时，之前所指堆内存的引用计数也不会因此而减 1。也就是说，weak_ptr 类型指针并不会影响所指堆内存空间的引用计数。
 
@@ -869,43 +871,44 @@ int main() {
 
 ```
 
->  basic/ptr/copy.cpp 里的 operator= 用的是 copy-and-swap：
->
->   Foo tmp(other);
->   swap(tmp);
->
->   原因是：
->
->   - 强异常安全：先构造 tmp，如果拷贝分配抛异常，原对象完全不变；只有 tmp 成功后才 swap。
->   - 复用拷贝构造：只写一套深拷贝逻辑，避免重复代码。
->   - 自赋值安全：即使没有显式 if (this == &other)，也不会出错（只是多一次拷贝）。
->
->   如果你不关心强异常安全，确实可以直接清空再逐个复制，但一旦中途失败对象就处于部分修改状态。复制后再 swap 可以避免这一点。
->
-> • 举个具体例子：
->
->   假设 Foo 里有很多元素，正在做 a = b;。
->   如果你用“直接复制”的写法（先清空再逐个 new）：
->
->   // 伪代码
->   clear(a);
->   for (p in b) {
->       a.push_back(new int(*p));  // 这里可能抛异常
->   }
->
->   如果在中途分配失败（std::bad_alloc），a 已经被清空了一半，对象状态被破坏。
->
->   而 copy-and-swap：
->
->   Foo tmp(b);   // 先完整拷贝到临时对象
->   swap(tmp);    // 再一次性交换
->
->   如果拷贝时抛异常，tmp 构造失败，a 完全没动；
->   拷贝成功后再 swap，操作是常量时间且不会抛异常，a 要么旧值，要么新值，永远不会处于“半成品”状态。
->
->   这就是 copy-and-swap 的核心价值：强异常安全 + 代码复用。
->
->   如果你确定拷贝过程不会抛异常（比如全是 int），直接复制也没问题；但有动态分配时，copy-and-swap 更稳。
+!!! note
+    basic/ptr/copy.cpp 里的 operator= 用的是 copy-and-swap：
+    
+      Foo tmp(other);
+      swap(tmp);
+    
+      原因是：
+    
+      - 强异常安全：先构造 tmp，如果拷贝分配抛异常，原对象完全不变；只有 tmp 成功后才 swap。
+      - 复用拷贝构造：只写一套深拷贝逻辑，避免重复代码。
+      - 自赋值安全：即使没有显式 if (this == &other)，也不会出错（只是多一次拷贝）。
+    
+      如果你不关心强异常安全，确实可以直接清空再逐个复制，但一旦中途失败对象就处于部分修改状态。复制后再 swap 可以避免这一点。
+    
+    • 举个具体例子：
+    
+      假设 Foo 里有很多元素，正在做 a = b;。
+      如果你用“直接复制”的写法（先清空再逐个 new）：
+    
+      // 伪代码
+      clear(a);
+      for (p in b) {
+          a.push_back(new int(*p));  // 这里可能抛异常
+      }
+    
+      如果在中途分配失败（std::bad_alloc），a 已经被清空了一半，对象状态被破坏。
+    
+      而 copy-and-swap：
+    
+      Foo tmp(b);   // 先完整拷贝到临时对象
+      swap(tmp);    // 再一次性交换
+    
+      如果拷贝时抛异常，tmp 构造失败，a 完全没动；
+      拷贝成功后再 swap，操作是常量时间且不会抛异常，a 要么旧值，要么新值，永远不会处于“半成品”状态。
+    
+      这就是 copy-and-swap 的核心价值：强异常安全 + 代码复用。
+    
+      如果你确定拷贝过程不会抛异常（比如全是 int），直接复制也没问题；但有动态分配时，copy-and-swap 更稳。
 
 
 
@@ -965,8 +968,9 @@ int main() {
 }
 ```
 
->prev(it, 2) = 4
->prev(it, -2) = 3
+!!! note
+    prev(it, 2) = 4
+    prev(it, -2) = 3
 
 ```c++
 #include <iostream>     // std::cout
@@ -989,8 +993,9 @@ int main() {
 }
 ```
 
->next(it, 2) = 3
->next(it, -2) = 4
+!!! note
+    next(it, 2) = 3
+    next(it, -2) = 4
 
 ```c++
 #include <iostream>     // std::cout
@@ -1012,8 +1017,9 @@ int main() {
 }
 ```
 
->移动前的 *it = 1
->移动后的 *it = 3
+!!! note
+    移动前的 *it = 1
+    移动后的 *it = 3
 
 ```c++
 // 反向迭代，注意不要用(auto it = v.end(); it!=v.begin; it--), v.end()是UB  
@@ -1089,7 +1095,8 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) {
     
     ```
 
-> 注意：find 返回 end 表示未找到；访问前先检查。
+!!! note
+    注意：find 返回 end 表示未找到；访问前先检查。
 
 
 
@@ -1231,26 +1238,28 @@ int main() {
 }
 ```
 
-> Construct a person.1
->
-> Copy-Construct1
->
-> \--------------------
->
-> Construct a person.2
-> Move-Construct2
-> Construct a person.4
->
-> Move-Construct2
->
-> \--------------------
->
-> Construct a person.3
-> Move-Construct3
-> Construct a person.5
-> Move-Construct3
+!!! note
+    Construct a person.1
+    
+    Copy-Construct1
+    
+    \--------------------
+    
+    Construct a person.2
+    Move-Construct2
+    Construct a person.4
+    
+    Move-Construct2
+    
+    \--------------------
+    
+    Construct a person.3
+    Move-Construct3
+    Construct a person.5
+    Move-Construct3
 
->emplace_back() 函数在原理上比 push_back() 有了一定的改进，包括在内存优化方面和运行效率方面。内存优化主要体现在使用了==就地构造==（直接在容器内构造对象，不用拷贝一个复制品再使用）+强制类型转换的方法来实现，在运行效率方面，由于==省去了拷贝构造过程==，因此也有一定的提升。
+!!! note
+    emplace_back() 函数在原理上比 push_back() 有了一定的改进，包括在内存优化方面和运行效率方面。内存优化主要体现在使用了==就地构造==（直接在容器内构造对象，不用拷贝一个复制品再使用）+强制类型转换的方法来实现，在运行效率方面，由于==省去了拷贝构造过程==，因此也有一定的提升。
 
 
 
@@ -1341,39 +1350,40 @@ int main() {
 
 ```
 
-> v.size = 0
->
-> push_back temporary:
-> ctor   tmp
-> move   tmp
->
-> emplace_back in place:
-> ctor   emplaced
->
-> push_back lvalue:
-> ctor   local
-> copy   local
-> t address before move: 0x7ffe2e3461f0
->
-> emplace_back move lvalue:
-> move   local
->
-> current names in vector:
-> tmp emplaced local local 
-> current t.name after move: <moved-from>
->
-> t address after move : 0x7ffe2e3461f0
->
-> copy slice [0, 2):
-> copy   tmp
-> copy   emplaced
->
-> move slice [2, 4):
-> move   local
-> move   local
->
-> original names after move slice:
-> tmp emplaced <moved-from> <moved-from> 
+!!! note
+    v.size = 0
+    
+    push_back temporary:
+    ctor   tmp
+    move   tmp
+    
+    emplace_back in place:
+    ctor   emplaced
+    
+    push_back lvalue:
+    ctor   local
+    copy   local
+    t address before move: 0x7ffe2e3461f0
+    
+    emplace_back move lvalue:
+    move   local
+    
+    current names in vector:
+    tmp emplaced local local 
+    current t.name after move: <moved-from>
+    
+    t address after move : 0x7ffe2e3461f0
+    
+    copy slice [0, 2):
+    copy   tmp
+    copy   emplaced
+    
+    move slice [2, 4):
+    move   local
+    move   local
+    
+    original names after move slice:
+    tmp emplaced <moved-from> <moved-from> 
 
 - https://zhuanlan.zhihu.com/p/213853588
 
@@ -1472,9 +1482,10 @@ public:
   }
   ```
 
-  > 单例模式是指在整个系统生命周期内，保证一个类只能产生一个实例，确保该类的唯一性。
-  >
-  > [【C++】C++ 单例模式总结（5种单例实现方法）_单例模式c++实现-CSDN博客](https://blog.csdn.net/unonoi/article/details/121138176)
+  !!! note
+      单例模式是指在整个系统生命周期内，保证一个类只能产生一个实例，确保该类的唯一性。
+      
+      [【C++】C++ 单例模式总结（5种单例实现方法）_单例模式c++实现-CSDN博客](https://blog.csdn.net/unonoi/article/details/121138176)
 
 ##### 参考
 
@@ -1569,8 +1580,9 @@ numbers.pop_back();
 std::cout << "a = " << a << "\n";
 ```
 
->这是未定义行为。int &a = numbers[2]; 绑定到最后一个元素，pop_back() 会析构并移除该元素，引用变成悬空。刚好内存还没被覆
->盖，所以打印出了旧值 3，但这只是偶然：换个编译器/优化/场景可能是任意值甚至崩溃。
+!!! note
+    这是未定义行为。int &a = numbers[2]; 绑定到最后一个元素，pop_back() 会析构并移除该元素，引用变成悬空。刚好内存还没被覆
+    盖，所以打印出了旧值 3，但这只是偶然：换个编译器/优化/场景可能是任意值甚至崩溃。
 
 #### 左值与右值
 
@@ -1643,9 +1655,10 @@ int &&z4 = x; // 错误，x是一个左值
     std::cout << "v.back() after move = '" << v.back() << "' (size=" << v.back().size() << ")\n";
 ```
 
->v.back() before move = 'world' (size=5)
->moved = 'world'
->v.back() after move = '' (size=0)
+!!! note
+    v.back() before move = 'world' (size=5)
+    moved = 'world'
+    v.back() after move = '' (size=0)
 
 ```c++
     std::vector<std::pair<std::string, int>> v{{"hello", 1}, {"world", 2}};
@@ -1670,20 +1683,21 @@ int &&z4 = x; // 错误，x是一个左值
     std::cout << "v.back().second = " << v2.back().second << "\n";
 ```
 
-> v.back() before move = 'world' (size=5)
-> v.back().second = 2
-> getRight = 'world'
-> v.back() after move = '' (size=0)
->
-> v.back().second = 2
->
-> \--------------------------------
->
-> v.back() before move = 'world' (size=5)
-> v.back().second = 2
-> getRight = 'world'
-> v.back() after move = 'world' (size=5)
-> v.back().second = 2
+!!! note
+    v.back() before move = 'world' (size=5)
+    v.back().second = 2
+    getRight = 'world'
+    v.back() after move = '' (size=0)
+    
+    v.back().second = 2
+    
+    \--------------------------------
+    
+    v.back() before move = 'world' (size=5)
+    v.back().second = 2
+    getRight = 'world'
+    v.back() after move = 'world' (size=5)
+    v.back().second = 2
 
 
 
@@ -1833,17 +1847,18 @@ int main() {
 
   需要注意的是，只有相近类型之间才能发生隐式类型转换，比如int和double表示的都是数值，只不过它们表示的范围和精度不同。而指针类型表示的是地址编号，因此整型和指针类型之间不会进行隐式类型转换，如果需要转换则只能进行显式类型转换
 
-> 显示类型转换: 需要用户自己处理，以(指定类型)变量的方式进行类型转换
->
-> ```c++
-> int a = 0;
-> short b = a;
-> float c = 1.2;
-> b = c;//隐式转换
-> int* p = &a;
->  
-> int d = (int)p;//显示类型转换，强转 //c风格
-> ```
+!!! note
+    显示类型转换: 需要用户自己处理，以(指定类型)变量的方式进行类型转换
+    
+    ```c++
+    int a = 0;
+    short b = a;
+    float c = 1.2;
+    b = c;//隐式转换
+    int* p = &a;
+     
+    int d = (int)p;//显示类型转换，强转 //c风格
+    ```
 
 
 
@@ -1861,7 +1876,8 @@ c++ 风格四种配型转换
 
 - 基本数据类型之间的转换
 
-  > 只能转换相近的数据类型，如int转short,float,double
+  !!! note
+      只能转换相近的数据类型，如int转short,float,double
 
 - 对指针的类型转化无效（除void*)
 
@@ -1928,13 +1944,14 @@ c++ 风格四种配型转换
 
 （6）在==向下转换==时，==dynamic_cast 具有类型检查的功能，比 static_cast 更安全==
 
->向上转换: 子类的指针（或引用）→ 父类的指针（或引用）
->
->向下转换:  父类的指针（或引用）→ 子类的指针（或引用）
->
->使用==C风格==的强制类型转换进行向下转型是==不安全==的，因为此时无论父类的指针（或引用）指向的是父类对象还是子类对象都会进行转换
->
->而使用dynamic_cast进行向下转型则是安全的，如果父类的指针（或引用）指向的是子类对象那么dynamic_cast会转换成功，但如果父类的指针（或引用）指向的是父类对象那dynamic_cast会转换失败并返回一个空指针
+!!! note
+    向上转换: 子类的指针（或引用）→ 父类的指针（或引用）
+    
+    向下转换:  父类的指针（或引用）→ 子类的指针（或引用）
+    
+    使用==C风格==的强制类型转换进行向下转型是==不安全==的，因为此时无论父类的指针（或引用）指向的是父类对象还是子类对象都会进行转换
+    
+    而使用dynamic_cast进行向下转型则是安全的，如果父类的指针（或引用）指向的是子类对象那么dynamic_cast会转换成功，但如果父类的指针（或引用）指向的是父类对象那dynamic_cast会转换失败并返回一个空指针
 
 ```c++
 #include<iostream>
@@ -2084,22 +2101,23 @@ int main() {
 
 
 
-> 使用多态和虚函数会导致性能下降吗？有多严重？
->
-> > • 会带来一些开销，但通常很小，在绝大多数工程场景里不值得为此牺牲灵活性。具体影响：
-> >
-> >   - 虚表访问：调用虚函数会多一次指针间接寻址（从对象读取 vptr，再索引 vtable）。相比
-> >     内联或非虚函数的直接调用，多了1~2次内存访问，加上 CPU 分支预测。成本大约几个指令
-> >     周期，除非此函数在极度频繁、毫秒级热点循环里才会显现。
-> >   - 无法内联：编译器通常不能内联虚函数（除非知道确切类型）。这意味着错失部分编译期优
-> >     化，不过现代编译器仍能在一些情况下去虚化（devirtualize）。
-> >   - 内存占用：每个多态对象通常多一个指针大小的 vptr（8 字节），虚表本身也存储在只读
-> >     段，但多个对象共享同一份虚表，成本可忽略。
-> >
-> >   严重程度？绝大多数应用（GUI、网络、业务逻辑、工具链）几乎感觉不到。只有在超低延
-> >   迟、高性能数值核心里（如图形渲染内核、游戏引擎核心循环、音频 DSP）才会考虑手动避免
-> >   虚函数，取而代之的常见手段有 CRTP、函数对象、静态多态等。总之，除非 profiler 指出
-> >   虚调用是瓶颈，否则优先写清晰的面向对象代码，性能问题再针对性优化。
+!!! note
+    使用多态和虚函数会导致性能下降吗？有多严重？
+    
+    > • 会带来一些开销，但通常很小，在绝大多数工程场景里不值得为此牺牲灵活性。具体影响：
+    >
+    >   - 虚表访问：调用虚函数会多一次指针间接寻址（从对象读取 vptr，再索引 vtable）。相比
+    >     内联或非虚函数的直接调用，多了1~2次内存访问，加上 CPU 分支预测。成本大约几个指令
+    >     周期，除非此函数在极度频繁、毫秒级热点循环里才会显现。
+    >   - 无法内联：编译器通常不能内联虚函数（除非知道确切类型）。这意味着错失部分编译期优
+    >     化，不过现代编译器仍能在一些情况下去虚化（devirtualize）。
+    >   - 内存占用：每个多态对象通常多一个指针大小的 vptr（8 字节），虚表本身也存储在只读
+    >     段，但多个对象共享同一份虚表，成本可忽略。
+    >
+    >   严重程度？绝大多数应用（GUI、网络、业务逻辑、工具链）几乎感觉不到。只有在超低延
+    >   迟、高性能数值核心里（如图形渲染内核、游戏引擎核心循环、音频 DSP）才会考虑手动避免
+    >   虚函数，取而代之的常见手段有 CRTP、函数对象、静态多态等。总之，除非 profiler 指出
+    >   虚调用是瓶颈，否则优先写清晰的面向对象代码，性能问题再针对性优化。
 
 #### reinterpret_cast
 
@@ -2136,10 +2154,11 @@ int c = reinterpret_cast<int>(ra);
   }
   ```
 
-  > ​	代码中用const_cast删除了变量a的地址的const属性，这时就可以通过这个指针来修改变量a的值。由于编译器认为const修饰的变量是不会被修改的，因此会将const修饰的变量存放到==寄存器==当中，当需要读取const变量时就会直接从寄存器中进行读取，而我们修改的实际上是==内存==中的a的值，因此最终打印出a的值是未修改之前的值。（直接覆盖替换）
-  > ​	如果不想让编译器将const变量优化到寄存器当中，可以用==volatile==关键字对const变量进行修饰，这时当要读取这个const变量时编译器就会从内存中进行读取，即保持了该变量在内存中的可见性
-  >
-  > > 在 C++ 中，==volatile== 是一个类型修饰符，用于告诉编译器该变量的值可能以不可预测的方式被改变（例如：由硬件或其他线程修改）。这会阻止编译器对该变量进行优化，确保每次访问都直接从==内存==读取，而不是使用==寄存器==中的缓存值。
+  !!! note
+      ​	代码中用const_cast删除了变量a的地址的const属性，这时就可以通过这个指针来修改变量a的值。由于编译器认为const修饰的变量是不会被修改的，因此会将const修饰的变量存放到==寄存器==当中，当需要读取const变量时就会直接从寄存器中进行读取，而我们修改的实际上是==内存==中的a的值，因此最终打印出a的值是未修改之前的值。（直接覆盖替换）
+      ​	如果不想让编译器将const变量优化到寄存器当中，可以用==volatile==关键字对const变量进行修饰，这时当要读取这个const变量时编译器就会从内存中进行读取，即保持了该变量在内存中的可见性
+      
+      > 在 C++ 中，==volatile== 是一个类型修饰符，用于告诉编译器该变量的值可能以不可预测的方式被改变（例如：由硬件或其他线程修改）。这会阻止编译器对该变量进行优化，确保每次访问都直接从==内存==读取，而不是使用==寄存器==中的缓存值。
 
 - 对自己设计的类型去常性
 
@@ -2252,7 +2271,8 @@ decltype(exp) varname [= value]; // decltype的语法格式
 
 在推导变量类型时，auto 和 decltype 对 `cv 限制符` 的处理是不一样的。decltype 会保留 `cv 限定符`，而 auto 有可能会去掉 `cv 限定符`。
 
->`cv 限定符`是 `const` 和 `volatile` 关键字的统称：
+!!! note
+    `cv 限定符`是 `const` 和 `volatile` 关键字的统称：
 
  `auto` 关键字对 `cv 限定符`的推导规则：
 
@@ -2567,18 +2587,19 @@ https://blog.csdn.net/Ethan_Rich/article/details/151958218
 
 ![image-20250917215222346](assets/image-20250917215222346.png)
 
-><assert.h>是c写的
->
-><cassert> C++
->
->• 二者功能上基本一样，都提供 assert 宏；差别在于风格和可移植性：
->
->  - <assert.h> 是 C 头文件；在 C++ 中也能用，但属于旧式接口。
->  - <cassert> 是 C++ 版本的头文件；按标准库风格引入 C 头，推荐在 C++ 中使用它。
->  - 即便用 <cassert>，assert 仍然是==宏==，不在 std 命名空间（标准没有 std::assert）。
->  - 行为（NDEBUG 关闭断言等）完全一致。
->
->  在 C++ 代码里用 <cassert>，在纯 C 代码里用 <assert.h> 即可。
+!!! note
+    <assert.h>是c写的
+    
+    <cassert> C++
+    
+    • 二者功能上基本一样，都提供 assert 宏；差别在于风格和可移植性：
+    
+     - <assert.h> 是 C 头文件；在 C++ 中也能用，但属于旧式接口。
+     - <cassert> 是 C++ 版本的头文件；按标准库风格引入 C 头，推荐在 C++ 中使用它。
+     - 即便用 <cassert>，assert 仍然是==宏==，不在 std 命名空间（标准没有 std::assert）。
+     - 行为（NDEBUG 关闭断言等）完全一致。
+    
+     在 C++ 代码里用 <cassert>，在纯 C 代码里用 <assert.h> 即可。
 
 
 
@@ -2626,7 +2647,8 @@ try{
 }
 ```
 
-> 这就好比，catch 告诉 try：你去检测一下程序有没有错误，有错误的话就告诉我，我来处理，没有的话就不要理我！
+!!! note
+    这就好比，catch 告诉 try：你去检测一下程序有没有错误，有错误的话就告诉我，我来处理，没有的话就不要理我！
 
 ```c++
 #include <iostream>
@@ -2655,29 +2677,30 @@ int main(){
 }
 ```
 
-> output:
->
-> 
->
-> [2]out of bound!
->
-> > [1]不会throw
-> >
-> > [2]会throw
-> >
-> > string.at()源码：
-> >
-> > ```c++
-> >       at(size_type __n)
-> >       {
-> > 	if (__n >= size())
-> > 	  __throw_out_of_range_fmt(__N("basic_string::at: __n "
-> > 				       "(which is %zu) >= this->size() "
-> > 				       "(which is %zu)"),
-> > 				   __n, this->size());
-> > 	return _M_data()[__n];
-> >       }
-> > ```
+!!! note
+    output:
+    
+    
+    
+    [2]out of bound!
+    
+    > [1]不会throw
+    >
+    > [2]会throw
+    >
+    > string.at()源码：
+    >
+    > ```c++
+    >       at(size_type __n)
+    >       {
+    > 	if (__n >= size())
+    > 	  __throw_out_of_range_fmt(__N("basic_string::at: __n "
+    > 				       "(which is %zu) >= this->size() "
+    > 				       "(which is %zu)"),
+    > 				   __n, this->size());
+    > 	return _M_data()[__n];
+    >       }
+    > ```
 
 
 
@@ -2732,7 +2755,8 @@ int main(){
 
 全局/静态存储区：全局变量和静态变量被分配到同一块内存中。
 
-> 在C语言中，全局变量又分为初始化的和未初始化的，C++中没有这一区
+!!! note
+    在C语言中，全局变量又分为初始化的和未初始化的，C++中没有这一区
 
 常量存储区：这是一块特殊存储区，里边存放常量(和代码？），不允许修改
 
@@ -2849,7 +2873,8 @@ add 函数的堆栈帧上的 `sum` 变量被分配 `a + b` 的结果
 
 main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段再次清空
 
-> 注意：C++ 标准库还提供了一系列智能指针，可以帮助自动化堆中内存分配和释放的过程。
+!!! note
+    注意：C++ 标准库还提供了一系列智能指针，可以帮助自动化堆中内存分配和释放的过程。
 
 
 
@@ -3003,7 +3028,8 @@ GNU C Library（通常简称为glibc）是一个按照GNU通用公共许可证�
 
 auto it = **find**(container.begin(), container.end(), value);
 
-> 如果找到，it 将指向匹配的元素；如果没有找到，it 将等于 container.end()。
+!!! note
+    如果找到，it 将指向匹配的元素；如果没有找到，it 将等于 container.end()。
 
 **std::binary_search**: 对有序区间进行二分查找。
 
@@ -3397,25 +3423,26 @@ Boost是一个流行的、开源的**C++库集合**，提供了各种功能强�
 
 Boost库包含了多个模块，每个模块都提供了不同领域的功能和工具，覆盖了诸如字符串操作、数据结构、算法、日期时间处理、文件系统、线程、网络、正则表达式等各个方面。以下是一些常用的Boost库：
 
->1.Boost.Asio：提供了异步I/O操作的网络编程库，支持TCP、UDP、串口等网络协议。 
->
-> 2.Boost.Smart_Ptr：提供了**智能指针类**，如shared_ptr和weak_ptr，用于方便地进行内存管理。 
->
-> 3.Boost.Filesystem：提供了对**文件系统**的访问和操作，包括文件和目录的创建、删除、遍历等。 
->
-> 4.Boost.Regex：提供了**正则表达式**的功能，用于进行文本匹配和搜索操作。 
->
-> 5.Boost.Thread：提供了**跨平台的多线程编程接口**，简化了线程的创建、同步和通信等操作。 
->
-> 6.Boost.Serialization：提供了对象的序列化和反序列化功能，可以将对象以二进制或XML格式进行存储和传输。 
->
->7.Boost.Math用于数学计算
->
->8.Boost.Graph用于**图论算法** [Chapter 31. Boost.Graph](https://theboostcpplibraries.com/boost.graph)
->
->9.Boost.Algorithm - 提供了包括排序、搜索等在内的**各种算法**。
->
->10.Boost.Numeric - 提供了用于数值计算的库，如用于线性代数、随机数生成等
+!!! note
+    1.Boost.Asio：提供了异步I/O操作的网络编程库，支持TCP、UDP、串口等网络协议。
+    
+    2.Boost.Smart_Ptr：提供了**智能指针类**，如shared_ptr和weak_ptr，用于方便地进行内存管理。 
+    
+    3.Boost.Filesystem：提供了对**文件系统**的访问和操作，包括文件和目录的创建、删除、遍历等。 
+    
+    4.Boost.Regex：提供了**正则表达式**的功能，用于进行文本匹配和搜索操作。 
+    
+    5.Boost.Thread：提供了**跨平台的多线程编程接口**，简化了线程的创建、同步和通信等操作。 
+    
+    6.Boost.Serialization：提供了对象的序列化和反序列化功能，可以将对象以二进制或XML格式进行存储和传输。 
+    
+    7.Boost.Math用于数学计算
+    
+    8.Boost.Graph用于**图论算法** [Chapter 31. Boost.Graph](https://theboostcpplibraries.com/boost.graph)
+    
+    9.Boost.Algorithm - 提供了包括排序、搜索等在内的**各种算法**。
+    
+    10.Boost.Numeric - 提供了用于数值计算的库，如用于线性代数、随机数生成等
 
 
 
@@ -3635,7 +3662,8 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 - 线程是**CPU**调度和分配的基本单位，可以理解为CPU只看得到线程；进程是**操作系统**进行资源分配的最小单位
 
-  >当你执行这个程序时，CPU响应为该进程分配资源对其进行处理，但是CPU看不到"进程"， 看到的是由很多个线程组成的一个网络（就是一个进程），于是CPU开始为这些线程利用`时间分配算法`来循环执行任务。
+  !!! note
+      当你执行这个程序时，CPU响应为该进程分配资源对其进行处理，但是CPU看不到"进程"， 看到的是由很多个线程组成的一个网络（就是一个进程），于是CPU开始为这些线程利用`时间分配算法`来循环执行任务。
 
 
 
@@ -3643,7 +3671,8 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 **并发**： 指的是两个(或以上)的线程同时请求执行，但是同一瞬间CPU只能执行一个，于是CPU就安排他们**交替**执行，我们看起来好像是同时执行的，其实不是。并发可认为是一种逻辑结构的设计模式。你可以用并发的设计方式去设计模型，然后运行在一个单核系统上，通过系统动态地逻辑切换制造出并行的假象。
 
-> 并发在生活中随处可见，单核CPU边听歌边写代码
+!!! note
+    并发在生活中随处可见，单核CPU边听歌边写代码
 
 **并行**： 指的是两个(或以上)的线程**同时**执行。     
 
@@ -3917,10 +3946,12 @@ int main() {
 
 #### 1
 
->vector<int> var1\[m][n];//不行
->vector<vector<vector<int>>> var2\[m][n]；//可以
+!!! note
+    vector<int> var1\[m][n];//不行
+    vector<vector<vector<int>>> var2\[m][n]；//可以
 
-> //当wire_max_level和wire_max_sublevel较大(1000）时，初始化第258和259行的        “IntVec dst[wire_max_level][wire_max_sublevel];IntVec dst_ports[wire_max_level][wire_max_sublevel];”会报错：Segmentation fault
+!!! note
+    //当wire_max_level和wire_max_sublevel较大(1000）时，初始化第258和259行的        “IntVec dst[wire_max_level][wire_max_sublevel];IntVec dst_ports[wire_max_level][wire_max_sublevel];”会报错：Segmentation fault
 
 在C++中，这两种声明方式涉及到多维向量的初始化和存储方式，它们之间存在一些关键的差异：
 
@@ -3959,8 +3990,9 @@ int main() {
 }
 ```
 
->ok
->Segmentation fault (core dumped)
+!!! note
+    ok
+    Segmentation fault (core dumped)
 
 ```c++
 #include <bits/stdc++.h>
@@ -3978,7 +4010,8 @@ int main() {
 }
 ```
 
-> Segmentation fault (core dumped)
+!!! note
+    Segmentation fault (core dumped)
 
 UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
@@ -4147,7 +4180,8 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
       ]
 ```
 
->注意把其中的`/home/pengxuan/Software/miniconda3/envs/cenv/share/gcc-12.4.0/python`路径换成自己环境中的
+!!! note
+    注意把其中的`/home/pengxuan/Software/miniconda3/envs/cenv/share/gcc-12.4.0/python`路径换成自己环境中的
 
 设置后重新debug
 
@@ -4532,8 +4566,9 @@ target_include_directories(my_target PRIVATE
 这会给编译器添加一个` -I/path/to/third_party/lib/include` 参数。因为 <>
 的查找规则是“只在系统目录和由 `-I` 指定的目录中查找”，所以加上这句后，你就可以放心地使用`#include <mylib.h> `了。
 
-> 进阶技巧：如果你想屏蔽第三方库头文件里的警告，可以加 ==SYSTEM== 关键字：
->  target_include_directories(xapr SYSTEM PUBLIC ...)
+!!! note
+    进阶技巧：如果你想屏蔽第三方库头文件里的警告，可以加 ==SYSTEM== 关键字：
+     target_include_directories(xapr SYSTEM PUBLIC ...)
 
 ###### target_link_libraries
 
@@ -4620,9 +4655,10 @@ add_executable(main main.cpp)
 
 `add_library(库名称 STATIC 源文件1 [源文件2] ...) `
 
-> add_library(calc STATIC ${SRC_LIST})
->
-> 这样最终就会生成对应的静态库文件libcalc.a。
+!!! note
+    add_library(calc STATIC ${SRC_LIST})
+    
+    这样最终就会生成对应的静态库文件libcalc.a。
 
 
 
@@ -4648,16 +4684,18 @@ add_executable(main main.cpp)
 
 
 
->add_library(calc SHARED ${SRC_LIST})
->
->这样最终就会生成对应的动态库文件libcalc.so。
+!!! note
+    add_library(calc SHARED ${SRC_LIST})
+    
+    这样最终就会生成对应的动态库文件libcalc.so。
 
 动态库的链接具有传递性，如果动态库 A 链接了动态库B、C，动态库D链接了动态库A，此时动态库D相当于也链接了动态库B、C，并可以使用动态库B、C中定义的方法
 
 `add_library(库名称 SHARED 源文件1 [源文件2] ...) `
 
->target_link_libraries(A B C)
->target_link_libraries(D A)
+!!! note
+    target_link_libraries(A B C)
+    target_link_libraries(D A)
 
 将程序按照模块拆分成各个相对独立的部分，**程序运行到时才链接**
 
@@ -4881,24 +4919,25 @@ debug脚本`json.json`
 
 ##### TEST_F
 
-
+方便写类似的case
 
 
 
 ##### TEST_P
 
-
+可以参数化，比如一个模型需要测试不同的输入graph，就可以用这个，方便写类似的case
 
 
 
 ##### tip
 
->短答（原因）：因为 Google Test 把类型放在全局命名空间下的 testing 命名空间，所以代码里用 ::testing::Test（前导 ::）显式指向全局命名空间，避免与当前作用域中可能存在的同名命名空间冲突。若当前没有嵌套同名命名空间，省略前导 ::（写成 testing::Test）通常也能正常工作。
->
->要点和容易踩的坑：
->
->::testing::Test 的前导 :: 强制从全局命名空间查找 testing。
->如果你的代码位于某个命名空间内（例如 namespace foo { ... }），写 testing::Test 可能会被解析为 foo::testing（如果存在），这会导致编译错误或歧义；使用 ::testing 则安全。
+!!! note
+    短答（原因）：因为 Google Test 把类型放在全局命名空间下的 testing 命名空间，所以代码里用 ::testing::Test（前导 ::）显式指向全局命名空间，避免与当前作用域中可能存在的同名命名空间冲突。若当前没有嵌套同名命名空间，省略前导 ::（写成 testing::Test）通常也能正常工作。
+    
+    要点和容易踩的坑：
+    
+    ::testing::Test 的前导 :: 强制从全局命名空间查找 testing。
+    如果你的代码位于某个命名空间内（例如 namespace foo { ... }），写 testing::Test 可能会被解析为 foo::testing（如果存在），这会导致编译错误或歧义；使用 ::testing 则安全。
 
 
 
@@ -5767,9 +5806,9 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 
    除以√d是为了稳定训练
 
-!!! warning
-    
-    在NLP中，需要进行掩码操作。应为不知道后面的单词。将后面的query对应的相关性置为0。还是要像RNN一样。
+   !!! warning
+       
+       在NLP中，需要进行掩码操作。应为不知道后面的单词。将后面的query对应的相关性置为0。还是要像RNN一样。
 
 4. 计算v
 
@@ -5903,7 +5942,8 @@ TabAttention 的核心思想是延展卷积块注意力模块 (CBAM) 到时间�
 
 现有的传统视觉 ViTs 在浅层网络中倾向于捕获局部特征，会导致大量冗余计算。同时， 为了降低计算成本，现有的许多方法采用局部注意力或早期卷积，但牺牲了全局建模能力。所以这篇论文从超像素分割中得到启发，==在后续处理中减少了图像基元的数量==，并在视觉Transformer中引入了一种**Super Token Attention**。Super Token Attention试图提供一个语义上有意义的视觉内容的镶嵌，从而==减少在自我注意力的token==，以及保留全局建模。STA 通过将视觉内容划分为超 token，在超 token 空间进行自注意力操作，从而有效地学习全局表示，同时降低计算成本。
 
-> 也许用得上
+!!! note
+    也许用得上
 
 [(TMM 2023) MSDA ](https://link.zhihu.com/?target=https%3A//github.com/JIAOJIAYUASD/dilateformer)
 
@@ -5951,7 +5991,8 @@ Top-K稀疏注意力
 
 标准 Transformer 中的自注意力机制在图像去雨任务中存在一些局限性：**全局信息交互**：标准自注意力对所有查询-键对进行计算，容易引入无关信息，干扰特征聚合，影响图像细节恢复。**冗余特征**：全连接计算模式放大了较小的相似度权重，导致特征交互和聚合过程易受噪声影响，产生冗余或不相关的特征表示。为了解决这些问题，这篇论文提出一种 **Top-k稀疏注意力（Top-K Sparse Attention）**。
 
-> 感觉用得上
+!!! note
+    感觉用得上
 
 [(2023) ESRA 高效空间压缩注意力](https://link.zhihu.com/?target=https%3A//github.com/XSforAI/SUnet)
 
@@ -5959,7 +6000,8 @@ Top-K稀疏注意力
 
 ![image-20250930151728539](assets/image-20250930151728539.png)
 
-> 感觉用得上
+!!! note
+    感觉用得上
 
 [Agent Attention 代理注意力](https://link.zhihu.com/?target=https%3A//github.com/LeapLabTHU/Agent-Attention)
 
@@ -6115,8 +6157,9 @@ puts [lindex $myVariable 1]
 
 ```
 
->blue
->green
+!!! note
+    blue
+    green
 
 #### 关联数组
 
@@ -6131,7 +6174,8 @@ puts $marks(mathematics)
 
 ```
 
-> 80 90
+!!! note
+    80 90
 
 ### 参考
 
