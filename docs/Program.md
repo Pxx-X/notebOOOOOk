@@ -1,12 +1,14 @@
-# C++
+# Program
 
-## C++ 版本
+## C++
+
+### C++ 版本
 
 以下是自 **C++11** 以来各版本 C++ 标准的主要特点和重要改动的总结(AI 生成)：
 
 ---
 
-### **1. C++11（2011 年）**
+#### **1. C++11（2011 年）**
 
 **现代 C++ 的里程碑**，引入大量革命性特性：  
 
@@ -28,7 +30,7 @@
 
 ---
 
-### **2. C++14（2014 年）**  
+#### **2. C++14（2014 年）**  
 **C++11 的补充版本**，优化语言细节：  
 - **核心语言**  
   - **泛型 Lambda**：Lambda 支持 `auto` 参数（`auto f = [](auto x) { ... };`）。  
@@ -43,7 +45,7 @@
 
 ---
 
-### **3. C++17（2017 年）**
+#### **3. C++17（2017 年）**
 
 **进一步简化代码，增强标准库**：  
 
@@ -138,7 +140,7 @@
 
 ---
 
-### **4. C++20（2020 年）**  
+#### **4. C++20（2020 年）**  
 **重大更新，迈向现代编程范式**：  
 
 - **核心语言**  
@@ -157,7 +159,7 @@
 
 ---
 
-### **5. C++23（2023 年）**  
+#### **5. C++23（2023 年）**  
 **当前最新标准**（部分特性仍在完善）：  
 - **核心语言**  
   - **多维数组视图**（`std::mdspan`）：科学计算优化。  
@@ -174,7 +176,7 @@
 
 
 
-## install
+### install
 
 安装特定版本
 
@@ -197,13 +199,13 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 
 
-## 书写规范（推荐）
+### 书写规范（推荐）
 
-### 文件命名
+#### 文件命名
 
-#### 源代码文件
+##### 源代码文件
 
-##### .cpp (C Plus Plus)
+###### .cpp (C Plus Plus)
 
 - 最常见的C++源代码文件扩展名
 
@@ -211,7 +213,7 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 - 大多数项目和IDE默认使用此扩展名
 
-##### .cc (C Code)
+###### .cc (C Code)
 
 - .cpp的替代扩展名，功能完全相同
 
@@ -219,9 +221,9 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 - 在Unix/Linux环境中比较流行
 
-#### 头文件
+##### 头文件
 
-##### .h (Header)
+###### .h (Header)
 
 - 传统的头文件扩展名，可用于C和C++
 
@@ -231,7 +233,7 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 - 可以包含C或C++代码
 
-##### .hpp (Header Plus Plus)
+###### .hpp (Header Plus Plus)
 
 - 专用于C++的头文件扩展名
 
@@ -241,7 +243,7 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 - 一些编码标准推荐C++项目使用此扩展名
 
-##### .hh (Header Header)
+###### .hh (Header Header)
 
 - C++头文件的另一种扩展名
 
@@ -251,7 +253,7 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 - 一些项目使用.hh与.cc源文件匹配
 
-#### 使用约定
+##### 使用约定
 
 这些扩展名的区别主要体现在不同项目和组织的编码规范中：
 
@@ -263,7 +265,7 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 
 
-### 函数/变量/类/常量/宏定义/环境变量/文件命名
+#### 函数/变量/类/常量/宏定义/环境变量/文件命名
 
 - Use PascalCase for classes and structures.
 - Use camelCase for variables, functions, and methods.
@@ -273,23 +275,23 @@ alias gcc="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc"
 
 
 
-### 注释
+#### 注释
 
 Doxygen
 
 
 
-## C/C++环境变量
+### C/C++环境变量
 
-### LD_LIBRARY_PATH
+#### LD_LIBRARY_PATH
 
-#C/C++语言动态链接库文件搜索的目录，它不是Linux缺省的环境变量
+## C/C++语言动态链接库文件搜索的目录，它不是Linux缺省的环境变量
 
 
-##### 核心定义
+###### 核心定义
 `LD_LIBRARY_PATH` (Load Dynamic Library Path) 是告诉操作系统（动态链接器）**去哪里寻找程序运行所需的 `.so` 动态库文件** 的环境变量。
 
-##### 为什么需要它？
+###### 为什么需要它？
 当你运行一个程序（如 `./my_app`）时，系统需要找到它依赖的动态库（如 `libssl.so`）。操作系统的**默认查找顺序**如下：
 
 1.  =程序的 RPATH= （编译时写死在程序里的路径）。
@@ -298,7 +300,7 @@ Doxygen
 
 **结论**：如果你把库安装在了非标准目录（如 `/home/user/mylib` 或 Conda 环境），系统默认找不到。此时必须设置 `LD_LIBRARY_PATH`。
 
-##### 典型应用场景
+###### 典型应用场景
 
 解决 "error while loading ==shared libraries=="
 
@@ -323,14 +325,14 @@ export LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
 
 
 
-##### 优缺点
+###### 优缺点
 
 *   **好处**：=灵活=。无需管理员权限即可让程序加载自定义路径的库。
 *   **坏处**：=隐患=。滥用（如全局设置）可能导致 **Dependency Hell**（依赖地狱），即程序意外加载了同名但不兼容的错误库。
 
 
 
-### CPPFLAGS (C Preprocessor Flags)
+#### CPPFLAGS (C Preprocessor Flags)
 *   **含义**：**C 预处理器**标志。
 *   **用途**：用于编译的第一阶段（预处理）。主要用于**定义宏**和**指定头文件路径**。
 *   **常见值**：
@@ -338,7 +340,7 @@ export LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
     *   `-D_FORTIFY_SOURCE=2`：开启缓冲区溢出检测，增强=安全性=。
     *   `-isystem .../include`：将指定目录设为“系统头文件目录”（优先级高于 `-I`，且忽略其中的警告）。
 
-### CFLAGS (C Compiler Flags)
+#### CFLAGS (C Compiler Flags)
 
 *   **含义**：**C 语言编译器**标志。
 *   **用途**：仅用于编译 =`.c`= 文件。
@@ -348,7 +350,7 @@ export LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
     *   `-fPIC`：生成**位置无关代码** (Position Independent Code)，编译 `.so` 动态库=必须=。
     *   `-fstack-protector-strong`：开启栈保护，防止栈溢出攻击。
 
-### CXXFLAGS (C++ Compiler Flags)
+#### CXXFLAGS (C++ Compiler Flags)
 *   **含义**：**C++ 语言编译器**标志。
 *   **用途**：仅用于编译 =`.cpp`, `.cc`, `.cxx`= 文件。
 *   **常见值**：
@@ -358,13 +360,13 @@ export LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
 
 
 
-## struct & class & union
+### struct & class & union
 
-> [!NOTE]
->
-> 什么时候用struct和什么时候用class？
->
-> struct 默认全部public，class可以使用继承等特性，默认是private。
+!!! note
+    
+    什么时候用struct和什么时候用class？
+    
+    struct 默认全部public，class可以使用继承等特性，默认是private。
 
 ```c++
 #include <iostream>
@@ -469,7 +471,7 @@ int main() {
 
 关于Union: [C/C++中的联合体union介绍_c++ union-CSDN博客](https://blog.csdn.net/mooneve/article/details/92703036)
 
-### public/private/protected
+#### public/private/protected
 
 • - public: 外部可访问和继承可见。任何对象都能直接调用/读取。
 
@@ -506,16 +508,16 @@ Foo f; f.greet(); // ok
 
 
 
-### 虚函数
+#### 虚函数
 
 - 虚函数的调用需在运行时确定，编译器无法提前内联（除非能确定具体类型，如通过对象直接调用而非指针 / 引用）
 - dynamic_case< >, 从基类转成子类需要用虚函数
 
-### 什么时候使用继承？什么时候只需要把基类作为一个成员变量就行？
+#### 什么时候使用继承？什么时候只需要把基类作为一个成员变量就行？
 
-## 指针
+### 指针
 
-### 野指针和空指针
+#### 野指针和空指针
 
 **空指针**: 如 int *p = NULL 这就定义了一个指针，通常NULL是一个零值，操作系统定义内存64kb以下的内存单元是不可访问的，所以像如 *p = 9 这样给他赋值是系统不允许的，将会发生内存报错。
 
@@ -523,9 +525,9 @@ Foo f; f.greet(); // ok
 
 
 
-### 内存泄漏&悬空指针
+#### 内存泄漏&悬空指针
 
-#### 举例
+##### 举例
 
 ```c++
 void foo(int n) {
@@ -553,9 +555,9 @@ void bar() {
 
 
 
-### 智能指针
+#### 智能指针
 
-#### share_ptr
+##### share_ptr
 
 只要有一个指针占用了同一块地址，对应的内存都不会被释放
 
@@ -573,7 +575,7 @@ void bar() {
     cout << hex << v_ptr[0].get() << endl;
 ```
 
-##### 循环引用问题
+###### 循环引用问题
 
 A 持有 B 的 shared_ptr，B 持有 A 的 shared_ptr，双方 use_count 永不归零，以前就永远不会被释放
 
@@ -581,13 +583,13 @@ A 持有 B 的 shared_ptr，B 持有 A 的 shared_ptr，双方 use_count 永不�
 
 堆空间里的 Person对象 与 Car对象互相使用着，导致双方的 shared_ptr 强引用数量不会为0，所以不会自动释放内存，产生了内存泄漏
 
-#### unique_ptr
+##### unique_ptr
 
 只能有一个指针占用对应的内存
 
 
 
-#### weak_ptr
+##### weak_ptr
 
 std::weak_ptr 是 C++11 引入的一种非拥有型智能指针，它与 std::shared_ptr 配合使用，用于解决共享所有权场景下的==循环引用问题==
 
@@ -635,7 +637,7 @@ int main()
 
 
 
-##### 应用场景
+###### 应用场景
 
 -  避免循环引用
 
@@ -676,7 +678,7 @@ int main()
 
 
 
-#### 总结
+##### 总结
 
 | 特性             | 普通指针      | unique_ptr      | shared_ptr       | weak_ptr           |
 | ---------------- | ------------- | --------------- | ---------------- | ------------------ |
@@ -722,7 +724,7 @@ void sharedPointerExample() {
 
 
 
-### 深拷贝
+#### 深拷贝
 
 当一个对象的有一个指针的时候，复制对象需要特别注意，要看是否两个对象管理同一片内存！如果不要，需要使用深拷贝，创建新的内存空间和指针
 
@@ -909,7 +911,7 @@ int main() {
 
 
 
-## STL/Iterator
+### STL/Iterator
 
 | 容器                                    | 头文件               | 类别                   | 简要特性 / 典型复杂度 / 备注                                 |
 | :-------------------------------------- | -------------------- | ---------------------- | ------------------------------------------------------------ |
@@ -940,7 +942,7 @@ int main() {
 
 
 
-### begin/end/prev/next/advance/rbegin/rend
+#### begin/end/prev/next/advance/rbegin/rend
 
 ```c++
 #include <iostream>     // std::cout
@@ -1023,7 +1025,7 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) {
 
 
 
-### find
+#### find
 
  - 有序/无序关联容器（std::map / std::unordered_map / std::set / std::unordered_set）：
 
@@ -1091,7 +1093,7 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) {
 
 
 
-### std::pair/std::tuple
+#### std::pair/std::tuple
 
  tuple是一个固定大小的不同类型值的集合，是泛化的std::pair
 
@@ -1107,7 +1109,7 @@ std::make_tuple(v1, v2); // 像pair一样也可以通过make_tuple进行创建�
 
 
 
-### custom hash for map
+#### custom hash for map
 
 ```c++
 struct Point {
@@ -1141,7 +1143,7 @@ void DemoCustomKeyHash() {
 
 
 
-### priority_queue 和 vector+sort 相比有什么区别
+#### priority_queue 和 vector+sort 相比有什么区别
 
   - 接口与用途：priority_queue 提供“始终能取当前最大/最小值”的堆接口；vector+sort 是一次性排序后顺序访问的容器组合。
   - 复杂度：priority_queue 的 push/pop/top 都是 O(log N)/O(log N)/O(1)，适合动态插入+反复取极值；vector 初始乱序时 sort
@@ -1156,7 +1158,7 @@ void DemoCustomKeyHash() {
 
 
 
-### push_back 和 emplace_back 区别
+#### push_back 和 emplace_back 区别
 
 ![image-20251223204328735](assets/image-20251223204328735.png)
 
@@ -1179,14 +1181,14 @@ public:
 };
 ```
 
-> [!CAUTION]
->
-> 移动构造形参是传右值`&&`
->
-> `noexcept` 告诉编译器“这个移动构造不会抛异常”。作用：
->
->   - 标记后可以让标准容器在需要搬移元素时选择移动而非退回到拷贝（因为它保证不抛，容器可以安全移动已有元素）。
->   - 语义：承诺不会抛出异常；若仍抛出，将调用 std::terminate。
+!!! caution
+    
+    移动构造形参是传右值`&&`
+    
+    `noexcept` 告诉编译器“这个移动构造不会抛异常”。作用：
+    
+      - 标记后可以让标准容器在需要搬移元素时选择移动而非退回到拷贝（因为它保证不抛，容器可以安全移动已有元素）。
+      - 语义：承诺不会抛出异常；若仍抛出，将调用 std::terminate。
 
 ```c++
 #include <bits/stdc++.h>
@@ -1379,21 +1381,21 @@ int main() {
 
 
 
-### 参考
+#### 参考
 
 [C++ 迭代器(iterator)超详解+实例演练_c++ iterator-CSDN博客](https://blog.csdn.net/qq_52324409/article/details/121048486)
 
 
 
-## 字符串
+### 字符串
 
-### 基本对象
+#### 基本对象
 
-#### std::string
+##### std::string
 
 `std::string` 保证其字符存储在内存中的一个连续区域内，从而实现了通过索引对单个字符进行高效的随机访问，其时间复杂度为 O(1) 
 
-#### std::string_view
+##### std::string_view
 
 `c++17`引入
 
@@ -1401,13 +1403,13 @@ int main() {
 
 
 
-### 小字符串优化
+#### 小字符串优化
 
 [【83】C++的小字符串优化_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=84)
 
-## 模版Template
+### 模版Template
 
-### 背景
+#### 背景
 
 有时，有两个或多个类，其功能是相同的，仅仅是数据类型不同
 
@@ -1425,15 +1427,15 @@ public:
 
 
 
-### 参考
+#### 参考
 
 - [【53】C++的模板_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=54)
 
 
 
-## static & extern
+### static & extern
 
-### static
+#### static
 
 - 修饰局部变量，修改变量的存储区域和生命周期，使变量存储在静态区，==在 main 函数运行前就分配了空间==，如果有初始值就用初始值初始化它，如果没有初始值系统用默认值初始化它。
 - 修饰成员变量，修饰成员变量使==所有的对象只保存一个该变量==，而且不需要生成对象就可以访问该成员。静态成员变量的初始化必须在函数声明体之外。
@@ -1443,7 +1445,7 @@ public:
 
 
 
-#### 使用场景
+##### 使用场景
 
 - 修饰成员变量，作为类的对象计数器
 
@@ -1474,19 +1476,19 @@ public:
   >
   > [【C++】C++ 单例模式总结（5种单例实现方法）_单例模式c++实现-CSDN博客](https://blog.csdn.net/unonoi/article/details/121138176)
 
-#### 参考
+##### 参考
 
 https://zhuanlan.zhihu.com/p/605741092
 
 
 
-### extern
+#### extern
 
 extern其实就是一个声明，明确指出一个语句是声明，比如extern int i ;这是声明变量i，而不是定义i，定义i则是int i（声明不开辟内存空间，而定义是要开辟内存空间的）
 
 
 
-#### 使用场景
+##### 使用场景
 
 - 适用于简单项目，几个文件之间的调用
 
@@ -1542,15 +1544,15 @@ extern其实就是一个声明，明确指出一个语句是声明，比如exter
 
   `extern "C"`修饰的语句是为了==编译器按照c的方式去进行编译==的，为什么需要这样呢，是因为，如果在cpp文件中调用了c函数，那么就需要对这些c函数进行extern "C"操作，从而在编译cpp程序时，调用这些函数的时候，这些函数要按照c编译。
 
-#### 参考
+##### 参考
 
 https://blog.csdn.net/ytt999/article/details/139352522
 
 
 
-## 引用
+### 引用
 
-### 常见应用场景
+#### 常见应用场景
 
 1. 减少拷贝
 2. 函数传参
@@ -1558,7 +1560,7 @@ https://blog.csdn.net/ytt999/article/details/139352522
 
 
 
-#### 注意
+##### 注意
 
 ```c++
 std::vector<int> numbers = {1, 2, 3};
@@ -1570,7 +1572,7 @@ std::cout << "a = " << a << "\n";
 >这是未定义行为。int &a = numbers[2]; 绑定到最后一个元素，pop_back() 会析构并移除该元素，引用变成悬空。刚好内存还没被覆
 >盖，所以打印出了旧值 3，但这只是偶然：换个编译器/优化/场景可能是任意值甚至崩溃。
 
-### 左值与右值
+#### 左值与右值
 
 `左值`指既能够出现在等号左边，也能出现在等号右边的变量；
 
@@ -1589,13 +1591,13 @@ a = 3; // 3 为右值
 
 
 
-### 左值引用&
+#### 左值引用&
 
 ![image-20250917154157587](assets/image-20250917154157587.png)
 
 
 
-### 右值引用&&
+#### 右值引用&&
 
 - **一次性使用**：右值引用只能绑定到右值上，一旦绑定，原始的右值就不能再被使用。
 - **移动语义**：右值引用允许你转移资源的所有权，而不是复制资源。这是通过移动构造函数和移动赋值运算符实现的(std::move)。
@@ -1615,17 +1617,17 @@ int &&z4 = x; // 错误，x是一个左值
 
 ![image-20250917154857585](assets/image-20250917154857585.png)
 
->[!WARNING]
->
-> 这个时候`PrintName(firstName)`是可以的
->
-> 但是`PrintName(firstName+lastName)`是不行的
->
-> 如果函数声明为`void PrintName(const std::string& name)`，那么两种都可以了就可以了
->
->
-> 
-> 如果声明为右值引用`void PrintName(std::string&& name)`, 那么输入参数只能是右值`firstName+lastName`
+!!! warning
+    
+    这个时候`PrintName(firstName)`是可以的
+    
+    但是`PrintName(firstName+lastName)`是不行的
+    
+    如果函数声明为`void PrintName(const std::string& name)`，那么两种都可以了就可以了
+    
+    
+    
+    如果声明为右值引用`void PrintName(std::string&& name)`, 那么输入参数只能是右值`firstName+lastName`
 
 那么右值引用有什么用？可以在函数里面用`move`了
 
@@ -1689,7 +1691,7 @@ int &&z4 = x; // 错误，x是一个左值
 
 
 
-### std::move
+#### std::move
 
 [C++ std::move深入解析 | 移动语义与性能优化 | C++ 编程指南](https://chengxumiaodaren.com/docs/cpp-advanced/cpp-move/)
 
@@ -1703,7 +1705,7 @@ std::move 可以告诉编译器将一个对象视为右值，从而触发移动�
 
 移动构造函数就是右值引用：[【90】stdmove与移动赋值操作符_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=91) 
 
-#### 案例
+##### 案例
 
 ```c++
 #include <stdio.h>
@@ -1780,13 +1782,13 @@ int main (void)
 
 
 
-### 完美转发（std::forward）
+#### 完美转发（std::forward）
 
 [(73 封私信 / 80 条消息) C++编程系列笔记（3）——std::forward与完美转发详解 - 知乎](https://zhuanlan.zhihu.com/p/645328162)
 
 主要用于以下场景：**提高模板函数参数传递过程的转发效率**。
 
-#### 引用折叠
+##### 引用折叠
 
 ![image-20251215195447134](assets/image-20251215195447134.png)
 
@@ -1809,7 +1811,7 @@ int main() {
 
 
 
-### 参考
+#### 参考
 
 [【85】C++的左值与右值_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=86)
 
@@ -1823,7 +1825,7 @@ int main() {
 
 
 
-## 类型转换
+### 类型转换
 
 在C语言中，如果赋值运算符左右两侧类型不同，或者形参与实参类型不匹配，或者返回值类型与接收返回值类型不一致时，就需要发生类型转化
 
@@ -1851,7 +1853,7 @@ c++ 风格四种配型转换
 
 动态转换： dynamic_cast
 
-### static_cast
+#### static_cast
 
 `static_cast<type_name>(expression)`
 
@@ -1910,9 +1912,9 @@ c++ 风格四种配型转换
   int&& ra = static_cast<int&&>(a);
   ```
 
-### dynamic_cast
+#### dynamic_cast
 
-#### 条件
+##### 条件
 
 （1）必须是==公有继承==，==基类要有虚函数==（这样基类才会有虚函数表，从而支持运行时类型识别 RTTI）
 
@@ -2099,7 +2101,7 @@ int main() {
 > >   虚函数，取而代之的常见手段有 CRTP、函数对象、静态多态等。总之，除非 profiler 指出
 > >   虚调用是瓶颈，否则优先写清晰的面向对象代码，性能问题再针对性优化。
 
-### reinterpret_cast
+#### reinterpret_cast
 
 `reinterpret_cast`用于两个不相关类型之间的转换，表示重新解释的含义。类似于C语言中的强转
 
@@ -2114,7 +2116,7 @@ int c = reinterpret_cast<int>(ra);
 
 
 
-### const_cast
+#### const_cast
 
 删除变量的const属性
 
@@ -2143,14 +2145,14 @@ int c = reinterpret_cast<int>(ra);
 
   ![image-20251216160635775](assets/image-20251216160635775.png)
 
-### ref
+#### ref
 
 - https://blog.csdn.net/2401_83282433/article/details/148365850
 - [【C++】深度解析C++的四种强制转换类型（小白一看就懂！！）_c++强制类型转换-CSDN博客](https://blog.csdn.net/weixin_45031801/article/details/142147962)
 
-## lamda/std::function/函数指针
+### lamda/std::function/函数指针
 
-### auto
+#### auto
 
 关键字 `auto` 允许编译器自动推导变量的类型，从而使程序员不必显式地指定它们。这一特性在处理复杂类型或[模板编程](https://zhida.zhihu.com/search?content_id=240865199&content_type=Article&match_order=1&q=模板编程&zhida_source=entity)时尤为有用，能够使代码==更加简洁明了==。
 
@@ -2235,7 +2237,7 @@ auto result = complexFunction(); // 自动推导为std::map<std::string, std::ve
 
 
 
-### decltype
+#### decltype
 
 语法格式的区别
 
@@ -2258,7 +2260,7 @@ decltype(exp) varname [= value]; // decltype的语法格式
 
 - 如果表达式的类型**是指针或者引用**，auto 将保留 cv 限定符。
 
-- ```c++
+-   ```c++
   // const
   int main() {
       // 非指针非引用类型
@@ -2296,7 +2298,7 @@ decltype(exp) varname [= value]; // decltype的语法格式
 
 
 
-#### 使用场景
+##### 使用场景
 
 ```c++
 // decltype usage examples.
@@ -2353,7 +2355,7 @@ int main() {
 
 [C++11 新特性：自动类型推导 auto 和 decltype（下） - 知乎](https://zhuanlan.zhihu.com/p/687411666)
 
-### lambda
+#### lambda
 
 [【58】C++的函数指针_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=59)
 
@@ -2376,7 +2378,7 @@ int main() {
 
 
 
-### 典型应用场景
+#### 典型应用场景
 
 ```c++
 int i = 0, j = 1;
@@ -2408,9 +2410,9 @@ auto filter = [threshold](int x) { return x > threshold; };
 
 
 
-## Keywords
+### Keywords
 
-### inline
+#### inline
 
 在 c/c++ 中，为了解决一些频繁调用的小函数==大量消耗栈空间（栈内存）的问题==，特别的引入了 inline 修饰符，表示为内联函数。
 
@@ -2422,12 +2424,12 @@ inline本质是编译器==优化建议==，而非指令。
 - 复杂函数（如包含循环、递归、大量分支）：编译器可能忽略inline，仍按普通函数处理；
 - 递归函数：几乎无法内联（除非编译器支持尾递归优化，但极少）。
 
-#### C 与 C++ 中inline的核心差异
+##### C 与 C++ 中inline的核心差异
 
 C 语言（C99 及之后）：inline仅表示 “内联建议”，且inline函数的定义需满足多处声明一致，若函数在多个编译单元中被调用，需确保有且仅有一个编译单元提供该函数的 “外部定义”（非inline的定义），否则会导致链接错误。
 C++ 语言：inline除了内联建议，还隐含 **“外部链接” 且允许重复定义 ** 的特性 —— 只要多个编译单元中的inline函数定义完全一致，编译器会自动合并为一个实例，避免链接冲突。
 
-#### 使用场景
+##### 使用场景
 
 - 短小且频繁调用的函数：如数值计算、简单的成员访问器（getter/setter）、工具类小函数（如判断奇偶、求绝对值）。
 
@@ -2445,11 +2447,10 @@ C++ 语言：inline除了内联建议，还隐含 **“外部链接” 且允许
 
 - 模板函数：模板函数通常在头文件中定义，inline可辅助编译器优化，且避免链接冲突。
 
-- 
 
 
 
-#### Tips
+##### Tips
 
 - `constexpr`函数：默认隐含inline特性，可在编译期求值，也可在运行时调用并被内联。
 - `consteval`函数（C++20）：强制编译期求值，本质也是内联的。
@@ -2458,20 +2459,20 @@ C++ 语言：inline除了内联建议，还隐含 **“外部链接” 且允许
 - 链接属性问题：C 语言中若未用static修饰头文件中的inline函数，需确保只有一个编译单元提供该函数的非inline定义，否则会报 “multiple definition” 错误。
 - **调试难度增加**：内联函数的代码被嵌入调用处，调试时无法直接断点到函数内部（需禁用优化）。
 
-#### ref
+##### ref
 
 https://www.cnblogs.com/Kakakak/p/19278174
 
 
 
-### constexpr/consteval/constinit
+#### constexpr/consteval/constinit
 
 - `constexpr` 表示“可以在==编译期==求值”（但并不强制）——它允许把表达式/函数/构造在编译期计算，从而用于需要常量表达式的场景（如数组大小、模板参数、static_assert 等）。
 - `constexpr` ==修饰变量==时意味着其初始值必须是常量表达式（而且该变量本身是不可变的）。
 - `constexpr` 修饰==函数/构造函数==时，表示该函数可以在编译期被调用；在运行时也可以被正常调用。
 - C++17 引入了 `if constexpr`（编译期分支），C++20 又加入了 `consteval` 与 `constinit` 等扩展，整体上 `constexpr` 能做的事情随着 C++ 标准演进越来越多。
 
-#### consteval
+##### consteval
 
 若你需要==强制在编译期求值==，用 `consteval`（C++20）。
 
@@ -2485,7 +2486,7 @@ int x = make_magic(); // 编译错误：不能在运行时调用 consteval 函�
 
 当你想确保某些值在编译期就确定（例如生成编译期常量配置、生成类型相关的常量），用 consteval 很合适
 
-#### constinit
+##### constinit
 
 `constinit` 并不会使变量成为常量（它==并不隐含 const==），它的目的是 保证具有静态/线程存储期的变量进行“静态（`constant`）初始化”而不是动态初始化；==如果其初始化不是常量初始化，程序就是 ill-formed（违例）==。因此 constinit 常用于防止“静态初始化顺序混乱”（static initialization order fiasco）。简而言之：==constinit 是关于“初始化时机”的断言==，而非关于是否常量。
 
@@ -2494,7 +2495,7 @@ constexpr int compile_time_val = 10; // 常量初始化
 constinit int runtime_global = compile_time_val; // OK（保证为常量初始化）
 ```
 
-#### 使用场景
+##### 使用场景
 
 - 经典例子：用 constexpr 写一个阶乘函数，然后在编译期求值并用于数组大小或静态断言。
 
@@ -2546,23 +2547,23 @@ constinit int runtime_global = compile_time_val; // OK（保证为常量初始�
     //  调用 print("hi") 时，整数/浮点分支被编译器移除，不要求对字符串也能做整数操作，这就是它的价值
     ```
 
-#### ref
+##### ref
 
 https://blog.csdn.net/Ethan_Rich/article/details/151958218
 
 
 
-### volatile
+#### volatile
 
 - `volatile` 表示数据是可变的、易变的，目的是不让 CPU 将数据缓存到寄存器，而是从原始的内存中读取。
 
 
 
-### mutable
+#### mutable
 
 
 
-## assert
+### assert
 
 ![image-20250917215222346](assets/image-20250917215222346.png)
 
@@ -2581,7 +2582,7 @@ https://blog.csdn.net/Ethan_Rich/article/details/151958218
 
 
 
-### static_assert
+#### static_assert
 
 ```c++
 #include <cassert>
@@ -2596,11 +2597,11 @@ static_assert(sizeof(void *)==4,"64位系统上不支持！", "ERROR Condition!"
 
 
 
-#### 参考
+##### 参考
 
 [c++11：static_assert 与assert_c++assert和static assert-CSDN博客](https://blog.csdn.net/drdairen/article/details/76689014)
 
-## try-catch-throw
+### try-catch-throw
 
 程序的错误大致可以分为三种，分别是语法错误、逻辑错误和运行时错误：
 1) 语法错误在编译和链接阶段就能发现，只有 100% 符合语法规则的代码才能生成可执行程序。语法错误是最容易发现、最容易定位、最容易排除的错误，程序员最不需要担心的就是这种错误。
@@ -2680,7 +2681,7 @@ int main(){
 
 
 
-### 场景
+#### 场景
 
 ```c++
 #include <iostream>
@@ -2717,13 +2718,13 @@ int main(){
 
 
 
-### ref
+#### ref
 
 - https://c.biancheng.net/view/2330.html
 
-## 堆栈内存管理
+### 堆栈内存管理
 
-### 程序内存分区
+#### 程序内存分区
 
 栈：是由编译器在需要时自动分配，不需要时自动清除的变量存储区。通常存放局部变量、函数参数等。
 
@@ -2744,13 +2745,14 @@ int main(){
 - **堆栈**（ Stack ）：用于管理==局部变量、函数参数和控制信息==（例如返回地址）
 - **堆**（ Heap ）：提供了一个灵活的区域来存储==大型数据结构==和具有==动态生命周期==的对象。堆内存可以在程序执行期间==分配或释放==
 
-> [!NOTE]值得注意的是，**内存分配**上下文中的堆栈和堆不应与**数据结构**堆栈和堆混淆。
+!!! note
+    值得注意的是，**内存分配**上下文中的堆栈和堆不应与**数据结构**堆栈和堆混淆。
 
-### 栈(**Stack**)
+#### 栈(**Stack**)
 
 **堆栈简称为堆栈**。
 
-#### 特点
+##### 特点
 
 - ==固定大小==： 当涉及到堆栈内存时，其大小保持固定，并在程序执行开始时确定。
 - 速度优势： 堆栈内存帧是==连续==的。因此，在==堆栈内存中分配和释放内存的速度非常快==。这是通过操作系统管理的堆栈指针对引用进行简单调整来完成的。
@@ -2761,7 +2763,7 @@ int main(){
 
 
 
-#### 举例
+##### 举例
 
 ![img](https://p7.itc.cn/q_70/images03/20230807/67187575cc3948c296c35acd21cdf1e9.png)
 
@@ -2801,11 +2803,11 @@ add 函数的堆栈帧上的 `sum` 变量被分配 `a + b` 的结果
 
 在显示结果值（此处未显示）后，==主功能块也被销毁==，并且堆栈段再次为空
 
-### 堆(Heap)
+#### 堆(Heap)
 
 也称为`动态内存`
 
-#### 特点
+##### 特点
 
 - 大小的灵活性： 堆内存大小可以在程序执行过程中发生变化。
 - 速度权衡： 在堆中==分配和释放内存速度较慢==(索引速度呢？)，因为它==涉及寻找合适的内存帧和处理碎片==。
@@ -2814,7 +2816,7 @@ add 函数的堆栈帧上的 `sum` 变量被分配 `a + b` 的结果
 
 
 
-#### 举例
+##### 举例
 
 
 ![img](https://p7.itc.cn/q_70/images03/20230807/1c9670506335474b8410774fa3a2d26e.png)
@@ -2853,13 +2855,13 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 
 
-### 申请后系统的响应
+#### 申请后系统的响应
 
-#### 栈
+##### 栈
 
 只要栈的剩余空间大于所申请空间，系统将为程序提供内存，否则将报异常提示栈溢出。
 
-#### 堆
+##### 堆
 
 首先应该知道==操作系统有一个记录空闲内存地址的链表==，当系统收到程序的申请时，会==遍历该链表==，寻找第一个空间==大于==所申请空间的堆结点，然后将该结点从空闲结点链表中删除，并将该结点的空间分配给程序
 
@@ -2867,13 +2869,13 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 对于大多数系统，会在这块内存空间中的首地址处记录本次分配的大小，这样，代码中的delete语句才能正确的释放本内存空间
 
-### 申请大小的限制
+#### 申请大小的限制
 
-#### 栈
+##### 栈
 
 在`Windows`下,栈是==向低地址扩展==的数据结构，是一块==连续的内存的区域==。这句话的意思是栈顶的地址和栈的最大容量是系统预先规定好的，在`Windows`下，栈的大小是2M（也有的说是1M，总之是一个==编译时就确定的常数==），如果申请的空间超过栈的剩余空间时，将提示`overflow`。因此，能从栈获得的==空间较小==。
 
-#### 堆
+##### 堆
 
 堆是==向高地址扩展==的数据结构，是==不连续==的内存区域。这是由于系统是用==链表==来存储的空闲内存地址的，自然是不连续的，而链表的遍历方向是由低地址向高地址。堆的大小==受限于计算机系统中有效的虚拟内存==。由此可见，堆获得的空间==比较灵活，也比较大==。
 
@@ -2881,9 +2883,9 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 
 
-### 申请和释放效率的比较
+#### 申请和释放效率的比较
 
-#### 栈
+##### 栈
 
 由系统自动分配，速度较快。但程序员是无法控制的。
 
@@ -2893,7 +2895,7 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 分配连续，具有良好的缓存局部性，CPU缓存可高效预取数据，提高访问速度。
 
-#### 堆
+##### 堆
 
 由new分配的内存，一般速度比较慢，而且容易产生内存碎片,不过用起来最方便
 
@@ -2905,13 +2907,13 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 分配分散，缓存局部性较差，CPU缓存可能无法高效预取数据，导致访问速度较慢。
 
-### 线程安全性
+#### 线程安全性
 
-#### 栈
+##### 栈
 
 每个线程有独立栈，分配和释放线程私有，==无需考虑线程同步==。
 
-#### 堆
+##### 堆
 
 ==全局共享==，分配和释放可能涉及==线程同步==(如锁机制)，增加额外开销。
 
@@ -2919,7 +2921,7 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 
 
-### 参考
+#### 参考
 
 - [堆栈与堆（Stack vs Heap）：有什么区别？图文并茂拆解代码解析！_内存_存储_函数 (sohu.com)](https://roll.sohu.com/a/709585652_121124377)
 - [【笔记】C++的内存管理:堆和栈 - 知乎](https://zhuanlan.zhihu.com/p/448259227)
@@ -2934,9 +2936,9 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 
 
-## 标准库
+### 标准库
 
-### 系统库
+#### 系统库
 
 ```bash
    1. `/usr/include/c++/7`: The standard C++ library (like <vector>, <iostream>).
@@ -2949,7 +2951,7 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
    7. `/usr/include`: The standard Linux system headers (like <stdlib.h>, <unistd.h>).
 ```
 
-##### include "*" 和 \<*> 的区别
+###### include "*" 和 \<*> 的区别
 
    1. `#include "filename"` (Quoted form):
        * Priority: Checks the current directory (where the source file is located) first.
@@ -2964,7 +2966,7 @@ main函数的栈帧从栈中弹出（显示result的值后），栈段和堆段�
 
 
 
-#### GNU C Library
+##### GNU C Library
 
 GNU 是由 Richard Stallman（理查德·斯托曼）在 1983 年发起的，其核心思想是 自由（Freedom）
 
@@ -2987,9 +2989,9 @@ GNU C Library（通常简称为glibc）是一个按照GNU通用公共许可证�
 
 
 
-### algorithm库
+#### algorithm库
 
-#### 1. 排序算法
+##### 1. 排序算法
 
 **sort**(container.begin(), container.end(), compare_function);
 
@@ -2997,7 +2999,7 @@ GNU C Library（通常简称为glibc）是一个按照GNU通用公共许可证�
 
 **std::stable_sort**: 稳定排序，保留相等元素的相对顺序。
 
-#### 2. 搜索算法
+##### 2. 搜索算法
 
 auto it = **find**(container.begin(), container.end(), value);
 
@@ -3007,15 +3009,15 @@ auto it = **find**(container.begin(), container.end(), value);
 
 **std::find_if**: 查找第一个满足特定条件的元素。
 
-#### 3. 复制算法
+##### 3. 复制算法
 
 **copy**(source_begin, source_end, destination_begin);
 
-#### 4. 比较算法
+##### 4. 比较算法
 
 bool result = **equal**(first1, last1, first2, compare_function);
 
-#### 5. 修改算法
+##### 5. 修改算法
 
 **std::reverse**: 反转区间内的元素顺序。
 
@@ -3042,7 +3044,7 @@ std::vector<int> vec2(6);
 std::copy(vec.begin(), vec.end(), vec2.begin());
 ```
 
-#### 6. 排列算法
+##### 6. 排列算法
 
 **std::next_permutation**: 生成字典序的下一个排列，如果没有下一个排列则返回 false。
 
@@ -3060,7 +3062,7 @@ do {
 std::prev_permutation(vec.begin(), vec.end());
 ```
 
-#### 7. 归并算法
+##### 7. 归并算法
 
 **std::merge**: 将两个有序区间合并到一个有序区间。
 
@@ -3079,7 +3081,7 @@ std::inplace_merge(vec.begin(), middle, vec.end());
 
 
 
-#### 8. 集合算法
+##### 8. 集合算法
 
 **std::set_union**: 计算两个有序集合的并集。
 
@@ -3103,7 +3105,7 @@ auto it = std::set_difference(vec1.begin(), vec1.end(), vec2.begin(), vec2.end()
 result.resize(it - result.begin());
 ```
 
-#### 9. 其他有用算法
+##### 9. 其他有用算法
 
 **std::accumulate**（需要 <numeric> 库）**：计算范围内元素的累计和。
 
@@ -3127,43 +3129,43 @@ auto max_it = std::max_element(vec.begin(), vec.end());
 
 
 
-### numeric库
+#### numeric库
 
 C++ 标准库中的 `<numeric>` 头文件提供了一组用于数值计算的函数==模板==，这些函数可以对容器中的元素进行各种数值操作，如==求和、乘积、最小值、最大值==等。这些函数模板非常强大，可以应用于==任何类型的容器==，包括数组、向量、列表等。
 
-#### 1. `accumulate`
+##### 1. `accumulate`
 
 `accumulate` 函数用于计算容器中所有元素的总和。它接受三个参数：容器的开始迭代器、结束迭代器和初始值。
 
-#### 2. `inner_product`
+##### 2. `inner_product`
 
 `inner_product` 函数用于计算两个容器中对应元素乘积的总和。
 
-#### 3. `partial_sum`
+##### 3. `partial_sum`
 
 `partial_sum` 函数用于计算容器中元素的部分和，并将结果存储在另一个容器中。
 
-#### 4. `adjacent_difference`
+##### 4. `adjacent_difference`
 
 `adjacent_difference` 函数用于计算容器中相邻元素的差值，并将结果存储在另一个容器中。
 
-#### 5. std::gcd
+##### 5. std::gcd
 
 使用 std::gcd 计算两个整数的最大公约数
 
-#### 6. std::lcm
+##### 6. std::lcm
 
 使用 std::lcm 计算两个整数的最小公倍数
 
-#### 7. std::iota
+##### 7. std::iota
 
 使用 std::iota 填充范围内的序列值。
 
-#### 8.查找最大值与最小值
+##### 8.查找最大值与最小值
 
 `min_element` 和 `max_element` 函数用于找到容器中的最大值和最小值。
 
-### limit
+#### limit
 
 `numeric_limits`模板类
 
@@ -3173,11 +3175,10 @@ C++ 标准库中的 `<numeric>` 头文件提供了一组用于数值计算的函
 
   `std::numeric_limits<int>::min()`
 
-- 
 
-### 文件/文本处理
+#### 文件/文本处理
 
-#### std::i/ofstream
+##### std::i/ofstream
 
 ```c++
 file_obj.open("file_path", ios::xxx)
@@ -3204,17 +3205,17 @@ fileObject.seekg( 0, ios::end );
 
 
 
-##### 参考
+###### 参考
 
 [C++ 文件和流 | 菜鸟教程](https://www.runoob.com/cplusplus/cpp-files-streams.html)
 
-#### std::filesystem
+##### std::filesystem
 
-> [!CAUTION]
->
-> 在g++ 15.1 的cmake中要
->
-> target_link_libraries(${binary} stdc++fs)
+!!! caution
+    
+    在g++ 15.1 的cmake中要
+    
+    target_link_libraries(${binary} stdc++fs)
 
 `filesystem` 源自boost.filesystem库，在C++17合并进C++标准库中，filesystem中的所有操作是==线程不安全==的。
 
@@ -3234,23 +3235,23 @@ fs::exists(p1)
 
 [理解C++17 filesystem 库的使用 - 知乎](https://zhuanlan.zhihu.com/p/703768306)
 
-### 并行相关
+#### 并行相关
 
-#### 线程
+##### 线程
 
-##### thread
+###### thread
 
-##### mutex/shared_mutex/lock_guard/unique_lock
+###### mutex/shared_mutex/lock_guard/unique_lock
 
 unique_lock是个类模板，工作中，一般lock_guard(推荐使用)；lock_guard取代了mutex的lock()和unlock();
 
 unique_lock比lock_guard灵活很多，效率上差一点，内存占用多一点。
 
-##### atomic
+###### atomic
 
-##### asnyc/future
+###### asnyc/future
 
-#### 协程
+##### 协程
 
 C++20
 
@@ -3258,7 +3259,7 @@ C++20
 
 普通函数是线程相关的，函数的状态跟线程紧密关联；而==协程是线程无关的==，它的状态与任何线程都没有关系。
 
-##### 协程和普通函数（线程）的区别
+###### 协程和普通函数（线程）的区别
 
 - 函数 `Foo()` 调用普通函数 `Bar()` 的过程如下所示![image-20250918102411616](assets/image-20250918102411616.png)
 
@@ -3274,7 +3275,7 @@ C++20
 
   由此可见，当协程执行的时候，它跟普通函数一样，也是需要依赖线程栈；但是，==一旦它暂停了，它的状态就会独立保存在堆中，此时它跟任何线程都没有关系==，调用它的线程可以继续去做其它事情而不会停止。在下一次恢复执行时，协程可以由上次执行的线程来执行，==也可以由另外一个完全不同的线程来执行。所以说协程是线程无关的==。
 
-##### 参考
+###### 参考
 
 [C++ 多线程库  | 菜鸟教程](https://www.runoob.com/cplusplus/cpp-libs-thread.html)
 
@@ -3282,9 +3283,9 @@ C++20
 
 
 
-### random
+#### random
 
-#### 生成种子值
+##### 生成种子值
 
 方法1：使用std::random_device
 
@@ -3334,7 +3335,7 @@ int main() {
 
 
 
-#### std::shuffle
+##### std::shuffle
 
 • std::shuffle 的结果只由“==引擎类型 + 引擎当前状态 + 序列长度==”决定；同样的初始状态 → 一样的排
   列，不同状态 → 通常不一样（但有极小概率碰巧一样）。
@@ -3358,13 +3359,13 @@ int main() {
 
 
 
-#### Ref
+##### Ref
 
 - https://blog.csdn.net/m0_61629312/article/details/132327242
 
 
 
-### 其他
+#### 其他
 
 C++ 标准库中的 `<complex>` 头文件提供了对复数的支持。
 
@@ -3376,13 +3377,13 @@ C++ 的 `<valarray>` 库是一个用于数值计算的库
 
 
 
-## 其他库
+### 其他库
 
-### Boost库
+#### Boost库
 
 [Boost](https://www.boost.org/)
 
-#### 安装
+##### 安装
 
 ```bash
 
@@ -3390,7 +3391,7 @@ C++ 的 `<valarray>` 库是一个用于数值计算的库
 
 
 
-#### 简介
+##### 简介
 
 Boost是一个流行的、开源的**C++库集合**，提供了各种功能强大的库和工具，扩展了C++语言的能力，并为开发者提供了更高级别的抽象和工具。Boost库经过广泛的使用和测试，被认为是C++社区的事实标准之一
 
@@ -3418,21 +3419,21 @@ Boost库包含了多个模块，每个模块都提供了不同领域的功能和
 
 
 
-> [!TIP]
->
-> 尝试过单独build boost::graph 库，但是不行，还是要整体build。
+!!! tip
+    
+    尝试过单独build boost::graph 库，但是不行，还是要整体build。
 
 
 
-#### graph
+##### graph
 
 
 
-#### bitmap
+##### bitmap
 
 
 
-#### 参考
+##### 参考
 
 1. [【C++】开源：Boost库常用组件配置使用-腾讯云开发者社区-腾讯云](https://cloud.tencent.com/developer/article/2438818)
 2. 项目Github地址：`https://github.com/boostorg/boost`
@@ -3443,7 +3444,7 @@ Boost库包含了多个模块，每个模块都提供了不同领域的功能和
 
 
 
-### OpenAccess2.2
+#### OpenAccess2.2
 
 - 一个EDA的C++底层api库
 - 汉擎pdk对标
@@ -3456,7 +3457,7 @@ Boost库包含了多个模块，每个模块都提供了不同领域的功能和
 
 
 
-### Lemon
+#### Lemon
 
 [LEMON](https://lemon.cs.elte.hu/trac/lemon)
 
@@ -3466,15 +3467,15 @@ Boost库包含了多个模块，每个模块都提供了不同领域的功能和
 
 
 
-### Eigen
+#### Eigen
 
 a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
 
 
-### lp_solver
+#### lp_solver
 
-##### install
+###### install
 
 ```bash
 pip install lpsolve55
@@ -3483,7 +3484,7 @@ lp_solver -h
 
 
 
-### Gurobi
+#### Gurobi
 
 Gurobi 是一款强大的==商业==优化求解器，能够高效地解决线性规划（LP）、二次规划（QP）、混合整数规划（MIP）等多种优化问题。
 
@@ -3491,9 +3492,9 @@ Gurobi 是一款强大的==商业==优化求解器，能够高效地解决线性
 
 
 
-### pybind
+#### pybind
 
-#### 配置
+##### 配置
 
 - pybind11可以使用==CMake==作为构建系统。在你的CMakeLists.txt文件中，需要添加对Python和pybind11的查找和链接
 
@@ -3518,7 +3519,7 @@ Gurobi 是一款强大的==商业==优化求解器，能够高效地解决线性
 
 
 
-#### 核心概念
+##### 核心概念
 
 **1、Python解释器管理**
 
@@ -3534,7 +3535,7 @@ pybind11的类型转换是类型安全的，这意味着它会在编译时检查
 
 
 
-#### instll
+##### instll
 
 ```bash
 apt-get install pybind11
@@ -3542,19 +3543,19 @@ apt-get install pybind11
 
 
 
-#### debug
+##### debug
 
 [VSCode调试使用pybind11的Python和C++代码 - 知乎](https://zhuanlan.zhihu.com/p/683196635)
 
 
 
-### ODB
+#### ODB
 
 ODB（Object-Relational Mapping）是一个C++库，用于将C++对象映射到关系数据库中。
 
-### Logger
+#### Logger
 
-#### [spdlog](https://github.com/gabime/spdlog)
+##### [spdlog](https://github.com/gabime/spdlog)
 
 ```
 ├── build
@@ -3605,24 +3606,24 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-### cairo
+#### cairo
 
-#### install
+##### install
 
 `conda install cairo`
 
-### Raylib
+#### Raylib
 
-### Dear ImGui
+#### Dear ImGui
 
-### 参考
+#### 参考
 
 - [C++知识库 | 收录各种各样的 C++ 优质内容](https://cpp-reference.com/)
 - [程序喵/cpp-learning](https://gitee.com/chengxumiaodaren/cpp-learning)
 
-## 多线程
+### 多线程
 
-### 进程与线程的区别
+#### 进程与线程的区别
 
 ![image-20241023224153349](assets/image-20241023224153349.png)
 
@@ -3638,7 +3639,7 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-### 并发和并行
+#### 并发和并行
 
 **并发**： 指的是两个(或以上)的线程同时请求执行，但是同一瞬间CPU只能执行一个，于是CPU就安排他们**交替**执行，我们看起来好像是同时执行的，其实不是。并发可认为是一种逻辑结构的设计模式。你可以用并发的设计方式去设计模型，然后运行在一个单核系统上，通过系统动态地逻辑切换制造出并行的假象。
 
@@ -3648,13 +3649,13 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-### Deadlock问题与解决方法
+#### Deadlock问题与解决方法
 
 **死锁（Deadlock）** 是最危险的并发问题之一，指两个或多个线程因互相等待对方释放资源而永久阻塞。以下是关于死锁的完整解析、典型场景及解决方案：
 
 ------
 
-#####  死锁的四大必要条件
+###### 死锁的四大必要条件
 
 死锁发生必须同时满足以下四个条件：
 
@@ -3671,7 +3672,7 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-### 多线程与核心数查看
+#### 多线程与核心数查看
 
 ```bash
 # ubuntu下查看电脑CPU核数，CPU个数，最大线程数(逻辑CPU的数量)
@@ -3689,9 +3690,9 @@ more /proc/cpuinfo |grep "physical id"|grep "0"|wc -l    # 12
 
 
 
-## Tips
+### Tips
 
-### 数值类型的差异
+#### 数值类型的差异
 
 在不同的平台，声明特定大小整数的方法不同，我们可以使用标准头文件`stdint.h`，声明特定大小的整型，该方法还==可以跨平台，可移植==。
 
@@ -3705,7 +3706,7 @@ more /proc/cpuinfo |grep "physical id"|grep "0"|wc -l    # 12
 
 
 
-### void指针
+#### void指针
 
 在 `ANSI C` 标准中，不允许对 void 指针进行一些算术运算如 p++ 或 p+=1 等，因为既然 void 是无类型，那么每次算术运算我们就不知道该操作几个字节，例如 char 型操作 sizeof(char) 字节，而 int 则要操作 sizeof(int) 字节。而在 GNU 中则允许，因为在默认情况下，`GNU` 认为 `void *` 和 `char *` 一样，既然是确定的，当然可以进行一些算术操作，在这里`sizeof(p)==sizeof(char)`。
 
@@ -3713,7 +3714,7 @@ more /proc/cpuinfo |grep "physical id"|grep "0"|wc -l    # 12
 
 
 
-### 结构化绑定
+#### 结构化绑定
 
 pair/tuple/tie
 
@@ -3721,7 +3722,7 @@ pair/tuple/tie
 
 
 
-### std::optional
+#### std::optional
 
 C++ 17 引入
 
@@ -3731,7 +3732,7 @@ std::nullopt
 
 
 
-### std::variant
+#### std::variant
 
 std::visit
 
@@ -3747,7 +3748,7 @@ std::bad_variant_access
 
 
 
-### std::any
+#### std::any
 
 std::any
 
@@ -3759,17 +3760,17 @@ std::any::has_value
 
 
 
-### IO 密集型与 cpu 密集型任务
+#### IO 密集型与 cpu 密集型任务
 
 [I/O密集型（I/O-bound）和CPU密集型（CPU-bound）](https://juejin.cn/post/7467819981926137867)
 
 
 
-### 传引用和传指针的区别
+#### 传引用和传指针的区别
 
 
 
-### const形参报错
+#### const形参报错
 
 ```c++
 #include <iostream>
@@ -3789,7 +3790,7 @@ int main() {
 
 
 
-### others
+#### others
 
 - 使用`#include <bits/stdc++.h>`，这个库包含了常见的所有c++标准库
   - 用来做快速测试，实际项目中不要用
@@ -3912,9 +3913,9 @@ int main() {
 
   
 
-## Bugs
+### Bugs
 
-### 1
+#### 1
 
 >vector<int> var1\[m][n];//不行
 >vector<vector<vector<int>>> var2\[m][n]；//可以
@@ -3940,7 +3941,7 @@ int main() {
 
 
 
-### 2
+#### 2
 
 ```c++
 #include <bits/stdc++.h>
@@ -3983,23 +3984,23 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
 
 
-### 参考
+#### 参考
 
 [C++学习之智能指针中的unique_ptr与shared_ptr_C 语言_脚本之家 (jb51.net)](https://www.jb51.net/program/285055q9v.htm)
 
 
 
-## 优化
+### 优化
 
 先完成，再完美
 
 谨记`80-20`法则
 
-### 常用小技巧
+#### 常用小技巧
 
 - x能用`const`, `&`就用
 
-  - ```c++
+  -   ```c++
     bool Compare（string s1, string s2)
     bool Compare(string *s1, string *s2)
     bool Compare(string &s1, string &s2)
@@ -4083,21 +4084,21 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
 
 
-### CPU Cache伪共享问题
+#### CPU Cache伪共享问题
 
 [CPU Cache伪共享问题：原理与优化指南 | 性能优化 | C++ 编程指南](https://chengxumiaodaren.com/docs/performance/cpu-cache/)
 
 [如何利用CPU Cache写出高性能代码，看这些图就够了！](https://mp.weixin.qq.com/s?__biz=MzkyODU5MTYxMA==&mid=2247492914&idx=1&sn=bd6dde78d06e6668f0879cb0092b44b9&source=41&poc_token=HKU1wWijvvtQ8FELhF1zy4b9PUo-2WMqlLcpRWCV)
 
-### 流水线与分支预测
+#### 流水线与分支预测
 
 [CPU分支预测原理：if-else性能优化指南 | 性能优化 | C++ 编程指南](https://chengxumiaodaren.com/docs/performance/branch-predict/)
 
-### 程序体积优化
+#### 程序体积优化
 
 [程序体积优化指南：十个实用技巧 | 性能优化 | C++ 编程指南](https://chengxumiaodaren.com/docs/performance/size-opt/)
 
-### 类的数据成员
+#### 类的数据成员
 
 大数组和其他大对象排在最后最常用的数据成员排在前面。如果不能在前128个字节内包含所有数据成员，则将最常用的成员放在前128个字节中。
 
@@ -4107,19 +4108,19 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
 
 
-# C++ Tools
+## C++ Tools
 
-## IDE
+### IDE
 
-### VSCode
+#### VSCode
 
-#### install extension
+##### install extension
 
 公司里面通过`.vsix`文件安装（离线）
 
 
 
-#### Better debug view
+##### Better debug view
 
 默认情况, 难以观察：
 
@@ -4152,27 +4153,27 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
 ![image-20250416154902415](assets/image-20250416154902415.png)
 
-##### ref
+###### ref
 
 - [How can i see the value of elements in STL containers or arrays in debug · Issue #1414 · microsoft/vscode-cpptools](https://github.com/Microsoft/vscode-cpptools/issues/1414)
 
 
 
-#### Theme
+##### Theme
 
 之前一些关键字一直没有高亮，以为是include_path的问题，后来发现是主题有问题。不过确实发现如果把include_path去掉，会导致一些关键字不会高亮
 
 
 
-### CLion
+#### CLion
 
 
 
 
 
-## 编译工具
+### 编译工具
 
-### g++ 
+#### g++ 
 
 - g++是GNU的c++编译器
 
@@ -4184,7 +4185,7 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
   所谓的本地编译器，是指编译出来的程序只能够在本地环境进行运行。而gcc编译出来的程序能够在其他平台进行运行。例如嵌入式程序可在x86上编译，然后在arm上运行。
 
-#### 编译过程
+##### 编译过程
 
 1. 预处理（Preprocessing）。由预处理器cpp完成，将.cpp源文件预处理为`.i`文件。预处理实际上是将头文件、宏进行展开。
 
@@ -4213,7 +4214,7 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
 
 
-#### 版本
+##### 版本
 
 - GCC 7 (2017)
   - 主要进展：开始大规模支持 C++17 核心语言特性（structured bindings、if constexpr、fold expressions、inline variables 等）和不少库特性。
@@ -4240,7 +4241,7 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
   - 主要进展：进一步完善并扩大 C++23 的实现覆盖；持续修复兼容性与性能问题，改进编译器诊断与静态分析能力。
   - 向后兼容性与标准跟进继续进行。
 
-#### Install
+##### Install
 
 ```bash
 sudo apt -y install build-essential
@@ -4256,9 +4257,9 @@ g++ -v
 
 
 
-#### 常用命令选项
+##### 常用命令选项
 
-##### 编译过程选项
+###### 编译过程选项
 
 `-E` (仅作预处理，不进行编译、汇编和链接）
 	只激活预处理,这个不生成文件,你需要把它重定向到一个输出文件里面。例子用法:   
@@ -4280,7 +4281,7 @@ g++ -v
 
 
 
-##### 目录选项
+###### 目录选项
 
 `-I [dir]` （把dir加入到搜索`头文件`的路径列表中）
 	g++优先在当前目录查找头文件，如果没有找到，会到系统默认的头文件目录找。如果使用`-I`指定了目录，g++会到`-I`指定的目录查找，查找不到，然后再到系统默认的头文件目录查找
@@ -4306,7 +4307,7 @@ g++ -v
           程序运行时查找自己的动态库的时候，可以用它指定运行时的动态库搜索路径。用法如下：
           g++ -o hello hello.cpp -L./lib -lmylib -Wl,-rpath=./lib
 
-##### 预处理选项
+###### 预处理选项
 
 -D macro
 	相当于C语言中的#define macro
@@ -4325,7 +4326,7 @@ g++ -v
 -undef
 	取消任何非标准宏的定义，C++标准预定义的宏仍然有效
 
-##### 链接方式选项
+###### 链接方式选项
 
 -static
 	优点：程序运行不依赖于其他库。缺点：可执行文件==比较大==。
@@ -4336,7 +4337,7 @@ g++ -v
 -Wl,-Bdynamic
 	告诉链接器ld优先使用动态链接库，如果只存在静态链接库，则使用静态链接库。
 
-##### 错误与警告
+###### 错误与警告
 
 `-Wall`（打开一些很有用的警告选项）
 	一般使用该选项，允许发出GCC能够提供的所有有用的警告。也可以用-W{warning}来标记指定的警告
@@ -4379,7 +4380,7 @@ g++ -v
 -Wnonnull: 检查是否将非空指针传递给要求非空参数的函数。
 ```
 
-##### 调试选项
+###### 调试选项
 
  -g   
 	指示编译器，在编译时，产生调试信息。
@@ -4388,7 +4389,7 @@ g++ -v
 -glevel
 	请求生成调试信息，同时用level指出需要多少信息，默认的level值是2。
 
-##### 优化选项
+###### 优化选项
 
 -O0   （禁止编译器进行优化。默认为此项）
 -O1   （尝试优化编译时间和可执行文件大小）
@@ -4397,7 +4398,7 @@ g++ -v
 -Os   （对生成文件大小进行优化。它会打开 -O2 开的全部选项，除了会那些增加文件大小的。）
 	编译器优化建议使用-O2。
 
-##### 其他选项
+###### 其他选项
 
 -fpic
 	编译器生成位置无关目标码（PIC，position-independent code），用于动态链接库，即Linux下的.so文件。
@@ -4446,7 +4447,7 @@ g++ -v
 
 
 
-#### 预编译头文件
+##### 预编译头文件
 
 预编译头文件是将经常使用且不常更改的头文件预先编译成一个中间文件（通常是`.pch`文件），之后在项目编译过程中直接使用这个预编译的中间文件，而不是每次重新编译这些头文件。这可以显著减少编译时间，特别是在大型项目中。
 
@@ -4457,14 +4458,13 @@ g++ -v
    - 第三方库的头文件（如 Boost 等）
    - 项目中很少修改的公共头文件
 2. 确保预编译头和所有包含的头文件都使用了头文件保护（#pragma once 或 include guards）来防止重复包含。
-3. 
 
-#### 参考
+##### 参考
 
 - [g++入门教程 - 时间的风景 - 博客园](https://www.cnblogs.com/create-serenditipy/p/16126280.html)
 - [C++为了提升编译速度可以考虑使用预编译头 - 知乎](https://zhuanlan.zhihu.com/p/706229667)
 
-### clangd
+#### clangd
 
 
 
@@ -4472,9 +4472,9 @@ https://www.cnblogs.com/newtonltr/p/18867195
 
 [一文搞懂C/C++常用编译器 - 陌尘(MoChen) - 博客园](https://www.cnblogs.com/luoweifu/p/18348981#122-gcc的常用工具)
 
-### CMake
+#### CMake
 
-#### cmake-build-install
+##### cmake-build-install
 
 - 配置 (cmake -S src -B build):
   - 读 CMakeLists.txt，解析目标/依赖/选项。  
@@ -4492,15 +4492,15 @@ https://www.cnblogs.com/newtonltr/p/18867195
       - 不重新编译，只做拷贝、创建目录和必要的 RPATH/权限调整。
       - 产物面向“被系统或其他项目使用”，与构建目录分离。
 
-#### 基本用法
+##### 基本用法
 
 [cmake使用详细教程（日常使用这一篇就足够了）_cmake教程-CSDN博客](https://blog.csdn.net/iuu77/article/details/129229361)
 
 [CMake基础：常用内部变量和环境变量的引用_cmake环境变量设置-CSDN博客](https://blog.csdn.net/haokan123456789/article/details/148749381)
 
-#### cmake include
+##### cmake include
 
-##### find_package
+###### find_package
 
 如果第三方库安装在==系统标准路径==（如 `/usr/local`）或者提供了 CMake 支持，这是最标准的方法。
 
@@ -4515,7 +4515,7 @@ find_package(fmt REQUIRED)# 1. 查找库
 
    
 
-##### target_include_directories
+###### target_include_directories
 
 源码集成/手动指定: 如果库是源码形式放在你的项目里（比如 third_party/文件夹），或者没有安装到系统目录
 
@@ -4535,7 +4535,7 @@ target_include_directories(my_target PRIVATE
 > 进阶技巧：如果你想屏蔽第三方库头文件里的警告，可以加 ==SYSTEM== 关键字：
 >  target_include_directories(xapr SYSTEM PUBLIC ...)
 
-##### target_link_libraries
+###### target_link_libraries
 
 告诉链接器去链接哪些**库文件** (`.so` / `.a` / `.dll`)。
 在 Modern CMake 中，它不仅链接二进制文件，还会自动传递该库的**Usage Requirements**（包括头文件路径！）。
@@ -4544,7 +4544,7 @@ target_include_directories(my_target PRIVATE
 *   **核心特性**：
     如果你链接的是一个 **Target** (如 `fmt::fmt`)，CMake ==会自动把 `fmt` 的头文件路径加到 `my_app` 的 include 路径==里。**你不需要再手动写 `target_include_directories` 指向 `fmt` 的目录了。**
 
-##### 总结：标准工作流
+###### 总结：标准工作流
 
 ###### 现代做法 (Modern CMake - 推荐)
 只需要两步，路径自动管理：
@@ -4571,7 +4571,7 @@ target_link_libraries(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/third_party/libfo
 
 
 
-#### build选项
+##### build选项
 
 在Release模式下，追求的是程序的最佳性能表现，在此情况下，编译器会对程序做最大的代码优化以达到最快运行速度。另一方面，由于代码优化后不与源代码一致，此模式下一般会丢失大量的调试信息。
 
@@ -4587,9 +4587,9 @@ target_link_libraries(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/third_party/libfo
 
 此外需要注意：`NDEBUG`宏会使`assert`宏被去除掉（assert宏主要是在调试时使用）。
 
-> [!CAUTION]
->
-> NDEBUG 下，assert()是生效的
+!!! caution
+    
+    NDEBUG 下，assert()是生效的
 
 ```cmake
 cmake_minimum_required(VERSION 3.15)
@@ -4604,7 +4604,7 @@ add_executable(main main.cpp)
 
 
 
-#### 静态和动态链接
+##### 静态和动态链接
 
 静态链接允许更多的优化发生
 
@@ -4667,7 +4667,7 @@ add_executable(main main.cpp)
 
 ​    据估算，动态链接和静态链接相比，性能损失大约在5%以下。经过实践证明，这点性能损失用来换区程序在空间上的节省和程序构建和升级时的灵活性是值得的。
 
-#### 基本内置宏变量
+##### 基本内置宏变量
 
 - PROJECT_SOURCE_DIR	使用cmake命令后紧跟的目录，一般是工程的根目录
 - PROJECT_BINARY_DIR	执行cmake命令的目录
@@ -4678,23 +4678,23 @@ add_executable(main main.cpp)
 - PROJECT_NAME	返回通过PROJECT指令定义的项目名称
 - CMAKE_BINARY_DIR	项目实际构建路径，假设在build目录进行的构建，那么得到的就是这个目录的路径
 
-#### CMakePresets
+##### CMakePresets
 
 
 
-#### 参考
+##### 参考
 
 [CMake从入门到实战系列（四）——CMake链接静态库和动态库_cmake 链接静态库-CSDN博客](https://blog.csdn.net/zhangsan_3/article/details/144574938)
 
 
 
-## Debug 工具
+### Debug 工具
 
-### GDB
+#### GDB
 
    `GDB`是由 `GUN` 软件系统社区提供的调试工具，同 ==GCC 配套==组成了一套完整的开发环境，`GDB` 是 ==Linux 和许多类Unix系统==的标准开发环境。
 
-#### cmd
+##### cmd
 
 启动：`gdb {binary}`
 
@@ -4731,19 +4731,19 @@ c(continue) —— 从一个断点处，直接运行至下一个断点处【VS�
 
 ```
 
-> [!TIP]
->
-> 感觉还是太麻烦了，变量数据也不好看
+!!! tip
+    
+    感觉还是太麻烦了，变量数据也不好看
 
-#### reverse debug
+##### reverse debug
 
-> [!CAUTION]
->
-> 好像是有这种东西，听说不好用，不知道有没有，感觉在大项目应该很有用。
+!!! caution
+    
+    好像是有这种东西，听说不好用，不知道有没有，感觉在大项目应该很有用。
 
-#### GDB in VSCode
+##### GDB in VSCode
 
-##### 脚本配置示例
+###### 脚本配置示例
 
 debug脚本`json.json`
 
@@ -4779,41 +4779,41 @@ debug脚本`json.json`
 }
 ```
 
-> [!TIP]
->
-> 编译的时候记得加上`-g`
->
-> `setupCommands` 中的 `Enable pretty-printing for vector` 是为了debug的时候让vector等信息更加可读一些: [vscode中让 C++一维、二维向量直接在调试窗口观察元素_c++ vscode 可视化二维 vector-CSDN博客](https://blog.csdn.net/qq_51080257/article/details/147636935?spm=1011.2124.3001.6209)
+!!! tip
+    
+    编译的时候记得加上`-g`
+    
+    `setupCommands` 中的 `Enable pretty-printing for vector` 是为了debug的时候让vector等信息更加可读一些: [vscode中让 C++一维、二维向量直接在调试窗口观察元素_c++ vscode 可视化二维 vector-CSDN博客](https://blog.csdn.net/qq_51080257/article/details/147636935?spm=1011.2124.3001.6209)
 
 
 
-##### 断点设置
+###### 断点设置
 
 ![image-20250916111048510](assets/image-20250916111048510.png)
 
 除了直接的Hit Breakpoint, 还可以右键设置其他的方式触发，或者只是输出Log Message
 
-> [!WARNING]
->
-> 关于Hit Count 用不了的问题
->
-> [The Hit Count feature is **NOT** supported by the GDB C++ debugger.](https://stackoverflow.com/questions/65873190/vscode-cant-figure-out-hit-count-condition)
->
-> [WebFreak001/code-debug: Native debugging for VSCode](https://github.com/WebFreak001/code-debug)
+!!! warning
+    
+    关于Hit Count 用不了的问题
+    
+    [The Hit Count feature is **NOT** supported by the GDB C++ debugger.](https://stackoverflow.com/questions/65873190/vscode-cant-figure-out-hit-count-condition)
+    
+    [WebFreak001/code-debug: Native debugging for VSCode](https://github.com/WebFreak001/code-debug)
 
-> [!CAUTION]
->
-> vscode c++插件debug有个很恶心的是watch窗口变量不清的话，可能会导致有时候会看不到断点触发的地方
+!!! caution
+    
+    vscode c++插件debug有个很恶心的是watch窗口变量不清的话，可能会导致有时候会看不到断点触发的地方
 
-> [!CAUTION]
->
-> condition break point 还是怪怪的，而且感觉大项目很慢
+!!! caution
+    
+    condition break point 还是怪怪的，而且感觉大项目很慢
 
-##### 内存查看
+###### 内存查看
 
-> [!TIP]
->
-> 找了一下貌似是没有好用的GUI工具，只能用gdb指令
+!!! tip
+    
+    找了一下貌似是没有好用的GUI工具，只能用gdb指令
 
 ```c++
     int jjj = 0x81ffeecc;
@@ -4829,27 +4829,27 @@ debug脚本`json.json`
 
 
 
-##### 运行时间可视化
+###### 运行时间可视化
 
 [【81】C++的可视化基准测试_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=82)
 
-> [!TIP]
->
-> 感觉还是不够好用
+!!! tip
+    
+    感觉还是不够好用
 
-### 参考
+#### 参考
 
 [【Linux】GDB保姆级调试指南（什么是GDB？GDB如何使用？）_gdb教程-CSDN博客](https://blog.csdn.net/weixin_45031801/article/details/134399664)
 
 
 
-## 测试工具
+### 测试工具
 
-### CTest
+#### CTest
 
 
 
-### Google Test
+#### Google Test
 
 [Quickstart: Building with CMake | GoogleTest](https://google.github.io/googletest/quickstart-cmake.html)
 
@@ -4879,19 +4879,19 @@ debug脚本`json.json`
 
   说明：ASSERT_* 是对应的致命版本；EXPECT 只报告失败不中断当前测试。
 
-#### TEST_F
+##### TEST_F
 
 
 
 
 
-#### TEST_P
+##### TEST_P
 
 
 
 
 
-#### tip
+##### tip
 
 >短答（原因）：因为 Google Test 把类型放在全局命名空间下的 testing 命名空间，所以代码里用 ::testing::Test（前导 ::）显式指向全局命名空间，避免与当前作用域中可能存在的同名命名空间冲突。若当前没有嵌套同名命名空间，省略前导 ::（写成 testing::Test）通常也能正常工作。
 >
@@ -4904,7 +4904,7 @@ debug脚本`json.json`
 
 
 
-## C++项目性能分析工具
+### C++项目性能分析工具
 
 Valgrind
 
@@ -4914,13 +4914,13 @@ Valgrind
 
 
 
-## Format
+### Format
 
-### clang-format
+#### clang-format
 
 `clang-format`是一款备受赞誉的==开源==代码格式化利器，专为程序员量身打造。它能够智能地自动调整源代码格式，确保代码遵循特定的编码风格规范。借助直观易懂的配置选项，`clang-format`能在不改变代码逻辑的前提下，精准处理缩进、空格、括号、逗号等细微之处，从而显著提升代码的可读性和统一性。无论是在个人项目中追求代码的整洁，还是在团队协作中追求代码风格的统一，`clang-format`都扮演着不可或缺的角色。它极大地减轻了代码审查和格式化的负担，使代码维护工作变得更加高效、轻松。
 
-#### ref
+##### ref
 
 - [vscode的c/c++ 环境配置(包含clang-format配置)_breakbeforebraces-CSDN博客](https://blog.csdn.net/2402_87385120/article/details/143581830)
 
@@ -4929,7 +4929,7 @@ Valgrind
 
 
 
-### Doxygen 
+#### Doxygen 
 
 - 注释规范
 - 鼠标移动到函数就能够显示对应的信息
@@ -4937,23 +4937,23 @@ Valgrind
 
 
 
-# Python
+## Python
 
-## basic
+### basic
 
-###  直接赋值、浅拷贝和深度拷贝
+#### 直接赋值、浅拷贝和深度拷贝
 
 [Python 直接赋值、浅拷贝和深度拷贝解析 | 菜鸟教程](https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html)
 
-### Python内存管理
+#### Python内存管理
 
 [Python是如何进行内存管理的？（图文讲解）_python内存管理-CSDN博客](https://blog.csdn.net/YZL40514131/article/details/125884570)
 
-> [!TIP]
->
-> 当用python要考虑内存管理的时候，就该考虑是否该用python了😭
+!!! tip
+    
+    当用python要考虑内存管理的时候，就该考虑是否该用python了😭
 
-### `__init__.py`
+#### `__init__.py`
 
 1. **包初始化**：当一个目录包含 `__init__.py` 文件时，Python 解释器会将其视为一个包，允许你使用 `import` 语句导入该目录下的模块。
 2. **初始化代码**：`__init__.py` 文件可以包含包的初始化代码。这些代码在包被导入时执行，可以用来执行一些初始化操作，比如设置包的属性、定义函数或类等。
@@ -4982,7 +4982,7 @@ mypackage.my_function()
 mypackage.MyClass()
 ```
 
-### `*args` 和 `**kwds`
+#### `*args` 和 `**kwds`
 
 ```python
 def func(*args, **kwds):
@@ -4999,9 +4999,9 @@ func(1, 2, 3, a=4, b=5)  # 输出:
 # b = 5
 ```
 
-### collections
+#### collections
 
-#### defaultdict
+##### defaultdict
 
 ```python
 from collections import defaultdict
@@ -5019,7 +5019,7 @@ dd['foo'] = 1
 print(dd['foo'])  # 输出: 1
 ```
 
-#### NameTuple
+##### NameTuple
 
 元组 tuple 一样，NamedTuple 也是**不可变数据类型**，创建之后就不能改变内容
 
@@ -5068,7 +5068,7 @@ point1 = Point(x=1, y=2)
 
 [【Python 高级特性】深入 NamedTuple 命名元组-CSDN博客](https://blog.csdn.net/XcantloadX/article/details/134071289)
 
-### map
+#### map
 
 map()传入的第一个参数是f，即函数对象本身。由于结果r是一个[Iterator](https://so.csdn.net/so/search?q=Iterator&spm=1001.2101.3001.7020)，Iterator是惰性序列，因此通过list()函数让它把整个序列都计算出来并返回一个list。你可能会想，不需要map()函数，写一个循环，也可以计算出结果。但是，map要比循环更快，更稳健。
 
@@ -5089,9 +5089,9 @@ rewards = list(map(lambda s: s.reward, batch))#get reward from batch
 
 
 
-### pip/venv 包管理
+#### pip/venv 包管理
 
-#### 配置国内镜像源
+##### 配置国内镜像源
 
 **临时使用：**
 
@@ -5111,13 +5111,13 @@ rewards = list(map(lambda s: s.reward, batch))#get reward from batch
 
 
 
-#### 包安装与管理
+##### 包安装与管理
 
 ![image-20251013153801236](assets/image-20251013153801236.png)
 
 
 
-#### 离线安装
+##### 离线安装
 
 ```
 python -m pip show package_name 
@@ -5126,7 +5126,7 @@ python -m pip install package_name.whl # you can find **.whl in https://pypi.org
 
 
 
-#### 虚拟环境
+##### 虚拟环境
 
 从 Python 3.3 开始，`venv` 模块成为创建虚拟环境的标准工具。
 
@@ -5175,14 +5175,14 @@ deactivate
 
 
 
-#### 参考
+##### 参考
 
 - [Python包管理：pip完全指南-CSDN博客](https://blog.csdn.net/u012399690/article/details/149044527)
 - [Python 包管理与导入全方位教程 | 逐梦](https://0xdadream.github.io/2025/06/17/python-bao-guan-li/)
 
 
 
-## 多线程
+### 多线程
 
 基于线程池
 
@@ -5241,15 +5241,15 @@ with ProcessPoolExecutor(max_workers=4) as executor:
 
 
 
-## Pytorch
+### Pytorch
 
-### Version
+#### Version
 
 
 
-### Dataset
+#### Dataset
 
-#### 最简案例
+##### 最简案例
 
 ```python
 from torch.utils.data import Dataset, DataLoader
@@ -5274,11 +5274,11 @@ dataloader = DataLoader(dataset=my_dataset)
 
 
 
-### DataLoader
+#### DataLoader
 
 通过🛠️灵活配置DataLoader的各种参数，我们可以🔄优化数据加载速度，📏调整数据批次大小，甚至实现🎭自定义的数据处理和抽样策略。
 
-#### 参数说明
+##### 参数说明
 
 - dataset (必需): 用于加载数据的数据集，通常是torch.utils.data.Dataset的子类实例。
 
@@ -5290,7 +5290,7 @@ dataloader = DataLoader(dataset=my_dataset)
 - collate_fn (可选): 如何将多个数据样本整合成一个批次。通常不需要指定。
 - drop_last (可选): 如果数据集大小不能被批次大小整除，是否丢弃最后一个不完整的批次。默认为False。
 
-#### 简单案例
+##### 简单案例
 
 ```python
 import torch
@@ -5376,26 +5376,26 @@ for epoch in range(50):
 
 
 
-#### 参考
+##### 参考
 
 1. [PyTorch入门必学：DataLoader（数据迭代器）参数解析与用法合集_python dataloader-CSDN博客](https://blog.csdn.net/qq_41813454/article/details/134903615)
 
 
 
-### torch.nn.functional
+#### torch.nn.functional
 
-#### F.interpolate
+##### F.interpolate
 
 
 
-### nn.Sequential & nn.ModuleList
+#### nn.Sequential & nn.ModuleList
 
 - `nn.Sequential`：允许将多个层按顺序组合起来，形成简单的线性堆叠网络。
 - `nn.ModuleList` 和 `nn.ModuleDict`：可以动态地存储和访问子模块，支持可变长度或命名的模块集合。
 
 
 
-### nn.Module
+#### nn.Module
 
 `nn.Module` 是所有自定义神经网络模型的基类
 
@@ -5407,26 +5407,26 @@ method:
 
 
 
-### DDP
+#### DDP
 
 
 
-#### 参考
+##### 参考
 
 - [Single Machine Multi-GPU Minibatch Node Classification — DGL 2.4.0 documentation](https://www.dgl.ai/dgl_docs/en/2.4.x/tutorials/multi/2_node_classification.html)
 - [pytorch单机多卡训练--完整示例代码_torchrun 单机多卡-CSDN博客](https://blog.csdn.net/weixin_42655901/article/details/131324593)
 
 
 
-## DGL
+### DGL
 
-### api
+#### api
 
 `with g.local_scope():` #
 
-#### dgl.nn.pytorch as dglnn
+##### dgl.nn.pytorch as dglnn
 
-##### 异构Embedding
+###### 异构Embedding
 
 ![image-20250605101006851](assets/image-20250605101006851.png)
 
@@ -5456,7 +5456,7 @@ print(embeds[('user', 'follows', 'user')].shape)
 
 
 
-##### 异构线性层
+###### 异构线性层
 
 ![image-20250605100418049](assets/image-20250605100418049.png)
 
@@ -5470,11 +5470,11 @@ print(out_feats['user'].shape)
 print(out_feats[('user', 'follows', 'user')].shape)
 ```
 
-##### 异构卷积层
+###### 异构卷积层
 
 ![image-20250605100703502](assets/image-20250605100703502.png)
 
-#### dgl.batch
+##### dgl.batch
 
 ![image-20250603113826044](assets/image-20250603113826044.png)
 
@@ -5490,21 +5490,21 @@ print(out_feats[('user', 'follows', 'user')].shape)
 
 
 
-### 单机多卡实现
+#### 单机多卡实现
 
 [Single Machine Multi-GPU Minibatch Graph Classification — DGL 2.5 documentation](https://www.dgl.ai/dgl_docs/tutorials/multi/1_graph_classification.html)
 
 
 
-### install
+#### install
 
 [Deep Graph Library](https://www.dgl.ai/pages/start.html)
 
 [dgl与torch版本不兼容以及解决方法_dgl torch-CSDN博客](https://blog.csdn.net/qq_64076181/article/details/143184101)
 
-## Tensorflow
+### Tensorflow
 
-### 基本操作
+#### 基本操作
 
 [pytorch函数mm() mul() matmul()区别_torch.mm matmul区别-CSDN博客](https://blog.csdn.net/qq_35091353/article/details/117234223)
 
@@ -5523,7 +5523,7 @@ print(A.numpy())
 
 
 
-### 自动求导
+#### 自动求导
 
 ```python
 import tensorflow as tf
@@ -5550,7 +5550,7 @@ print(L, w_grad, b_grad)
 
 
 
-### 模型与层
+#### 模型与层
 
 [简单粗暴 TensorFlow 2 | A Concise Handbook of TensorFlow 2 — 简单粗暴 TensorFlow 2 0.4 beta 文档 (tf.wiki)](https://tf.wiki/zh_hans/)
 
@@ -5571,7 +5571,7 @@ print(L, w_grad, b_grad)
 - 在继承类中，我们需要重写 `__init__()` （构造函数，初始化）和 `call(input)` （模型调用）两个方法，同时也可以根据需要增加自定义的方法。
 - 实例化类 `model = Model()` 后，可以通过 `model.variables` 这一属性直接获得模型中的所有变量
 
-#### 自定义层
+##### 自定义层
 
 `tf.keras.models.Sequential()` 提供一个层的列表，就能快速地建立一个 `tf.keras.Model` 模型并返回
 
@@ -5584,19 +5584,19 @@ print(L, w_grad, b_grad)
         ])
 ```
 
-### 变量的恢复和保存
+#### 变量的恢复和保存
 
 [TensorFlow常用模块 — 简单粗暴 TensorFlow 2 0.4 beta 文档 (tf.wiki)](https://tf.wiki/zh_hans/basic/tools.html)
 
-### 训练过程可视化
+#### 训练过程可视化
 
-### GPU使用
+#### GPU使用
 
-#### 分布式训练
+##### 分布式训练
 
-#### TPU训练
+##### TPU训练
 
-### install
+#### install
 
 [使用 pip 安装 TensorFlow (google.cn)](https://tensorflow.google.cn/install/pip?hl=zh-cn#1.-install-the-python-development-environment-on-your-system)
 
@@ -5620,15 +5620,15 @@ pip install tensorflow==2.6.0
 
 
 
-### reference
+#### reference
 
 [简单粗暴 TensorFlow 2 | A Concise Handbook of TensorFlow 2 — 简单粗暴 TensorFlow 2 0.4 beta 文档 (tf.wiki)](https://tf.wiki/zh_hans/)
 
 
 
-## 其他第三方库
+### 其他第三方库
 
-### [open-mmlab/mmcv](https://github.com/open-mmlab/mmcv?tab=readme-ov-file)
+#### [open-mmlab/mmcv](https://github.com/open-mmlab/mmcv?tab=readme-ov-file)
 
 OpenMMLab 是一个用于学术研究和工业应用的开源算法体系，于2018年年中开始，由 MMLab（香港中文大学多媒体实验室）和商汤科技联合启动。OpenMMLab 致力于为计算机视觉领域的重要方向创建统一且开源的代码库，推进可复现算法生态的建立；目前为止 OpenMMLab 已经陆续开源**30多个**视觉算法库，实现了**300多种**算法，并包含**2000+**预训练模型，涵盖**2D/3D目标检测**、**语义分割**、**视频理解**、**姿态分析**等多个方向
 
@@ -5638,11 +5638,11 @@ timm库，全称pytorch-image-models，是最前沿的PyTorch图像模型、预�
 
 
 
-## 模型
+### 模型
 
-### CNN 预训练
+#### CNN 预训练
 
-#### restnet50
+##### restnet50
 
 ```python
 # restnet50一共有5个stage, 这里提取前4个stage。
@@ -5693,7 +5693,7 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 
 
 
-### nn.Linear和nn.Embedding的区别
+#### nn.Linear和nn.Embedding的区别
 
 | 特性             | `nn.Embedding`                                               | `nn.Linear`                                                  |
 | :--------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
@@ -5705,7 +5705,7 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 | **梯度更新**     | 只更新被查询到的索引对应的行（向量）。                       | 更新整个权重矩阵和所有输入特征相关。                         |
 | **一个关键联系** | 一个 `nn.Embedding`层在数学上**等价于**一个将 **one-hot 输入** 输入到一个**没有偏置**的 `nn.Linear`层。 |                                                              |
 
-### 总结与如何选择
+#### 总结与如何选择
 
 | 场景                                                         | 应该使用的层       |
 | :----------------------------------------------------------- | :----------------- |
@@ -5715,7 +5715,7 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 | **在嵌入向量之后**，或者从其他层（如CNN、GCN）接一个层进行特征变换/降维。 | **`nn.Linear`**    |
 | **多层感知机 (MLP)** 的构建块。                              | **`nn.Linear`**    |
 
-### norm_layer
+#### norm_layer
 
 [Layer Norm 提升训练稳定性的原理:解决权重初始值敏感性问题（中英双语）_nn.layernorm初始化过大-CSDN博客](https://blog.csdn.net/shizheng_Li/article/details/144474020)
 
@@ -5725,9 +5725,9 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 
 
 
-### Attention
+#### Attention
 
-#### 综述
+##### 综述
 
 ![](assets/v2-43d8ebce2c5a2cb511331014a05aa688_1440w.jpg)
 
@@ -5743,7 +5743,7 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 
 **Value：**每个单词本身的特征向量看作为 Value，一般和 Key成对出现，也就是我们常说的"键-值"对。
 
-##### SA步骤
+###### SA步骤
 
 1. Embedding
 
@@ -5767,9 +5767,9 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 
    除以√d是为了稳定训练
 
-   > [!WARNING]
-   >
-   > 在NLP中，需要进行掩码操作。应为不知道后面的单词。将后面的query对应的相关性置为0。还是要像RNN一样。
+!!! warning
+    
+    在NLP中，需要进行掩码操作。应为不知道后面的单词。将后面的query对应的相关性置为0。还是要像RNN一样。
 
 4. 计算v
 
@@ -5779,7 +5779,7 @@ print("Output shape:", output.shape)  # 期望: (1, 1000)
 
 
 
-##### MSA
+###### MSA
 
 ![image-20250930114655798](assets/image-20250930114655798.png)
 
@@ -5793,17 +5793,17 @@ q,k计算距离
 
 
 
-##### 参考
+###### 参考
 
 [【官方双语】直观解释注意力机制，Transformer的核心 | 【深度学习第6章】_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1TZ421j7Ke/?spm_id_from=333.337.search-card.all.click&vd_source=ea5f077dc692dc32725d05ff92da61a5)
 
 [(51 封私信 / 80 条消息) 注意力机制综述（图解完整版附代码） - 知乎](https://zhuanlan.zhihu.com/p/631398525)
 
-#### 自注意力机制（SA, MSA）
+##### 自注意力机制（SA, MSA）
 
 
 
-#### 通道注意力机制(CAM)
+##### 通道注意力机制(CAM)
 
 通道注意力机制是通过计算每个通道channel的重要性程度；因此，常常被用在卷积神经网络里面。
 
@@ -5825,7 +5825,7 @@ q,k计算距离
 
 
 
-#### 空间注意力机制(SAM)
+##### 空间注意力机制(SAM)
 
 空间注意力机制和通道注意力机制具有异曲同工之妙，通道注意力机制旨在捕捉通道的重要性的程度，空间注意力机制旨在通过引入注意力模块，使模型能够自适应地学习不同区域的注意力权重。这样，模型可以更加关注重要的图像区域，而忽略不重要的区域
 
@@ -5859,7 +5859,7 @@ q,k计算距离
 
 
 
-#### 混合注意力(CAM+SAM)
+##### 混合注意力(CAM+SAM)
 
 [DANet: Dual Attention Network for Scene Segmentation (CVPR2019)](https://github.com/junfu1115/DANet)
 
@@ -5891,7 +5891,7 @@ TabAttention 的核心思想是延展卷积块注意力模块 (CBAM) 到时间�
 
 
 
-#### 轻量级网络模型
+##### 轻量级网络模型
 
 线性注意力机制
 
@@ -5971,7 +5971,7 @@ Top-K稀疏注意力
 
 ![image-20250930153202379](assets/image-20250930153202379.png)
 
-#### other
+##### other
 
 [EPSANet ACCV 2021](https://github.com/murufeng/EPSANet)
 
@@ -6003,39 +6003,38 @@ Top-K稀疏注意力
 
 
 
-#### 参考
+##### 参考
 
 [10种涨点即插即用模块 注意力 合集篇来啦（一）！！！(附原文地址+论文+代码) - 知乎](https://zhuanlan.zhihu.com/p/31864215481)
 
 
 
-### Tips
+#### Tips
 
 -  torch.backends.cudnn.benchmark = True
 
   ![image-20251010153155271](D:\My2025\MyNotes\Other\assets\image-20251010153155271.png)
 
-- 
 
 
 
 
 
-## 数据
+### 数据
 
 
 
-## 方法
+### 方法
 
-### 迁移学习
+#### 迁移学习
 
 ![image-20250922121751716](assets/image-20250922121751716.png)
 
 
 
-## 实验
+### 实验
 
-### 训练速度
+#### 训练速度
 
 消费级显卡对单精度计算有优化，服务器级显卡对双精度计算有优化
 
@@ -6043,9 +6042,9 @@ Top-K稀疏注意力
 
 
 
-### 显存占用
+#### 显存占用
 
-#### 训练
+##### 训练
 
 **网络模型占用**
 
@@ -6054,14 +6053,14 @@ Top-K稀疏注意力
 - **优化器的参数：** 除了保存权重之外，还要保存对应的梯度，用于梯度更新，尤其对哪些需要记录历史梯度、自适应学习率的优化器来说
 - 框架自身的显存开销
 
-#### 推理
+##### 推理
 
 - **不可控制空间**: 指系统分配的空间，如每个进程 [CUDA Context](https://zhida.zhihu.com/search?content_id=235724505&content_type=Article&match_order=1&q=CUDA+Context&zhida_source=entity) 所占用的显存空间，一般在 100-300MB 左右；
 - **输入输出** :指用户自行分配的显存空间，如模型输入输出 Tensor 占用的空间，即神经网络中“输入与输出”如何占用显存？
 - **模型参数** 指训练的深度学习模型的参数所占用的显存空间，我们需要将模型参数加载到显存中，才能进行计算，即神经网络中“有参数的层”如何占用显存？
 - **“运行时空间”** 是指模型的算子在计算的时候，需要的显存空间
 
-#### 降低模型训练显存
+##### 降低模型训练显存
 
 - 改精度，使用混合精度
 - `Relu()`有一个默认参数`inplace`，默认设置为False。当设置为True时，我们在通过relu()计算得到的新值不会占用新的空间，而是直接覆盖原来的值，这也就是为什么当inplace参数设置为True时可以节省一部分内存的缘故。
@@ -6070,23 +6069,23 @@ Top-K稀疏注意力
 
 
 
-### Loss选择
+#### Loss选择
 
 
 
-#### 参考
+##### 参考
 
 [分类和回归任务的常用损失函数](https://juejin.cn/post/7188370492187738167)
 
 
 
-### 交叉验证
+#### 交叉验证
 
  [【小萌五分钟】机器学习 | 交叉验证 Cross-Validation_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1GQ4y1P7Tv/?spm_id_from=333.337.search-card.all.click&vd_source=ea5f077dc692dc32725d05ff92da61a5)
 
 
 
-## Tips
+### Tips
 
 - CPython
 
@@ -6094,15 +6093,14 @@ Top-K稀疏注意力
   绝大多数 Python 用户用的都是 CPython。它支持 C/C++ 扩展模块（如 `.so` 文件），也是所有第三方库兼容的主流 Python 解释器。
   其他实现还有 PyPy（JIT）、Jython（Java）、IronPython（.NET）等，但 CPython 是最常用和最兼容的版本
 
-- 
 
 
 
-# TCL
+## TCL
 
-## 基本知识
+### 基本知识
 
-### list
+#### list
 
 一组单词或者使用双引号或大括号可以用来表示一个简单的列表
 
@@ -6120,7 +6118,7 @@ puts [lindex $myVariable 1]
 >blue
 >green
 
-### 关联数组
+#### 关联数组
 
 ```tcl
 #!/usr/bin/tclsh
@@ -6135,7 +6133,7 @@ puts $marks(mathematics)
 
 > 80 90
 
-## 参考
+### 参考
 
 [TCL数据类型 - Tcl教程 (yiibai.com)](https://www.yiibai.com/tcl/tcl_data_types.html#:~:text=原始数据类型在Tcl)
 
@@ -6145,15 +6143,15 @@ puts $marks(mathematics)
 
 
 
-# CUDA
+## CUDA
 
-## 简介
+### 简介
 
-### 什么是CUDA
+#### 什么是CUDA
 
 CUDA建立在NVIDIA的GPU上的一个通用并行计算平台和编程模型  
 
-### GPU性能指标
+#### GPU性能指标
 
 - 核心数：为GPU提供计算能力的硬件单元，核心数量越多，可并行运算的线程数量也就越多
 - GPU显存容量
@@ -6174,7 +6172,7 @@ CUDA建立在NVIDIA的GPU上的一个通用并行计算平台和编程模型
 
 
 
-### 架构
+#### 架构
 
 ![image-20241124210526461](assets/image-20241124210526461.png)
 
@@ -6185,7 +6183,7 @@ CUDA建立在NVIDIA的GPU上的一个通用并行计算平台和编程模型
 
 ![image-20241124215841653](assets/image-20241124215841653.png)
 
-### 开发环境
+#### 开发环境
 
 可以用C++或python
 
@@ -6199,9 +6197,9 @@ CUDA建立在NVIDIA的GPU上的一个通用并行计算平台和编程模型
 
 
 
-## basic
+### basic
 
-### 核函数(Kernel function)
+#### 核函数(Kernel function)
 
 主机对设备的调用是通过核函数进行的
 
@@ -6236,7 +6234,7 @@ hello_from_gpu<<<1, 1>>>(); //<<<grid_size, block_size>>>指定线程块和线�
 
 
 
-### 同步
+#### 同步
 
 使用原因：CPU主机不会等待核函数执行完毕
 
@@ -6244,11 +6242,11 @@ hello_from_gpu<<<1, 1>>>(); //<<<grid_size, block_size>>>指定线程块和线�
 
 
 
-## 模型
+### 模型
 
 ![image-20250221151630049](assets/image-20250221151630049.png)
 
-### grid，block，thread
+#### grid，block，thread
 
 - 正常[程序执行](https://so.csdn.net/so/search?q=程序执行&spm=1001.2101.3001.7020)在host（CPU）端，当需要到device（GPU）执行时，启动kernel（核函数，一个kernel对应一个线程）调用[GPU](https://so.csdn.net/so/search?q=GPU&spm=1001.2101.3001.7020)。（K-G-B-T），一个kernel对应一个grid，启动一个kernel的时候需要制定grid和block的维度
 - **线程(Thread)：**一般通过GPU的一个核进行处理; 受wrap影响，一般设置为32的整数倍
@@ -6385,7 +6383,7 @@ int main() {
 
 
 
-### memory
+#### memory
 
 ![image-20250221152125157](assets/image-20250221152125157.png)
 
@@ -6404,11 +6402,11 @@ int main() {
 - 由于shared memory和L1要比L2和global memory更接近SM，shared memory的延迟比global memory低20到30倍，带宽大约高10倍。
 - 提现shared memory于global memor性能差距的案例：矩阵乘法
 
-#### CUDA之静态、动态共享内存分配详解
+##### CUDA之静态、动态共享内存分配详解
 
 [CUDA之静态、动态共享内存分配详解_cuda 动态内存分配-CSDN博客](https://blog.csdn.net/bruce_0712/article/details/65947934)
 
-##### 静态的共享内存
+###### 静态的共享内存
 
 ```c++
 __global__ void staticReverse(int *d, int n)
@@ -6426,7 +6424,7 @@ __global__ void staticReverse(int *d, int n)
 
 
 
-##### 动态的共享内存
+###### 动态的共享内存
 
 这主要用于==共享内存的大小在编译时不能确定==的情况。在这种情况下，每个线程块中共享内存的大小必须在核函数第三个执行配置参数中指定(**以字节为单位**): `dynamicReverse<<<1, n, n*sizeof(int)>>>(d_d, n);`
 
@@ -6447,7 +6445,7 @@ __global__ void dynamicReverse(int *d, int n)
 
 
 
-#### cuda bank conflict
+##### cuda bank conflict
 
 参考：[【CUDA编程概念】一、什么是bank conflict？ - 知乎](https://zhuanlan.zhihu.com/p/659142274)
 
@@ -6461,11 +6459,11 @@ shared_memory 映射到大小相等的32个Bank上，Bank的数据读取带宽�
 
 
 
-### wrap
+#### wrap
 
 指的是一组同时执行相同指令的线程集合。
 
-#### 特性：
+##### 特性：
 
 1. **大小**：在当前所有 NVIDIA GPU 架构中，一个 warp 固定包==含 32 个线程==。
 2. **执行模式**：Warp 中的所有线程以 SIMT（Single Instruction, Multiple Threads）模式执行，即同一时刻执行相同的指令，但可以操作不同的数据。
@@ -6474,7 +6472,7 @@ shared_memory 映射到大小相等的32个Bank上，Bank的数据读取带宽�
 
 
 
-#### bank conflicts
+##### bank conflicts
 
 
 
@@ -6482,11 +6480,11 @@ shared_memory 映射到大小相等的32个Bank上，Bank的数据读取带宽�
 
 
 
-### Tile（瓦片）
+#### Tile（瓦片）
 
 Tile 是一种数据分块的策略，而不是 CUDA 硬件架构的一部分。它是一种软件优化技术，特别适用于矩阵操作。
 
-#### Tile 的关键特性：
+##### Tile 的关键特性：
 
 1. **定义**：将大型数据集（如矩阵）分解成更小的块，每个块称为"瓦片"（tile）。
 2. **目的**：减少全局内存访问，提高数据局部性和重用性。
@@ -6494,7 +6492,7 @@ Tile 是一种数据分块的策略，而不是 CUDA 硬件架构的一部分。
 
 一个很好的例子是在矩阵乘法中
 
-### 核函数
+#### 核函数
 
 kernel<<<Dg,Db, Ns, S>>>(param list);
 
@@ -6505,15 +6503,15 @@ S： cudaStream_t类型，可缺省，默认为0。 表示该核函数位于哪�
 
 
 
-## nvcc
+### nvcc
 
-### 简介
+#### 简介
 
 类似gcc, 用于编译.cu文件
 
 
 
-### 原理
+#### 原理
 
 ![image-20241124233519108](assets/image-20241124233519108.png)
 
@@ -6522,16 +6520,16 @@ S： cudaStream_t类型，可缺省，默认为0。 表示该核函数位于哪�
 - 在将源代码编译为 PTX 代码时， 需要用选项**-arch=compute_XY**指定一个**虚拟架构**的计算能力，用以确定代码中能够使用的CUDA功能。  
 - 在将PTX代码编译为cubin代码时， 需要用选项**-code=sm_XY**指定一个**真实架构**的计算能力， 用以确定可执行文件能够使用的GPU。 
 
-#### PTX
+##### PTX
 
 - PTX（ Parallel Thread Execution） 是CUDA平台为基于GPU的通用计算而定义的虚拟机和指令集  
 - 可以适配更多的GPU，C/C++源码转化为PTX这一步骤与GPU**硬件无关**  
 
-### flow
+#### flow
 
 ![image-20241124234028186](assets/image-20241124234028186.png)
 
-### command
+#### command
 
 - `nvidia-smi`
 
@@ -6587,7 +6585,7 @@ S： cudaStream_t类型，可缺省，默认为0。 表示该核函数位于哪�
 
 
 
-## 计算能力
+### 计算能力
 
 不同版本CUDA编译器在编译CUDA代码时， 都有一个默认计算能力  
 
@@ -6595,7 +6593,7 @@ S： cudaStream_t类型，可缺省，默认为0。 表示该核函数位于哪�
 
 
 
-## GPU架构
+### GPU架构
 
 不同的GPU架构之间, GPU指令集会有较大的差异，因此编译出的**二进制可执行文件在不同的架构之间是不可以混用的**
 
@@ -6607,17 +6605,17 @@ S： cudaStream_t类型，可缺省，默认为0。 表示该核函数位于哪�
 
 ![image-20241124234356373](assets/image-20241124234356373.png)
 
-## Imbalanced Workload问题
+### Imbalanced Workload问题
 
 指的是不同 GPU 线程之间的任务分配不均匀，导致某些线程需要处理比另一些线程更复杂或更耗时的任务。这种不均衡会严重降低 GPU 的并行效率
 
-###  **Imbalanced Workload 的典型表现**
+#### **Imbalanced Workload 的典型表现**
 
 - **线程发散（Thread Divergence）**：同一线程束（Warp，通常包含 32 个线程）中的线程执行不同分支的代码，导致部分线程空闲。
 - **任务粒度不均**：某些线程需要处理大量计算或内存访问，而其他线程很快完成工作后闲置。
 - **资源争用**：部分线程因任务过重而长期占用显存带宽或计算单元，其他线程无法充分利用资源。
 
-### **对 GPU 性能的影响**
+#### **对 GPU 性能的影响**
 
 1. **资源利用率下降**
    - 部分线程因等待其他线程而闲置，导致 SM（Streaming Multiprocessor）的计算单元和显存带宽未被充分利用。
@@ -6628,9 +6626,9 @@ S： cudaStream_t类型，可缺省，默认为0。 表示该核函数位于哪�
 3. **能耗效率降低**
    - 闲置线程仍占用功耗，但未贡献有效计算，导致单位能耗的性能（Performance per Watt）下降
 
-## tutorial
+### tutorial
 
-### 1. Introduction
+#### 1. Introduction
 
 While the CPU is designed to excel at executing a sequence of operations, called a *thread*, as fast as possible and can execute a few tens of these threads in parallel, the GPU is designed to excel at executing thousands of them in parallel (amortizing the slower single-thread performance to achieve greater throughput).
 
@@ -6644,11 +6642,11 @@ GPU缓存较少，浮点计算单元较多
 
 Applications with a high degree of parallelism can exploit this massively parallel nature of the GPU to achieve higher performance than on the CPU.  
 
-#### A Scalable Programming Mode
+##### A Scalable Programming Mode
 
 At its core are three key abstractions — **a hierarchy of thread groups, shared memories, and barrier synchronization** — that are simply exposed to the programmer as a minimal set of language extensions.
 
-### 2. Memory Management & Thread Hierarchies
+#### 2. Memory Management & Thread Hierarchies
 
 
 
@@ -6656,13 +6654,13 @@ At its core are three key abstractions — **a hierarchy of thread groups, share
 
 
 
-## 常用算法
+### 常用算法
 
-### 矩阵乘法
+#### 矩阵乘法
 
-### 规约
+#### 规约
 
-### 并行前缀和
+#### 并行前缀和
 
 [CUDA练手小项目——Parallel Prefix Sum (Scan) - 知乎](https://zhuanlan.zhihu.com/p/661460705)
 
@@ -6672,13 +6670,13 @@ At its core are three key abstractions — **a hierarchy of thread groups, share
 
 
 
-### 参考
+#### 参考
 
 - [ Will Zhang - 知乎](https://www.zhihu.com/people/will-zhang-52-34/search?keyword=CUDA高性能计算经典问题&pathBefore=%2Fpeople%2Fwill-zhang-52-34)
 
 
 
-## vscode debug配置
+### vscode debug配置
 
 ```shell
 Press F5 to build and debug
@@ -6761,7 +6759,7 @@ Press Ctrl+Shift+B (Cmd+Shift+B on Mac) to build without debugging
 
 
 
-## install
+### install
 
 - [wsl下的安装](https://www.bilibili.com/video/BV1sM4y1x7of?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=3)
 - [CUDA C++ Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
@@ -6772,7 +6770,7 @@ Press Ctrl+Shift+B (Cmd+Shift+B on Mac) to build without debugging
 
 
 
-## debug
+### debug
 
 
 
@@ -6782,20 +6780,20 @@ Press Ctrl+Shift+B (Cmd+Shift+B on Mac) to build without debugging
 
 
 
-## 参考
+### 参考
 
 1. [sangyc10/CUDA-code](https://github.com/sangyc10/CUDA-code)
 1. [cuda中threadIdx、blockIdx、blockDim和gridDim的使用 - 知乎](https://zhuanlan.zhihu.com/p/544864997)
 
 
 
-# Triton
+## Triton
 
-## PyTorch 与 Triton 的区别
+### PyTorch 与 Triton 的区别
 
 PyTorch 和 Triton 是两个不同层次的工具，它们在GPU编程生态系统中扮演不同的角色：
 
-### PyTorch
+#### PyTorch
 
 1. **高级深度学习框架**：PyTorch是一个完整的深度学习框架，提供了构建、训练和部署神经网络的全套工具。
 2. **抽象级别**：PyTorch提供高级API，隐藏了大部分底层GPU编程细节。
@@ -6804,7 +6802,7 @@ PyTorch 和 Triton 是两个不同层次的工具，它们在GPU编程生态系�
 5. **生态系统**：拥有庞大的生态系统，包括预训练模型、工具和库。
 6. **用户群体**：主要面向机器学习研究人员和工程师。
 
-### Triton
+#### Triton
 
 1. **中层编程语言**：Triton是一种专门用于编写GPU内核的语言，介于高级框架（如PyTorch）和底层CUDA之间。
 2. **抽象级别**：比CUDA更高级，但比PyTorch更底层，允许更细粒度的控制。
@@ -6813,7 +6811,7 @@ PyTorch 和 Triton 是两个不同层次的工具，它们在GPU编程生态系�
 5. **编程模型**：基于Python语法，但编译为GPU代码。使用特殊的语言构造（如tl.program_id, tl.load, tl.store等）。
 6. **用户群体**：面向需要自定义高性能GPU操作的开发者。
 
-## 关键区别
+### 关键区别
 
 1. **目的**：
    - PyTorch：构建和训练完整的深度学习模型
@@ -6835,17 +6833,17 @@ PyTorch 和 Triton 是两个不同层次的工具，它们在GPU编程生态系�
 
 
 
-# SystemC
+## SystemC
 
-## 环境配置
+### 环境配置
 
-### EDA Playground
+#### EDA Playground
 
-### Local
+#### Local
 
 [SystemC 学习之 Linux 安装 SystemC（一）_systemc如何安装-CSDN博客](https://blog.csdn.net/yp18792574062/article/details/133747670)
 
-### other
+#### other
 
 [Sign Up - Stack Overflow](https://stackoverflow.com/users/auth/gcp?ssrc=google-one-tap&returnurl=https%3a%2f%2fstackoverflow.com%2fusers%2fauth%2fgcp%3fssrc%3dgoogle-one-tap%26returnurl%3dhttps%3a%2f%2fstackoverflow.com%2fusers%2fauth%2fgcp%3fssrc%3dgoogle-one-tap%26returnurl%3dhttps%253a%252f%252fstackoverflow.com%252f)
 

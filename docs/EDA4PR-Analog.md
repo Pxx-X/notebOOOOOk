@@ -1,8 +1,9 @@
+# EDA4PR-Analog
 
 
-# 概述
+## 概述
 
-## 背景
+### 背景
 
 - Implementing analog circuit layout is a heavily manual, timeconsuming, and error-prone task.   
 
@@ -10,13 +11,13 @@
 - analog  ICs flow faces challenges regarding low design efficiency and slow development speed [AIPlacer: 1] 
 - ![image-20251022153431726](assets/image-20251022153431726.png)
 
-### 和数字在布局的区别
+#### 和数字在布局的区别
 
 - Digital designers have to deal with a large number of rectangular devices, but all the devices share the same height and are placed in rows rather than freely, which resembles 1D Bin Packing Problem (Munienand Ezugwu, 2021). On the other hand, Analog and Mixed-Signal (AMS) ICs usually contain fewer devices, which may have different sizes and voltage levels and can be freely placed on the canvas. Hence, routability is generally not a critical issue for analog circuit layouts.
 - Unlike digital ICs, analog ICs contain a large number of design constraints and intricate performance metrics to meet, which requires a steep learning curve for designers with a wealth of specialized skills. 
 - ![image-20251022152231332](assets/image-20251022152231332.png)
 
-#### performance-driven placement optimization  
+##### performance-driven placement optimization  
 
 AIPlacer:
 
@@ -25,7 +26,7 @@ AIPlacer:
 
 
 
-## 指标
+### 指标
 
 - area
 - wirelength
@@ -37,9 +38,8 @@ AIPlacer:
 - power
 - via
 - thermal effects
-- 
 
-## 难点
+### 难点
 
 - the impact of layout on analog circuit performance can be very large due to significant RC (Resistance and Capacitance) parasitic generated in layout
 
@@ -67,15 +67,15 @@ AIPlacer:
 
 
 
-## 约束类型
+### 约束类型
 
 [DATE22]: symmetry [5], common-centroid [6], regularity [7], proximity [8], pre-placed [9], fixed-boundary [10], and mimimum/maximum separation [11]. Performance-related constraints such as monotonic current flows [12] have also been studied. 
 
 
 
-### overlap  
+#### overlap  
 
-### symmetry  
+#### symmetry  
 
 - ![image-20251014101346045](assets/image-20251014101346045.png)
 - 对称性约束是模拟版图综合过程中应用最广泛且至关重要的约束之一。模拟设计经常采用差分拓扑结构来抑制共模噪声并增强电路的鲁棒性。这些拓扑结构中器件的失配会显著降低电路性能。
@@ -84,59 +84,58 @@ AIPlacer:
 - Symmetry constraints are one of the ==most essential and widely adopted== constraints applied during analog layout synthesis
 - ![image-20251022095602561](assets/image-20251022095602561.png)
 
-#### hierarchical symmetry constraints  
+##### hierarchical symmetry constraints  
 
 
 
-### alignment  
+#### alignment  
 
 
 
-### common-centroid  
+#### common-centroid  
 
 - ![image-20251014101401573](assets/image-20251014101401573.png)
 - [ICCAD20:19, 33, 38]  
-- 
 
-### topo
+#### topo
 
 - ![image-20251014101411315](assets/image-20251014101411315.png)
 
-### length
+#### length
 
 - ![image-20251014101421031](assets/image-20251014101421031.png)
 
-### current/signal-flow
+#### current/signal-flow
 
 - [ICCAD20]
 - Current flow constraint requires that the path or direction of current flows must align with the circuit’s design. Adhering to current flow constraints mitigates issues such as voltage drops, noise, electromagnetic interference, and localized overheating.
 
-### regularity  
+#### regularity  
 
 - [ICCAD20: 7, 26, 39]  
 
-### proximity  
+#### proximity  
 
 - various minimum distances between devices
 - [ICCAD20:6, 18, 25, 33–35, 41] 
 
-### thermal effects  
+#### thermal effects  
 
 - [ICCAD20:19, 20]   
 
-### area
+#### area
 
 
 
 
 
-## 版图基本知识
+### 版图基本知识
 
-### MOS
+#### MOS
 
 ![image-20251105111559354](assets/image-20251105111559354.png)
 
-#### finger & multiple&fin
+##### finger & multiple&fin
 
 ![image-20251105111457462](assets/image-20251105111457462.png)
 
@@ -162,7 +161,7 @@ AIPlacer:
 
 ![image-20251105133445624](assets/image-20251105133445624.png)
 
-### LDE效应
+#### LDE效应
 
 layout-dependent effects
 
@@ -182,7 +181,7 @@ layout dependent effect can affect device `threshold voltage V_th` , `mobility` 
 - MBE(Metal Boundary Effect）
 - PCE(Poly Cut Effect)
 
-#### LOD
+##### LOD
 
 ![image-20251118173042930](assets/image-20251118173042930.png)
 
@@ -194,7 +193,7 @@ layout dependent effect can affect device `threshold voltage V_th` , `mobility` 
 
 
 
-##### 实例
+###### 实例
 
 [告别失配！实用的版图匹配技巧 ①（附仿真验证说明） - 知乎](https://zhuanlan.zhihu.com/p/1966516064595715212)
 
@@ -210,7 +209,7 @@ layout dependent effect can affect device `threshold voltage V_th` , `mobility` 
 
 
 
-#### WPE
+##### WPE
 
 ![image-20251204093425205](assets/image-20251204093425205.png)
 
@@ -224,11 +223,11 @@ layout dependent effect can affect device `threshold voltage V_th` , `mobility` 
 
   ![image-20251204092445982](assets/image-20251204092445982.png)
 
-#### OSE
+##### OSE
 
 栅极之间的间距变化会影响多晶硅栅周围应力材料（如氮化硅）的体积，从而调制应力并改变Vth。
 
-### variations 
+#### variations 
 
 学术解释：
 
@@ -252,7 +251,7 @@ layout dependent effect can affect device `threshold voltage V_th` , `mobility` 
 
 
 
-#### random variations 
+##### random variations 
 
 Analog circuit performance can degrade due to random and spatial variations
 
@@ -271,7 +270,7 @@ random dopant fluctuations (RDF)
 
 
 
-#### spatial variations
+##### spatial variations
 
 use common-centroid, which effectively reduces `linear variations` or `first-order effect`
 
@@ -289,13 +288,13 @@ However, for high performance systems, layout must be optimized considering `non
   - ![image-20251204154350909](assets/image-20251204154350909.png)
 - ![image-20251205101928335](assets/image-20251205101928335.png)
 
-#### Gradient-Based Variations  
+##### Gradient-Based Variations  
 
 ![image-20251205102128219](assets/image-20251205102128219.png)
 
 
 
-### 电迁移（EM）
+#### 电迁移（EM）
 
 电迁移可以被形象地理解为金属导线中的“动脉硬化”。当大量电子（电流）长时间持续地流过一根细小的金属导线时，会像水流冲击河床一样，对导线原子产生一个持续的推力（电子风）
 
@@ -318,29 +317,28 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-### 参考
+#### 参考
 
 - [集成电路版图设计技术更新版_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1dL411n7c2?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5)
 - [版图知识大总结_陆晓欢.pdf](版图知识大总结_陆晓欢.pdf)
 - [Finger对MOS管的影响以及finger与Multiple的区别（浅显理解） - 知乎](https://zhuanlan.zhihu.com/p/690311740)
 - [fingers和multiplier_inv电路中multiplier跟fingers的区别-CSDN博客](https://blog.csdn.net/Cecilia_yxy/article/details/134325937)
-- 
 
 
 
 
 
-## 版图绘制方法
+### 版图绘制方法
 
-### placement
+#### placement
 
 ![image-20251204154912770](assets/image-20251204154912770.png)
 
-#### clustered
+##### clustered
 
 ![image-20251204154922277](assets/image-20251204154922277.png)
 
-#### Interdigitating 
+##### Interdigitating 
 
 - U may assume that interdigitization is a special case of a ==common centroid== but with ==only one row==
 
@@ -362,21 +360,21 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 ![image-20251124182632825](assets/image-20251124182632825.png)
 
->[!WARNING]
->
->貌似finger必须是双数。为了源漏共用？
->
->[in interdigitised pattern all the transistors are in interleaved pattern like suppose there are two transistors with 2 fingers each](https://www.edaboard.com/threads/common-centroid-interdigitization.58378/)
+!!! warning
+    
+    貌似finger必须是双数。为了源漏共用？
+    
+    [in interdigitised pattern all the transistors are in interleaved pattern like suppose there are two transistors with 2 fingers each](https://www.edaboard.com/threads/common-centroid-interdigitization.58378/)
 
 
 
-##### Interdigitation Patterns
+###### Interdigitation Patterns
 
 ![image-20251125085713644](assets/image-20251125085713644.png)
 
 
 
-#### Common Centroid
+##### Common Centroid
 
 - **Common Centroid** is more advanced matching technique, suitable for more complex analog structures, such as ==differential pairs==, BJT arrays in Bandgaps, R/C DAC array etc. 
 
@@ -430,7 +428,7 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-##### 2器件示例
+###### 2器件示例
 
 ![image-20251124201004547](assets/image-20251124201004547.png)
 
@@ -442,11 +440,11 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 ![image-20251124205150034](assets/image-20251124205150034.png)
 
-##### 3器件示例
+###### 3器件示例
 
 ![image-20251124190336284](assets/image-20251124190336284.png)
 
-##### 4器件示例
+###### 4器件示例
 
 ![image-20251117194458082](assets/image-20251117194458082.png)
 
@@ -456,17 +454,17 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-##### cc和idg可以混合
+###### cc和idg可以混合
 
 ![image-20251124190743429](assets/image-20251124190743429.png)
 
-> [!WARNING]
->
-> 感觉具体那种效果好很难说
+!!! warning
+    
+    感觉具体那种效果好很难说
 
 
 
-##### 不相等/不规则的数量
+###### 不相等/不规则的数量
 
 ![image-20251124190417956](assets/image-20251124190417956.png)
 
@@ -476,7 +474,7 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-##### CC Patterns
+###### CC Patterns
 
 ![image-20251124183242920](assets/image-20251124183242920.png)
 
@@ -484,7 +482,7 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-#### 电阻电容根器件法(Root Device Method)
+##### 电阻电容根器件法(Root Device Method)
 
 ![image-20251118090048476](assets/image-20251118090048476.png)
 
@@ -502,13 +500,13 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-#### Dummy虚拟器件
+##### Dummy虚拟器件
 
 ![image-20251117192358362](assets/image-20251117192358362.png)
 
 
 
-#### 考虑源漏共用
+##### 考虑源漏共用
 
 A layout that does not share diffusion region can lead to worse routing length and may degrade spatial variations due to increased layout area.
 
@@ -534,7 +532,7 @@ minimizing only the dummy count leads to inferior results --cite-->[Multiobjecti
 
 
 
-#### 参考
+##### 参考
 
 - [模拟电路版图设计中的匹配艺术](../Analog/模拟电路版图设计中的匹配艺术.pdf)
 - [Matching patterns - AnalogHub](https://analoghub.ie/category/Layout/article/layoutMatchingPatterns)
@@ -548,15 +546,15 @@ minimizing only the dummy count leads to inferior results --cite-->[Multiobjecti
 
 
 
-### routing
+#### routing
 
 Route signals symmetrically to reduce IR drops and parasitic mismatches on either branch.
 
-#### 过孔
+##### 过孔
 
 纳米级技术中的通孔电阻同样显著，且较低金属层对单向布线的要求使得CC布局必须采用通孔数量较少的布线方案。--cite-->[Performance-Aware Common-Centroid Placement and Routing of Transistor Arrays in Analog Circuits]
 
-#### 高频信号线
+##### 高频信号线
 
 高频信号线走线采用高层金属走线，高层金属厚度大，寄生电阻小，寄生电容也小；高频信号线尽量走直线；避免平行走线，采用不同层金属走线，或者加大同层金属走线的间距以减小耦合和串扰
 
@@ -564,7 +562,7 @@ All the critical signals should be shielded with gnd or clean reference signal
 
 For high speed signals, the shield line shouldn’t be put closer to the signal toavoid loading
 
-#### 关键信号
+##### 关键信号
 
 关键信号要离PAD足够近，以减小走线寄生电容，直流信号的PAD由于考虑到漏压降的问题，走线越宽，有利于减小压降。
 
@@ -574,19 +572,19 @@ Use proper spacing between two signal
 
 
 
-#### 电迁移
+##### 电迁移
 
 ![image-20251124195541622](assets/image-20251124195541622.png)
 
 ![image-20251124195548748](assets/image-20251124195548748.png)
 
-#### Tiling?
+##### Tiling?
 
 ![image-20251124195824854](assets/image-20251124195824854.png)
 
 ![image-20251124195845168](assets/image-20251124195845168.png)
 
-#### Antenna Effect
+##### Antenna Effect
 
 ![image-20251124195929141](assets/image-20251124195929141.png)
 
@@ -594,11 +592,11 @@ Use proper spacing between two signal
 
 
 
-#### Latchup 
+##### Latchup 
 
 ![image-20251124195921855](assets/image-20251124195921855.png)
 
-#### Power
+##### Power
 
 ![image-20251124200035088](assets/image-20251124200035088.png)
 
@@ -606,7 +604,7 @@ Use proper spacing between two signal
 
 ![image-20251124200056495](assets/image-20251124200056495.png)
 
-#### IR drop
+##### IR drop
 
 IR drop **CANNOT BE IGNORED** in modern nodes, particularly when wide metal lines are not used for power/ground or high-current paths.
 
@@ -616,7 +614,7 @@ Always consider adding more metal width and multiple vias to keep IR drops minim
 
 ![image-20251125091535340](assets/image-20251125091535340.png)
 
-#### 参考
+##### 参考
 
 [eet.bme.hu/~bognar/rfic/Layout02.pdf](https://www.eet.bme.hu/~bognar/rfic/Layout02.pdf)
 
@@ -624,9 +622,9 @@ Always consider adding more metal width and multiple vias to keep IR drops minim
 
 
 
-### 减小失配方法总结
+#### 减小失配方法总结
 
-#### overview
+##### overview
 
 - Place transistor segments in the areas of low-stress gradients.
 - Place transistors in ==close proximity==. Keep the layout of the transistors as ==compact== as possible
@@ -641,7 +639,7 @@ Always consider adding more metal width and multiple vias to keep IR drops minim
 
 
 
-#### 增加尺寸
+##### 增加尺寸
 
 ![image-20251230145315622](assets/image-20251230145315622.png)
 
@@ -654,25 +652,25 @@ to Cancel Nonlinear Process Gradients)
 
 
 
-#### 远离噪声（相同距离）
+##### 远离噪声（相同距离）
 
 ![image-20251124163922221](assets/image-20251124163922221.png)
 
-#### dummy
+##### dummy
 
 ![image-20251124163944401](assets/image-20251124163944401.png)
 
-> [!CAUTION]
->
-> 不过貌似正常都只是在两边放dummy，可能严格的才需要？
+!!! caution
+    
+    不过貌似正常都只是在两边放dummy，可能严格的才需要？
 
-> [!WARNING]
->
-> 工艺越先进越要二维的dummy
+!!! warning
+    
+    工艺越先进越要二维的dummy
 
 
 
-#### CC考虑二阶效应
+##### CC考虑二阶效应
 
 ![image-20251230145830824](assets/image-20251230145830824.png)
 
@@ -681,7 +679,7 @@ to Cancel Nonlinear Process Gradients)
 
 
 
-### other
+#### other
 
 - 为了防止**闩锁效应**，电路版图设计的角度，NMOS和PMOS附近设置尽可能多的接触孔以减小寄生电阻，或者添加保护环；
 
@@ -697,11 +695,10 @@ to Cancel Nonlinear Process Gradients)
 
   （3）Bipolar失调电压随温度的漂移很容易控制，减小Vos的同时也会减小失调电压的温漂；
   
-- 
 
 
 
-### 参考
+#### 参考
 
 [Analog Layout Guide – Nextra](https://neu-ucb-tvip.github.io/tvip-analog-workspace/Analog_Layout_Guide/)
 
@@ -709,9 +706,9 @@ to Cancel Nonlinear Process Gradients)
 
 
 
-## 常见pattern版图
+### 常见pattern版图
 
-### overview
+#### overview
 
 the **Interdigitation** is a ==less complex== method, and it would be sufficient for structures like small ==current mirrors== and ==biasing circuits==. Using this pattern will be **more area-efficient** and allows **simple routing**.
 
@@ -731,21 +728,21 @@ When we are talking about structures that require **maximum precision** - such a
 
 -- cite-->[DATE24 Analog Transistor Placement Optimization Considering Nonlinear Spatial Variations]()
 
-### 电流镜
+#### 电流镜
 
-#### 基本电流镜
+##### 基本电流镜
 
 <img src="assets/image-20251117194841219.png" alt="image-20251117194841219" style="zoom: 35%;" />
 
 ![image-20251124150322926](assets/image-20251124150322926.png)
 
-#### cascode电流镜
+##### cascode电流镜
 
 源漏共用
 
 ![image-20251124192136470](assets/image-20251124192136470.png)
 
-#### 共源共栅电流镜
+##### 共源共栅电流镜
 
 [IC Layout版图实操重要知识-电流镜_电流镜版图匹配设计-CSDN博客](https://blog.csdn.net/qq_49315469/article/details/129650954)
 
@@ -761,7 +758,7 @@ When we are talking about structures that require **maximum precision** - such a
 
 
 
-#### 多路输出电流镜
+##### 多路输出电流镜
 
 ![image-20251124170007459](assets/image-20251124170007459.png)
 
@@ -775,21 +772,21 @@ https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&v=mca7NKcT
 
 ![image-20251124205525800](assets/image-20251124205525800.png)
 
-> [!WARNING]
->
-> 相比idg，cc数量翻倍了？为了全部源漏共用，idg只能这么设计！注意每一个B-B或者C-C之间都是D端的，两边的都是共用的GND
+!!! warning
+    
+    相比idg，cc数量翻倍了？为了全部源漏共用，idg只能这么设计！注意每一个B-B或者C-C之间都是D端的，两边的都是共用的GND
 
 ![image-20251125093612920](assets/image-20251125093612920.png)
 
 ![image-20251125093701814](assets/image-20251125093701814.png)
 
->[!WARNING]
->
->M7飞哪去了？
+!!! warning
+    
+    M7飞哪去了？
 
 
 
-### 差分对
+#### 差分对
 
 - [版图匹配之差分电流镜_电流镜版图匹配设计-CSDN博客](https://blog.csdn.net/weixin_52567455/article/details/129659950)
   
@@ -825,7 +822,7 @@ https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&v=mca7NKcT
 
 
 
-### cap
+#### cap
 
 ![image-20251125091444620](assets/image-20251125091444620.png)
 
@@ -833,7 +830,7 @@ https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&v=mca7NKcT
 
 
 
-### 其他
+#### 其他
 
 ![image-20251125101746517](assets/image-20251125101746517.png)
 
@@ -843,9 +840,9 @@ https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&v=mca7NKcT
 
 
 
-# placement 算法
+## placement 算法
 
-## 三种布局范式
+### 三种布局范式
 
 - 结合数字 APR 综合的
 
@@ -861,28 +858,28 @@ https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&v=mca7NKcT
 
 
 
-## GA
+### GA
 
 Kubalík et al. (2019) and Kubalík et al. (2023)   FLP   
 
 
 
-## Simulated Annealing
+### Simulated Annealing
 
 Historically, most analog placement methods were based on simulated annealing and focused on handling geometrical constraints such as symmetry that are specific to analog ICs [DATE22[4]–[8]]()
 
-### 优点
+#### 优点
 
 - flexibility in incorporating different types of cost functions  
 
-### 缺点
+#### 缺点
 
 - not a fast algorithm in general
   - its runtime speed is acceptable for analog IC designs, which typically have much less elements than digital circuits. 
 - the approach cannot guarantee good performance for large-scale analog netlists  
 - cannot utilize past or external knowledge to enhance exploration of the solution space, as each problem instance is optimized anew.
 
-### 相关论文
+#### 相关论文
 
 - ![image-20251022093326904](assets/image-20251022093326904.png)
 
@@ -896,17 +893,16 @@ Historically, most analog placement methods were based on simulated annealing an
 
   Expert Systems with Applications, 42(23): 9137–9151.
   
-- 
 
   
 
 
 
-## LP
+### LP
 
 Analytical Approaches  
 
-### NLP
+#### NLP
 
 non-linear programming (NLP)  
 
@@ -939,7 +935,7 @@ cannot utilize past or external knowledge to enhance exploration of the solution
 
 
 
-### ILP
+#### ILP
 
 - 相关论文：
   - ROC24: Automated placement of analog integrated circuits using priority-based constructive heuristic
@@ -948,7 +944,7 @@ cannot utilize past or external knowledge to enhance exploration of the solution
 - It is important to mention that although ILP does not scale well for large problems, the problem sizes of analog circuits are generally small, making an ILP solution tractable
 - Since our layout system is built on discrete grids, integer solutions are preferred. 
 
-### MILP
+#### MILP
 
 mixed-integer-programming (MILP)  
 
@@ -961,7 +957,7 @@ mixed-integer-programming (MILP)
 
 
 
-## combinatorial optimization  
+### combinatorial optimization  
 
 相关论文：
 
@@ -970,7 +966,7 @@ mixed-integer-programming (MILP)
 
 
 
-## SMT formulation
+### SMT formulation
 
 - 特点：
 
@@ -991,7 +987,7 @@ mixed-integer-programming (MILP)
 
 
 
-## B*-tree/O-tree 
+### B*-tree/O-tree 
 
 - 一般和启发式方法配合
 - deterministic
@@ -1002,7 +998,7 @@ mixed-integer-programming (MILP)
 
 
 
-## sequence pairs  
+### sequence pairs  
 
 一般和启发式方法配合
 
@@ -1013,9 +1009,8 @@ topological representation, which determines the relative positions between devi
 相关论文
 
 - ![image-20251022135342653](assets/image-20251022135342653.png)
-- 
 
-## Forced-directed approach 
+### Forced-directed approach 
 
 Spindler, P., Schlichtmann, U., and Johannes, F. M. (2008). Kraftwerk2—A fast force-directed quadratic placement approach using an accurate net model.
 
@@ -1031,45 +1026,45 @@ Spindler, P., Schlichtmann, U., and Johannes, F. M. (2008). Kraftwerk2—A fast 
 
 
 
-# 数据集
+## 数据集
 
-### MAGICAL
+#### MAGICAL
 
 - ![image-20251015111556317](assets/image-20251015111556317.png)
 - <img src="assets/image-20251020154710476.png" alt="image-20251020154710476" style="zoom: 55%;" />
 - <img src="assets/image-20251020154730583.png" alt="image-20251020154730583" style="zoom: 65%;" />
 
-### ALIGN
+#### ALIGN
 
 consisting of 1390 OTA circuits, including bias networks
 
 
 
-### MCNC
+#### MCNC
 
   ![image-20251017101706006](assets/image-20251017101706006.png)
 
-### GSRC
+#### GSRC
 
   ![image-20251017101723040](assets/image-20251017101723040.png)
 
 
 
-### AMSnet
+#### AMSnet
 
 [AMSnet 2.0: A Large AMS Database with AI Segmentation for Net Detection](https://amsnet2-0.github.io/AMSNet2.0.github.io/)
 
-### AICircuit
+#### AICircuit
 
 aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估模拟和射频电路设计中的 ML 算法。aiccircuit 包括七个常用的基本电路和两个由多个电路块组成的复杂无线收发器系统，涵盖了实际应用中遇到的各种设计场景。我们广泛评估了数据集上的各种 ML 算法，揭示了 ML 算法在学习从设计规范到所需电路参数的映射方面的潜力。
 
 
 
-# 综述
+## 综述
 
-### -routing-IEEE Access-2023-Analog Integrated Circuit Routing Techniques: An Extensive Review---
+#### -routing-IEEE Access-2023-Analog Integrated Circuit Routing Techniques: An Extensive Review---
 
-#### Background
+##### Background
 
 - as A/RF design moved into ==advanced integration technology nodes==, the increasing number of design rules/constraints, wire resistance, congestion, and interwire parasitic growth is constantly challenging existing automatic routing techniques and keeping pressure on their improvement.  average number of layout design rules contained in process design kits (PDKs) has escalated from below 1000 rules in 180/130-nanometer nodes to more than 10 times in 22-nanometer and below [5]
 
@@ -1120,9 +1115,9 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
 
 
-### --ASP DAC-2024-Performance Driven Analog Layout Automation: Current Status and Future Directions--CUHK Bei Yu
+#### --ASP DAC-2024-Performance Driven Analog Layout Automation: Current Status and Future Directions--CUHK Bei Yu
 
-#### Background
+##### Background
 
 - Conventionally, research in academic analog place-and-route (PNR) algorithms often targets the optimization of proxy objectives, such as wire length and area [1].  Such an approach fails to reveal the
 
@@ -1141,14 +1136,13 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
 - Symmetry constraints have played a crucial role in analog layout design
 
-- 
 
 
 
 
 
 
-### Challenges and opportunities toward fully automated analog layout design-JoS20-DZP
+#### Challenges and opportunities toward fully automated analog layout design-JoS20-DZP
 
 
 
@@ -1157,35 +1151,33 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
 
 
-  # Placement
+## Placement
 
   Routability-aware placement for advanced finfet mixed-signal circuits using satisfiability modulo theories
 
   
 
-  ## Placer-stochastic
+### Placer-stochastic
 
   SA/
 
-  ### [TCAD10-SA-EFYY]()
+#### [TCAD10-SA-EFYY]()
 
-  - 
 
   
 
-  ## Placer-analytical   
+### Placer-analytical   
 
-  ### [-system signal flow-ICCAD20--UTA]()
+#### [-system signal flow-ICCAD20--UTA]()
 
   - [OpenSource!](https://github.com/krzhu/IdeaPlaceEx)
   - non-linear programming-based (`NLP`) `global placement` 
   - linear-programming-based (`LP`) legalization, minimizing the ==area and wirelength==.  
   - we spread the modules considering the placement objectives and the constraint penalties using `gradient descent-based optimization`. 
-  - 
 
   
 
-  #### background
+##### background
 
   - However, the `hyper-edge net models` often underestimate the importance of the ==directions of signals==
 
@@ -1210,7 +1202,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### contribution
+##### contribution
 
   - NLP-based global placement 
 
@@ -1222,7 +1214,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### flow
+##### flow
 
   ![image-20251014112051182](assets/image-20251014112051182.png)
 
@@ -1230,9 +1222,9 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### model
+##### model
 
-  ##### NLP for GP:
+###### NLP for GP:
 
   - 目标和约束
 
@@ -1246,9 +1238,9 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
     ![image-20251014140806211](assets/image-20251014140806211.png)
 
-    > [!TIP]
-    >
-    > 这里只写了一个方向的
+!!! tip
+    
+    这里只写了一个方向的
 
   - 更详细的目标：
 
@@ -1291,21 +1283,20 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
       
 
-  ##### ADAM optimizer  
+###### ADAM optimizer  
 
-  ##### 𝝀 settings  
+###### 𝝀 settings  
 
-  ##### 𝜸 settings
+###### 𝜸 settings
 
   
 
-  ##### Legalization  
+###### Legalization  
 
   - based on the plane sweep line algorithm from [9]  
   - ![image-20251014160658042](assets/image-20251014160658042.png)
-  - 
 
-  #### experiment
+##### experiment
 
   ![image-20251014092807654](assets/image-20251014092807654.png)
 
@@ -1315,13 +1306,12 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
   - ![image-20251014161451615](assets/image-20251014161451615.png)
   - ![image-20251014161525242](assets/image-20251014161525242.png)
   - ![image-20251014161600273](assets/image-20251014161600273.png)
-  - 
 
   
 
-  #### 
+##### 
 
-  ### [-GAN+Well Generation-ASPDAC22-GAN-UTA]()
+#### [-GAN+Well Generation-ASPDAC22-GAN-UTA]()
 
   - analytical well-aware non-linear programming-based analog placer
 
@@ -1344,9 +1334,8 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
     ![image-20251015133935489](assets/image-20251015133935489.png)
 
-  - 
 
-  #### background
+##### background
 
   - what is well:
 
@@ -1356,7 +1345,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### contribution
+##### contribution
 
   - propose a new well-aware placement methodology  
   - consider wells as fence region constraints  
@@ -1364,7 +1353,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### flow
+##### flow
 
   ![image-20251015133601567](assets/image-20251015133601567.png)
 
@@ -1372,48 +1361,47 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### model
+##### model
 
-  ##### GAN
+###### GAN
 
   ![image-20251015132854116](assets/image-20251015132854116.png)
 
   <img src="assets/image-20251015133125234.png" alt="image-20251015133125234" style="zoom: 65%;" />
 
-  ##### WPE
+###### WPE
 
   ![image-20251015133342779](assets/image-20251015133342779.png)
 
   ![image-20251015133552450](assets/image-20251015133552450.png)
 
-  ##### NLP Placer
+###### NLP Placer
 
   - NLP 目标：
 
     ![image-20251015135253191](assets/image-20251015135253191.png)
 
-  - 
 
   
 
-  #### data
+##### data
 
   from `WellGAN`：(OTA) with different architectures (OTA1, OTA2, OTA3, and OTA4), two comparators with the same topology but with different sizing (COMP1 and COMP2), a bootstrap switch (BOOTSTRAP), and a resistor digital-to-analog converter unit (RDAC). 
 
   
 
-  #### experiment
+##### experiment
 
   baseline:
 
   - The first baseline uses individual wells, denoted as “individual wells”
   - second baseline is to generate wells after placement using GANbased well generation, denoted as “WellGAN after placements”.  
 
-  ##### single well type
+###### single well type
 
   ![image-20251015141032575](assets/image-20251015141032575.png)
 
-  ##### multi-well type
+###### multi-well type
 
   <img src="assets/image-20251015141354021.png" alt="image-20251015141354021" style="zoom: 50%;" />
 
@@ -1423,11 +1411,11 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  ##### WPE effect
+###### WPE effect
 
   ![image-20251015141656409](assets/image-20251015141656409.png)
 
-  ### ePlace A-NLP+GNN-DATE22-Are Analytical Techniques Worthwhile for Analog IC Placement-TAU
+#### ePlace A-NLP+GNN-DATE22-Are Analytical Techniques Worthwhile for Analog IC Placement-TAU
 
   - GNN
   - Device Flipping  
@@ -1435,11 +1423,11 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
   - results indicate that not every analytical technique is superior to simulated annealing in solution quality.
   - it is widely recognized that analog circuit performance can be seriously affected by the quality of placement [18], [19], most existing placement techniques are unable to directly optimize performance. 
 
-  #### background
+##### background
 
   
 
-  #### contribution
+##### contribution
 
   - ![image-20251020190609756](assets/image-20251020190609756.png)
   - ![image-20251020191213196](assets/image-20251020191213196.png)
@@ -1448,7 +1436,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### flow
+##### flow
 
   - `global placement` based on `NLP` and a stage of `legalization and detailed placement`. 
 
@@ -1456,9 +1444,9 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### model
+##### model
 
-  ##### GP: NLP
+###### GP: NLP
 
   ![image-20251020190105098](assets/image-20251020190105098.png)
 
@@ -1470,7 +1458,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   ![image-20251021110348083](assets/image-20251021110348083.png)
 
-  ##### Legalization and Detailed Placement：ILP
+###### Legalization and Detailed Placement：ILP
 
   - device flipping  
   - ![image-20251021112427985](assets/image-20251021112427985.png)
@@ -1478,13 +1466,13 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### data
+##### data
 
   The testcases include three Operational Transconductance Amplifier (OTA) designs, two comparator designs, two Voltage Controlled Oscillator (VCO) designs, an analog adder, a Variable Gain Amplifier (VGA) and an Switched Capacitor Filter (SCF). 
 
   GF12nm PDK  
 
-  #### experiment
+##### experiment
 
   ![image-20251021113910891](assets/image-20251021113910891.png)
 
@@ -1496,7 +1484,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  ### [-ILP+COR24Pre- ICORES23--STM]()
+#### [-ILP+COR24Pre- ICORES23--STM]()
 
   - Our proposed ILP solution derives its core ideas from approaches used for general `rectangle packing problem` (Korf et al., 2010; Berger et al., 2009). 
   - [FLP 问题](https://blog.csdn.net/JESSIENOTCAR/article/details/134990427)
@@ -1504,34 +1492,34 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### background
+##### background
 
   
 
   
 
-  #### contribution
+##### contribution
 
   - ILP formulation of the placement problem.  
   - Method based on `force-directed graph drawing (FDGD)` for finding partial initial solution used as a warm start to ILP model, which significantly improves the performance of the utilized `Gurobi` (Gurobi Optimization, LLC, 2021) solver.
 
   
 
-  #### model
+##### model
 
-  ##### constraintion
+###### constraintion
 
   ![image-20251020110640942](assets/image-20251020110640942.png)
 
-  ###### block
+###### block
 
   ![image-20251020110826238](assets/image-20251020110826238.png)
 
-  ###### Aspect Ratio  
+###### Aspect Ratio  
 
   ![image-20251020111216242](assets/image-20251020111216242.png)
 
-  ##### FDGD 
+###### FDGD 
 
   背景：
 
@@ -1541,11 +1529,11 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   ![image-20251020131947552](assets/image-20251020131947552.png)
 
-  #### data
+##### data
 
   ![image-20251020132602890](assets/image-20251020132602890.png)
 
-  #### experiment
+##### experiment
 
   - Gurobi ILP solver v9.1.2  
   - four threads 
@@ -1558,33 +1546,33 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   ![image-20251020133252845](assets/image-20251020133252845.png)
 
-  > [!TIP]
-  >
-  > 都比手工的差 
+!!! tip
+    
+    都比手工的差 
 
-  ### [-Priority-based+associated constraints -COR24-CO+heuristic+RL-]()
+#### [-Priority-based+associated constraints -COR24-CO+heuristic+RL-]()
 
   - build on our previous conference papers (Grus et al., 2023; Grus and Hanzálek , 2024), and FLP (Kubalík et al., 2019).
   - Method based on `force-directed graph drawing (FDGD)` for finding partial initial solution used as a warm start to ILP model, which significantly improves the performance of the utilized `Gurobi` solver
 
-  #### background
+##### background
 
   - ![image-20251017133247822](assets/image-20251017133247822.png)
 
   
 
-  #### contribution
+##### contribution
 
   - associated constraints  
   - Priority-based constructive heuristic inspired by Kubalík et al. (2019) maps each indirect representation to a feasible placement
 
-  #### flow
+##### flow
 
   
 
-  #### model
+##### model
 
-  ##### constraints  
+###### constraints  
 
   ![image-20251017135343944](assets/image-20251017135343944.png)
 
@@ -1604,7 +1592,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   ![image-20251017140425705](assets/image-20251017140425705.png)
 
-  ###### 对称约束
+###### 对称约束
 
   注意一个 G 只有一个 x~G~
 
@@ -1620,15 +1608,15 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  ###### 版图形状
+###### 版图形状
 
   ![image-20251017142252546](assets/image-20251017142252546.png)
 
-  ###### 宽高比
+###### 宽高比
 
   ![image-20251017143852240](assets/image-20251017143852240.png)
 
-  ###### **面积近似**
+###### **面积近似**
 
   ![image-20251017143905923](assets/image-20251017143905923.png)
 
@@ -1636,23 +1624,23 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   ![image-20251017144534371](assets/image-20251017144534371.png)
 
-  ##### Constructive heuristic  
+###### Constructive heuristic  
 
   
 
   
 
-  #### data
+##### data
 
   
 
-  #### experiment
+##### experiment
 
   
 
   
 
-  ### [AIPlacer-GNN unsupervised-ASPDAC25--USTC]()
+#### [AIPlacer-GNN unsupervised-ASPDAC25--USTC]()
 
   - the first multi-task learning model for analog placement automation.
 
@@ -1668,23 +1656,23 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
     >
     > 没有提 `Legalization`？是不需要吗？
 
-  #### background
+##### background
 
   - Although recent works have investigated ML-based analog placement automation, these arts face complex training datasets and efficiency challenges.   
 
   
 
-  #### contribution
+##### contribution
 
   - the first multi-task learning model for analog placement automation.
   - A practical scheme  
   - An unsupervised loss function  
 
-  #### flow
+##### flow
 
   ![image-20251022095910268](assets/image-20251022095910268.png)
 
-  ##### Input  
+###### Input  
 
   - a SPICE netlist(an un-directed graph)
 
@@ -1716,25 +1704,25 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
       - 𝑴1 matrix: ![image-20251022103442426](assets/image-20251022103442426.png)
 
-        >[!WARNING]
-        >
-        >是否会有例外？
+!!! warning
+    
+    是否会有例外？
 
       - 𝑴2 matrix: 
 
         对称信息
 
-        > [!TIP]
-        >
-        > 没有区分 x/y 对称，还有对称组？
-        >
-        > 感觉还有很大提升空间
+!!! tip
+    
+    没有区分 x/y 对称，还有对称组？
+    
+    感觉还有很大提升空间
 
       - 𝑴3 matrix: 
 
         current-flow VDD2VSS
 
-  #### mode
+##### mode
 
   - **GAT** to realize the feature interactions between nodes. 
   - **RGCN** for constraint relation
@@ -1743,7 +1731,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
     - MMOE-based
     - <img src="assets/image-20251022110342890.png" alt="image-20251022110342890" style="zoom: 55%;" />
 
-  ##### loss
+###### loss
 
   > 无监督感觉就是想 NLP 一样找最小值？
 
@@ -1763,7 +1751,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### data
+##### data
 
   - TSMC180
 
@@ -1773,7 +1761,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-  #### experiment
+##### experiment
 
   - ⚠️ 非监督但是也分了测试集和训练集
 
@@ -1791,20 +1779,18 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
   
 
-## Placer-DL
+### Placer-DL
 
 
 
-### [SACPlace-MADRL+symmetry-DATE25-MADRL-CAS]()
+#### [SACPlace-MADRL+symmetry-DATE25-MADRL-CAS]()
 
-- 
 
-#### background
+##### background
 
 - ![image-20251023135142915](assets/image-20251023135142915.png)
-- 
 
-#### contribution
+##### contribution
 
 - symmetry-aware  
 - introduce cumulative rewards  
@@ -1812,7 +1798,7 @@ aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估
 
 
 
-#### flow
+##### flow
 
 SACPlace initially extracts layout information and various constraints as the input information for placement refinement and evaluation.
 
@@ -1820,7 +1806,7 @@ SACPlace initially extracts layout information and various constraints as the in
 
 
 
-#### model
+##### model
 
 ![image-20251023140803790](assets/image-20251023140803790.png)
 
@@ -1829,11 +1815,11 @@ SACPlace initially extracts layout information and various constraints as the in
 - ==each device== to be placed is treated as an individual ==agent==
 - Initially, all devices are intentionally overlapped to facilitate the forward progress of DRL optimization.
 
-##### state
+###### state
 
 ![image-20251023142752590](assets/image-20251023142752590.png)
 
-##### action
+###### action
 
 action space A ensures symmetrical actions  
 
@@ -1841,7 +1827,7 @@ action space A ensures symmetrical actions
 
 ![image-20251023143011197](assets/image-20251023143011197.png)
 
-##### reward
+###### reward
 
 ![image-20251023143026188](assets/image-20251023143026188.png)
 
@@ -1853,19 +1839,19 @@ action space A ensures symmetrical actions
 
 
 
-##### MARL
+###### MARL
 
 > 没看懂
 
 
 
-#### data
+##### data
 
 ![image-20251023144002040](assets/image-20251023144002040.png)
 
 > SAGERoute!
 
-#### experiment
+##### experiment
 
 - compare different SOTA DRL approaches  
 
@@ -1881,15 +1867,15 @@ action space A ensures symmetrical actions
 
 
 
-  ## Placer-other
+### Placer-other
 
-  ### [-Interactive Layout Editing+instant legalization-DAC21--PEK Gao, Lin]()  
+#### [-Interactive Layout Editing+instant legalization-DAC21--PEK Gao, Lin]()  
 
   - legalization 
   - 交互的
   - adopt analog placement engine of MAGICAL [2] to generate the initial placement results shown to the users. 
 
-  #### background
+##### background
 
   - shortcoming of full-auto flow
 
@@ -1899,11 +1885,10 @@ action space A ensures symmetrical actions
 
   - So far, developing an end-to-end flow that can generate highquality and stable solutions is still challenging, as it is hard to define a universal analytical objective for analog layout problems.
 
-  - 
 
   
 
-  #### contribution
+##### contribution
 
   - `interactive analog placement` framework that supports ==commands== for fast layout editing  
   - an instant `legalization algorithm` for incremental layout update with ==linear time complexity==
@@ -1911,26 +1896,25 @@ action space A ensures symmetrical actions
 
   
 
-  #### flow
+##### flow
 
   ![image-20251015095802524](assets/image-20251015095802524.png)
 
   - All events on the interface are encoded as commands.  
-  - 
 
   
 
-  #### model
+##### model
 
-  ##### command set
+###### command set
 
   ![image-20251015100823071](assets/image-20251015100823071.png)
 
-  ##### constraint graph   
+###### constraint graph   
 
   
 
-  ##### Instant Legalization  
+###### Instant Legalization  
 
   ![image-20251015102613744](assets/image-20251015102613744.png)
 
@@ -1940,7 +1924,7 @@ action space A ensures symmetrical actions
 
   
 
-  ##### MCG(G^M^)
+###### MCG(G^M^)
 
   ![image-20251015102654826](assets/image-20251015102654826.png)
 
@@ -1954,7 +1938,7 @@ action space A ensures symmetrical actions
 
   
 
-  ##### Layout Partitioning  
+###### Layout Partitioning  
 
   two symmetry groups  
 
@@ -1964,23 +1948,23 @@ action space A ensures symmetrical actions
 
   
 
-  ##### topo-sort based legalization  
+###### topo-sort based legalization  
 
-  > [!TIP]
-  >
-  > 前面没怎么看懂，之后再看看
+!!! tip
+    
+    前面没怎么看懂，之后再看看
 
   ![image-20251015105642908](assets/image-20251015105642908.png)
 
   
 
-  #### experiment
+##### experiment
 
   ![image-20251015110029781](assets/image-20251015110029781.png)
 
-  > [!WARNING]
-  >
-  > A~2~是什么？
+!!! warning
+    
+    A~2~是什么？
 
   比 MAGICAL（基于 LP）的快很多
 
@@ -1990,9 +1974,9 @@ action space A ensures symmetrical actions
 
   
 
-  ## Placer-adv
+### Placer-adv
 
-  ### [-AMS+FinFET-DATE22--DZP]()
+#### [-AMS+FinFET-DATE22--DZP]()
 
   - FinFET
 
@@ -2002,7 +1986,7 @@ action space A ensures symmetrical actions
 
     
 
-  #### background
+##### background
 
   - FinFET reigon-based layout 新增的 constraint:
 
@@ -2013,11 +1997,10 @@ action space A ensures symmetrical actions
     - <img src="assets/image-20251016105124494.png" alt="image-20251016105124494" style="zoom: 50%;" />
     - <img src="assets/image-20251016105323503.png" alt="image-20251016105323503" style="zoom: 45%;" />
 
-  - 
 
   
 
-  #### contributuion
+##### contributuion
 
   - an `SMT-based` placement framework targeting a new `region-based` layout for advanced FinFET AMS designs
   - a `window-based` pin density checking SMT formulation for placement routability consideration.
@@ -2025,7 +2008,7 @@ action space A ensures symmetrical actions
 
   
 
-  #### experiment
+##### experiment
 
   - Z3 SMT solver  
 
@@ -2039,16 +2022,16 @@ action space A ensures symmetrical actions
 
   
 
-  ## POpt-DL
+### POpt-DL
 
-  ### [-survey ML+SA-ISVLSI20--UTA-]()
+#### [-survey ML+SA-ISVLSI20--UTA-]()
 
   - 一个实验性质的对比工作，NN, RF, SVM
   - Placer 基于 [TCAD10-SA-EFYY]() 的工作
   - OTA only
   - ![image-20251013101351269](assets/image-20251013101351269.png)
 
-  #### background
+##### background
 
   - most of the previous works are focused on geometric constraint
 
@@ -2058,22 +2041,21 @@ action space A ensures symmetrical actions
 
   - the layout effect on performance is often very complex and thus difficult to be quickly and accurately estimated
 
-  - 
 
     
 
-  #### contribution
+##### contribution
 
   - directly optimizes circuit performance during placement
   - It can directly optimize analog circuit performance along with conventional objectives, including wirelength, area and geometric constraints such as symmetry constraints
 
   
 
-  #### experiment
+##### experiment
 
   ![image-20251013102653336](assets/image-20251013102653336.png)
 
-  ### [-Placement Quality Prediction via Transfer Learning-DATE20-CNN-UTA]()
+#### [-Placement Quality Prediction via Transfer Learning-DATE20-CNN-UTA]()
 
   - OTA only
   - a new methodology to shorten the gap in post layout performance modeling for analog circuits.
@@ -2082,26 +2064,26 @@ action space A ensures symmetrical actions
 
   
 
-  #### background
+##### background
 
   - hand-crafted constraints are often questionable in explainability and confidence, and lack flexibility and generality in meeting the detailed needs of different scenarios. 
   - a mapping between a given layout and the expected post layout performance is imperative yet still challenging
   - One major bottleneck of design exploration is the runtime involved with post layout simulations. 
 
-  #### contribution
+##### contribution
 
   - proposed approach leverages an automatic flow to generate high-quality labeled training data
   - a transfer learning scheme that significantly reduces the amount of data needed during training
 
   
 
-  #### model
+##### model
 
   ![image-20251014091716280](assets/image-20251014091716280.png)
 
   
 
-  #### data
+##### data
 
   create a balanced data with the worst performing  25th percentile layout labeled as 1 and the best 
 
@@ -2121,7 +2103,7 @@ action space A ensures symmetrical actions
 
   
 
-  #### experiment
+##### experiment
 
   ![image-20251014085547313](assets/image-20251014085547313.png)
 
@@ -2129,33 +2111,31 @@ action space A ensures symmetrical actions
 
   
 
-  ### [-Constraint Evaluation-ASPDAC21-SVM+MLP-]()
+#### [-Constraint Evaluation-ASPDAC21-SVM+MLP-]()
 
   - 基于 [TCAD10-SA](#TCAD10-SA-EFYY) 方法的 Placer
   - testcase: three 12nm OTA 
 
-  #### background
+##### background
 
   - the interconnect parasitic correlation may not be linear over the search space
 
-  #### experiment
+##### experiment
 
   
 
-  ### [-Analog Placement Quality Prediction-ASPDAC23-NAS-DU]()
+#### [-Analog Placement Quality Prediction-ASPDAC23-NAS-DU]()
 
   - [DATE20]() 的延伸，就是用 NAS 优化了一下？
   - NAS: [ 神经架构搜索（NAS）简要介绍 - 知乎](https://zhuanlan.zhihu.com/p/127194745)
-  - 
 
-  #### background
+##### background
 
   - Severalrecent studies apply machine learning (ML) techniques to directly predict the impact of placement on circuit performance or even guide the placement process. However, the significant diversity in analog design topologies can lead to different impacts on performance metrics (e.g., common-mode rejection ratio (CMRR) or offset voltage). 
-  - 
 
   
 
-  #### data
+##### data
 
   using the same open-sourced dataset and the same setting as the work [DATE20]()
 
@@ -2163,22 +2143,22 @@ action space A ensures symmetrical actions
 
   
 
-  # Routing
+## Routing
 
-  ### LDS—A description script for layout templates
+#### LDS—A description script for layout templates
 
-  ### BAG
+#### BAG
 
   - grid and template-based 
 
-  ### LAYGO1
+#### LAYGO1
 
   - grid and template-based 
   - 类似 [BAG](# BAG)
 
   
 
-  ### LAYGO2
+#### LAYGO2
 
   - [OpenSource!](https://github.com/niftylab/laygo2)
 
@@ -2188,7 +2168,7 @@ action space A ensures symmetrical actions
 
   
 
-  ### Analog and mixed-signal layout automation using digital place-and-route tools
+#### Analog and mixed-signal layout automation using digital place-and-route tools
 
   - digital PR tools base
   - a fully automated solution where the physical design process is treated as an optimization process.
@@ -2197,9 +2177,9 @@ action space A ensures symmetrical actions
 
 
 
-# DTCO
+## DTCO
 
-### [-BO+closed loop+SSF post-DAC20--UTA]()
+#### [-BO+closed loop+SSF post-DAC20--UTA]()
 
 - closed loop
 
@@ -2209,15 +2189,14 @@ action space A ensures symmetrical actions
 
   ![image-20251021190625931](assets/image-20251021190625931.png)
 
-#### background
+##### background
 
-#### contribution
+##### contribution
 
 - closed loop
 - automatic symmetry constraint detection both between devices and subcircuits
-- 
 
-#### flow
+##### flow
 
 ![image-20251021193214407](assets/image-20251021193214407.png)
 
@@ -2229,7 +2208,7 @@ action space A ensures symmetrical actions
 
 
 
-#### model
+##### model
 
 - Gaussian process regression (GPR) and MOBO
 
@@ -2244,29 +2223,28 @@ action space A ensures symmetrical actions
 
 
 
-#### data
+##### data
 
-#### experiment
+##### experiment
 
 - GPflow  to do MOBO
 
 
 
-# Gate Sizing
+## Gate Sizing
 
-### [- -DAC-2024-MARL-Mohsen et al-]()
+#### [- -DAC-2024-MARL-Mohsen et al-]()
 
 - Model-Based Policy Optimization (MBPO) to highly boost the sample efficiency of reinforcement learning for analog circuit sizing  
 - Integrated in the Twin Delayed DDPG (TD3) algorithm  
-- 
 
-### [PZTA-Transferable Circuit Theory-Inspired-ISEDA-2025- -Fudan-]()
+#### [PZTA-Transferable Circuit Theory-Inspired-ISEDA-2025- -Fudan-]()
 
 - a transferable pole-zero-based transient assertion (PZTA) system
 
 
 
-#### background
+##### background
 
 - Transient simulation is a major computational bottleneck in analog circuit sizing optimization, especially when
 
@@ -2278,14 +2256,14 @@ action space A ensures symmetrical actions
 
 
 
-### Routing
+#### Routing
 
 - 概伦和北大合作的
 - for analog/mixed-signal integrated circuits.  
 
 
 
-#### background
+##### background
 
 - Most previous work has focused only on ==geometric constraints== or basic ==electrical constraints==, lacking ==holistic== and ==systematic== investigation.
 - categorize routing constraints into：
@@ -2297,7 +2275,7 @@ action space A ensures symmetrical actions
 
 
 
-#### contribution
+##### contribution
 
 ![image-20250717134247641](assets/image-20250717134247641.png)
 
@@ -2308,7 +2286,7 @@ action space A ensures symmetrical actions
 - a multi-constraint aware routing algorithm
   - work with complicated constraints and the wire sizing scheme
 
-# Netlist Annotation & Constraint Generation  
+## Netlist Annotation & Constraint Generation  
 
 Liu M, Li W, Zhu K, et al. S3DET: Detecting system symmetry constraints for analog circuits with graph similarity. Proc ASPDAC, 2020, 193  基于快速图相似性  
 
@@ -2332,7 +2310,7 @@ templates and knowledge-based
 
 
 
-# Design rule abstraction  
+## Design rule abstraction  
 
 ![image-20251022170844515](assets/image-20251022170844515.png)
 
@@ -2340,19 +2318,19 @@ templates and knowledge-based
 
 
 
-# PCell Generator
+## PCell Generator
 
-### [ALIGN-opt-DATE21--]()
+#### [ALIGN-opt-DATE21--]()
 
 - 一个方法上的改进，但是没仔细说PCell的生成
 
-#### background
+##### background
 
 - The quality of primitive cell layout is critical for design performance
 
 
 
-## Array CC PR
+### Array CC PR
 
 ![image-20251204172818005](assets/image-20251204172818005.png)
 
@@ -2360,13 +2338,13 @@ templates and knowledge-based
 
 
 
-### TOREAD
+#### TOREAD
 
-#### cap
+##### cap
 
 ![image-20251203152910054](assets/image-20251203152910054.png)
 
-#### mos
+##### mos
 
 ![image-20251205100808025](assets/image-20251205100808025.png)
 
@@ -2388,7 +2366,7 @@ templates and knowledge-based
 
 ![image-20251203151142265](assets/image-20251203151142265.png)
 
-### [-Eulerian Path-ICASIC-03--Tsinghua]()
+#### [-Eulerian Path-ICASIC-03--Tsinghua]()
 
 - $\mathcal{O}(n)$
 - dummy insert
@@ -2396,13 +2374,13 @@ templates and knowledge-based
 
 
 
-#### background
+##### background
 
-#### contribution
+##### contribution
 
-#### flow
+##### flow
 
-#### model
+##### model
 
 the follow five rules should beconsidered [9]. 
 
@@ -2418,13 +2396,13 @@ the follow five rules should beconsidered [9].
 
 ![image-20251230144530681](assets/image-20251230144530681.png)
 
-#### data
+##### data
 
-#### experiment
+##### experiment
 
 
 
-### [Layout Symmetries--TCAD-17--]()
+#### [Layout Symmetries--TCAD-17--]()
 
 - arbitrary numbers of rows and columns
 - applicable to all device types
@@ -2433,13 +2411,13 @@ the follow five rules should beconsidered [9].
 
 
 
-#### contribution
+##### contribution
 
 
 
-#### model
+##### model
 
-##### 匹配梯度模型
+###### 匹配梯度模型
 
 ![image-20251230154251978](assets/image-20251230154251978.png)
 
@@ -2451,7 +2429,7 @@ the follow five rules should beconsidered [9].
 
 
 
-##### 对称类型
+###### 对称类型
 
 ![image-20251230160306030](assets/image-20251230160306030.png)
 
@@ -2461,7 +2439,7 @@ the follow five rules should beconsidered [9].
 
 ![image-20251230160652955](assets/image-20251230160652955.png)
 
-##### 离散度
+###### 离散度
 
 
 
@@ -2475,7 +2453,7 @@ the follow five rules should beconsidered [9].
 
 ![image-20251230160825786](assets/image-20251230160825786.png)
 
-##### 三种算法
+###### 三种算法
 
 1. 行数模4余1
 
@@ -2491,17 +2469,17 @@ the follow five rules should beconsidered [9].
 
 
 
-##### DO LINEAR GRADIENTS CANCEL IN COMMON CENTROID LAYOUTS？
+###### DO LINEAR GRADIENTS CANCEL IN COMMON CENTROID LAYOUTS？
 
 ![image-20251230162005563](assets/image-20251230162005563.png)
 
 
 
-#### experiment
+##### experiment
 
 
 
-### [-Choose pattern-DATE-21--Sharma]()
+#### [-Choose pattern-DATE-21--Sharma]()
 
 - 讨论了什么时候用什么pattern， 很深的理论分析，
 - TODO: 没看懂.
@@ -2510,13 +2488,13 @@ the follow five rules should beconsidered [9].
 
 
 
-#### background
+##### background
 
 - LDE and Variation  
 
 
 
-### [-Performance-Aware Common-Centroid Placement and Routing-ICCAD-21--Sharma]()
+#### [-Performance-Aware Common-Centroid Placement and Routing-ICCAD-21--Sharma]()
 
 - Performance-Aware:  maximizes diffusion sharing, incorporates length of diffusion (LOD) based stress-induced performance variations, and mitigates resistive parasitics and electromigration (EM) hotspots
 - Placement and Routing 
@@ -2524,18 +2502,18 @@ the follow five rules should beconsidered [9].
 
 
 
-#### background
+##### background
 
 - LDE
 - ![image-20251204103519600](assets/image-20251204103519600.png)
 
 
 
-#### flow
+##### flow
 
-#### model
+##### model
 
-##### placement
+###### placement
 
 ![image-20251204103503323](assets/image-20251204103503323.png)
 
@@ -2543,7 +2521,7 @@ the follow five rules should beconsidered [9].
 
 ![image-20251204094753384](assets/image-20251204094753384.png)
 
-##### routing
+###### routing
 
 EM and IR drop aware
 
@@ -2553,13 +2531,13 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 
 
-#### experiment
+##### experiment
 
 env
 
 - simulate spatial variations random fields  tool: [GeoStat-Framework/GSTools: GSTools - A geostatistical toolbox: random fields, variogram estimation, covariance models, kriging and much more](https://github.com/GeoStat-Framework/GSTools)
 
-### [-CC nonlinear spatial variations Opt-DATE-24-SA-UTA](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/10546584/)
+#### [-CC nonlinear spatial variations Opt-DATE-24-SA-UTA](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/10546584/)
 
 - minimizing nonlinear spatial variations.  
 - placment only
@@ -2567,7 +2545,7 @@ env
 - not-cc
 - 没后仿
 
-#### background
+##### background
 
 - LDE and Variation
 
@@ -2579,15 +2557,14 @@ env
 
 - <img src="assets/image-20251204153031143.png" alt="image-20251204153031143" style="zoom: 35%;" />
 
-- 
 
 
 
-#### contribution
+##### contribution
 
 ![image-20251204155553693](assets/image-20251204155553693.png)
 
-#### flow
+##### flow
 
 Our approach ==starts with an initial placement== of unit cells
 
@@ -2595,9 +2572,9 @@ Our approach ==starts with an initial placement== of unit cells
 
 
 
-#### model
+##### model
 
-##### 空间误差
+###### 空间误差
 
 ![image-20251204163535801](assets/image-20251204163535801.png)
 
@@ -2605,7 +2582,7 @@ Our approach ==starts with an initial placement== of unit cells
 
 ![image-20251204163558885](assets/image-20251204163558885.png)
 
-##### 布线复杂度
+###### 布线复杂度
 
 <img src="assets/image-20251204164447501.png" alt="image-20251204164447501" style="zoom: 75%;" />
 
@@ -2613,7 +2590,7 @@ Our approach ==starts with an initial placement== of unit cells
 
 𝑂(𝑛2)  
 
-##### LOD效应
+###### LOD效应
 
 ![image-20251204164856058](assets/image-20251204164856058.png)
 
@@ -2621,13 +2598,13 @@ Our approach ==starts with an initial placement== of unit cells
 
 ![image-20251204165112547](assets/image-20251204165112547.png)
 
-##### Diffusion Break  
+###### Diffusion Break  
 
 ![image-20251204172336269](assets/image-20251204172336269.png)
 
 
 
-##### SA 优化
+###### SA 优化
 
 SA适合这种小规模的问题
 
@@ -2645,11 +2622,11 @@ Random Perturbation
 
 
 
-#### data
+##### data
 
 
 
-#### experiments
+##### experiments
 
 ###### setting
 
@@ -2669,17 +2646,17 @@ result
 
 ![image-20251204192112672](assets/image-20251204192112672.png)
 
-> [!WARNING]
->
-> 没说时间，没后仿
->
-> ![image-20251204192245775](assets/image-20251204192245775.png)
+!!! warning
+    
+    没说时间，没后仿
+    
+    ![image-20251204192245775](assets/image-20251204192245775.png)
 
 
 
 
 
-### [-Nonlinear Gradients -TCAD-24--Sharma]()
+#### [-Nonlinear Gradients -TCAD-24--Sharma]()
 
 - FinFET-Based  
 - Sharma 这个方向的第三篇
@@ -2687,11 +2664,10 @@ result
 - optimize the placement for second-order gradients  
 - routing 和之前的工作一样
 - 详细阐述了为什么要引入空间位置的非线性成分
-- 
 
 
 
-#### background
+##### background
 
 - LED, EM, Variation  
 
@@ -2699,9 +2675,9 @@ result
 
 - ![image-20251205103152625](assets/image-20251205103152625.png)
 
-  > [!CAUTION]
-  >
-  > 这里是分开来相等，但是在[DATE24]()中，每个component和起来相等
+!!! caution
+    
+    这里是分开来相等，但是在[DATE24]()中，每个component和起来相等
 
 - ![image-20251205103505575](assets/image-20251205103505575.png)
 
@@ -2709,18 +2685,18 @@ result
 
 
 
-#### model
+##### model
 
-##### 之前的方法：
+###### 之前的方法：
 
 ![image-20251205112341203](assets/image-20251205112341203.png)
 
 ![image-20251205112140586](assets/image-20251205112140586.png)
 
-> [!CAUTION]
->
-> 如果是8列
-> (g)下一次放置就完蛋了
+!!! caution
+    
+    如果是8列
+    (g)下一次放置就完蛋了
 
 
 
@@ -2728,7 +2704,7 @@ result
 
 
 
-##### new method
+###### new method
 
 extensible to higher than second-order gradients, but in practice it is unlikely that such an analysis is necessary in real world scenarios.
 
@@ -2740,19 +2716,19 @@ by swapping unit cell
 
 ![image-20251205133058621](assets/image-20251205133058621.png)
 
->[!CAUTION]
->
-> ![image-20251205133035907](assets/image-20251205133035907.png)
+!!! caution
+    
+    ![image-20251205133035907](assets/image-20251205133035907.png)
 
 
 
-#### data/setting
+##### data/setting
 
 ![image-20251205135447899](assets/image-20251205135447899.png)
 
 
 
-#### experiment
+##### experiment
 
 ![image-20251205142305511](assets/image-20251205142305511.png)
 
@@ -2770,7 +2746,7 @@ impact of secondorder gradients increases significantly with the ==layout size==
 
 ![image-20251205142509367](assets/image-20251205142509367.png)
 
-### [-Multiobjective Optimization-TCAD-25-SA-Supriyo]()
+#### [-Multiobjective Optimization-TCAD-25-SA-Supriyo]()
 
 - Multi-object: degree of dispersion, routing complexity, diffusion sharing, and layout dependent effects.
 
@@ -2800,13 +2776,13 @@ impact of secondorder gradients increases significantly with the ==layout size==
 
 
 
-#### background
+##### background
 
 - LED and Variation  
 
 
 
-#### contribution
+##### contribution
 
 ![image-20251204202619435](assets/image-20251204202619435.png)
 
@@ -2814,13 +2790,13 @@ impact of secondorder gradients increases significantly with the ==layout size==
 
 
 
-#### flow
+##### flow
 
 ![image-20251204214330618](assets/image-20251204214330618.png)
 
 
 
-##### init placement
+###### init placement
 
 ![image-20251204205558760](assets/image-20251204205558760.png)
 
@@ -2832,9 +2808,9 @@ XY/180◦ transformation can be applied only to devices having the same number o
 
 
 
-#### model
+##### model
 
-##### AMOSA-based
+###### AMOSA-based
 
 we store the solution==s== in new-pts（AMOSA store one solution）
 
@@ -2842,7 +2818,7 @@ we store the solution==s== in new-pts（AMOSA store one solution）
 
 ![image-20251204212726442](assets/image-20251204212726442.png)
 
-##### constration
+###### constration
 
 Degree of Dispersion  
 
@@ -2868,13 +2844,13 @@ Routing Cost
 
 ![image-20251204214108804](assets/image-20251204214108804.png)
 
-> [!CAUTION]
->
-> 再换成RSMT？
->
-> 有这么麻烦吗
+!!! caution
+    
+    再换成RSMT？
+    
+    有这么麻烦吗
 
-#### Data and Env
+##### Data and Env
 
 TSMC 40 nm PDK  
 
@@ -2894,7 +2870,7 @@ Labels and NWELL are created ==manually==
 
 > 感觉case的单元数量都挺大的。不过小的话好像也没什么优化必要
 
-#### experiment
+##### experiment
 
 ![image-20251204215809188](assets/image-20251204215809188.png)
 
@@ -2910,23 +2886,22 @@ Labels and NWELL are created ==manually==
 
 
 
-# Tools
+## Tools
 
-## Generator
+### Generator
 
-### PCell
+#### PCell
 
 - Cadence
-- 
 
-### PyCells
+#### PyCells
 
 - related tools：pycell studio
 - Synopsys
 
 
 
-### BAG1/2
+#### BAG1/2
 
 - 2013/2018
 
@@ -2942,30 +2917,29 @@ Labels and NWELL are created ==manually==
 
 
 
-## Netlist2GDS
+### Netlist2GDS
 
-### MAGICAL
+#### MAGICAL
 
 - [magical-eda/MAGICAL: Machine Generated Analog IC Layout](https://github.com/magical-eda/MAGICAL)
 - IDEA program  “no human in the loop”   
-- 
 
 
 
-#### flow
+##### flow
 
 ![image-20251015190632878](assets/image-20251015190632878.png)
 
 - MAGICAL supports different device types, including PMOS, NMOS, MOM capacitors, and poly resisters. 
 - Transistors can have additional attributes such as lvt (low threshold voltage), hvt (high threshold voltage) and na (native device)
 
-#### files
+##### files
 
 Benchmark circuit examples are under `examples/`
 
 
 
-#### case
+##### case
 
 three OTA
 
@@ -2980,13 +2954,13 @@ two ADC
 
 
 
-#### model
+##### model
 
 MAGICAL 会为每个 PMOS 器件生成单独的 NWELL 接触孔
 
 
 
-##### CONSTRAINT EXTRACTION  
+###### CONSTRAINT EXTRACTION  
 
 ###### Graph Abstraction  
 
@@ -3018,7 +2992,7 @@ define `current directions`
 
 
 
-##### placer
+###### placer
 
 - IO:
   - The inputs to the placer include the circuit netlist, extracted constraints, generated devices, and process technologydependent design rules  
@@ -3035,16 +3009,15 @@ define `current directions`
       - optimize the wirelength for the given legal placement  
 - `Post-Placement Optimization`：WellGAN 
 
-##### router
+###### router
 
 - two stages, global and detailed routing  
   - ![image-20251020152730277](assets/image-20251020152730277.png)
   - global routing: grid-based A* search routing engine, 3D grid, two-pin nets, RRR
   - detailed routing: a sequential A* search kernel is applied  
 - net constraintion
-- 
 
-#### Install
+##### Install
 
 To clone the repository and submodules, go to the path to download the repository.
 
@@ -3103,7 +3076,7 @@ You can use the Docker container to avoid building all the dependencies yourself
 
 
 
-### ALIGN
+#### ALIGN
 
 - [ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public?tab=readme-ov-file)
 
@@ -3117,11 +3090,10 @@ You can use the Docker container to avoid building all the dependencies yourself
 
   ![image-20251022153130808](assets/image-20251022153130808.png)
 
-- 
 
 
 
-#### Core concept
+##### Core concept
 
 hierarchical
 
@@ -3129,7 +3101,7 @@ hierarchical
 
 
 
-#### flow
+##### flow
 
 [ALIGN: flow — ALIGN](https://align-analoglayout.github.io/ALIGN-public/notes/flow.html#inputs)
 
@@ -3163,7 +3135,7 @@ hierarchical
 
 
 
-##### Netlist auto-annotation  
+###### Netlist auto-annotation  
 
    ![image-20251022161143098](assets/image-20251022161143098.png)
 
@@ -3189,7 +3161,7 @@ hierarchical
 
    >It is important to note that the best layout hierarchy may sometimes differ from a logical netlist hierarchy
 
-##### Design rule capture
+###### Design rule capture
 
    ![image-20251022161522067](assets/image-20251022161522067.png)
 
@@ -3197,7 +3169,7 @@ hierarchical
 
 
 
- ##### Constraint generation   
+###### Constraint generation   
 
    ![image-20251022161600188](assets/image-20251022161600188.png)
 
@@ -3219,7 +3191,7 @@ two type of constraints:
 
    
 
-##### Parameterized primitive layout generation    
+###### Parameterized primitive layout generation    
 
    ![image-20251022162636097](assets/image-20251022162636097.png)
 
@@ -3229,7 +3201,7 @@ provides the user with a predefined `library` of parameterizable primitives
 
 ![image-20251023083853426](assets/image-20251023083853426.png)
 
-##### Hierarchical block assembly   
+###### Hierarchical block assembly   
 
    ![image-20251022162530398](assets/image-20251022162530398.png)
 
@@ -3245,7 +3217,7 @@ router
 
 
 
-#### constraintion
+##### constraintion
 
 [Constraints — ALIGN](https://align-analoglayout.github.io/ALIGN-public/notes/const.html)
 
@@ -3307,7 +3279,7 @@ router
 
 - ![image-20251023160914344](assets/image-20251023160914344.png)
 
-#### PDK abstraction
+##### PDK abstraction
 
 - [Doc](..\Analog\Tools\ALIGN_PDK_Abstraction_Guide.pptx)
 
@@ -3319,7 +3291,7 @@ router
 
   <img src="assets/image-20251027162219298.png" alt="image-20251027162219298" style="zoom: 70%;" />
 
-##### layer.json
+###### layer.json
 
 - [What is Front End(FEOL), Middle End, and Back End of Line(BEOL)](https://techovedas.com/what-is-front-endfeol-middle-end-and-back-end-of-linebeol-in-semiconductor-manufacturing/)
 - Metal names in the ‘layers.json’ must start with ‘M’ 
@@ -3348,7 +3320,7 @@ These layers are used by the `cell generator` and may vary based on the `PDK`.
 
 
 
-##### model.sp
+###### model.sp
 
 - Define ==models for devices available in a pdk==
 
@@ -3358,11 +3330,10 @@ These layers are used by the `cell generator` and may vary based on the `PDK`.
 
   <img src="assets/image-20251027162938213.png" alt="image-20251027162938213" style="zoom: 60%;" />
 
-- 
 
 
 
-#### PCell Generator
+##### PCell Generator
 
 ![image-20251023163213457](assets/image-20251023163213457.png)
 
@@ -3377,22 +3348,22 @@ Cell fabric module defines the common structure for cell generation utilities wh
 
 
 
-#### Hierarchical Analog Placer and Router Flow
+##### Hierarchical Analog Placer and Router Flow
 
 [ALIGN-public/PlaceRouteHierFlow/README.md at master · ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public/blob/master/PlaceRouteHierFlow/README.md)
 
 
 
-#### install
+##### install
 
-> [!CAUTION]
->
-> 1. CMake 版本不能太高，实测 `cmake4.1` 不行。`cmake3.29.3` 可以但是也有警告。
->
-> 2. 为了防止 github 在线下载问题，需要手动下载一份 `https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent/archive/refs/tags/v3.7.3.tar.gz` 和 `https://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.11/lp_solve_5.5.2.11_source.tar.gz/download`
->
->    解压然后指定 CMAKE_ARGS 到对应路径
->
+!!! caution
+    
+    1. CMake 版本不能太高，实测 `cmake4.1` 不行。`cmake3.29.3` 可以但是也有警告。
+    
+    2. 为了防止 github 在线下载问题，需要手动下载一份 `https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent/archive/refs/tags/v3.7.3.tar.gz` 和 `https://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.11/lp_solve_5.5.2.11_source.tar.gz/download`
+    
+       解压然后指定 CMAKE_ARGS 到对应路径
+    
 
 > 学校服务器 g++版本太低，需要自己下
 >
@@ -3535,7 +3506,7 @@ zstd                       1.5.2            h8a70e8d_1            conda-forge
 
 
 
-##### bug
+###### bug
 
 GLIBCXX_3.4.30' not found
 
@@ -3561,7 +3532,7 @@ ImportError: /home/pengxuan/Software/miniconda3/envs/align/bin/../lib/libstdc++.
 
 
 
-#### debug
+##### debug
 
 ```json
 {
@@ -3589,13 +3560,13 @@ ImportError: /home/pengxuan/Software/miniconda3/envs/align/bin/../lib/libstdc++.
 
 
 
-## viewer
+### viewer
 
-### KLayout
+#### KLayout
 
 [KLayout Layout Viewer And Editor](https://www.klayout.de/doc-qt5/manual/basic.html)
 
-#### install
+##### install
 
 >  无 sudo 权限 local 下载
 

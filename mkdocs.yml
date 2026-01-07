@@ -1,24 +1,24 @@
 ﻿site_name: notebOOOOOOk
 theme:
-  name: material
-  palette:
-    - scheme: default
-      primary: black
-      accent: grey
-  features:
-    - navigation.sections
-    - toc.follow
-extra_css:
-  - styles/mono.css
+  name: readthedocs
 markdown_extensions:
   - toc:
-      toc_depth: 2-3
+      toc_depth: 1-6
       permalink: true
   - fenced_code
+  - tables
+  - footnotes
+  - def_list
+  - attr_list
+  - admonition
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.mark
+extra_javascript:
+  - js/code-copy.js
+extra_css:
+  - styles/code-copy.css
 nav:
   - Home: index.md
   - EDA:
@@ -34,6 +34,4 @@ nav:
       - Program: Program.md
       - Tools: Tools.md
   - Other:
-      - Good Thing: Literature.md
-
-
+      - Good Things: Literature.md

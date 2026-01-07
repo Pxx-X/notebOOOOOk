@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Hardware - notebOOOOOOk</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Hardware";
+        var mkdocs_page_input_path = "Hardware.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> notebOOOOOOk
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">EDA</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR/">EDA4PR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR-Analog/">EDA4PR-Analog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR-Digtal/">EDA4PR-Digtal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR-LCM/">EDA4PR-LCM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../flow/">Flow</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tools</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Algorithms/">Algorithms</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Hardware</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">计算机组成与体系结构</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">发展历史</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_3">存储墙</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">计算机系统</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_5">早期冯诺依曼机</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_6">现代冯罗伊曼机</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_7">数的表示</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_9">定点数/ 浮点数</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_11">中断</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_12">总线互联</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cpu">处理器/CPU</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_13">综述</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_14">最简程序</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_15">运算器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_16">指令</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_27">控制器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cpu_1">CPU内部总线数据通路</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_51">多处理器</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_53">硬件多线程</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_57">参数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_58">存储器</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_59">综述</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cachesram">Cache/SRAM</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sdram">主存储器/SDRAM/内存</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#romssdflash">硬盘/ROM/SSD/FLASH</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_80">软件</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_81">软件语言区别与分类</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_82">系统软件/应用软件</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isa">指令集体系结构（ISA）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_83">专业术语</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_84">参考</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_85">综述</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cpu_2">CPU</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#cpu_3">CPU类型</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#arm">ARM</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#x86atom">x86/Atom</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mips">MIPS</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#risc-v">RISC-V</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_87">核心和线程</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#core">核心（core)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cpu_4">多核CPU</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gpu">GPU</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#gpu_1">GPU主要参数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_88">结构</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cuda-context">CUDA Context（上下文）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cuda-stream">CUDA Stream</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#hyper-queue">Hyper-Queue</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#smspwarp">显卡硬件架构：SM、SP、Warp</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_90">参考</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_91">相关厂商和产品</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_92">英伟达</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_96">国产</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cpugpu">CPU和GPU区别</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_97">集显和独显</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#asic">ASIC</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tpu">TPU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#npu">NPU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dpu">DPU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ascend">华为昇腾（Ascend）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fpga">FPGA</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_98">参考</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OS/">OS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Program/">Program</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Other</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Literature/">Good Things</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">notebOOOOOOk</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Tools</li>
+      <li class="breadcrumb-item active">Hardware</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h1>
+<h2 id="_1">计算机组成与体系结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">发展历史<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>ENIAC  约翰 • 莫克利教授  1943 年  </p>
+</li>
+<li>
+<p>EDVAC  冯 ・ 诺伊曼  1945 年  存储程序概念  IAS 计算机</p>
+</li>
+</ul>
+<p><img alt="image-20250912201236696" src="../assets/image-20250912201236696-1761878610218-1.png" /></p>
+<ul>
+<li>
+<p>1947 年贝尔实验室发明了晶体管  </p>
+</li>
+<li>
+<p>UNIVAC I 是第一台成功的商用计算机  </p>
+</li>
+<li>
+<p>IBM701 1953 年    IBM 702  1955 年  </p>
+</li>
+<li>
+<p>1958 年出现了电子学革命性的成就， 开创了微电子时代： 集成电路的发明  </p>
+</li>
+<li>
+<p>System/360 ，  1964 年， IBM   </p>
+</li>
+<li>
+<p>PDP-8    1964 年 足够小， 以至于可以放在实验室的工作台上  总线结构  </p>
+</li>
+</ul>
+<p>由于所有的系统元件都分享同一套信号通路， 因此它们的使用必须由 CPU 来控制。 这种结构具有高度的灵活性,. 允许将模块插入总线以形成各种配置。  </p>
+<p><img alt="image-20250912202622171" src="../assets/image-20250912202622171-1761878610218-3.png" /></p>
+<ul>
+<li>
+<p>Intel 4004  1971 年  第一个将 CPU 的所有元件都放在同一块芯片内的产品—— 微处理器诞生</p>
+</li>
+<li>
+<p>Intel 8008  1972 年  第一个 8 位的微处理器  </p>
+</li>
+<li>
+<p>Intel 8080  1974 年  第一个通用微处理器。 </p>
+</li>
+<li>
+<p>32 位单片微处理器  贝尔实验室和 HP 公司  1981 年    </p>
+</li>
+<li>
+<p>Intel 32 位微处理器  80386  1985 年  </p>
+</li>
+</ul>
+<p><img alt="image-20250912201821713" src="../assets/image-20250912201821713-1761878610218-4.png" /></p>
+<p><img alt="image-20250923202913887" src="../assets/image-20250923202913887-1761878610218-2.png" /></p>
+<p><img alt="image-20250923203137516" src="../assets/image-20250923203137516-1761878610218-6.png" /></p>
+<p>机器字长：一次整数运算所能处理的二进制位数</p>
+<h4 id="_3">存储墙<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250912203539172" src="../assets/image-20250912203539172-1761878610218-5.png" /></p>
+<h3 id="_4">计算机系统<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="_5">早期冯诺依曼机<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923205210584" src="../assets/image-20250923205210584-1761878610218-7.png" /></p>
+<p>效率低</p>
+<h4 id="_6">现代冯罗伊曼机<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923205317716" src="../assets/image-20250923205317716-1761878610218-8.png" /></p>
+<p><img alt="image-20250912214542794" src="../assets/image-20250912214542794-1761878610218-9.png" /></p>
+<p>处理器CPU = 运算器+控制器</p>
+<p><img alt="image-20250923205709358" src="../assets/image-20250923205709358-1761878610218-10.png" /></p>
+<p>数据给运算器
+指令给控制器</p>
+<p>计组的主机是CPU+内存，不包括硬盘，硬盘属于IO设备</p>
+<p><img src="assets/image-20250912214831022-1761878610218-11.png" alt="image-20250912214831022" style="zoom:95%;" /></p>
+<p><img alt="image-20250912211304256" src="../assets/image-20250912211304256-1761878610218-12.png" /></p>
+<p><img alt="image-20250912211347915" src="../assets/image-20250912211347915-1761878610218-14.png" /></p>
+<h4 id="_7">数的表示<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<h5 id="_8">原码/反码/补码/移码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924140807155" src="../assets/image-20250924140807155-1761878610218-13.png" /></p>
+<p>补码的使用可以简化计算机中的算术运算，因为==加法和减法可以统一为加法运算==。当进行减法运算时，可以将减数的补码与被减数相加，从而得到结果</p>
+<p><img alt="image-20250924150053467" src="../assets/image-20250924150053467-1761878610218-15.png" /></p>
+<p>移码:补码的基础上将符号位取反。注意:移码只能用于表示整数</p>
+<p><img alt="image-20250924172013715" src="../assets/image-20250924172013715-1761878610218-16.png" /></p>
+<p><img alt="image-20250924143748490" src="../assets/image-20250924143748490-1761878610218-17.png" /></p>
+<p><a href="https://www.runoob.com/w3cnote/sign-magnitude.html">原码、反码、补码 | 菜鸟教程</a></p>
+<h4 id="_9">定点数/ 浮点数<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>浮点数就是小数点位置是变的</p>
+</blockquote>
+<p><code>定点数</code>也有反码和补码</p>
+<p><img alt="image-20250924142634471" src="../assets/image-20250924142634471-1761878610218-18.png" /></p>
+<h5 id="ieee-754">IEEE 754标准浮点数<a class="headerlink" href="#ieee-754" title="Permanent link">&para;</a></h5>
+<p>科学计数法</p>
+<p><img alt="image-20250924194352902" src="../assets/image-20250924194352902-1761878610218-20.png" /></p>
+<p><img alt="image-20250924194403239" src="../assets/image-20250924194403239-1761878610218-21.png" /></p>
+<h6 id="float">float<a class="headerlink" href="#float" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924194526841" src="../assets/image-20250924194526841-1761878610218-19.png" /></p>
+<p><img alt="image-20250924194727683" src="../assets/image-20250924194727683-1761878610218-22.png" /></p>
+<p>注意小数点前一定为1，所以不用记录这个数据到尾数 </p>
+<p><img alt="image-20250924195105991" src="../assets/image-20250924195105991-1761878610218-23.png" /></p>
+<h6 id="double">double<a class="headerlink" href="#double" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924194538407" src="../assets/image-20250924194538407-1761878610218-26.png" /></p>
+<p>阶码偏置值为1023 </p>
+<h6 id="_10">表示范围<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h6>
+<p>规格化浮点数的阶码不全为0、也不全为1</p>
+<p><img alt="image-20250924195819484" src="../assets/image-20250924195819484-1761878610218-24.png" /></p>
+<h4 id="_11">中断<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250912214211726" src="../assets/image-20250912214211726-1761878610218-25.png" /></p>
+<p>与3-3对比</p>
+<p>中断优先级</p>
+<h4 id="_12">总线互联<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250912215425396" src="../assets/image-20250912215425396-1761878610218-27.png" /></p>
+<p><img alt="image-20250912215213930" src="../assets/image-20250912215213930-1761878610218-28.png" /></p>
+<p><img alt="image-20250912215240199" src="../assets/image-20250912215240199-1761878610218-29.png" /></p>
+<p>总线中包含三类：</p>
+<ul>
+<li>
+<p>数据线</p>
+</li>
+<li>
+<p>地址线</p>
+</li>
+</ul>
+<p><img alt="image-20250912215640836" src="../assets/image-20250912215640836-1761878610218-30.png" /></p>
+<ul>
+<li>控制线</li>
+</ul>
+<p><img alt="image-20250912215754374" src="../assets/image-20250912215754374-1761878610218-31.png" /></p>
+<h3 id="cpu">处理器/CPU<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
+<h4 id="_13">综述<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251008144356907" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008144356907.png" /></p>
+<p><strong>CPU内部总线结构</strong>
+<img alt="image-20251008145952149" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145952149.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>橙色框为用户可见的寄存器，灰色不可见</p>
+<p>这里的R0,R1...表示的是ALU输入的通用寄存器</p>
+</blockquote>
+<p><img alt="image-20251008150212562" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008150212562.png" /></p>
+<h4 id="_14">最简程序<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923212243597" src="../assets/image-20250923212243597-1761878610218-32.png" /></p>
+<p><img alt="image-20250923212602386" src="../assets/image-20250923212602386-1761878610218-33.png" /></p>
+<p><img alt="image-20250923212909161" src="../assets/image-20250923212909161-1761878610218-34.png" /></p>
+<p><img alt="image-20250923213208546" src="../assets/image-20250923213208546-1761878610218-35.png" /></p>
+<p><img alt="image-20250923213249855" src="../assets/image-20250923213249855-1761878610218-36.png" /></p>
+<p><img alt="image-20250923213438640" src="../assets/image-20250923213438640-1761878610218-37.png" /></p>
+<p><img alt="image-20250912212753286" src="../assets/image-20250912212753286-1761878610218-38.png" /></p>
+<h4 id="_15">运算器<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923210922375" src="../assets/image-20250923210922375-1761878610218-39.png" /></p>
+<p>还有一个PSW寄存器,也叫FR(标志寄存器)</p>
+<h5 id="alu">ALU<a class="headerlink" href="#alu" title="Permanent link">&para;</a></h5>
+<p>ALU的核心是一个加法器，加减乘数都使用加法器实现</p>
+<p><img alt="image-20250924191526810" src="../assets/image-20250924191526810-1761878610218-40.png" /></p>
+<p><img alt="image-20250924191848166" src="../assets/image-20250924191848166-1761878610218-41.png" /></p>
+<ul>
+<li>
+<p>如果ALU支持k种功能，则控制信号位数m≥log~2~k</p>
+</li>
+<li>
+<p>ALU的运算数、运算结果位数与计算机的器字长相同</p>
+</li>
+<li>
+<p>ZF/OF/SF/CF标志位，用于表示本次运算结果的特征。这些标志信息通常会被送入<code>PSW（FR）程序状态字寄存器</code></p>
+</li>
+</ul>
+<p>ZF表示运算结果是否为零</p>
+<p>0F表示有符号数运算结果是否溢出</p>
+<p>SF表示有符号数运算结果的正负性</p>
+<p>CF表示无符号数运算结果是否溢出</p>
+<h6 id="alu_1">ALU的输入连接的寄存器<a class="headerlink" href="#alu_1" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008144704335" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008144704335.png" /></p>
+<p><img alt="image-20251008144651156" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008144651156.png" /></p>
+<p>三种连线方式：</p>
+<p><img alt="image-20251008145107476" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145107476.png" /></p>
+<p><img alt="image-20251008145447117" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145447117.png" /></p>
+<p><img alt="image-20251008145028186" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145028186.png" /></p>
+<h4 id="_16">指令<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p>x86/ARM</p>
+<h5 id="_17">分类<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h5>
+<h6 id="_18">按访问地址数量分类<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250926231215005" src="../assets/image-20250926231215005-1761878610218-42.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>注意，一个指令中需要访问的地址越多，寻址能力越差</p>
+</blockquote>
+<p><strong>零地址指令</strong></p>
+<p>空操作/停机/关中断</p>
+<p>堆栈操作</p>
+<p><strong>一地址指令</strong></p>
+<p>单操作数（三次访存）：加减==1==/取反/求补码</p>
+<p>双操作数（两次访存）：加减法，但是被加数已经在ACC里面了</p>
+<p><strong>二地址指令</strong>：</p>
+<p>（四次访存）加减，结果放在被加数覆盖</p>
+<p><strong>三地址指令</strong>：</p>
+<p>（四次访存）加减结果指定存放到某地址</p>
+<p><strong>四地址指令</strong>：</p>
+<p>（四次访存）加减结果指定存放到某地址,同时PC的值指向另一个地址</p>
+<h6 id="_19">按指令长度分类<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250926231503851" src="../assets/image-20250926231503851-1761878610218-43.png" /></p>
+<h6 id="_20">按操作码长度分类<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250926231548040" src="../assets/image-20250926231548040-1761878610218-44.png" /></p>
+<p>一种可变操作码指令：</p>
+<p><img alt="image-20250926232103901" src="../assets/image-20250926232103901-1761878610218-46.png" /></p>
+<p><img alt="image-20250926232433693" src="../assets/image-20250926232433693-1761878610218-45.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p><strong>设地址长度为n，上一层留出m种状态，下一层可扩展出mx2"种状态</strong></p>
+<p><img alt="image-20250926232702198" src="../assets/image-20250926232702198-1761878610218-47.png" /></p>
+</blockquote>
+<h6 id="_21">按操作类型分类<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250926231801673" src="../assets/image-20250926231801673-1761878610219-48.png" /></p>
+<h5 id="_22">指令寻址<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h5>
+<p>PC实际上并不一定是+1。如果主存按字节（Byte）编址的（也就是说一个地址只有1Byte数据），而指令长度为2Byte，那么PC每次就要+2了</p>
+<p>如果是变长指令：</p>
+<p><img alt="image-20250926233550908" src="../assets/image-20250926233550908-1761878610219-49.png" /></p>
+<h6 id="_23">顺序寻址<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250926233642340" src="../assets/image-20250926233642340-1761878610219-50.png" /></p>
+<h6 id="_24">跳跃寻址<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h6>
+<p>比如汇编中的JUMP</p>
+<p>十种类型</p>
+<p><img alt="image-20250927010108200" src="../assets/image-20250927010108200-1761878610219-51.png" /></p>
+<p><img alt="image-20250926234800733" src="../assets/image-20250926234800733-1761878610219-52.png" /></p>
+<p><img alt="image-20250926234940570" src="../assets/image-20250926234940570-1761878610219-54.png" /></p>
+<p><img alt="image-20250926235007680" src="../assets/image-20250926235007680-1761878610219-53.png" /></p>
+<p><img alt="image-20250926235116471" src="../assets/image-20250926235116471-1761878610219-55.png" /></p>
+<p><img alt="image-20250926235225041" src="../assets/image-20250926235225041-1761878610219-56.png" /></p>
+<p><img alt="image-20250926235314649" src="../assets/image-20250926235314649-1761878610219-58.png" /></p>
+<p><img alt="image-20250926235414546" src="../assets/image-20250926235414546-1761878610219-57.png" /></p>
+<p><img alt="image-20250926235528949" src="../assets/image-20250926235528949-1761878610219-59.png" /></p>
+<p><img alt="image-20250926235546974" src="../assets/image-20250926235546974-1761878610219-61.png" /></p>
+<p><img alt="image-20250927010245030" src="../assets/image-20250927010245030-1761878610219-60.png" /></p>
+<p><img alt="image-20250927010511795" src="../assets/image-20250927010511795-1761878610219-62.png" /></p>
+<p><img alt="image-20250927010556364" src="../assets/image-20250927010556364-1761878610219-63.png" /></p>
+<p>变址的作用，有无IX的比较：</p>
+<p><img alt="image-20250927011036874" src="../assets/image-20250927011036874-1761878610219-66.png" /></p>
+<p><img alt="image-20250927010921753" src="../assets/image-20250927010921753-1761878610219-64.png" /></p>
+<p><img alt="image-20250927011117267" src="../assets/image-20250927011117267-1761878610219-65.png" /></p>
+<p><img alt="image-20250927011332290" src="../assets/image-20250927011332290-1761878610219-67.png" /></p>
+<p><img alt="image-20250927011456943" src="../assets/image-20250927011456943-1761878610219-68.png" /></p>
+<p><img alt="image-20250927011618647" src="../assets/image-20250927011618647-1761878610219-69.png" /></p>
+<p><img alt="image-20250927011640177" src="../assets/image-20250927011640177-1761878610219-70.png" /></p>
+<h6 id="_25">堆栈寻址<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h6>
+<p>堆栈指针：SP</p>
+<p><img alt="image-20251008141838145" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008141838145.png" /></p>
+<p><img alt="image-20251008141944514" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008141944514.png" /></p>
+<h5 id="_26">指令集<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h5>
+<p>CISC 和 RIS </p>
+<p><img alt="image-20251008143655517" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008143655517.png" /></p>
+<p><img alt="image-20251008143706376" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008143706376.png" /></p>
+<h4 id="_27">控制器<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923211133175" src="../assets/image-20250923211133175-1761878610219-71.png" /></p>
+<h5 id="_28">指令周期<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250923211256611" src="../assets/image-20250923211256611-1761878610219-72.png" /></p>
+<p><img alt="image-20250912211652603" src="../assets/image-20250912211652603-1761878610219-73.png" /></p>
+<p>读取指令，然后执行指令。这两部为一个指令周期</p>
+<p><code>PC</code>寄存器保存下一条指令<code>地址</code></p>
+<p><code>IR</code>保存指令</p>
+<h6 id="_29">取址周期<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008151500175" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151500175.png" /></p>
+<h6 id="_30">间址周期<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008151854198" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151854198.png" /></p>
+<h6 id="_31">执行周期<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008151914822" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151914822.png" /></p>
+<h6 id="_32">中断周期<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008152553261" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008152553261.png" /></p>
+<h5 id="_33">指令周期和机器周期<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008150653284" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008150653284.png" /></p>
+<p><img alt="image-20251008151012770" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151012770.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>关于间址周期，详情可看<a href="#指令寻址">指令寻址</a></p>
+</blockquote>
+<h5 id="_34">控制器的内部总线结构<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008145831173" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145831173.png" /></p>
+<h5 id="_35">控制器中的设计<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008162537760" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008162537760.png" /></p>
+<h6 id="_36">硬布线<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008163031117" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163031117.png" /></p>
+<p><img alt="image-20251008163315326" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163315326.png" /></p>
+<p>举例：</p>
+<p><img alt="image-20251008163335621" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163335621.png" /></p>
+<p>各阶段微操作时序安排原则：</p>
+<p><img alt="image-20251008163646522" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163646522.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>可以并行</p>
+</blockquote>
+<p><img alt="image-20251008163758018" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163758018.png" /></p>
+<p><img alt="image-20251008164000507" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008164000507.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>假设都只有3个节拍</p>
+</blockquote>
+<p><strong>组合逻辑电路设计</strong></p>
+<p><img alt="image-20251008164457519" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008164457519.png" /></p>
+<p><a href="https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5&amp;p=66">5.4.1_硬布线控制器_哔哩哔哩_bilibili</a></p>
+<p><strong>特点：</strong></p>
+<p>指令越多，设计和实现就越复杂，因此一般用于RISC(精简指令集系统)</p>
+<p>如果扩充一条新的指令，则控制器的设计就需要大改，因此扩充指令较困难。</p>
+<p>由于使用纯硬件实现控制，因此执行速度很快。微操作控制信号由组合逻辑电路即时产生。</p>
+<h6 id="_37">微程序<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008165329871" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008165329871.png" /></p>
+<blockquote>
+<p>类似程序</p>
+</blockquote>
+<p><strong>结构：</strong></p>
+<p><img alt="image-20251008165841788" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008165841788.png" /></p>
+<p>CM/CMDR/CMAR</p>
+<blockquote>
+<p>[!TIP]</p>
+<p>ROM读取比RAM快</p>
+</blockquote>
+<p><img alt="image-20251008170139887" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008170139887.png" /></p>
+<p><img alt="image-20251008170426848" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008170426848.png" /></p>
+<h6 id="_38"><strong>微指令（微控制器的输出）格式</strong><a class="headerlink" href="#_38" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008170739868" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008170739868.png" /></p>
+<p>水平型 <img alt="image-20251008171005715" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008171005715.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>Intel的CPU就是这种方式？</p>
+<p>面积占整个CPU的一半</p>
+</blockquote>
+<p><img alt="image-20251008171630709" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008171630709.png" /></p>
+<p><a href="https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5&amp;p=68">5.4.3_微指令的设计_哔哩哔哩_bilibili</a></p>
+<h6 id="_39">下地址的确认<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008171824831" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008171824831.png" /></p>
+<h6 id="_40">对比<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008172355139" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008172355139.png" /></p>
+<p><img alt="image-20251008172700435" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008172700435.png" /></p>
+<p><a href="https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5&amp;p=69">5.4.4_微程序控制单元的设计_哔哩哔哩_bilibili</a></p>
+<h5 id="_41">指令流水线<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h5>
+<h6 id="_42">综述<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008173319727" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173319727.png" /></p>
+<p>性能指标：</p>
+<ul>
+<li>吞吐率</li>
+</ul>
+<p><img alt="image-20251008173615909" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173615909.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>注意这种图纵坐标是stage</p>
+</blockquote>
+<ul>
+<li>加速比</li>
+</ul>
+<p><img alt="image-20251008173737233" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173737233.png" /></p>
+<ul>
+<li>效率</li>
+</ul>
+<p><img alt="image-20251008173941083" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173941083.png" /></p>
+<h6 id="_43">机器周期的设置<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008174156353" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008174156353.png" /></p>
+<p>流水线每一个功能段部件后面都要有一个<strong>缓冲寄存器</strong>，或称为锁存器其作用是保存本流水段的执行结果，提供给下一流水段使用</p>
+<blockquote>
+<p>[!TIP]</p>
+<p>注意 I Cache 和 D Cache </p>
+<p>Imm 模块存的是立即数</p>
+<p><img alt="image-20251008180315627" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180315627.png" /></p>
+<p><img alt="image-20251008180801855" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180801855.png" /></p>
+</blockquote>
+<h6 id="_44">影响流水线的因素<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h6>
+<ul>
+<li>结构相关(资源冲突)</li>
+</ul>
+<p><img alt="image-20251008174847770" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008174847770.png" /></p>
+<p><img alt="image-20251008174905402" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008174905402.png" /></p>
+<ul>
+<li>数据相关（数据冲突）</li>
+</ul>
+<p><img alt="image-20251008174942039" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008174942039.png" /></p>
+<p><img alt="image-20251008175247893" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175247893.png" /></p>
+<ul>
+<li>
+<p>硬件阻塞</p>
+<p><img alt="image-20251008175122287" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175122287.png" /></p>
+</li>
+<li>
+<p>软件阻塞</p>
+<p><img alt="image-20251008175139495" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175139495.png" /></p>
+<p>旁路优化</p>
+<p><img alt="image-20251008175322393" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175322393.png" /></p>
+<p>编译优化：调整其他指令的顺序</p>
+</li>
+<li>
+<p>控制相关（控制冲突）</p>
+</li>
+</ul>
+<p><img alt="image-20251008175535040" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175535040.png" /></p>
+<h6 id="_45">举例<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h6>
+<p><a href="https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5&amp;p=72">5.6_3_五段式指令流水线_哔哩哔哩_bilibili</a></p>
+<p><img alt="image-20251008181349359" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181349359.png" /></p>
+<h6 id="_46">流水线分类<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h6>
+<p><a href="https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5&amp;p=71">5.6_2_指令流水线的影响因素和分类_哔哩哔哩_bilibili</a></p>
+<p><img alt="image-20251008175816868" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175816868.png" /></p>
+<p><img alt="image-20251008175926581" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175926581.png" /></p>
+<h6 id="_47">流水线的多发技术<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251008180032929" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180032929.png" /></p>
+<p><img alt="image-20251008180127845" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180127845.png" /></p>
+<p><img alt="image-20251008180201126" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180201126.png" /></p>
+<h4 id="cpu_1">CPU内部总线数据通路<a class="headerlink" href="#cpu_1" title="Permanent link">&para;</a></h4>
+<h5 id="_48">单总线方式<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008161352384" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008161352384.png" /></p>
+<h5 id="_49">多总线方式<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h5>
+<h5 id="_50">专用数据通路方式<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008162030664" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008162030664.png" /></p>
+<p><a href="https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5&amp;p=65">5.3_2_数据通路-专用通路结构_哔哩哔哩_bilibili</a></p>
+<h4 id="_51">多处理器<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h4>
+<h5 id="sisd">SISD<a class="headerlink" href="#sisd" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008181501722" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181501722.png" /></p>
+<h5 id="simd">SIMD<a class="headerlink" href="#simd" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008181609740" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181609740.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>显卡</p>
+</blockquote>
+<h5 id="mimd">MIMD<a class="headerlink" href="#mimd" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008181808729" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181808729.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>现在的CPU都是这种架构</p>
+<p>注意有一个共享的Cache，一般是L3</p>
+</blockquote>
+<h5 id="_52">向量处理器<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251008182038608" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008182038608.png" /></p>
+<p><img alt="image-20251008182104971" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008182104971.png" /></p>
+<h4 id="_53">硬件多线程<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251008182213593" src="D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008182213593.png" /></p>
+<h5 id="_54">细粒度多线程<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h5>
+<h5 id="_55">粗粒度多线程<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h5>
+<h5 id="_56">同时多线程<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h5>
+<h4 id="_57">参数<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h4>
+<ul>
+<li>主频</li>
+<li>CPI: 执行一条指令所需时钟周期数。不同指令，CPI不同；相同指令，CPI可能也有变化</li>
+<li>IPS: 每秒执行多少条指令</li>
+<li>FLOPS: 每秒执行多少次浮点</li>
+</ul>
+<p><img alt="image-20250924140058115" src="../assets/image-20250924140058115-1761878610219-74.png" /></p>
+<h3 id="_58">存储器<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h3>
+<h4 id="_59">综述<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250913144201410" src="../assets/image-20250913144201410-1761878610219-75.png" /></p>
+<p><img alt="image-20250914095318230" src="../assets/image-20250914095318230-1761878610219-77.png" /></p>
+<h5 id="_60">存取方法<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250914100020937" src="../assets/image-20250914100020937-1761878610219-76.png" /></p>
+<p><img alt="image-20250924202332102" src="../assets/image-20250924202332102-1761878610219-78.png" /></p>
+<h6 id="_61">大小端<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924200811076" src="../assets/image-20250924200811076-1761878610219-79.png" /></p>
+<h6 id="_62">边界对齐<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h6>
+<p>字：word</p>
+<p>字节：byte</p>
+<p><img alt="image-20250924201239023" src="../assets/image-20250924201239023-1761878610219-81.png" /></p>
+<p>边界对齐 ：性能好，但是浪费空间</p>
+<p>边界不对齐：性能差，节约空间</p>
+<h5 id="_63">性能参数<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250914100344193" src="../assets/image-20250914100344193-1761878610219-80.png" /></p>
+<p><img alt="image-20250914100351713" src="../assets/image-20250914100351713-1761878610219-83.png" /></p>
+<p><img alt="image-20250924202610417" src="../assets/image-20250924202610417-1761878610219-82.png" /> </p>
+<h5 id="_64">层次结构<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250914100452444" src="../assets/image-20250914100452444-1761878610219-85.png" /></p>
+<ul>
+<li>存取时间越短，平均每位的花费就越大。</li>
+<li>存储容量越大，平均每位的花费就越小。</li>
+<li>存储容量越大，存取时间就越长。</li>
+</ul>
+<p><img alt="image-20250924201624779" src="../assets/image-20250924201624779-1761878610219-86.png" /></p>
+<p><img alt="image-20250924201646125" src="../assets/image-20250924201646125-1761878610219-84.png" /></p>
+<h5 id="_65">分类<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h5>
+<h6 id="_66">是否只读<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h6>
+<h6 id="_67">是否易失<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h6>
+<h6 id="dramsramcache">DRAM（主存（内存））和SRAM（Cache）的区别<a class="headerlink" href="#dramsramcache" title="Permanent link">&para;</a></h6>
+<p>SRAM</p>
+<p><img src="assets/image-20250924204806880-1761878610219-87.png" alt="image-20250924204806880" style="zoom: 45%;" /><img src="C:/Users/17875/Desktop/assets/image-20250924204817453.png" alt="image-20250924204817453" style="zoom: 60%;" /></p>
+<p><img alt="image-20250924205143579" src="../assets/image-20250924205143579-1761878610219-89.png" /></p>
+<h5 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924203951221" src="../assets/image-20250924203951221-1761878610219-90.png" /></p>
+<h4 id="cachesram">Cache/SRAM<a class="headerlink" href="#cachesram" title="Permanent link">&para;</a></h4>
+<h5 id="cache">为什么要Cache?<a class="headerlink" href="#cache" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>主存读取速度比不上CPU计算速度</p>
+</li>
+<li>
+<p>局部性原理</p>
+</li>
+</ul>
+<p><img alt="image-20250924214632775" src="../assets/image-20250924214632775-1761878610219-93.png" /></p>
+<ul>
+<li>性能提升案例：</li>
+</ul>
+<p><img alt="image-20250924214917335" src="../assets/image-20250924214917335-1761878610219-91.png" /></p>
+<h5 id="_68">运行逻辑<a class="headerlink" href="#_68" title="Permanent link">&para;</a></h5>
+<ul>
+<li>将主存数据分块，主存和Cache之间以块为单位进行数据交换</li>
+<li>Cache和主存有地址映射</li>
+<li>cache溢出替换算法</li>
+</ul>
+<h5 id="_69">地址映射<a class="headerlink" href="#_69" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924222307823" src="../assets/image-20250924222307823-1761878610219-92.png" /></p>
+<p><mark>Cache中使用Tag和有效位来标记对应的主存的块</mark></p>
+<p><img alt="image-20250924222910786" src="../assets/image-20250924222910786-1761878610219-94.png" /></p>
+<p><img alt="image-20250924223203520" src="../assets/image-20250924223203520-1761878610219-95.png" /></p>
+<p>相比全相联映射，直接映射可以省略一些Tag（橙色）</p>
+<p><img alt="image-20250924223616294" src="../assets/image-20250924223616294-1761878610219-96.png" /></p>
+<p>组相联映射是前面两种方法的结合</p>
+<p>全相联映射相当于Cache的所有行都在一个组中</p>
+<p>直接映射无需替换算法，直接替换接可以了</p>
+<h5 id="_70">替换算法<a class="headerlink" href="#_70" title="Permanent link">&para;</a></h5>
+<p>目的：提高Cache命中率</p>
+<h6 id="rand">随机（RAND）<a class="headerlink" href="#rand" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924224201514" src="../assets/image-20250924224201514-1761878610219-98.png" /></p>
+<h6 id="fifo">先进先出（FIFO）<a class="headerlink" href="#fifo" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924224343257" src="../assets/image-20250924224343257-1761878610219-97.png" /></p>
+<p>抖动现象</p>
+<h6 id="lru">近期最少使用（LRU）<a class="headerlink" href="#lru" title="Permanent link">&para;</a></h6>
+<p><img alt="" src="../assets/image-20250924224709305-1761878610219-99.png" />
+多需要一个计数器</p>
+<h6 id="lfu">最近不经常使用（LFU）<a class="headerlink" href="#lfu" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924224934333" src="../assets/image-20250924224934333-1761878610219-106.png" /></p>
+<p><a href="https://www.bilibili.com/video/BV1P3zpYGEJd?spm_id_from=333.788.player.switch&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5">（中文配音）缓存替换策略：当您的 CPU 耗尽缓存内存时会发生什么？_哔哩哔哩_bilibili</a></p>
+<h5 id="_71">写策略<a class="headerlink" href="#_71" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924225334615" src="../assets/image-20250924225334615-1761878610219-100.png" /></p>
+<h6 id="_72">写回法<a class="headerlink" href="#_72" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924225441335" src="../assets/image-20250924225441335-1761878610219-102.png" />
+脏位</p>
+<h6 id="_73">全写法<a class="headerlink" href="#_73" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924225311832" src="../assets/image-20250924225311832-1761878610219-101.png" /></p>
+<p><img alt="image-20250924225618322" src="../assets/image-20250924225618322-1761878610219-104.png" /></p>
+<p>有写缓冲</p>
+<h6 id="_74">写分配法<a class="headerlink" href="#_74" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924225835581" src="../assets/image-20250924225835581-1761878610219-103.png" /></p>
+<h6 id="_75">非写分配法<a class="headerlink" href="#_75" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924225913934" src="../assets/image-20250924225913934-1761878610219-105.png" /></p>
+<h6 id="cache_1">多级cache的写策略常见搭配<a class="headerlink" href="#cache_1" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20250924230708123" src="../assets/image-20250924230708123-1761878610219-107.png" /></p>
+<h4 id="sdram">主存储器/SDRAM/内存<a class="headerlink" href="#sdram" title="Permanent link">&para;</a></h4>
+<p>DRAM(老)/SDRAM</p>
+<h5 id="_76">结构<a class="headerlink" href="#_76" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250923210224728" src="../assets/image-20250923210224728-1761878610219-108.png" />
+MAR: 存地址
+MDR：存数据</p>
+<p><img alt="image-20250924204021066" src="../assets/image-20250924204021066-1761878610219-111.png" /></p>
+<p>为了减少译码器输出信号数，实际上使用的是二维的（行列）地址译码器</p>
+<h5 id="dram">DRAM的充电/刷新<a class="headerlink" href="#dram" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924205750729" src="../assets/image-20250924205750729-1761878610219-110.png" /></p>
+<h5 id="_77">地址线服用技术<a class="headerlink" href="#_77" title="Permanent link">&para;</a></h5>
+<h5 id="ram">双端口RAM技术<a class="headerlink" href="#ram" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924210945780" src="../assets/image-20250924210945780-1761878610219-109.png" /></p>
+<h5 id="_78">多体并行存储器<a class="headerlink" href="#_78" title="Permanent link">&para;</a></h5>
+<p>注意存取之后有恢复时间需要等待</p>
+<p><img alt="image-20250924211643600" src="../assets/image-20250924211643600-1761878610219-113.png" /></p>
+<p><img alt="image-20250924211941851" src="../assets/image-20250924211941851-1761878610219-112.png" /></p>
+<h4 id="romssdflash">硬盘/ROM/SSD/FLASH<a class="headerlink" href="#romssdflash" title="Permanent link">&para;</a></h4>
+<h5 id="_79">分类<a class="headerlink" href="#_79" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924210425063" src="../assets/image-20250924210425063-1761878610219-114.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>实际上主板上的BIOS（ROM）也属于主存的一部分，二值常常同意编址</p>
+</blockquote>
+<h5 id="ssd">SSD<a class="headerlink" href="#ssd" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250924213015528" src="../assets/image-20250924213015528-1761878610219-115.png" /></p>
+<p><img alt="image-20250924213119918" src="../assets/image-20250924213119918-1761878610219-116.png" /></p>
+<p>Block(擦除单位)-&gt;Page(读写单位)</p>
+<h3 id="_80">软件<a class="headerlink" href="#_80" title="Permanent link">&para;</a></h3>
+<h4 id="_81">软件语言区别与分类<a class="headerlink" href="#_81" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923214301217" src="../assets/image-20250923214301217-1761878610219-117.png" /></p>
+<blockquote>
+<p>汇编指令和机器码是一一对应的</p>
+<p>HDL语言属于硬件语言</p>
+<p>软硬件可以实现相同功能，只是过程不同</p>
+</blockquote>
+<p><img alt="image-20250924114046856" src="../assets/image-20250924114046856-1761878610219-118.png" /></p>
+<blockquote>
+<p>微指令：就是一个指令流程中的每一个小步骤，比如PC+1</p>
+</blockquote>
+<h4 id="_82">系统软件/应用软件<a class="headerlink" href="#_82" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923213836674" src="../assets/image-20250923213836674-1761878610219-119.png" /></p>
+<h4 id="isa">指令集体系结构（ISA）<a class="headerlink" href="#isa" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250923215611054" src="../assets/image-20250923215611054-1761878610219-120.png" /></p>
+<h3 id="_83">专业术语<a class="headerlink" href="#_83" title="Permanent link">&para;</a></h3>
+<p>PC 程序计数器(指令地址)</p>
+<p>IR 指令寄存器（指令内容（数据））</p>
+<p>MAR 存储器地址存储器（地址）</p>
+<p>MBR 存储器缓冲寄存器（数据）</p>
+<p>MDR 存储器数据存储器（数据）</p>
+<p>CPI 每条指令的平均周期数</p>
+<p>MIPS 每秒百万条指令</p>
+<p>MFLOPS 每秒百万条浮点操作</p>
+<p>ISR 中断服务程序</p>
+<p>ISA 指令集体系结构</p>
+<p>SP (Stack Pointer) 堆栈指针</p>
+<h3 id="_84">参考<a class="headerlink" href="#_84" title="Permanent link">&para;</a></h3>
+<ul>
+<li>计算机组成与体系结构性能设计(美)William Stallings </li>
+</ul>
+<h2 id="_85">综述<a class="headerlink" href="#_85" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20250205232132033" src="C:/Users/17875/Desktop/asset s/image-20250205232132033.png" /></p>
+<p><img alt="image-20250205232142292" src="../assets/image-20250205232142292-1761878610219-121.png" /></p>
+<p><img alt="image-20250205235817697" src="../assets/image-20250205235817697-1761878610219-123.png" /></p>
+<p><img alt="image-20250205235828836" src="../assets/image-20250205235828836-1761878610219-124.png" /></p>
+<p><img alt="image-20250205235842773" src="../assets/image-20250205235842773-1761878610219-122.png" /></p>
+<p><img alt="image-20250205235955485" src="../assets/image-20250205235955485-1761878610219-126.png" /></p>
+<h2 id="cpu_2">CPU<a class="headerlink" href="#cpu_2" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20250205232228476" src="../assets/image-20250205232228476-1761878610219-125.png" /></p>
+<p><img alt="image-20250205232544143" src="../assets/image-20250205232544143-1761878610219-127.png" /></p>
+<p><img alt="image-20241024104223498" src="../assets/image-20241024104223498-1761878610219-128.png" /></p>
+<h3 id="cpu_3">CPU类型<a class="headerlink" href="#cpu_3" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205232814720" src="../assets/image-20250205232814720-1761878610219-129.png" /></p>
+<p><img alt="image-20250225100046558" src="../assets/image-20250225100046558-1761878610219-130.png" /></p>
+<p><strong>复杂指令集(CISC)</strong>: x86, Zen</p>
+<p><strong>精简指令集(RISC)</strong>：ARM，MIPS, PowerPC</p>
+<ul>
+<li>针对性更强，可以根据不同的需求进行专门的优化，能效更高</li>
+<li>调用速度快</li>
+<li>服务器上往往使用RISC</li>
+<li>服务器CPU往往应用了最先进的工艺和技术，并且配备了一二三级缓存，运行能力更强，服务器CPU很早就用上了3级缓存，普通cpu是近几年才用上了缓存技术</li>
+</ul>
+<p>与 CISC 相比，RISC 方法有几个优点：</p>
+<ol>
+<li><strong>简化硬件实现</strong>：它简化了处理器的硬件实现，因为需要解码和执行的指令更少。这可加快执行时间，降低功耗。</li>
+<li><strong>更高的指令级并行性</strong>：RISC 处理器通常具有更高的指令级并行性，可同时执行多条指令，从而进一步提高性能。</li>
+<li><strong>简易性</strong>：RISC 指令集的简易性使得开发可为处理器生成高效代码的编译器和其他软件工具变得更加容易。</li>
+</ol>
+<h4 id="arm">ARM<a class="headerlink" href="#arm" title="Permanent link">&para;</a></h4>
+<p>是一个<strong>32位精简指令集（RISC）</strong>处理器架构</p>
+<p>优势：<strong>价格低；能耗低</strong></p>
+<p>由于<strong>节能</strong>的特点，ARM处理器非常适用于行动通讯领域，符合其主要设计目标为低耗电的特性。</p>
+<p>其广泛地使用在许多<a href="https://zhida.zhihu.com/search?content_id=106234547&amp;content_type=Article&amp;match_order=1&amp;q=嵌入式系统设计&amp;zhida_source=entity">嵌入式系统设计</a>。</p>
+<h4 id="x86atom">x86/Atom<a class="headerlink" href="#x86atom" title="Permanent link">&para;</a></h4>
+<p><code>x86</code>是英代尔Intel首先开发制造的一种<a href="https://zhida.zhihu.com/search?content_id=106234547&amp;content_type=Article&amp;match_order=1&amp;q=微处理器体系结构&amp;zhida_source=entity">微处理器体系结构</a>的泛称。<a href="https://zhida.zhihu.com/search?content_id=106234547&amp;content_type=Article&amp;match_order=1&amp;q=x86架构&amp;zhida_source=entity">x86架构</a>是重要地<strong>可变指令长度</strong>的CISC（复杂指令集电脑，Complex Instruction Set Computer）。</p>
+<p>Intel <code>Atom</code>（中文：凌动，开发代号：Silverthorne）是Intel的一个<a href="https://zhida.zhihu.com/search?content_id=106234547&amp;content_type=Article&amp;match_order=1&amp;q=超低电压处理器&amp;zhida_source=entity">超低电压处理器</a>系列</p>
+<h4 id="mips">MIPS<a class="headerlink" href="#mips" title="Permanent link">&para;</a></h4>
+<p>一种<a href="https://zhida.zhihu.com/search?content_id=106234547&amp;content_type=Article&amp;match_order=1&amp;q=RISC处理器&amp;zhida_source=entity">RISC处理器</a>（精简指令集）</p>
+<h4 id="risc-v">RISC-V<a class="headerlink" href="#risc-v" title="Permanent link">&para;</a></h4>
+<p><em>RISC-V（读作 risk-five）架构是一种开源指令集架构（ISA），近年来因其灵活性、模块化和可扩展性而备受关注</em></p>
+<p>模块化是指将 ISA 划分为不同的独立组件，这些组件可以通过各种方式组合在一起，从而创建一个定制的处理器。另一方面，可扩展性是指在不破坏现有功能的情况下，向 ISA 添加新指令、功能或扩展的能力。</p>
+<h5 id="_86">历史<a class="headerlink" href="#_86" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250225095526450" src="../assets/image-20250225095526450-1761878610219-131.png" /></p>
+<p>专有 ISA (例如 ARM) 受到特定公司的严格控制，限制了对其架构的访问，并征收许可费。这种缺乏开放性的做法阻碍了创新，打击了竞争，使小公司或学术机构在试验和开发定制处理器方面面临挑战。这导致了 RISC-V 的兴起。</p>
+<p>在 RISC-V 之前，市场上有几种 RISC（精简指令集计算机）处理器。著名的例子包括 MIPS、SPARC 和 PowerPC。这些架构被认为是高效的，也有它们的应用，但它们往往需要支付许可费用，而且对其内部工作原理的访问也受到限制。</p>
+<p>RISC-V 的起源可以追溯到 加利福尼亚大学伯克利分校，最初是作为 2010 年的一个研究项目开发的。该项目旨在创建一种全新的开源 ISA，以解决现有专有 ISA 的局限性，并为未来的处理器设计奠定基础。RISC-V 项目由计算机科学家 Krste Asanović、Yunsup Lee 和 Andrew Waterman 领导，他们受到开源软件成功的启发，希望为硬件领域带来类似的好处。</p>
+<p>第一版 RISC-V ISA 于 2011 年发布，被称为 "RV32I " 基本整数指令集。最初的版本遵循精简指令集计算（RISC）原则，注重简洁和高效。多年来，RISC-V ISA 经历了多次迭代，增加了新的扩展和功能，以增强其功能，满足更广泛的应用需求。</p>
+<p>2015 年，RISC-V 基金会成立，旨在促进 RISC-V ISA 的采用和标准化。该基金会汇集了行业领导者、学术机构和个人贡献者，共同合作开发和推广 RISC-V 技术。自成立以来，RISC-V 基金会已发展了 200 多个成员组织，RISC-V ISA 已被众多公司采用，应用于从微控制器和嵌入式系统到高性能计算和数据中心处理器等各种领域。</p>
+<h3 id="_87">核心和线程<a class="headerlink" href="#_87" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>CPU可以想象成是一个银行，CPU核心就相当于柜员，而线程数就相当于开通了几个窗口，柜员和窗口越多，那么同时办理的业务就越多，速度也就越快。</p>
+<p>通常情况下，一个柜员对应的是一个窗口，通过超线程技术相当于一个柜员管理着两个窗口，使用左右手同时办理两个窗口的业务，大大提高了核心的使用效率，增加了办理业务的速度。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">#查看物理 cpu 数：</span>
+cat<span class="w"> </span>/proc/cpuinfo<span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;physical id&quot;</span><span class="p">|</span><span class="w"> </span>sort<span class="p">|</span><span class="w"> </span>uniq<span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+
+<span class="c1">#查看每个物理 cpu 中 核心数(core 数)：</span>
+cat<span class="w"> </span>/proc/cpuinfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;cpu cores&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq
+
+<span class="c1">#查看总的逻辑 cpu 数（processor 数）：</span>
+cat<span class="w"> </span>/proc/cpuinfo<span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;processor&quot;</span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+
+<span class="c1">#查看 cpu 型号：</span>
+cat<span class="w"> </span>/proc/cpuinfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>name<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f2<span class="w"> </span>-d:<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c
+
+<span class="c1">#判断 cpu 是否 64 位：</span>
+<span class="c1">#检查 cpuinfo 中的 flags 区段，看是否有 lm （long mode） 标识</span>
+</code></pre></div>
+<blockquote>
+<p>2</p>
+<p>48</p>
+<p>96</p>
+<p>Intel(R) Xeon(R) Platinum 8255C CPU @ 2.50GHz</p>
+<p>Thread(s) per core:    1</p>
+</blockquote>
+<p><code>lscpu</code>命令可以同时看到上述信息。比如：</p>
+<blockquote>
+<p>CPU(s):                24
+On-line CPU(s) list:   0-23
+Thread(s) per core:    2
+Core(s) per socket:    6
+Socket(s):             2</p>
+</blockquote>
+<h4 id="core">核心（core)<a class="headerlink" href="#core" title="Permanent link">&para;</a></h4>
+<p>一开始，每个物理 cpu 上只有一个核心（a single core），对操作系统而言，也就是同一时刻只能运行一个进程/线程。</p>
+<p>总的逻辑 cpu 数 = 物理 cpu 数 * 每颗物理 cpu 的核心数 * 每个核心的超线程数</p>
+<h5 id="simultaneous-multithreading">同时多线程技术（simultaneous multithreading）<a class="headerlink" href="#simultaneous-multithreading" title="Permanent link">&para;</a></h5>
+<p>SMT</p>
+<h5 id="hyperthreadinght">超线程技术(hyper–threading/HT)<a class="headerlink" href="#hyperthreadinght" title="Permanent link">&para;</a></h5>
+<p>可以认为HT是 SMT 的一种具体技术实现</p>
+<p>一般一个核心对应了一个线程，而intel开发出了<strong>超线程技术</strong>，1个核心能够做到2个线程计算，而6个核心则能够做到12个线程，超线程技术的好处就是无需增加物理核心就可以明显的进步CPU多线程功能，毕竟增加物理核心是需要占据非常大的核心面积，成本也随之增加</p>
+<h4 id="cpu_4">多核CPU<a class="headerlink" href="#cpu_4" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250205232733956" src="../assets/image-20250205232733956-1761878610219-132.png" /></p>
+<h2 id="gpu">GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<h3 id="gpu_1">GPU主要参数<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205233957431" src="../assets/image-20250205233957431-1761878610219-133.png" /></p>
+<h3 id="_88">结构<a class="headerlink" href="#_88" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205234152083" src="../assets/image-20250205234152083-1761878610220-134.png" /></p>
+<h4 id="cuda-context">CUDA Context（上下文）<a class="headerlink" href="#cuda-context" title="Permanent link">&para;</a></h4>
+<p>context类似于CPU上的进程上下，表示了，管理了由Driver层分配的资源的生命周期。多线程分配调用的GPU资源同属一个context下，通常与CPU的一个进程对应</p>
+<p>与CPU进程的管理类似，每个Context有自己的地址空间，之间是隔离的，在一个Context中有效的东西（例如某个指针，指向一段显存；或者某个纹理对象），只能在这一个Context中使用。但一个CUDA Context中的任何一个kernel，挂掉后，则整个Context中的所有东西都会失效（例如所有的缓冲区，kernel对象，纹理对象，stream等等）。在同一个GPU上，可能同时存在1个或者多个CUDA Context的。</p>
+<p><img alt="image-20250319163047563" src="../assets/image-20250319163047563-1761878610220-135.png" /></p>
+<blockquote>
+<p>对于context的创建与管理，CUDA runtime和CUDA driver API的方式稍有不同：</p>
+<p>CUDA runtime软件库通过<strong>*延迟初始化*</strong>（deferred initialization）来创建context，也就是lazy initialization。具体意思是在调用每一个CUDART库函数时，它会检查当前是否有context存在，假如需要context，那么才自动创建。也就是说需要创建上面这些对象的时候就会创建context。runtime也可以通过调用cudaFree(0)来强制显式地初始化context。cuda runtime将context和device的概念合并了，即在一个gpu上操作可看成在一个context下。</p>
+<p>而在驱动这一层的Driver API里，创建的context是针对一个线程的，即一个device，对应多个context，每个context对应多个线程，线程之间的context可以转移。在driver API中，每一个cpu线程必须要创建 context，或者从其他cpu线程转移context。如果没有创建context，直接调用 driver api创建上面那些对象，就会报错。</p>
+<p>CUDA runtime软件库和driver API的区别：</p>
+<p>我们平常安装使用的CUDA，即runtime软件库，是构建在Driver API上的另一层封装，所有的API都是以4个字母cuda开头。在编译时其cu代码可以和C/C++代码混合编译。而CUDA还有另外一个功能更强大，当然使用起来也更麻烦的API接口Driver API。Driver API将完整的CUDA功能展现给用户，功能更加强大，但是用起来较为繁琐，所有的Driver API，则都是2个字母cu开头。</p>
+</blockquote>
+<h4 id="cuda-stream">CUDA Stream<a class="headerlink" href="#cuda-stream" title="Permanent link">&para;</a></h4>
+<p>CUDA Stream是指一堆异步的CUDA操作，他们按照host代码调用的顺序执行在device上。</p>
+<p>当我们使用CUDA异步函数与多流（Multi Stream）时，多线程间既可以实现并行进行数据传输与计算，如下图所示。不过需要注意的是， CUDA runtime API默认的default stream是同步串行的，且一个进程内的所有线程都在default stream下，需要显式声明default之外的Stream才可以实现多流并发。</p>
+<h4 id="hyper-queue">Hyper-Queue<a class="headerlink" href="#hyper-queue" title="Permanent link">&para;</a></h4>
+<h5 id="_89">多流<a class="headerlink" href="#_89" title="Permanent link">&para;</a></h5>
+<p>利用CUDA异步函数以及多流的声明，既可以实现在多个线程的计算与数据传输的并行，增加GPU利用率。</p>
+<p><img alt="image-20250319164523111" src="../assets/image-20250319164523111-1761878610220-137.png" /></p>
+<h5 id="mps">MPS<a class="headerlink" href="#mps" title="Permanent link">&para;</a></h5>
+<p>多进程时使用MPS（Multi Process Service）。我们知道，每个进程默认对应一个context，而GPU在同一时刻只会运行一个context，因此进程间实际是无法并发的。</p>
+<p>MPS是一个二进制兼容的客户端-服务器运行时实现的CUDA API，允许多个CPU进程共享同一GPU context，不同进程的kernel和memcpy操作在同一GPU上并发执行，以实现最大化 GPU利用率、减少GPU上下文的切换时间与存储空间。在CUDA 7.0后，我们只需要执行如下指令就可以打开MPS服务：</p>
+<div class="highlight"><pre><span></span><code>nvidia-cuda-mps-control -d
+</code></pre></div>
+<h4 id="smspwarp">显卡硬件架构：SM、SP、Warp<a class="headerlink" href="#smspwarp" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250221154422162" src="../assets/image-20250221154422162-1761878610220-136.png" /></p>
+<h5 id="spstreaming-processorcuda-core"><code>SP(Streaming Processor)/CUDA core</code><a class="headerlink" href="#spstreaming-processorcuda-core" title="Permanent link">&para;</a></h5>
+<p>流处理器， 是GPU最基本的处理单元，。相当于一个thread</p>
+<h5 id="smstreaming-multiprocessor"><code>SM(Streaming MultiProcessor)</code><a class="headerlink" href="#smstreaming-multiprocessor" title="Permanent link">&para;</a></h5>
+<p>一个<code>SM</code>(也叫GPU大核)由多个<code>SP</code>加上其他的一些资源组成，<strong>每个SM根据GPU架构不同有不同数量的CUDA core</strong>，Pascal架构中一个SM有128个CUDA core。
+SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文件(Register File)和==调度器==(Warp Scheduler)等。<mark>register和shared memory是稀缺资源</mark>，这些有限的资源就使每个SM中active warps有非常严格的限制，也就限制了并行能力。</p>
+<p>当一个kernel启动后，thread会被分配到很多SM中执行。大量的thread可能会被分配到不同的SM，但是同一个block中的thread必然在同一个SM中并行执行。</p>
+<p><img alt="image-20250319164909978" src="../assets/image-20250319164909978-1761878610220-138.png" /></p>
+<h5 id="warp"><code>warp</code><a class="headerlink" href="#warp" title="Permanent link">&para;</a></h5>
+<p>一个SP可以执行一个thread，但是==实际上并不是所有的thread能够在同一时刻执行==。Nvidia把32个threads组成一个warp，<strong>warp是调度和运行的基本单元</strong>。</p>
+<p><mark>warp中所有threads并行的执行相同的指令</mark>。warp由SM的硬件warp scheduler负责调度，<mark>一个SM同一个时刻可以执行多个warp</mark>，这取决于warp scheduler的数量。<mark>目前每个warp包含32个threads</mark>（Nvidia保留修改数量的权利）。</p>
+<p>尽管warp中的线程从同一程序地址，但可能具有不同的行为，比如分支结构，因为==GPU规定warp中所有线程在同一周期执行相同的指令==，warp发散会导致性能下降。<strong>一个SM同时并发的warp是有限的</strong>，因为资源限制，SM要为每个线程块分配共享内存，而也要为每个线程束中的线程分配独立的寄存器，所以SM的配置会影响其所支持的线程块和warp并发数量。<strong>由于warp控制的thread的大小一般为32，所以block所含的thread的大小一般要设置为32的倍数</strong></p>
+<p>每个block的warp数量:</p>
+<p><img alt="image-20250221155702087" src="../assets/image-20250221155702087-1761878610220-139.png" /></p>
+<p>一个warp中的线程必然在同一个block中，如果block所含线程数目不是warp大小的整数倍，那么多出的那些thread所在的warp中，会剩余一些inactive的thread</p>
+<h4 id="_90">参考<a class="headerlink" href="#_90" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/266633373">详解CUDA的Context、Stream、Warp、SM、SP、Kernel、Block、Grid - 知乎</a></li>
+</ul>
+<h3 id="_91">相关厂商和产品<a class="headerlink" href="#_91" title="Permanent link">&para;</a></h3>
+<h4 id="_92">英伟达<a class="headerlink" href="#_92" title="Permanent link">&para;</a></h4>
+<h5 id="ai">常见计算卡(AI生成)<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h5>
+<h6 id="_93"><strong>计算卡对比</strong><a class="headerlink" href="#_93" title="Permanent link">&para;</a></h6>
+<p>对比维度：</p>
+<ol>
+<li><strong>架构先进性</strong>: Hopper &gt; Ada ≈ Ampere &gt; Volta。</li>
+<li><strong>显存带宽</strong>: HBM3（H100） &gt; HBM2e（A100） &gt; GDDR6X（4090） &gt; HBM2（V100）。</li>
+<li><strong>稀疏计算支持</strong>: H100/A100/4090显著优于旧架构。</li>
+<li><strong>多卡扩展</strong>: H100/A100支持NVLink，4090/3090仅支持PCIe。</li>
+</ol>
+<p>综合来看：H100 &gt; A100 ≈ A800 &gt; RTX 4090 &gt; A40 &gt; V100 &gt; RTX 3090 &gt; A30</p>
+<p>实际场景中，H100/A100更适合企业级训练，4090/3090适合个人或小规模任务，A40/A30侧重推理和边缘计算</p>
+<h6 id="h100-hopper">H100 (Hopper架构)<a class="headerlink" href="#h100-hopper" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>架构</strong>: Hopper (2022)</li>
+<li><strong>制程</strong>: 4nm</li>
+<li><strong>显存</strong>: 80GB HBM3 | 带宽 3TB/s</li>
+<li><strong>计算性能</strong>: FP32 60 TFLOPS | FP16/TF32 2,000 TFLOPS（稀疏）</li>
+<li><strong>核心数</strong>: 18,432 CUDA + 576 Tensor Core（第四代）</li>
+<li><strong>特性</strong>: 支持NVLink 4.0（900GB/s）、PCIe 5.0、Transformer引擎优化</li>
+<li><strong>功耗</strong>: 700W</li>
+<li><strong>定位</strong>: 超大规模模型训练、HPC</li>
+<li><strong>优势</strong>: Hopper架构 + <strong>第四代Tensor Core</strong> + <strong>Transformer引擎</strong>，FP16稀疏算力高达 <strong>2,000 TFLOPS</strong>，HBM3显存带宽 <strong>3TB/s</strong>，支持NVLink 4.0，专为超大规模模型优化。</li>
+<li><strong>场景</strong>: 大规模训练（如GPT-4/LLaMA）、HPC。</li>
+</ul>
+<h6 id="a100-ampere"><strong>A100 (Ampere架构)</strong><a class="headerlink" href="#a100-ampere" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>架构</strong>: Ampere (2020)</li>
+<li><strong>显存</strong>: 40GB/80GB HBM2e | 带宽 1.6TB/s</li>
+<li><strong>计算性能</strong>: FP32 19.5 TFLOPS | FP16/TF32 312 TFLOPS（稀疏）</li>
+<li><strong>核心数</strong>: 6,912 CUDA + 432 Tensor Core（第三代）</li>
+<li><strong>特性</strong>: NVLink 3.0（600GB/s）、多实例GPU（MIG）</li>
+<li><strong>功耗</strong>: 400W</li>
+<li><strong>定位</strong>: 主流AI训练、科学计算</li>
+</ul>
+<h6 id="a800-ampere"><strong>A800 (Ampere架构)</strong><a class="headerlink" href="#a800-ampere" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>简介</strong>: A100的出口限制版，NVLink带宽降至400GB/s，其他参数与A100一致。</li>
+<li><strong>定位</strong>: 替代A100的中国市场专用型号。</li>
+</ul>
+<h6 id="a40-ampere"><strong>A40 (Ampere架构)</strong><a class="headerlink" href="#a40-ampere" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>架构</strong>: Ampere (2021)</li>
+<li><strong>显存</strong>: 48GB GDDR6 | 带宽 696GB/s</li>
+<li><strong>计算性能</strong>: FP32 37.4 TFLOPS | FP16 149.8 TFLOPS</li>
+<li><strong>核心数</strong>: 10,752 CUDA + 336 Tensor Core</li>
+<li><strong>特性</strong>: 支持虚拟化、RT Core（光追）、被动散热</li>
+<li><strong>功耗</strong>: 300W</li>
+<li><strong>定位</strong>: 混合渲染与AI推理（如云游戏、虚拟化）。</li>
+<li><strong>优势</strong>: Ampere架构 + <strong>第三代Tensor Core</strong>，FP16算力 <strong>149.8 TFLOPS</strong>，48GB GDDR6显存，支持虚拟化和光追。</li>
+<li><strong>局限</strong>: 显存带宽（696GB/s）低于HBM系列，适合混合渲染与推理。</li>
+<li><strong>场景</strong>: 云推理、虚拟化、轻量级训练。</li>
+</ul>
+<h6 id="v100-volta"><strong>V100 (Volta架构)</strong><a class="headerlink" href="#v100-volta" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>架构</strong>: Volta (2017)</li>
+<li><strong>显存</strong>: 16GB/32GB HBM2 | 带宽 900GB/s</li>
+<li><strong>计算性能</strong>: FP32 14 TFLOPS | FP16 112 TFLOPS（Tensor Core）</li>
+<li><strong>核心数</strong>: 5,120 CUDA + 640 Tensor Core（第一代）</li>
+<li><strong>特性</strong>: NVLink 2.0（300GB/s）</li>
+<li><strong>功耗</strong>: 250W</li>
+<li><strong>定位</strong>: 经典深度学习卡，仍广泛用于推理和小规模训练。</li>
+<li><strong>优势</strong>: Volta架构 + <strong>第一代Tensor Core</strong>，FP16算力 <strong>112 TFLOPS</strong>，HBM2显存带宽 <strong>900GB/s</strong>。</li>
+<li><strong>局限</strong>: 架构较老，稀疏计算支持有限。</li>
+<li><strong>场景</strong>: 经典推理任务、兼容性要求高的场景。</li>
+</ul>
+<h6 id="rtx-4090-ada-lovelace"><strong>RTX 4090 (Ada Lovelace架构)</strong><a class="headerlink" href="#rtx-4090-ada-lovelace" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>架构</strong>: Ada Lovelace (2022)</li>
+<li><strong>显存</strong>: 24GB GDDR6X | 带宽 1TB/s</li>
+<li><strong>计算性能</strong>: FP32 82.6 TFLOPS | FP16 1321 TFLOPS（稀疏）</li>
+<li><strong>核心数</strong>: 16,384 CUDA + 512 Tensor Core（第四代）</li>
+<li><strong>功耗</strong>: 450W</li>
+<li><strong>定位</strong>: 单卡最强FP32性能，适合本地AI开发，但无ECC显存和NVLink。</li>
+<li><strong>优势</strong>: Ada架构 + <strong>第四代Tensor Core</strong>，FP16算力 <strong>1,321 TFLOPS</strong>（稀疏），GDDR6X显存带宽 <strong>1TB/s</strong>，单卡FP32性能最强（82.6 TFLOPS）。</li>
+<li><strong>局限</strong>: 无ECC显存、不支持NVLink，显存容量（24GB）和带宽弱于H100/A100。</li>
+<li><strong>场景</strong>: 小规模训练、本地AI开发。</li>
+</ul>
+<h6 id="a30-ampere"><strong>A30 (Ampere架构)</strong><a class="headerlink" href="#a30-ampere" title="Permanent link">&para;</a></h6>
+<ul>
+<li><strong>架构</strong>: Ampere (2021)</li>
+<li><strong>显存</strong>: 24GB HBM2 | 带宽 933GB/s</li>
+<li><strong>计算性能</strong>: FP32 10.3 TFLOPS | FP16 82.5 TFLOPS</li>
+<li><strong>核心数</strong>: 3,584 CUDA + 112 Tensor Core</li>
+<li><strong>特性</strong>: 支持MIG、低功耗</li>
+<li><strong>功耗</strong>: 165W</li>
+<li><strong>定位</strong>: 高密度推理、边缘服务器。</li>
+<li><strong>优势</strong>: Ampere架构 + <strong>第三代Tensor Core</strong>，FP16算力 <strong>82.5 TFLOPS</strong>，24GB HBM2显存，低功耗（165W）。</li>
+<li><strong>局限</strong>: 算力较低，适合高密度推理。</li>
+<li><strong>场景</strong>: 边缘服务器、批量推理。</li>
+</ul>
+<h5 id="_94">架构<a class="headerlink" href="#_94" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250205234248935" src="../assets/image-20250205234248935-1761878610220-140.png" /></p>
+<p><img alt="image-20250205234332496" src="../assets/image-20250205234332496-1761878610220-141.png" /></p>
+<h5 id="_95">消费级显卡<a class="headerlink" href="#_95" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250205234007021" src="../assets/image-20250205234007021-1761878610220-142.png" /></p>
+<h4 id="_96">国产<a class="headerlink" href="#_96" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20250205234350427" src="../assets/image-20250205234350427-1761878610220-143.png" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">MTT S4000</th>
+<th style="text-align: left;">NVIDIA H100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Architecture</strong></td>
+<td style="text-align: left;">3rd generation MUSA architecture</td>
+<td style="text-align: left;">Hopper architecture</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Manufacturing Process</strong></td>
+<td style="text-align: left;"><mark>16nm</mark> process technology</td>
+<td style="text-align: left;">4N custom process from TSMC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Memory Capacity</strong></td>
+<td style="text-align: left;">48GB GDDR6</td>
+<td style="text-align: left;">80GB HBM3 (SXM) / 94GB HBM3 (NVL)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Memory Bandwidth</strong></td>
+<td style="text-align: left;">768GB/s</td>
+<td style="text-align: left;">3.35TB/s (SXM) / 3.9TB/s (NVL)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Compute Performance (FP32)</strong></td>
+<td style="text-align: left;">25 TFLOPs</td>
+<td style="text-align: left;">67 TFLOPs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tensor Core Performance (FP16/BF16)</strong></td>
+<td style="text-align: left;">1,979 TFLOPs</td>
+<td style="text-align: left;">1,979 TFLOPs (with sparsity)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Interconnect Technology</strong></td>
+<td style="text-align: left;">MTLink technology (240GB/s data link from one card to another)</td>
+<td style="text-align: left;">NVIDIA NVLink™ (900GB/s) / PCIe Gen5 (128GB/s)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cpugpu">CPU和GPU区别<a class="headerlink" href="#cpugpu" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205234545302" src="../assets/image-20250205234545302-1761878610220-144.png" /><img alt="image-20250205234616438" src="../assets/image-20250205234616438-1761878610220-147.png" /></p>
+<p>相比CPU，GPU将更多的晶体管用于数值计算，而不是缓存和流控（Flow Control）。这源于两者不同的设计目标，CPU的设计目标是并行执行几十个线程，而GPU的目标是要并行执行几千个线程</p>
+<p>GPU的Core数量要远远多余CPU，但是有得必有失，可以看到GPU的Cache和Control要远远少于CPU，这使得GPU的单Core的自由度要远远低于CPU，会受到诸多限制，而这个限制==最终会由程序员承担==。这些限制也使得GPU编程与CPU多线程编程有着根本区别。</p>
+<p><img alt="image-20250221190619537" src="../assets/image-20250221190619537-1761878610220-146.png" /></p>
+<p>这其中最根本的一个区别可以在上右图中看出，每一行有多个Core，却只有一个Control，这代表着==多个Core同一时刻只能执行同样的指令==，这种模式也称为 <a href="https://zhida.zhihu.com/search?content_id=179940325&amp;content_type=Article&amp;match_order=1&amp;q=SIMT&amp;zhida_source=entity">SIMT</a> (Single Instruction Multiple Threads). 这与现代CPU的SIMD倒是有些相似，但却有根本差别</p>
+<h3 id="_97">集显和独显<a class="headerlink" href="#_97" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205233808128" src="../assets/image-20250205233808128-1761878610220-145.png" /></p>
+<h2 id="asic">ASIC<a class="headerlink" href="#asic" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20250205234949657" src="../assets/image-20250205234949657-1761878610220-148.png" /></p>
+<p><img alt="image-20250205235042752" src="../assets/image-20250205235042752-1761878610220-149.png" /></p>
+<p><img alt="image-20250205235101742" src="../assets/image-20250205235101742-1761878610220-150.png" /></p>
+<p><img alt="image-20250205235134756" src="../assets/image-20250205235134756-1761878610220-151.png" /></p>
+<h3 id="tpu">TPU<a class="headerlink" href="#tpu" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205235206813" src="../assets/image-20250205235206813-1761878610220-153.png" /></p>
+<p><img alt="image-20250205235308263" src="../assets/image-20250205235308263-1761878610220-152.png" /></p>
+<h3 id="npu">NPU<a class="headerlink" href="#npu" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205235410488" src="../assets/image-20250205235410488-1761878610220-154.png" /></p>
+<h3 id="dpu">DPU<a class="headerlink" href="#dpu" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205235445133" src="../assets/image-20250205235445133-1761878610220-157.png" /></p>
+<h3 id="ascend">华为昇腾（Ascend）<a class="headerlink" href="#ascend" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20250205235558072" src="../assets/image-20250205235558072-1761878610220-155.png" /></p>
+<h2 id="fpga">FPGA<a class="headerlink" href="#fpga" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20250205235617852" src="../assets/image-20250205235617852-1761878610220-156.png" /></p>
+<p><img alt="image-20250205235634479" src="../assets/image-20250205235634479-1761878610220-158.png" /></p>
+<p><img alt="image-20250205235645202" src="../assets/image-20250205235645202-1761878610220-159.png" /></p>
+<p><img alt="image-20250205235653350" src="../assets/image-20250205235653350-1761878610220-160.png" /></p>
+<p><img alt="image-20250205235702421" src="../assets/image-20250205235702421-1761878610220-162.png" /></p>
+<p><img alt="image-20250205235718353" src="../assets/image-20250205235718353-1761878610220-161.png" /></p>
+<h2 id="_98">参考<a class="headerlink" href="#_98" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/z2C_3D_PapWpUnIMLN5M0Q">AI芯片基础知识</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/413145211">英伟达GPU架构演进近十年，从费米到安培 - 知乎</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Algorithms/" class="btn btn-neutral float-left" title="Algorithms"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../OS/" class="btn btn-neutral float-right" title="OS">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Algorithms/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../OS/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

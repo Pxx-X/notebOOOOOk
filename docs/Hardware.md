@@ -1,8 +1,9 @@
+# Hardware
 
 
-# 计算机组成与体系结构
+## 计算机组成与体系结构
 
-## 发展历史
+### 发展历史
 
 - ENIAC  约翰 • 莫克利教授  1943 年  
 
@@ -48,7 +49,7 @@
 
 机器字长：一次整数运算所能处理的二进制位数
 
-### 存储墙
+#### 存储墙
 
 ![image-20250912203539172](assets/image-20250912203539172-1761878610218-5.png)
 
@@ -56,15 +57,15 @@
 
 
 
-## 计算机系统
+### 计算机系统
 
-### 早期冯诺依曼机
+#### 早期冯诺依曼机
 
 ![image-20250923205210584](assets/image-20250923205210584-1761878610218-7.png)
 
 效率低
 
-### 现代冯罗伊曼机
+#### 现代冯罗伊曼机
 
 ![image-20250923205317716](assets/image-20250923205317716-1761878610218-8.png)
 
@@ -87,9 +88,9 @@
 
 
 
-### 数的表示
+#### 数的表示
 
-#### 原码/反码/补码/移码
+##### 原码/反码/补码/移码
 
 ![image-20250924140807155](assets/image-20250924140807155-1761878610218-13.png)
 
@@ -105,7 +106,7 @@
 
 [原码、反码、补码 | 菜鸟教程](https://www.runoob.com/w3cnote/sign-magnitude.html)
 
-### 定点数/ 浮点数
+#### 定点数/ 浮点数
 
 > 浮点数就是小数点位置是变的
 
@@ -113,7 +114,7 @@
 
 ![image-20250924142634471](assets/image-20250924142634471-1761878610218-18.png)
 
-####    IEEE 754标准浮点数
+##### IEEE 754标准浮点数
 
   科学计数法
 
@@ -121,7 +122,7 @@
 
 ![image-20250924194403239](assets/image-20250924194403239-1761878610218-21.png)
 
-##### float
+###### float
 
 ![image-20250924194526841](assets/image-20250924194526841-1761878610218-19.png)
 
@@ -131,19 +132,19 @@
 
  ![image-20250924195105991](assets/image-20250924195105991-1761878610218-23.png)
 
-##### double
+###### double
 
 ![image-20250924194538407](assets/image-20250924194538407-1761878610218-26.png)
 
 阶码偏置值为1023 
 
-##### 表示范围
+###### 表示范围
 
 规格化浮点数的阶码不全为0、也不全为1
 
 ![image-20250924195819484](assets/image-20250924195819484-1761878610218-24.png)
 
-### 中断
+#### 中断
 
 ![image-20250912214211726](assets/image-20250912214211726-1761878610218-25.png)
 
@@ -153,7 +154,7 @@
 
 
 
-### 总线互联
+#### 总线互联
 
 ![image-20250912215425396](assets/image-20250912215425396-1761878610218-27.png)
 
@@ -177,24 +178,24 @@
 
 
 
-## 处理器/CPU
+### 处理器/CPU
 
-### 综述
+#### 综述
 
 ![image-20251008144356907](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008144356907.png)
 
 **CPU内部总线结构**
 ![image-20251008145952149](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145952149.png)
 
-> [!TIP]
->
-> 橙色框为用户可见的寄存器，灰色不可见
->
-> 这里的R0,R1...表示的是ALU输入的通用寄存器
+!!! tip
+    
+    橙色框为用户可见的寄存器，灰色不可见
+    
+    这里的R0,R1...表示的是ALU输入的通用寄存器
 
 ![image-20251008150212562](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008150212562.png)
 
-### 最简程序
+#### 最简程序
 
 ![image-20250923212243597](assets/image-20250923212243597-1761878610218-32.png)
 
@@ -214,13 +215,13 @@
 
 
 
-### 运算器
+#### 运算器
 
 ![image-20250923210922375](assets/image-20250923210922375-1761878610218-39.png)
 
 还有一个PSW寄存器,也叫FR(标志寄存器)
 
-####  ALU
+##### ALU
 
 ALU的核心是一个加法器，加减乘数都使用加法器实现
 
@@ -244,7 +245,7 @@ ALU的核心是一个加法器，加减乘数都使用加法器实现
 
   CF表示无符号数运算结果是否溢出
 
-##### ALU的输入连接的寄存器
+###### ALU的输入连接的寄存器
 
 ![image-20251008144704335](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008144704335.png)
 
@@ -258,19 +259,19 @@ ALU的核心是一个加法器，加减乘数都使用加法器实现
 
 ![image-20251008145028186](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145028186.png)
 
-### 指令
+#### 指令
 
 x86/ARM
 
-#### 分类
+##### 分类
 
-##### 按访问地址数量分类
+###### 按访问地址数量分类
 
 ![image-20250926231215005](assets/image-20250926231215005-1761878610218-42.png)
 
-> [!WARNING]
->
-> 注意，一个指令中需要访问的地址越多，寻址能力越差
+!!! warning
+    
+    注意，一个指令中需要访问的地址越多，寻址能力越差
 
 **零地址指令**
 
@@ -298,13 +299,13 @@ x86/ARM
 
 
 
-##### 按指令长度分类
+###### 按指令长度分类
 
 ![image-20250926231503851](assets/image-20250926231503851-1761878610218-43.png)
 
 
 
-##### 按操作码长度分类
+###### 按操作码长度分类
 
 ![image-20250926231548040](assets/image-20250926231548040-1761878610218-44.png)
 
@@ -314,19 +315,19 @@ x86/ARM
 
 ![image-20250926232433693](assets/image-20250926232433693-1761878610218-45.png)
 
-> [!TIP]
->
-> **设地址长度为n，上一层留出m种状态，下一层可扩展出mx2"种状态**
->
-> ![image-20250926232702198](assets/image-20250926232702198-1761878610218-47.png)
+!!! tip
+    
+    **设地址长度为n，上一层留出m种状态，下一层可扩展出mx2"种状态**
+    
+    ![image-20250926232702198](assets/image-20250926232702198-1761878610218-47.png)
 
-##### 按操作类型分类
+###### 按操作类型分类
 
 ![image-20250926231801673](assets/image-20250926231801673-1761878610219-48.png)
 
 
 
-#### 指令寻址
+##### 指令寻址
 
 PC实际上并不一定是+1。如果主存按字节（Byte）编址的（也就是说一个地址只有1Byte数据），而指令长度为2Byte，那么PC每次就要+2了
 
@@ -334,11 +335,11 @@ PC实际上并不一定是+1。如果主存按字节（Byte）编址的（也就
 
 ![image-20250926233550908](assets/image-20250926233550908-1761878610219-49.png)
 
-##### 顺序寻址
+###### 顺序寻址
 
 ![image-20250926233642340](assets/image-20250926233642340-1761878610219-50.png)
 
-##### 跳跃寻址
+###### 跳跃寻址
 
 比如汇编中的JUMP
 
@@ -388,7 +389,7 @@ PC实际上并不一定是+1。如果主存按字节（Byte）编址的（也就
 
 ![image-20250927011640177](assets/image-20250927011640177-1761878610219-70.png)
 
-##### 堆栈寻址
+###### 堆栈寻址
 
 堆栈指针：SP
 
@@ -396,7 +397,7 @@ PC实际上并不一定是+1。如果主存按字节（Byte）编址的（也就
 
 ![image-20251008141944514](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008141944514.png)
 
-#### 指令集
+##### 指令集
 
 CISC 和 RIS 
 
@@ -406,11 +407,11 @@ CISC 和 RIS
 
 
 
-### 控制器
+#### 控制器
 
 ![image-20250923211133175](assets/image-20250923211133175-1761878610219-71.png)
 
-####   指令周期
+##### 指令周期
 
 ![image-20250923211256611](assets/image-20250923211256611-1761878610219-72.png)
 
@@ -426,41 +427,41 @@ CISC 和 RIS
 
 `IR`保存指令
 
-##### 取址周期
+###### 取址周期
 
 ![image-20251008151500175](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151500175.png)
 
-##### 间址周期 
+###### 间址周期 
 
 ![image-20251008151854198](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151854198.png)
 
-##### 执行周期
+###### 执行周期
 
 ![image-20251008151914822](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151914822.png)
 
-##### 中断周期
+###### 中断周期
 
 ![image-20251008152553261](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008152553261.png)
 
-#### 指令周期和机器周期
+##### 指令周期和机器周期
 
 ![image-20251008150653284](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008150653284.png)
 
 ![image-20251008151012770](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008151012770.png)
 
-> [!TIP]
->
-> 关于间址周期，详情可看[指令寻址](#指令寻址)
+!!! tip
+    
+    关于间址周期，详情可看[指令寻址](#指令寻址)
 
-#### 控制器的内部总线结构
+##### 控制器的内部总线结构
 
 ![image-20251008145831173](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008145831173.png)
 
-#### 控制器中的设计
+##### 控制器中的设计
 
 ![image-20251008162537760](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008162537760.png)
 
-##### 硬布线
+###### 硬布线
 
 ![image-20251008163031117](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163031117.png)
 
@@ -474,17 +475,17 @@ CISC 和 RIS
 
 ![image-20251008163646522](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163646522.png)
 
-> [!TIP]
->
-> 可以并行
+!!! tip
+    
+    可以并行
 
 ![image-20251008163758018](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008163758018.png)
 
 ![image-20251008164000507](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008164000507.png)
 
-> [!TIP]
->
-> 假设都只有3个节拍
+!!! tip
+    
+    假设都只有3个节拍
 
 **组合逻辑电路设计**
 
@@ -502,7 +503,7 @@ CISC 和 RIS
 
 
 
-##### 微程序
+###### 微程序
 
 ![image-20251008165329871](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008165329871.png)
 
@@ -514,9 +515,9 @@ CISC 和 RIS
 
 CM/CMDR/CMAR
 
-> [!TIP]
->
-> ROM读取比RAM快
+!!! tip
+    
+    ROM读取比RAM快
 
 ![image-20251008170139887](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008170139887.png)
 
@@ -530,11 +531,11 @@ CM/CMDR/CMAR
 
 水平型 ![image-20251008171005715](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008171005715.png)
 
-> [!TIP]
->
-> Intel的CPU就是这种方式？
->
-> 面积占整个CPU的一半
+!!! tip
+    
+    Intel的CPU就是这种方式？
+    
+    面积占整个CPU的一半
 
 ![image-20251008171630709](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008171630709.png)
 
@@ -544,7 +545,7 @@ CM/CMDR/CMAR
 
  ![image-20251008171824831](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008171824831.png)
 
-##### 对比
+###### 对比
 
 ![image-20251008172355139](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008172355139.png)
 
@@ -556,9 +557,9 @@ CM/CMDR/CMAR
 
 
 
-#### 指令流水线
+##### 指令流水线
 
-#####  综述
+###### 综述
 
 ![image-20251008173319727](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173319727.png)
 
@@ -568,9 +569,9 @@ CM/CMDR/CMAR
 
   ![image-20251008173615909](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173615909.png)
 
-  > [!WARNING]
-  >
-  > 注意这种图纵坐标是stage
+!!! warning
+    
+    注意这种图纵坐标是stage
 
 - 加速比
 
@@ -580,23 +581,23 @@ CM/CMDR/CMAR
 
   ![image-20251008173941083](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008173941083.png)
 
-#####  机器周期的设置
+###### 机器周期的设置
 
 ![image-20251008174156353](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008174156353.png)
 
 流水线每一个功能段部件后面都要有一个**缓冲寄存器**，或称为锁存器其作用是保存本流水段的执行结果，提供给下一流水段使用
 
-> [!TIP]
->
-> 注意 I Cache 和 D Cache 
->
-> Imm 模块存的是立即数
->
-> ![image-20251008180315627](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180315627.png)
->
-> ![image-20251008180801855](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180801855.png)
+!!! tip
+    
+    注意 I Cache 和 D Cache 
+    
+    Imm 模块存的是立即数
+    
+    ![image-20251008180315627](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180315627.png)
+    
+    ![image-20251008180801855](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180801855.png)
 
-##### 影响流水线的因素
+###### 影响流水线的因素
 
 - 结构相关(资源冲突)
 
@@ -630,13 +631,13 @@ CM/CMDR/CMAR
 
   ![image-20251008175535040](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175535040.png)
 
-##### 举例 
+###### 举例 
 
 [5.6_3_五段式指令流水线_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=72)
 
 ![image-20251008181349359](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181349359.png)
 
-##### 流水线分类
+###### 流水线分类
 
 [5.6_2_指令流水线的影响因素和分类_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1ps4y1d73V?spm_id_from=333.788.player.switch&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=71)
 
@@ -644,7 +645,7 @@ CM/CMDR/CMAR
 
 ![image-20251008175926581](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008175926581.png)
 
-##### 流水线的多发技术
+###### 流水线的多发技术
 
 ![image-20251008180032929](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008180032929.png)
 
@@ -658,15 +659,15 @@ CM/CMDR/CMAR
 
 
 
-### CPU内部总线数据通路
+#### CPU内部总线数据通路
 
-#### 单总线方式
+##### 单总线方式
 
 ![image-20251008161352384](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008161352384.png)
 
-#### 多总线方式
+##### 多总线方式
 
-#### 专用数据通路方式
+##### 专用数据通路方式
 
 ![image-20251008162030664](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008162030664.png)
 
@@ -674,35 +675,35 @@ CM/CMDR/CMAR
 
 
 
-### 多处理器
+#### 多处理器
 
-#### SISD
+##### SISD
 
 ![image-20251008181501722](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181501722.png)
 
-#### SIMD
+##### SIMD
 
 ![image-20251008181609740](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181609740.png)
 
-> [!TIP]
->
-> 显卡
+!!! tip
+    
+    显卡
 
 
 
-#### MIMD
+##### MIMD
 
 ![image-20251008181808729](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008181808729.png)
 
-> [!TIP]
->
-> 现在的CPU都是这种架构
->
-> 注意有一个共享的Cache，一般是L3
+!!! tip
+    
+    现在的CPU都是这种架构
+    
+    注意有一个共享的Cache，一般是L3
 
 
 
-#### 向量处理器
+##### 向量处理器
 
 ![image-20251008182038608](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008182038608.png)
 
@@ -710,17 +711,17 @@ CM/CMDR/CMAR
 
 
 
-### 硬件多线程
+#### 硬件多线程
 
 ![image-20251008182213593](D:\DownLoad\MyNotes\MyNotes\Other\assets\image-20251008182213593.png)
 
-#### 细粒度多线程
+##### 细粒度多线程
 
-#### 粗粒度多线程
+##### 粗粒度多线程
 
-#### 同时多线程
+##### 同时多线程
 
-### 参数
+#### 参数
 
 - 主频
 - CPI: 执行一条指令所需时钟周期数。不同指令，CPI不同；相同指令，CPI可能也有变化
@@ -731,25 +732,25 @@ CM/CMDR/CMAR
 
 
 
-## 存储器
+### 存储器
 
-### 综述
+#### 综述
 
 ![image-20250913144201410](assets/image-20250913144201410-1761878610219-75.png)
 
 ![image-20250914095318230](assets/image-20250914095318230-1761878610219-77.png)
 
-#### 存取方法
+##### 存取方法
 
 ![image-20250914100020937](assets/image-20250914100020937-1761878610219-76.png)
 
 ![image-20250924202332102](assets/image-20250924202332102-1761878610219-78.png)
 
-##### 大小端 
+###### 大小端 
 
 ![image-20250924200811076](assets/image-20250924200811076-1761878610219-79.png)
 
-##### 边界对齐
+###### 边界对齐
 
 字：word
 
@@ -761,7 +762,7 @@ CM/CMDR/CMAR
 
 边界不对齐：性能差，节约空间
 
-#### 性能参数
+##### 性能参数
 
 ![image-20250914100344193](assets/image-20250914100344193-1761878610219-80.png)
 
@@ -769,7 +770,7 @@ CM/CMDR/CMAR
 
 ![image-20250924202610417](assets/image-20250924202610417-1761878610219-82.png) 
 
-#### 层次结构
+##### 层次结构
 
 ![image-20250914100452444](assets/image-20250914100452444-1761878610219-85.png)
 
@@ -781,13 +782,13 @@ CM/CMDR/CMAR
 
 ![image-20250924201646125](assets/image-20250924201646125-1761878610219-84.png)
 
-#### 分类
+##### 分类
 
-##### 是否只读
+###### 是否只读
 
-##### 是否易失
+###### 是否易失
 
-##### DRAM（主存（内存））和SRAM（Cache）的区别
+###### DRAM（主存（内存））和SRAM（Cache）的区别
 
 SRAM
 
@@ -797,7 +798,7 @@ SRAM
 
 
 
-#### Tips
+##### Tips
 
 ![image-20250924203951221](assets/image-20250924203951221-1761878610219-90.png)
 
@@ -805,9 +806,9 @@ SRAM
 
 
 
-### Cache/SRAM
+#### Cache/SRAM
 
-#### 为什么要Cache?
+##### 为什么要Cache?
 
 - 主存读取速度比不上CPU计算速度
 
@@ -821,7 +822,7 @@ SRAM
 
 
 
-#### 运行逻辑 
+##### 运行逻辑 
 
 - 将主存数据分块，主存和Cache之间以块为单位进行数据交换
 - Cache和主存有地址映射
@@ -829,7 +830,7 @@ SRAM
 
 
 
-#### 地址映射
+##### 地址映射
 
 ![image-20250924222307823](assets/image-20250924222307823-1761878610219-92.png)
 
@@ -849,26 +850,26 @@ SRAM
 
 直接映射无需替换算法，直接替换接可以了
 
-#### 替换算法
+##### 替换算法
 
 目的：提高Cache命中率
 
-##### 随机（RAND） 
+###### 随机（RAND） 
 
 ![image-20250924224201514](assets/image-20250924224201514-1761878610219-98.png)
 
-##### 先进先出（FIFO）
+###### 先进先出（FIFO）
 
 ![image-20250924224343257](assets/image-20250924224343257-1761878610219-97.png)
 
 抖动现象
 
-##### 近期最少使用（LRU）
+###### 近期最少使用（LRU）
 
 ![](assets/image-20250924224709305-1761878610219-99.png)
 多需要一个计数器
 
-##### 最近不经常使用（LFU）
+###### 最近不经常使用（LFU）
 
 ![image-20250924224934333](assets/image-20250924224934333-1761878610219-106.png)
 
@@ -876,7 +877,7 @@ SRAM
 
 
 
-#### 写策略
+##### 写策略
 
 ![image-20250924225334615](assets/image-20250924225334615-1761878610219-100.png)
 
@@ -884,12 +885,12 @@ SRAM
 
 
 
-##### 写回法
+###### 写回法
 
 ![image-20250924225441335](assets/image-20250924225441335-1761878610219-102.png)
 脏位
 
-##### 全写法
+###### 全写法
 
 ![image-20250924225311832](assets/image-20250924225311832-1761878610219-101.png)
 
@@ -897,29 +898,29 @@ SRAM
 
 有写缓冲
 
-##### 写分配法
+###### 写分配法
 
 ![image-20250924225835581](assets/image-20250924225835581-1761878610219-103.png)
 
 
 
-##### 非写分配法
+###### 非写分配法
 
 ![image-20250924225913934](assets/image-20250924225913934-1761878610219-105.png)
 
 
 
-##### 多级cache的写策略常见搭配
+###### 多级cache的写策略常见搭配
 
 ![image-20250924230708123](assets/image-20250924230708123-1761878610219-107.png)
 
 
 
-### 主存储器/SDRAM/内存
+#### 主存储器/SDRAM/内存
 
 DRAM(老)/SDRAM
 
-#### 结构
+##### 结构
 
 ![image-20250923210224728](assets/image-20250923210224728-1761878610219-108.png)
 MAR: 存地址
@@ -929,17 +930,17 @@ MDR：存数据
 
 为了减少译码器输出信号数，实际上使用的是二维的（行列）地址译码器
 
-#### DRAM的充电/刷新
+##### DRAM的充电/刷新
 
 ![image-20250924205750729](assets/image-20250924205750729-1761878610219-110.png)
 
-#### 地址线服用技术
+##### 地址线服用技术
 
-#### 双端口RAM技术
+##### 双端口RAM技术
 
 ![image-20250924210945780](assets/image-20250924210945780-1761878610219-109.png)
 
-#### 多体并行存储器
+##### 多体并行存储器
 
 注意存取之后有恢复时间需要等待
 
@@ -949,19 +950,19 @@ MDR：存数据
 
 
 
-### 硬盘/ROM/SSD/FLASH
+#### 硬盘/ROM/SSD/FLASH
 
-#### 分类
+##### 分类
 
 ![image-20250924210425063](assets/image-20250924210425063-1761878610219-114.png)
 
-> [!TIP]
->
-> 实际上主板上的BIOS（ROM）也属于主存的一部分，二值常常同意编址
+!!! tip
+    
+    实际上主板上的BIOS（ROM）也属于主存的一部分，二值常常同意编址
 
 
 
-#### SSD
+##### SSD
 
 ![image-20250924213015528](assets/image-20250924213015528-1761878610219-115.png)
 
@@ -971,9 +972,9 @@ Block(擦除单位)->Page(读写单位)
 
 
 
-## 软件
+### 软件
 
-### 软件语言区别与分类
+#### 软件语言区别与分类
 
 ![image-20250923214301217](assets/image-20250923214301217-1761878610219-117.png)
 
@@ -987,15 +988,15 @@ Block(擦除单位)->Page(读写单位)
 
 > 微指令：就是一个指令流程中的每一个小步骤，比如PC+1
 
-### 系统软件/应用软件
+#### 系统软件/应用软件
 
 ![image-20250923213836674](assets/image-20250923213836674-1761878610219-119.png)
 
-### 指令集体系结构（ISA）
+#### 指令集体系结构（ISA）
 
 ![image-20250923215611054](assets/image-20250923215611054-1761878610219-120.png)
 
-## 专业术语
+### 专业术语
 
 PC 程序计数器(指令地址)
 
@@ -1019,13 +1020,13 @@ ISA 指令集体系结构
 
 SP (Stack Pointer) 堆栈指针
 
-## 参考
+### 参考
 
 - 计算机组成与体系结构性能设计(美)William Stallings 
 
 
 
-# 综述
+## 综述
 
 ![image-20250205232132033](C:/Users/17875/Desktop/asset s/image-20250205232132033.png)
 
@@ -1043,7 +1044,7 @@ SP (Stack Pointer) 堆栈指针
 
 
 
-# CPU
+## CPU
 
 ![image-20250205232228476](assets/image-20250205232228476-1761878610219-125.png)
 
@@ -1051,7 +1052,7 @@ SP (Stack Pointer) 堆栈指针
 
 ![image-20241024104223498](assets/image-20241024104223498-1761878610219-128.png)
 
-## CPU类型
+### CPU类型
 
 ![image-20250205232814720](assets/image-20250205232814720-1761878610219-129.png)
 
@@ -1076,7 +1077,7 @@ SP (Stack Pointer) 堆栈指针
 
 
 
-### ARM
+#### ARM
 
 是一个**32位精简指令集（RISC）**处理器架构
 
@@ -1086,25 +1087,25 @@ SP (Stack Pointer) 堆栈指针
 
 其广泛地使用在许多[嵌入式系统设计](https://zhida.zhihu.com/search?content_id=106234547&content_type=Article&match_order=1&q=嵌入式系统设计&zhida_source=entity)。
 
-### x86/Atom
+#### x86/Atom
 
 `x86`是英代尔Intel首先开发制造的一种[微处理器体系结构](https://zhida.zhihu.com/search?content_id=106234547&content_type=Article&match_order=1&q=微处理器体系结构&zhida_source=entity)的泛称。[x86架构](https://zhida.zhihu.com/search?content_id=106234547&content_type=Article&match_order=1&q=x86架构&zhida_source=entity)是重要地**可变指令长度**的CISC（复杂指令集电脑，Complex Instruction Set Computer）。
 
 Intel `Atom`（中文：凌动，开发代号：Silverthorne）是Intel的一个[超低电压处理器](https://zhida.zhihu.com/search?content_id=106234547&content_type=Article&match_order=1&q=超低电压处理器&zhida_source=entity)系列
 
-### MIPS
+#### MIPS
 
 一种[RISC处理器](https://zhida.zhihu.com/search?content_id=106234547&content_type=Article&match_order=1&q=RISC处理器&zhida_source=entity)（精简指令集）
 
 
 
-### RISC-V
+#### RISC-V
 
 *RISC-V（读作 risk-five）架构是一种开源指令集架构（ISA），近年来因其灵活性、模块化和可扩展性而备受关注*
 
 模块化是指将 ISA 划分为不同的独立组件，这些组件可以通过各种方式组合在一起，从而创建一个定制的处理器。另一方面，可扩展性是指在不破坏现有功能的情况下，向 ISA 添加新指令、功能或扩展的能力。
 
-#### 历史
+##### 历史
 
 ![image-20250225095526450](assets/image-20250225095526450-1761878610219-131.png)
 
@@ -1122,7 +1123,7 @@ RISC-V 的起源可以追溯到 加利福尼亚大学伯克利分校，最初是
 
 
 
-## 核心和线程
+### 核心和线程
 
 > CPU可以想象成是一个银行，CPU核心就相当于柜员，而线程数就相当于开通了几个窗口，柜员和窗口越多，那么同时办理的业务就越多，速度也就越快。
 >
@@ -1164,19 +1165,19 @@ cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
 > Core(s) per socket:    6
 > Socket(s):             2
 
-### 核心（core)
+#### 核心（core)
 
 一开始，每个物理 cpu 上只有一个核心（a single core），对操作系统而言，也就是同一时刻只能运行一个进程/线程。
 
 总的逻辑 cpu 数 = 物理 cpu 数 * 每颗物理 cpu 的核心数 * 每个核心的超线程数
 
-#### 同时多线程技术（simultaneous multithreading）
+##### 同时多线程技术（simultaneous multithreading）
 
 SMT
 
 
 
-#### 超线程技术(hyper–threading/HT)
+##### 超线程技术(hyper–threading/HT)
 
 可以认为HT是 SMT 的一种具体技术实现
 
@@ -1184,19 +1185,19 @@ SMT
 
 
 
-### 多核CPU
+#### 多核CPU
 
 ![image-20250205232733956](assets/image-20250205232733956-1761878610219-132.png)
 
 
 
-# GPU
+## GPU
 
-## GPU主要参数
+### GPU主要参数
 
 ![image-20250205233957431](assets/image-20250205233957431-1761878610219-133.png)
 
-## 结构
+### 结构
 
 
 
@@ -1204,7 +1205,7 @@ SMT
 
 
 
-### CUDA Context（上下文）
+#### CUDA Context（上下文）
 
 context类似于CPU上的进程上下，表示了，管理了由Driver层分配的资源的生命周期。多线程分配调用的GPU资源同属一个context下，通常与CPU的一个进程对应
 
@@ -1222,7 +1223,7 @@ context类似于CPU上的进程上下，表示了，管理了由Driver层分配�
 >
 >我们平常安装使用的CUDA，即runtime软件库，是构建在Driver API上的另一层封装，所有的API都是以4个字母cuda开头。在编译时其cu代码可以和C/C++代码混合编译。而CUDA还有另外一个功能更强大，当然使用起来也更麻烦的API接口Driver API。Driver API将完整的CUDA功能展现给用户，功能更加强大，但是用起来较为繁琐，所有的Driver API，则都是2个字母cu开头。
 
-### CUDA Stream
+#### CUDA Stream
 
 CUDA Stream是指一堆异步的CUDA操作，他们按照host代码调用的顺序执行在device上。
 
@@ -1230,15 +1231,15 @@ CUDA Stream是指一堆异步的CUDA操作，他们按照host代码调用的顺�
 
 
 
-### Hyper-Queue
+#### Hyper-Queue
 
-#### 多流
+##### 多流
 
 利用CUDA异步函数以及多流的声明，既可以实现在多个线程的计算与数据传输的并行，增加GPU利用率。
 
 ![image-20250319164523111](assets/image-20250319164523111-1761878610220-137.png)
 
-#### MPS
+##### MPS
 
 多进程时使用MPS（Multi Process Service）。我们知道，每个进程默认对应一个context，而GPU在同一时刻只会运行一个context，因此进程间实际是无法并发的。
 
@@ -1250,15 +1251,15 @@ nvidia-cuda-mps-control -d
 
 
 
-### 显卡硬件架构：SM、SP、Warp
+#### 显卡硬件架构：SM、SP、Warp
 
 ![image-20250221154422162](assets/image-20250221154422162-1761878610220-136.png)
 
-#### `SP(Streaming Processor)/CUDA core`
+##### `SP(Streaming Processor)/CUDA core`
 
 流处理器， 是GPU最基本的处理单元，。相当于一个thread
 
-#### `SM(Streaming MultiProcessor)`
+##### `SM(Streaming MultiProcessor)`
 
 一个`SM`(也叫GPU大核)由多个`SP`加上其他的一些资源组成，**每个SM根据GPU架构不同有不同数量的CUDA core**，Pascal架构中一个SM有128个CUDA core。
 SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文件(Register File)和==调度器==(Warp Scheduler)等。==register和shared memory是稀缺资源==，这些有限的资源就使每个SM中active warps有非常严格的限制，也就限制了并行能力。
@@ -1267,7 +1268,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 ![image-20250319164909978](assets/image-20250319164909978-1761878610220-138.png)
 
-#### `warp`
+##### `warp`
 
 一个SP可以执行一个thread，但是==实际上并不是所有的thread能够在同一时刻执行==。Nvidia把32个threads组成一个warp，**warp是调度和运行的基本单元**。
 
@@ -1285,7 +1286,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-### 参考
+#### 参考
 
 - [详解CUDA的Context、Stream、Warp、SM、SP、Kernel、Block、Grid - 知乎](https://zhuanlan.zhihu.com/p/266633373)
 
@@ -1293,13 +1294,13 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-## 相关厂商和产品
+### 相关厂商和产品
 
-### 英伟达
+#### 英伟达
 
-#### 常见计算卡(AI生成)
+##### 常见计算卡(AI生成)
 
-##### **计算卡对比**
+###### **计算卡对比**
 
 对比维度：
 
@@ -1316,7 +1317,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-##### H100 (Hopper架构)
+###### H100 (Hopper架构)
 
 - **架构**: Hopper (2022)
 - **制程**: 4nm
@@ -1331,7 +1332,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-##### **A100 (Ampere架构)**
+###### **A100 (Ampere架构)**
 
 - **架构**: Ampere (2020)
 - **显存**: 40GB/80GB HBM2e | 带宽 1.6TB/s
@@ -1343,14 +1344,14 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-##### **A800 (Ampere架构)**
+###### **A800 (Ampere架构)**
 
 - **简介**: A100的出口限制版，NVLink带宽降至400GB/s，其他参数与A100一致。
 - **定位**: 替代A100的中国市场专用型号。
 
 
 
-##### **A40 (Ampere架构)**
+###### **A40 (Ampere架构)**
 
 - **架构**: Ampere (2021)
 - **显存**: 48GB GDDR6 | 带宽 696GB/s
@@ -1365,7 +1366,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-##### **V100 (Volta架构)**
+###### **V100 (Volta架构)**
 
 - **架构**: Volta (2017)
 - **显存**: 16GB/32GB HBM2 | 带宽 900GB/s
@@ -1380,7 +1381,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-##### **RTX 4090 (Ada Lovelace架构)**
+###### **RTX 4090 (Ada Lovelace架构)**
 
 - **架构**: Ada Lovelace (2022)
 - **显存**: 24GB GDDR6X | 带宽 1TB/s
@@ -1394,7 +1395,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-##### **A30 (Ampere架构)**
+###### **A30 (Ampere架构)**
 
 - **架构**: Ampere (2021)
 - **显存**: 24GB HBM2 | 带宽 933GB/s
@@ -1409,7 +1410,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-#### 架构
+##### 架构
 
 ![image-20250205234248935](assets/image-20250205234248935-1761878610220-140.png)
 
@@ -1417,13 +1418,13 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 
 
 
-#### 消费级显卡
+##### 消费级显卡
 
 ![image-20250205234007021](assets/image-20250205234007021-1761878610220-142.png)
 
 
 
-### 国产
+#### 国产
 
 ![image-20250205234350427](assets/image-20250205234350427-1761878610220-143.png)
 
@@ -1439,7 +1440,7 @@ SM还包括特殊运算单元(SFU)，共享内存(shared memory)，寄存器文�
 | **Tensor Core Performance (FP16/BF16)** | 1,979 TFLOPs                                                 | 1,979 TFLOPs (with sparsity)                   |
 | **Interconnect Technology**             | MTLink technology (240GB/s data link from one card to another) | NVIDIA NVLink™ (900GB/s) / PCIe Gen5 (128GB/s) |
 
-## CPU和GPU区别
+### CPU和GPU区别
 
 ![image-20250205234545302](assets/image-20250205234545302-1761878610220-144.png)![image-20250205234616438](assets/image-20250205234616438-1761878610220-147.png)
 
@@ -1453,13 +1454,13 @@ GPU的Core数量要远远多余CPU，但是有得必有失，可以看到GPU的C
 
 
 
-## 集显和独显
+### 集显和独显
 
 ![image-20250205233808128](assets/image-20250205233808128-1761878610220-145.png)
 
 
 
-# ASIC
+## ASIC
 
 ![image-20250205234949657](assets/image-20250205234949657-1761878610220-148.png)
 
@@ -1469,27 +1470,27 @@ GPU的Core数量要远远多余CPU，但是有得必有失，可以看到GPU的C
 
 ![image-20250205235134756](assets/image-20250205235134756-1761878610220-151.png)
 
-## TPU
+### TPU
 
 ![image-20250205235206813](assets/image-20250205235206813-1761878610220-153.png)
 
 ![image-20250205235308263](assets/image-20250205235308263-1761878610220-152.png)
 
-## NPU
+### NPU
 
 ![image-20250205235410488](assets/image-20250205235410488-1761878610220-154.png)
 
-## DPU
+### DPU
 
 ![image-20250205235445133](assets/image-20250205235445133-1761878610220-157.png)
 
-## 华为昇腾（Ascend）
+### 华为昇腾（Ascend）
 
 ![image-20250205235558072](assets/image-20250205235558072-1761878610220-155.png)
 
 
 
-# FPGA
+## FPGA
 
 ![image-20250205235617852](assets/image-20250205235617852-1761878610220-156.png)
 
@@ -1507,7 +1508,7 @@ GPU的Core数量要远远多余CPU，但是有得必有失，可以看到GPU的C
 
 
 
-# 参考
+## 参考
 
 - [AI芯片基础知识](https://mp.weixin.qq.com/s/z2C_3D_PapWpUnIMLN5M0Q)
 - [英伟达GPU架构演进近十年，从费米到安培 - 知乎](https://zhuanlan.zhihu.com/p/413145211)

@@ -1,18 +1,22 @@
+# EDA4PR-LCM
 
 
 ## Agent
 
 ### Codex
 
-rust
+- rust
+- [OpenSource](https://github.com/openai/codex)
 
 ### Claude code
 
-close
+- [OpenSource](https://github.com/anthropics/claude-code)
+- python
 
 ### Gemini CLI
 
-typscript
+- typscript
+
 
 ### OpenCode
 
@@ -39,6 +43,20 @@ typscript
 - paper code gen
 
 
+
+### Kiro
+
+- [closed]()
+
+### GitHub Copilot
+
+
+
+## RAG
+
+### PageIndex
+
+https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
 
 
@@ -139,7 +157,6 @@ circuit tool library:
 
 #### background
 
-- 
 
 
 
@@ -154,7 +171,6 @@ circuit tool library:
   - Chain-of-thought  
   - Least-to-most prompting  
   - Self-refine strategy  
-- 
 
 
 
@@ -251,7 +267,6 @@ Legalization]()进行演示
 - [Open Source](https://zeju.gitbook.io/lcm-team)
 - a multimodal and comprehensive repository-level circuit dataset for deep learning in EDA  
 - more than 4,000 circuit design   
-- 
 
 #### background-
 

@@ -1,32 +1,34 @@
-# 研究背景
+# EDA4PR
+
+## 研究背景
 
 
 
-## EDA 软件研发难点
+### EDA 软件研发难点
 
 ![image-20241102103529055](assets/image-20241102103529055.png)
 
 ![image-20241102103538594](assets/image-20241102103538594.png)
 
-### 参考
+#### 参考
 
 [EDA软件研发有哪些难点？ - 知乎](https://www.zhihu.com/question/528984827)
 
-## EDA 重要性
+### EDA 重要性
 
 ![`image-20241116193659992`](assets/image-20241116193659992.png)
 
 ![image-20250106164128669](assets/image-20250106164128669.png)
 
-### 参考
+#### 参考
 
 *超大规模集成电路物理设计：从图分割到时序收敛*
 
-## EDA 发展历史
+### EDA 发展历史
 
 ![image-20241116194008548](assets/image-20241116194008548.png)
 
-## EDA国产替代
+### EDA国产替代
 
 由于1994年至2008年，中国大陆在EDA领域有差不多十五年的低迷期。很多高校失去了EDA的研究条件和生存环境，使得很多项目搞不下去，老师开始转型，导致高校从事EDA研究的人员越来越少。
 
@@ -34,7 +36,7 @@
 
 
 
-## AI 4 Science
+### AI 4 Science
 
 ![image-20241213120306409](assets/image-20241213120306409.png)
 
@@ -44,7 +46,7 @@
 
 
 
-## AI4EDA
+### AI4EDA
 
 **典型的芯片设计流程是先做前端、后端设计，再去验证性能、功耗和面积。**但由于流程太长，在前端设计的时候，无法保证后端设计的效果，所以很多时候需要进行跨环节建模，在早期设计环节预测后续环节的求解质量，这当中就很适合AI算法来进行辅助。
 
@@ -60,13 +62,13 @@
 
 ![image-20240928195328357](assets/image-20240928195328357.png)
 
-### 传统 EDA 缺点
+#### 传统 EDA 缺点
 
 **(1) 它依赖于硬件设计人员的专业知识来选择合适的 EDA 工具配置**，**(2) RTL 的设计空间探索，逻辑综合和物理综合是手动的，因此是有限且耗时的**，**(3) 设计中的更正将重新初始化流程**，**(4) 没有早期分析或结果的可预测性。**
 
 ![image-20241211142807806](assets/image-20241211142807806.png)
 
-### GNN4EDA
+#### GNN4EDA
 
 近年来，随着深度学习技术的广泛应用，越来越多的研究将其引入EDA领域。特别是图神经网络（Graph Neural Networks, GNN），凭借其在处理复杂图结构数据方面的显著优势，逐渐成为EDA后端设计中物理验证的重要工具。–cite–>[专题解读 | GNN在EDA后端设计物理验证环节中验证应力的应用](https://mp.weixin.qq.com/s/DTyRuFTws49WtwWEJaL8fQ)
 
@@ -98,7 +100,7 @@ G =(V, E) 分别不同的任务
 
 
 
-### GPU
+#### GPU
 
 Heterogeneous computing systems consisting of CPUs and GPUs, as shown in Figure 5, have brought huge performance benefits to all kinds of scientific computing applications, thanks to the architectural difference between CPUs and GPUs that caters their advantages in different types of workloads. CPUs have a few large and powerful cores, with high performance single-thread computation as well as branching prediction capability. This makes CPUs suitable for general purpose computation tasks with complex control structures. Multi-threading on CPUs is also promising provided with a limited number of concurrent tasks. Given massively parallel tasks consisting of possibly thousands to even millions of threads, CPUs incur high multitasking and thread switching overhead, as well as low data bandwidth and cache storage. On the contrary, GPU architecture is designed from the ground to fit the need of massive parallelism. A GPU has hundreds to thousands of small cores running in parallel. These cores can switch between threads with almost no runtime cost,  thus effectively hiding memory latency when one group of threads is waiting for a memory request to complete.  
 
@@ -106,7 +108,7 @@ Heterogeneous computing systems consisting of CPUs and GPUs, as shown in Figure 
 
 
 
-# 难点
+## 难点
 
 ![image-20241013184936794](./assets/image-20241013184936794.png)
 
@@ -125,7 +127,7 @@ Heterogeneous computing systems consisting of CPUs and GPUs, as shown in Figure 
 
 
 
-### future work
+#### future work
 
 - [2.5d/3d](# Future direction)
 - 晶圆级
@@ -133,55 +135,54 @@ Heterogeneous computing systems consisting of CPUs and GPUs, as shown in Figure 
 
 
 
-# 研究方向
+## 研究方向
 
-## Digtal
+### Digtal
 
 [数字后端EDA入门](https://mp.weixin.qq.com/s/vbegGznsJe0xq4FIawrrVQ)
 
 详细查看[EDA4PR-Digtal](./EDA4PR-Digtal.md)
 
-## Analog
+### Analog
 
 详细查看[EDA4PR-Analog](D:\MyNotes\Analog\WorkFlow\EDA4PR-Analog.md)
 
-# 相关数据集
+## 相关数据集
 
-## rtl only 
+### rtl only 
 
-### [Home :: OpenCores](https://opencores.org/)
+#### [Home :: OpenCores](https://opencores.org/)
 
 ![image-20241116140649477](./assets/image-20241116140649477.png)
 
-### [IWLS 2005 Benchmarks](https://iwls.org/iwls2005/benchmarks.html)
+#### [IWLS 2005 Benchmarks](https://iwls.org/iwls2005/benchmarks.html)
 
 ![image-20241116140821429](./assets/image-20241116140821429.png)
 
 ![image-20241116140834409](./assets/image-20241116140834409.png)
 
-### [openlane-examples: Examples from the Openlane repository](https://github.com/klasnordmark/openlane-examples)
+#### [openlane-examples: Examples from the Openlane repository](https://github.com/klasnordmark/openlane-examples)
 
 ![image-20241118160109426](./assets/image-20241118160109426.png)
 
 
 
-## Global route
+### Global route
 
-### ISPD-2007
+#### ISPD-2007
 
 ![image-20250209155834613](assets/image-20250209155834613.png)
 
 - the first published multilayer global routing benchmarks and the sizes of these benchmarks are large enough as compared to real industry cases  
 - has a two-layer and a six-layer version.  
-- 
 
 
 
-### ISPD-2008 
+#### ISPD-2008 
 
 
 
-### ICCAD-2019
+#### ICCAD-2019
 
 [2019 CAD Contest @ ICCAD](https://www.iccad-contest.org/2019/problems.html)
 
@@ -195,19 +196,19 @@ Heterogeneous computing systems consisting of CPUs and GPUs, as shown in Figure 
 
 
 
-### ISPD-2024
+#### ISPD-2024
 
 Dockerfile无法创建镜像了，401，Github也找不到benchmarks
 
 ![image-20241116211927308](./assets/image-20241116211927308.png)
 
-### ISPD-2025
+#### ISPD-2025
 
 
 
-## Detail Route
+### Detail Route
 
-### ISPD-2018/2019
+#### ISPD-2018/2019
 
 [Initial Detailed Routing Contest at ISPD 2018](https://www.ispd.cc/contests/18/)
 
@@ -227,7 +228,7 @@ https://ispd.cc/contests/19/ispd19eval.tgz：一个结果验证工具
 
 
 
-## CircuitNet
+### CircuitNet
 
 4部分数据：congestion，DRV, IR drop, Net delay
 
@@ -245,7 +246,7 @@ https://ispd.cc/contests/19/ispd19eval.tgz：一个结果验证工具
 
 ![image-20241116141000835](./assets/image-20241116141000835.png)
 
-## EDA-schema
+### EDA-schema
 
 GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，但是很全
 
@@ -253,7 +254,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-## OCB: Open Circuit Benchmark
+### OCB: Open Circuit Benchmark
 
 [zehao-dong/CktGNN: Open Circuit Benchmark OCB and source code for CktGNN (https://openreview.net/forum?id=NE2911Kq1sp).](https://github.com/zehao-dong/CktGNN?tab=readme-ov-file#ocb-open-circuit-benchmark)
 
@@ -264,7 +265,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-## CV
+### CV
 
 - ImageNet
 - multi-modal   
@@ -273,7 +274,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
   - [详细解读：MIT经典的语义分割数据集ADE20K，附下载链接-CSDN博客](https://blog.csdn.net/OpenDataLab/article/details/125293382)
   - ![image-20250930201446635](assets/image-20250930201446635.png)
 
-# 相关会议/期刊
+## 相关会议/期刊
 
 > 一个查找会议期刊相关新文章的好方法：
 >
@@ -281,18 +282,18 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 >
 > ![image-20250829210148116](assets/image-20250829210148116.png)
 
-## EDA应用
+### EDA应用
 
-### 会议
+#### 会议
 
-#### [DAC](http://www.dac.com/):
+##### [DAC](http://www.dac.com/):
 
 - 每年举办一次学术论坛和工业贸易展览
 - 一般11月截止
 
 
 
-#### [ICCAD](http://www.iccad.com/)：
+##### [ICCAD](http://www.iccad.com/)：
 
 - International Conference on Computer-Aided Design
 - 由电气电子工程师学会（IEEE）和美国计算机学会（ACM）共同举办的国际计算机辅助设计会议（ICCAD）被公认为EDA领域最重要的会议之一，享有很高的国际学术地位和广泛的影响力。该会议是探索EDA研究领域新挑战、展示前沿创新解决方案和识别新兴技术的重要论坛，涵盖了从器件和电路级到系统级的所有设计与自动化主题、以及后CMOS设计等新型方向。着重于学术研究，论文涉及专门的算法的研究进展。
@@ -300,7 +301,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [DATE](https://www.date-conference.com/)
+##### [DATE](https://www.date-conference.com/)
 
 - Design, Automation and Test in Europe Conference
 - 欧洲设计自动化和测试会议
@@ -308,7 +309,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [ASP-DAC](https://www.aspdac.com/aspdac/)
+##### [ASP-DAC](https://www.aspdac.com/aspdac/)
 
 - 亚洲、南太平洋设计自动化会议
 - 一般7月截止
@@ -317,7 +318,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [ISPD](https://ispd.cc)
+##### [ISPD](https://ispd.cc)
 
 - International Symposium on Physical Design
 
@@ -331,7 +332,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [GLSVLSI](https://www.glsvlsi.org/)
+##### [GLSVLSI](https://www.glsvlsi.org/)
 
 - CCF-C
 - 大湖区超大规模集成电路设计国际会议
@@ -343,12 +344,12 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [MLCAD](https://mlcad.org/symposium/2025/)
+##### [MLCAD](https://mlcad.org/symposium/2025/)
 
 - 5月
 - 不在CCF？
 
-#### [ICCD](https://www.iccd-conf.com/home.html)
+##### [ICCD](https://www.iccd-conf.com/home.html)
 
 - CCF-B
 - ICCD涵盖了计算机系统及其组件的研究、设计和实现中的广泛主题。ICCD的多学科重点为开发人员和研究人员提供了一个理想的环境，可以讨论涵盖系统和应用、计算机体系结构、验证和测试、设计工具和方法、电路设计和技术的实践和理论工作。
@@ -356,7 +357,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [CICC](https://www.ieee-cicc.org/)
+##### [CICC](https://www.ieee-cicc.org/)
 
 - Custom Integrated Circuits Conference
 - Area:[2026 Call for Papers - 2026 IEEE CICC](https://www.ieee-cicc.org/2026-call-for-papers/)
@@ -364,7 +365,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [VLSI](https://www.vlsisymposium.org/)
+##### [VLSI](https://www.vlsisymposium.org/)
 
 - 有个DTCO?
 - 一般1月
@@ -373,7 +374,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [ISEDA](https://www.eda2.com/iseda/index.html)
+##### [ISEDA](https://www.eda2.com/iseda/index.html)
 
 - 由IEEE和ACM主办，EDA²和CIE EDA委员会联合主办的ISEDA （EDA国际研讨会）是一个致力于VLSI设计自动化的年度顶级论坛。研讨会旨在探索新的挑战，展示前沿技术，并为EDA社区提供预测EDA研究领域未来发展方向的机会。ISEDA涵盖了从器件和电路级到系统级的所有EDA主题，从模拟到数字设计以及制造。会议的形式旨在培养富有成效和新颖
 - 二月
@@ -386,7 +387,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [SMACD](https://smacd-conference.org/)
+##### [SMACD](https://smacd-conference.org/)
 
 - 7月
 - 不在ccf
@@ -399,7 +400,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [APCCAS](https://ieee-cas.org/event/conference/2024-ieee-asia-pacific-conference-circuits-and-systems#documents)
+##### [APCCAS](https://ieee-cas.org/event/conference/2024-ieee-asia-pacific-conference-circuits-and-systems#documents)
 
 - E Asia Pacific Conference on Circuits and Systems
 - ![image-20250224112009790](assets/image-20250224112009790.png)
@@ -408,7 +409,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [ICORES](https://icores.scitevents.org/)
+##### [ICORES](https://icores.scitevents.org/)
 
 - International Conference on Operations Research and Enterprise Systems
 - 11月
@@ -416,7 +417,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 - routing
 - 不在CCF
 
-#### [ISCAS](https://ieeesystemscouncil.org/event/symposium/2025-ieee-international-symposium-circuits-and-systems#:~:text=The IEEE International Symposium on Circuits and Systems,theory%2C design and implementation of circuits and systems.)
+##### [ISCAS](https://ieeesystemscouncil.org/event/symposium/2025-ieee-international-symposium-circuits-and-systems#:~:text=The IEEE International Symposium on Circuits and Systems,theory%2C design and implementation of circuits and systems.)
 
 - International Symposium on Circuits and Systems
 - 计算机体系结构/并行与分布计算/存储系统
@@ -425,30 +426,29 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [ECCTD](https://www.bing.com/ck/a?!&&p=b4c882ef8ec83ce8cd7b7e1ff04bf54cc8b043f810f16fd6bc9ebcb5e08789c9JmltdHM9MTc2MDA1NDQwMA&ptn=3&ver=2&hsh=4&fclid=22516850-a084-67d2-0b26-7e1ca1b5666f&psq=+European+Conference+on+Circuit+Theory+and+Design&u=a1aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL3hwbC9jb25ob21lLzEwMDE3MDYvYWxsLXByb2NlZWRpbmdz&ntb=1)
+##### [ECCTD](https://www.bing.com/ck/a?!&&p=b4c882ef8ec83ce8cd7b7e1ff04bf54cc8b043f810f16fd6bc9ebcb5e08789c9JmltdHM9MTc2MDA1NDQwMA&ptn=3&ver=2&hsh=4&fclid=22516850-a084-67d2-0b26-7e1ca1b5666f&psq=+European+Conference+on+Circuit+Theory+and+Design&u=a1aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL3hwbC9jb25ob21lLzEwMDE3MDYvYWxsLXByb2NlZWRpbmdz&ntb=1)
 
 - 现在貌似没了？
 
 
 
-#### [CFTC]()
+##### [CFTC]()
 
 - ddl: 5月15
 
 [CCF CFTC 2025征文开始！CCF容错专委40周年！第二十一届CCF全国容错计算学术会议正式启航！](https://mp.weixin.qq.com/s/ruOdGFPUJDGZxFiTvBeYiA)
 
-- 
 
 
 
-#### [CCF Chip]()
+##### [CCF Chip]()
 
 - 7月份
 - 貌似只是个论坛
 
 
 
-#### [CCFDAC]()
+##### [CCFDAC]()
 
 - 7月份
 - ![image-20250605122408973](assets/image-20250605122408973.png)
@@ -458,19 +458,19 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-#### [ICML]()
+##### [ICML]()
 
 
 
-#### [NeurIPS]()
+##### [NeurIPS]()
 
 
 
-#### [CVPR]()
+##### [CVPR]()
 
 
 
-#### [SLIP](http://www.sliponline.org/)
+##### [SLIP](http://www.sliponline.org/)
 
 - System Level Interconnect Prediction
 - 2022年后没了？
@@ -479,9 +479,9 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 
 
-### 期刊
+#### 期刊
 
-#### 1. TCAD
+##### 1. TCAD
 
 - **全称**: *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*
 - **领域**: 计算机辅助设计（CAD）、集成电路与系统设计
@@ -494,7 +494,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 -----
 
-#### 2. TODAES
+##### 2. TODAES
 
 - **全称**: *ACM Transactions on Design Automation of Electronic Systems*
 - **领域**: 电子系统设计自动化（Design Automation for Electronic Systems）
@@ -514,7 +514,7 @@ GLSVLSI'24上发布的一个数字后端全流程数据集，规模比较小，�
 
 ----
 
-#### **3. Journal of the Royal Society Interface**
+##### **3. Journal of the Royal Society Interface**
 
 IF: 3.8
 
@@ -522,17 +522,17 @@ h-index: 114
 
 
 
-#### **4. Journal of Computational Design and Engineering**
+##### **4. Journal of Computational Design and Engineering**
 
 IF: 5.2
 
 
 
-#### 5. IEEE Transactions on Very Large Scale Integration
+##### 5. IEEE Transactions on Very Large Scale Integration
 
 
 
-#### 6. [IEEE TRANSACTIONS ON CIRCUITS AND SYSTEMS II-EXPRESS BRIEFS](https://www.letpub.com.cn/index.php?page=journalapp&view=detail&journalid=3371)
+##### 6. [IEEE TRANSACTIONS ON CIRCUITS AND SYSTEMS II-EXPRESS BRIEFS](https://www.letpub.com.cn/index.php?page=journalapp&view=detail&journalid=3371)
 
 - IF: 4.9
 - h-index: 105
@@ -542,7 +542,7 @@ IF: 5.2
 
 
 
-#### 7. [IEEE Access](https://www.letpub.com.cn/index.php?page=journalapp&view=detail&journalid=10017)
+##### 7. [IEEE Access](https://www.letpub.com.cn/index.php?page=journalapp&view=detail&journalid=10017)
 
 - IF: 3.9
 - h-index: 56
@@ -551,9 +551,9 @@ IF: 5.2
 
 
 
-## 算法理论
+### 算法理论
 
-#### [SODA](https://www.siam.org/conferences-events/siam-conferences/soda26/)
+##### [SODA](https://www.siam.org/conferences-events/siam-conferences/soda26/)
 
 ![image-20250912200456717](assets/image-20250912200456717.png)
 
@@ -561,7 +561,7 @@ IF: 5.2
 
 ![image-20250912204748770](assets/image-20250912204748770.png)
 
-#### [STOC](https://acm-stoc.org/)
+##### [STOC](https://acm-stoc.org/)
 
 - 偏计算机算法，理论
 
@@ -569,7 +569,7 @@ IF: 5.2
 
 
 
-## CV
+### CV
 
 ![image-20250930103922190](assets/image-20250930103922190.png)
 
@@ -577,22 +577,21 @@ IF: 5.2
 
 [CV顶刊顶会 - 知乎](https://zhuanlan.zhihu.com/p/265192024)
 
-## 参考
+### 参考
 
 - [(99+ 封私信 / 81 条消息) 集成电路设计的学术会议含金量排名如何？ - 知乎](https://www.zhihu.com/question/559252881/answer/2849452833?utm_campaign=shareopn&utm_medium=social&utm_psn=1875695916662534144&utm_source=wechat_session)
-- 
 
 
 
-# 相关科研实验室
+## 相关科研实验室
 
-## 清华
+### 清华
 
 清华大学是国内较早从事EDA研究的高校，**洪先龙教授**和**边计年教授**做`物理实现`和`逻辑综合`，两位老先生的学生大部分去了三大EDA公司
 
 
 
-## 北大-无锡EDA研究院
+### 北大-无锡EDA研究院
 
 [无锡北京大学电子设计自动化研究院](http://pkueda.org.cn/index.htm)
 
@@ -632,7 +631,7 @@ IF: 5.2
 
 ![ec7d7183c0dd379cccae82cd8354620](./assets/ec7d7183c0dd379cccae82cd8354620.jpg)
 
-## 复旦
+### 复旦
 
 集成芯片与系统国家重点实验室
 
@@ -642,11 +641,11 @@ IF: 5.2
 
 - 指导蔡志杰、魏民、邹鹏，ISPD 2024 contest 第三名
 
-## 北航
+### 北航
 
 ![image-20241116114923595](./assets/image-20241116114923595.png)
 
-## 港中文-EDA Center
+### 港中文-EDA Center
 
 [CUHK EDA Center官网](https://cueda-center.github.io/index.html)
 
@@ -687,7 +686,7 @@ IF: 5.2
 
 
 
-## The University of Texas at Austin 
+### The University of Texas at Austin 
 
 [David Z. Pan](https://users.ece.utexas.edu/~dpan/)
 
@@ -695,7 +694,7 @@ IF: 5.2
 
 
 
-## 中科大
+### 中科大
 
 USTC
 
@@ -703,7 +702,7 @@ School of Computer Science and Technology, School of Data Science
 
 
 
-## 福大
+### 福大
 
 中国科学院网络计算与智能信息处理重点实验室(Key Laboratory of Network Computing and Intelligent Information Processing)
 
@@ -731,13 +730,13 @@ School of Computer Science and Technology, School of Data Science
 
 
 
-## 上海交大
+### 上海交大
 
 [首页_上海人工智能实验室](https://www.shlab.org.cn/)
 
 
 
-## 东南大学-国家ASIC工程中心
+### 东南大学-国家ASIC工程中心
 
 研究方向是`亚阈值和近阈值相关的时序分析`
 
@@ -756,11 +755,11 @@ School of Computer Science and Technology, School of Data Science
 - yanhao@seu.edu.cn
 - 领域：智能EDA，面向先进工艺、高能效电路设计中存在的问题，应用人工智能算法辅助电路设计；先进制程/低电压下的**时序**分析与优化
 
-## 华中科技大学
+### 华中科技大学
 
 
 
-## 西安电子科技大学
+### 西安电子科技大学
 
 在国内较早开始从事成品率分析算法的研究，并且一直在宽禁带半导体的器件建模、可靠性分析等领域有深入的研究和突出的成果
 
@@ -768,13 +767,13 @@ School of Computer Science and Technology, School of Data Science
 
 
 
-## 中石油-超级科学软件实验室
+### 中石油-超级科学软件实验室
 
-## [Zhou Jin](https://www.ssslab.cn/people/zhoujin.html)
+### [Zhou Jin](https://www.ssslab.cn/people/zhoujin.html)
 
 
 
-## 中山大学
+### 中山大学
 
 [孟祥雨](https://seit.sysu.edu.cn/teacher/MengXiangyu)
 
@@ -784,7 +783,7 @@ School of Computer Science and Technology, School of Data Science
 
 
 
-## 华南理工大学
+### 华南理工大学
 
 赖晓铮
 
@@ -794,7 +793,7 @@ School of Computer Science and Technology, School of Data Science
 
 
 
-## 广东工业大学
+### 广东工业大学
 
 [电子设计自动化（EDA）科研团队-广东工业大学集成电路学院](https://sme.gdut.edu.cn/info/1163/1478.htm)
 
@@ -812,13 +811,13 @@ School of Computer Science and Technology, School of Data Science
 
 
 
-## 国立清华大学
+### 国立清华大学
 
 
 
 
 
-## University of California  
+### University of California  
 
 [Design Automation Laboratory](http://eda.ee.ucla.edu/) Department of Electrical and Computer Engineering, University of California San Diego  
 
@@ -829,7 +828,7 @@ Andrew B. Kahng
 
 
 
-## iEDA
+### iEDA
 
 - [ieda](https://ieda.oscc.cc/en/)
 - 一个做开源数字后端工具`iEDA`的组织
@@ -837,18 +836,18 @@ Andrew B. Kahng
 
 
 
-## 参考
+### 参考
 
 - https://wadmes.github.io/2019/12/11/EDA-family-tree/
 - [全国高校EDA研究全景图_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1UfMpzSEKH/?buvid=XUFC626F59C51B48BCBC4A41057611D79C17D&is_story_h5=false&mid=OVLsgEqbjDFgev4KMYtmeQ%3D%3D&plat_id=193&share_from=ugc&share_medium=android&share_plat=android&share_session_id=e1271216-2f7a-45fd-99ba-7777c86dfb1e&share_source=WEIXIN&share_tag=s_i&spmid=dt.dt.0.0&timestamp=1749785783&unique_k=KbJDjRW&up_id=3546575322221318&vd_source=ea5f077dc692dc32725d05ff92da61a5)
 
 
 
-# 相关企业/机构
+## 相关企业/机构
 
 ![image-20250615150449268](assets/image-20250615150449268.png)
 
-## 华为诺亚方舟 & 海思
+### 华为诺亚方舟 & 海思
 
 Huawei Noah’s Ark Lab [AI4EDA](https://noahai4eda.github.io/)
 
@@ -856,7 +855,7 @@ Huawei Noah’s Ark Lab [AI4EDA](https://noahai4eda.github.io/)
 
 
 
-## EDA国创中心
+### EDA国创中心
 
 与东南大学[有关联](https://ic.seu.edu.cn/2024/0509/c47774a489994/page.htm)
 
@@ -868,13 +867,13 @@ Huawei Noah’s Ark Lab [AI4EDA](https://noahai4eda.github.io/)
 
 
 
-## [芯行纪](https://www.xtimes-da.com/)
+### [芯行纪](https://www.xtimes-da.com/)
 
 ![image-20241214160736661](./assets/image-20241214160736661.png)
 
 
 
-### AmazeSys
+#### AmazeSys
 
 应用于数字芯片物理设计领域的**布局布线**工具
 
@@ -882,11 +881,11 @@ Huawei Noah’s Ark Lab [AI4EDA](https://noahai4eda.github.io/)
 
 基于强大的**机器学习引擎内核**，AmazeSys具备自适应超高质量优化能力。该引擎智能提取设计本身特点进行样本训练，综合性能、功耗、面积和布线拥塞等多项关键指标，快速获取量身定制的最佳优化方案，可有效帮助用户降低调整大量工具设置的时间成本。
 
-### AmazeFP
+#### AmazeFP
 
 智能布局规划工具**AmazeFP**将**机器学习**技术与**布局规划**引警结合，在兼顾性能、功耗和面积(**PPA**)的同时，提供了高度智能的**拥塞感知**、便捷的数据流分析和**宏单元自动整理对齐功能**，有效解决当前数字芯片在后端设计阶段的布局规划节点面临的经验值需求高、手工耗时长、数据流结构分析不够深入、设计目标收敛性差等难题，助力用户在后端设计初期快速有效地获取高质量布局规划方案，减少迭代次数，从而节约大规模设计的研发成本，提速产品上市时间。
 
-### AmazeFP-ME
+#### AmazeFP-ME
 
 作为一款EDA机器学习的工具，AmazeFP-ME在AmazeFP的基础上，能够快速探索数百倍甚至更多的庞大解空间，无需用户手动调参，同时配备优异且精准的数据、图形分析功能，可为用户提供高效便捷的设计体验
 
@@ -894,21 +893,21 @@ AmazeFP-ME作为AmazeFP的AI配套工具，将机器学习技术引入到AmazeFP
 
 
 
-### AmazeDRCLite
+#### AmazeDRCLite
 
 ![image-20241214162304222](./assets/image-20241214162304222.png)
 
-### 云
+#### 云
 
 
 
-## 华大九天
+### 华大九天
 
 ![image-20250330145214973](assets/image-20250330145214973.png)
 
 东南大学-华大九天-NiiCEDA联合实验室
 
-### PyAether
+#### PyAether
 
 Aether就是全定制电路（例如模拟、存储、射频、平板等）设计平台，包括原理图，版图，仿真环境，以及数据版本管理工具和Python接口等。
 
@@ -1224,7 +1223,7 @@ if __name__ == '__main__':
 
 
 
-## 概伦电子
+### 概伦电子
 
 ![image-20250330145528097](assets/image-20250330145528097.png)
 
@@ -1232,7 +1231,7 @@ if __name__ == '__main__':
 
 ![image-20241223162717895](./assets/image-20241223162717895.png)
 
-## 鸿芯微纳
+### 鸿芯微纳
 
 ![image-20250330145822595](assets/image-20250330145822595.png)
 
@@ -1242,7 +1241,7 @@ if __name__ == '__main__':
 
 
 
-## 立芯
+### 立芯
 
 ![image-20250330144549197](assets/image-20250330144549197.png)
 
@@ -1256,11 +1255,11 @@ if __name__ == '__main__':
 
 ![image-20250330143653697](assets/image-20250330143653697.png)
 
-## 伴芯
+### 伴芯
 
 ![image-20250330144809473](assets/image-20250330144809473.png)
 
-## 华芯巨数
+### 华芯巨数
 
 ![image-20250330145920243](assets/image-20250330145920243.png)
 
@@ -1270,15 +1269,15 @@ if __name__ == '__main__':
 
 ![image-20250105132149726](./assets/image-20250105132149726.png)
 
-## 嘉立创
+### 嘉立创
 
 PCB
 
 
 
-# 相关竞赛
+## 相关竞赛
 
-## CADathlon@ICCAD
+### CADathlon@ICCAD
 
 [CADathlon@ICCAD 2024 | ICCAD 2024](https://2024.iccad.com/cadathlon-iccad-2024)
 
@@ -1297,7 +1296,7 @@ PCB
 
 
 
-## Contest@ISPD
+### Contest@ISPD
 
 [International Symposium on Physical Design (ISPD)](https://ispd.cc/ispd2025/index.php?page=contests)
 
@@ -1311,7 +1310,7 @@ PCB
 
 
 
-## CAD Contest@ICCAD
+### CAD Contest@ICCAD
 
 - 始于 2012年
 - 覆盖了EDA前端（front-end）和后端（back-end）
@@ -1322,7 +1321,7 @@ Blockage-Aware Detailed Routing-Driven Placement Contest
 
 ![image-20241214172612304](./assets/image-20241214172612304.png)
 
-### 历年相关赛题
+#### 历年相关赛题
 
 |        |                             题目                             | Sponsor |
 | ------ | :----------------------------------------------------------: | ------- |
@@ -1334,17 +1333,17 @@ Blockage-Aware Detailed Routing-Driven Placement Contest
 
 
 
-## 侠客岛
+### 侠客岛
 
 
 
-## EDA精英挑战赛
+### EDA精英挑战赛
 
 
 
 
 
-## TAU Contest
+### TAU Contest
 
 [Tau 2021 Contest](https://sites.google.com/view/tau-contest-2021/home)
 
@@ -1355,7 +1354,7 @@ Blockage-Aware Detailed Routing-Driven Placement Contest
 
 
 
-## [Programming Contest@IWLS](https://www.iwls.org/contest/)
+### [Programming Contest@IWLS](https://www.iwls.org/contest/)
 
 [IWLS Contest](https://www.iwls.org/contest/)
 
@@ -1368,7 +1367,7 @@ Blockage-Aware Detailed Routing-Driven Placement Contest
 
 
 
-## “全国大学生集成电路创新创业大赛”的华大九天赛道
+### “全国大学生集成电路创新创业大赛”的华大九天赛道
 
 ![image-20241214193431391](./assets/image-20241214193431391.png)
 
@@ -1380,7 +1379,7 @@ Blockage-Aware Detailed Routing-Driven Placement Contest
 
 ![image-20241214203523404](./assets/image-20241214203523404.png)
 
-## LLM4HWDesign Contest
+### LLM4HWDesign Contest
 
 2024年ICCAD新设立**LLM** for **Hardware** Design Contest
 
@@ -1388,7 +1387,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 
 
-## [**DAC System Design Contest** ](https://pku-sec-lab.github.io/dac-sdc-2024/)
+### [**DAC System Design Contest** ](https://pku-sec-lab.github.io/dac-sdc-2024/)
 
 **DAC 2012 Routability-Driven Placement Contest and Benchmark Suite**
 
@@ -1400,19 +1399,19 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 
 
-## 参考
+### 参考
 
 - [盘点全球顶级EDA竞赛及中国大陆获奖情况|清华大学|福州大学|iccad|上海交通大学|eda_网易订阅](https://www.163.com/dy/article/GQS44UUR0531PW97.html)
 
 
 
-# 相关PDK
+## 相关PDK
 
 详细查看[flow.md](./flow.md)
 
 
 
-# 社区
+## 社区
 
 - [OSCC: Open Source Chip Community](https://gitee.com/oscc-project)
 - [EDA知识](https://ieda.oscc.cc/train/eda/)
@@ -1420,13 +1419,13 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 
 
-# 其他
+## 其他
 
-### 
+#### 
 
 
 
-### VLSI Placement and Routing — From 2D to 3D
+#### VLSI Placement and Routing — From 2D to 3D
 
 - --Hailong Yao （University of Science and Technology Beijing  ）
 - report at ISEDA'25
@@ -1434,7 +1433,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512161227505](assets/image-20250512161227505.png)
 
-#### Package
+##### Package
 
 ![image-20250512162032849](assets/image-20250512162032849.png)
 
@@ -1450,7 +1449,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 
 
-#### Placement  
+##### Placement  
 
 ![image-20250512171045694](assets/image-20250512171045694.png)
 
@@ -1458,7 +1457,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512171437370](assets/image-20250512171437370.png)
 
-#### Routing
+##### Routing
 
 ![image-20250512171453017](assets/image-20250512171453017.png)
 
@@ -1468,9 +1467,9 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512172127004](assets/image-20250512172127004.png)
 
-#### Existing P&R Methods
+##### Existing P&R Methods
 
-##### placement
+###### placement
 
 ![image-20250512172338616](assets/image-20250512172338616.png)
 
@@ -1488,7 +1487,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512172708788](assets/image-20250512172708788.png)
 
-##### routing
+###### routing
 
 ![image-20250512173511588](assets/image-20250512173511588.png)
 
@@ -1502,7 +1501,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512173816025](assets/image-20250512173816025.png)
 
-#### 3D商业工具
+##### 3D商业工具
 
 ![image-20250512173739075](assets/image-20250512173739075.png)
 
@@ -1510,7 +1509,7 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512174030473](assets/image-20250512174030473.png)
 
-#### Future direction
+##### Future direction
 
 ![image-20250512174137601](assets/image-20250512174137601.png)
 
@@ -1518,6 +1517,6 @@ LLM4HW Design竞赛旨在为硬件代码生成构建大规模、高质量的Veri
 
 ![image-20250512174315077](assets/image-20250512174315077.png)
 
-#### conclusion
+##### conclusion
 
 ![image-20250512174322304](assets/image-20250512174322304.png)

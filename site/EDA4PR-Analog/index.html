@@ -1,0 +1,3251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>EDA4PR-Analog - notebOOOOOOk</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "EDA4PR-Analog";
+        var mkdocs_page_input_path = "EDA4PR-Analog.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> notebOOOOOOk
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">EDA</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR/">EDA4PR</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">EDA4PR-Analog</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">概述</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">背景</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_3">和数字在布局的区别</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">指标</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">难点</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">约束类型</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#overlap">overlap</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#symmetry">symmetry</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#alignment">alignment</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#common-centroid">common-centroid</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#topo">topo</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#length">length</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#currentsignal-flow">current/signal-flow</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#regularity">regularity</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#proximity">proximity</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#thermal-effects">thermal effects</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#area">area</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">版图基本知识</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#mos">MOS</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#lde">LDE效应</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variations">variations</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#em">电迁移（EM）</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_9">参考</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_10">版图绘制方法</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#placement">placement</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#routing">routing</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_19">减小失配方法总结</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#other">other</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_22">参考</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pattern">常见pattern版图</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#overview_1">overview</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_23">电流镜</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_27">差分对</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cap">cap</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_28">其他</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#placement_1">placement 算法</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_29">三种布局范式</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ga">GA</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#simulated-annealing">Simulated Annealing</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_30">优点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_31">缺点</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_32">相关论文</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lp">LP</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#nlp">NLP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ilp">ILP</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#milp">MILP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#combinatorial-optimization">combinatorial optimization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#smt-formulation">SMT formulation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#b-treeo-tree">B*-tree/O-tree</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sequence-pairs">sequence pairs</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#-">-</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#forced-directed-approach">Forced-directed approach</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_33">数据集</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#magical">MAGICAL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#align">ALIGN</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mcnc">MCNC</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gsrc">GSRC</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#amsnet">AMSnet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#aicircuit">AICircuit</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_34">综述</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#-routing-ieee-access-2023-analog-integrated-circuit-routing-techniques-an-extensive-review-">-routing-IEEE Access-2023-Analog Integrated Circuit Routing Techniques: An Extensive Review---</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#background">Background</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-asp-dac-2024-performance-driven-analog-layout-automation-current-status-and-future-directions-cuhk-bei-yu">--ASP DAC-2024-Performance Driven Analog Layout Automation: Current Status and Future Directions--CUHK Bei Yu</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#background_1">Background</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#challenges-and-opportunities-toward-fully-automated-analog-layout-design-jos20-dzp">Challenges and opportunities toward fully automated analog layout design-JoS20-DZP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#placement_2">Placement</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#placer-stochastic">Placer-stochastic</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#tcad10-sa-efyy">TCAD10-SA-EFYY</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#placer-analytical">Placer-analytical</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#-system-signal-flow-iccad20-uta">-system signal flow-ICCAD20--UTA</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-ganwell-generation-aspdac22-gan-uta">-GAN+Well Generation-ASPDAC22-GAN-UTA</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#eplace-a-nlpgnn-date22-are-analytical-techniques-worthwhile-for-analog-ic-placement-tau">ePlace A-NLP+GNN-DATE22-Are Analytical Techniques Worthwhile for Analog IC Placement-TAU</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-ilpcor24pre-icores23-stm">-ILP+COR24Pre- ICORES23--STM</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-priority-basedassociated-constraints-cor24-coheuristicrl-">-Priority-based+associated constraints -COR24-CO+heuristic+RL-</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#aiplacer-gnn-unsupervised-aspdac25-ustc">AIPlacer-GNN unsupervised-ASPDAC25--USTC</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#placer-dl">Placer-DL</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#sacplace-madrlsymmetry-date25-madrl-cas">SACPlace-MADRL+symmetry-DATE25-MADRL-CAS</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#-_1">-</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#contribution_6">contribution</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flow_5">flow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#model_5">model</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#state">state</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#action">action</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#reward">reward</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#marl">MARL</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data_5">data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#experiment_6">experiment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#placer-other">Placer-other</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#-interactive-layout-editinginstant-legalization-dac21-pek-gao-lin">-Interactive Layout Editing+instant legalization-DAC21--PEK Gao, Lin</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#placer-adv">Placer-adv</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#-amsfinfet-date22-dzp">-AMS+FinFET-DATE22--DZP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#popt-dl">POpt-DL</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#-survey-mlsa-isvlsi20-uta-">-survey ML+SA-ISVLSI20--UTA-</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-placement-quality-prediction-via-transfer-learning-date20-cnn-uta">-Placement Quality Prediction via Transfer Learning-DATE20-CNN-UTA</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-constraint-evaluation-aspdac21-svmmlp-">-Constraint Evaluation-ASPDAC21-SVM+MLP-</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-analog-placement-quality-prediction-aspdac23-nas-du">-Analog Placement Quality Prediction-ASPDAC23-NAS-DU</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#routing_1">Routing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ldsa-description-script-for-layout-templates">LDS—A description script for layout templates</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bag">BAG</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#laygo1">LAYGO1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#laygo2">LAYGO2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#analog-and-mixed-signal-layout-automation-using-digital-place-and-route-tools">Analog and mixed-signal layout automation using digital place-and-route tools</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dtco">DTCO</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#-boclosed-loopssf-post-dac20-uta">-BO+closed loop+SSF post-DAC20--UTA</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#background_15">background</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#contribution_10">contribution</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#flow_7">flow</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#model_8">model</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#data_8">data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#experiment_12">experiment</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gate-sizing">Gate Sizing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#-dac-2024-marl-mohsen-et-al-">- -DAC-2024-MARL-Mohsen et al-</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pzta-transferable-circuit-theory-inspired-iseda-2025-fudan-">PZTA-Transferable Circuit Theory-Inspired-ISEDA-2025- -Fudan-</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#background_16">background</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#routing_2">Routing</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#background_17">background</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#contribution_11">contribution</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#netlist-annotation-constraint-generation">Netlist Annotation &amp; Constraint Generation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#design-rule-abstraction">Design rule abstraction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pcell-generator">PCell Generator</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#align-opt-date21-">ALIGN-opt-DATE21--</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#background_18">background</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#array-cc-pr">Array CC PR</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#toread">TOREAD</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-eulerian-path-icasic-03-tsinghua">-Eulerian Path-ICASIC-03--Tsinghua</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#layout-symmetries-tcad-17-">Layout Symmetries--TCAD-17--</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-choose-pattern-date-21-sharma">-Choose pattern-DATE-21--Sharma</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-performance-aware-common-centroid-placement-and-routing-iccad-21-sharma">-Performance-Aware Common-Centroid Placement and Routing-ICCAD-21--Sharma</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-cc-nonlinear-spatial-variations-opt-date-24-sa-uta">-CC nonlinear spatial variations Opt-DATE-24-SA-UTA</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-nonlinear-gradients-tcad-24-sharma">-Nonlinear Gradients -TCAD-24--Sharma</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#-multiobjective-optimization-tcad-25-sa-supriyo">-Multiobjective Optimization-TCAD-25-SA-Supriyo</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#generator">Generator</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#pcell">PCell</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#-cadence">- Cadence</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#pycells">PyCells</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bag12">BAG1/2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#netlist2gds">Netlist2GDS</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#magical_1">MAGICAL</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#align_1">ALIGN</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#viewer">viewer</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#klayout">KLayout</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR-Digtal/">EDA4PR-Digtal</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EDA4PR-LCM/">EDA4PR-LCM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../flow/">Flow</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tools</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Algorithms/">Algorithms</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware/">Hardware</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../OS/">OS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Program/">Program</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Tools/">Tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Other</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Literature/">Good Things</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">notebOOOOOOk</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">EDA</li>
+      <li class="breadcrumb-item active">EDA4PR-Analog</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="eda4pr-analog">EDA4PR-Analog<a class="headerlink" href="#eda4pr-analog" title="Permanent link">&para;</a></h1>
+<h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">背景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Implementing analog circuit layout is a heavily manual, timeconsuming, and error-prone task.   </p>
+</li>
+<li>
+<p><img alt="image-20251021185213217" src="../assets/image-20251021185213217.png" /></p>
+</li>
+<li>analog  ICs flow faces challenges regarding low design efficiency and slow development speed [AIPlacer: 1] </li>
+<li><img alt="image-20251022153431726" src="../assets/image-20251022153431726.png" /></li>
+</ul>
+<h4 id="_3">和数字在布局的区别<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Digital designers have to deal with a large number of rectangular devices, but all the devices share the same height and are placed in rows rather than freely, which resembles 1D Bin Packing Problem (Munienand Ezugwu, 2021). On the other hand, Analog and Mixed-Signal (AMS) ICs usually contain fewer devices, which may have different sizes and voltage levels and can be freely placed on the canvas. Hence, routability is generally not a critical issue for analog circuit layouts.</li>
+<li>Unlike digital ICs, analog ICs contain a large number of design constraints and intricate performance metrics to meet, which requires a steep learning curve for designers with a wealth of specialized skills. </li>
+<li><img alt="image-20251022152231332" src="../assets/image-20251022152231332.png" /></li>
+</ul>
+<h5 id="performance-driven-placement-optimization">performance-driven placement optimization<a class="headerlink" href="#performance-driven-placement-optimization" title="Permanent link">&para;</a></h5>
+<p>AIPlacer:</p>
+<ul>
+<li><img alt="image-20251022093722788" src="../assets/image-20251022093722788.png" /></li>
+<li><img alt="image-20251022093631389" src="../assets/image-20251022093631389.png" /></li>
+</ul>
+<h3 id="_4">指标<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>area</li>
+<li>
+<p>wirelength</p>
+</li>
+<li>
+<p>HPWL</p>
+</li>
+<li>RWL</li>
+<li>symmetry</li>
+<li>parasitics</li>
+<li>power</li>
+<li>via</li>
+<li>thermal effects</li>
+<li></li>
+</ul>
+<h3 id="_5">难点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>the impact of layout on analog circuit performance can be very large due to significant RC (Resistance and Capacitance) parasitic generated in layout</li>
+</ul>
+<p><img alt="image-20251013094024375" src="../assets/image-20251013094024375.png" /></p>
+<ul>
+<li>
+<p>the layout effect on performance is often very complex and thus difficult to be quickly and accurately estimated.</p>
+</li>
+<li>
+<p>analog circuit performance has much larger variety than digital circuits, and different performance metrics are used for different types of analog circuits. </p>
+</li>
+<li>
+<p>Unlike its counterpart in the digital domain, AMS circuits are sensitive to layout parasitics and coupling while lacking a practical approach to model the performance from layouts [21]</p>
+</li>
+<li>
+<p>Unlike typical digital designs, AMS circuits are sensitive to small perturbation and distortion on the signal and raise more considerable challenges on the layouts.</p>
+</li>
+<li>
+<p>企业方面：用户不一定有 GPU</p>
+</li>
+<li>
+<p>flow auto 的缺点：</p>
+</li>
+</ul>
+<p>1) Analog circuit topologies are rapidly evolving with new design practices. A fully automated flow is not flexible enough to satisfy the versatile customization demands. </p>
+<p>2) Analog layout drawing is designer-specific. That is, two designers can have quite different ways to layout the same circuit according to their own experience and taste, which is hard to be implemented in a fully automated flow.</p>
+<p>3) Layouts generated by a fully automated flow may not align with designers’ intuition, like the example in Figure 1, leading to performance degradation or difficulties in postsilicon debugging after tape-out. </p>
+<div class="highlight"><pre><span></span><code> ![image-20251015091642612](assets/image-20251015091642612.png)
+</code></pre></div>
+<h3 id="_6">约束类型<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>[DATE22]: symmetry [5], common-centroid [6], regularity [7], proximity [8], pre-placed [9], fixed-boundary [10], and mimimum/maximum separation [11]. Performance-related constraints such as monotonic current flows [12] have also been studied. </p>
+<h4 id="overlap">overlap<a class="headerlink" href="#overlap" title="Permanent link">&para;</a></h4>
+<h4 id="symmetry">symmetry<a class="headerlink" href="#symmetry" title="Permanent link">&para;</a></h4>
+<ul>
+<li><img alt="image-20251014101346045" src="../assets/image-20251014101346045.png" /></li>
+<li>对称性约束是模拟版图综合过程中应用最广泛且至关重要的约束之一。模拟设计经常采用差分拓扑结构来抑制共模噪声并增强电路的鲁棒性。这些拓扑结构中器件的失配会显著降低电路性能。</li>
+<li>在版图设计中，需要对这些器件进行对称的放置和布线，以确保匹配性。</li>
+<li>Symmetry constraints are one of the most essential and widely adopted constraints applied during analog layout synthesis. Analog designs frequently use differential topologies to reject common-mode noise and enhance circuit robustness and performance [18]. Mismatch of sensitive devices in the layouts often cause performance degradation to offset and commonmode rejection ratio (CMRR) [19]. Thus correctly identifying symmetry constraints between sensitive devices are crucial for ensuring the quality of placement and routing</li>
+<li>Symmetry constraints are one of the <mark>most essential and widely adopted</mark> constraints applied during analog layout synthesis</li>
+<li><img alt="image-20251022095602561" src="../assets/image-20251022095602561.png" /></li>
+</ul>
+<h5 id="hierarchical-symmetry-constraints">hierarchical symmetry constraints<a class="headerlink" href="#hierarchical-symmetry-constraints" title="Permanent link">&para;</a></h5>
+<h4 id="alignment">alignment<a class="headerlink" href="#alignment" title="Permanent link">&para;</a></h4>
+<h4 id="common-centroid">common-centroid<a class="headerlink" href="#common-centroid" title="Permanent link">&para;</a></h4>
+<ul>
+<li><img alt="image-20251014101401573" src="../assets/image-20251014101401573.png" /></li>
+<li>[ICCAD20:19, 33, 38]  </li>
+<li></li>
+</ul>
+<h4 id="topo">topo<a class="headerlink" href="#topo" title="Permanent link">&para;</a></h4>
+<ul>
+<li><img alt="image-20251014101411315" src="../assets/image-20251014101411315.png" /></li>
+</ul>
+<h4 id="length">length<a class="headerlink" href="#length" title="Permanent link">&para;</a></h4>
+<ul>
+<li><img alt="image-20251014101421031" src="../assets/image-20251014101421031.png" /></li>
+</ul>
+<h4 id="currentsignal-flow">current/signal-flow<a class="headerlink" href="#currentsignal-flow" title="Permanent link">&para;</a></h4>
+<ul>
+<li>[ICCAD20]</li>
+<li>Current flow constraint requires that the path or direction of current flows must align with the circuit’s design. Adhering to current flow constraints mitigates issues such as voltage drops, noise, electromagnetic interference, and localized overheating.</li>
+</ul>
+<h4 id="regularity">regularity<a class="headerlink" href="#regularity" title="Permanent link">&para;</a></h4>
+<ul>
+<li>[ICCAD20: 7, 26, 39]  </li>
+</ul>
+<h4 id="proximity">proximity<a class="headerlink" href="#proximity" title="Permanent link">&para;</a></h4>
+<ul>
+<li>various minimum distances between devices</li>
+<li>[ICCAD20:6, 18, 25, 33–35, 41] </li>
+</ul>
+<h4 id="thermal-effects">thermal effects<a class="headerlink" href="#thermal-effects" title="Permanent link">&para;</a></h4>
+<ul>
+<li>[ICCAD20:19, 20]   </li>
+</ul>
+<h4 id="area">area<a class="headerlink" href="#area" title="Permanent link">&para;</a></h4>
+<h3 id="_7">版图基本知识<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="mos">MOS<a class="headerlink" href="#mos" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251105111559354" src="../assets/image-20251105111559354.png" /></p>
+<h5 id="finger-multiplefin">finger &amp; multiple&amp;fin<a class="headerlink" href="#finger-multiplefin" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251105111457462" src="../assets/image-20251105111457462.png" /></p>
+<p><img src="assets/image-20251105111323938.png" alt="image-20251105111323938" style="zoom: 75%;" /></p>
+<p><code>finger</code>就是做成==叉指==形状的单个晶体管 , <code>mulitiplier</code>是多个并列的晶体管</p>
+<p><code>finger</code>是指将一个MOS管的<strong>沟道分割</strong>成多个<strong>并联</strong>的部分，每个部分称为一个finger。比如，如果一个MOS管的宽度太大，直接画成一个宽沟道可能不符合设计规则，或者导致版图不均匀。这时候，把它分成多个finger，每个finger的宽度较小，然后并联起来，总宽度就是各个finger的宽度之和。MOS管的漏端==结电容和栅电阻均会减小==</p>
+<p><img src="assets/image-20251105111802933.png" alt="image-20251105111802933" style="zoom: 85%;" /></p>
+<p><img src="assets/image-20251105111714782.png" alt="image-20251105111714782" style="zoom:95%;" /></p>
+<p><img alt="image-20251105111945631" src="../assets/image-20251105111945631.png" /></p>
+<p><code>multiplier</code>是指器件被复制的次数。比如，设置multiplier为4，相当于把这个MOS管<strong>复制</strong>4个，<mark>并联==在一起。这种情况下，==每个MOS管都是独立的，它们的源、漏、栅都分别连接在一起</mark>。这样==总宽度是单个MOS宽度的4倍==，电流能力也变成四倍。</p>
+<blockquote>
+<p>一般来说，fingers数取偶数会好一些</p>
+</blockquote>
+<p><code>fin</code></p>
+<p><img alt="image-20251105133445624" src="../assets/image-20251105133445624.png" /></p>
+<h4 id="lde">LDE效应<a class="headerlink" href="#lde" title="Permanent link">&para;</a></h4>
+<p>layout-dependent effects</p>
+<p>layout dependent effect can affect device <code>threshold voltage V_th</code> , <code>mobility</code> and circuit performance</p>
+<p><a href="https://www.toutiao.com/article/7463532600296997412/?wid=1761215732491">(LDE) </a> <a href="https://www.cnblogs.com/jinzbr/p/18235452">版图基础知识 - 小小桂花糕 - 博客园</a></p>
+<p><img src="assets/image-20251117183644094.png" alt="image-20251117183644094" style="zoom: 60%;" /></p>
+<ul>
+<li>LOD(Length of Diffusion)</li>
+<li>STI 应力引起的 LOD 效应的影响</li>
+<li><a href="https://zhuanlan.zhihu.com/p/1966516064595715212">告别失配！实用的版图匹配技巧 ①（附仿真验证说明） - 知乎</a></li>
+<li>不要盲目套用 “匹配就是 ABBA” 的经验，ABBA 能抵消全局梯度，却无法消除局部 STI 应力差异。</li>
+<li>WPE(Well Proximity Effect)</li>
+<li>OSE(OD Space Effect)</li>
+<li>PSE(Poly Space Effect)</li>
+<li>MBE(Metal Boundary Effect）</li>
+<li>PCE(Poly Cut Effect)</li>
+</ul>
+<h5 id="lod">LOD<a class="headerlink" href="#lod" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251118173042930" src="../assets/image-20251118173042930.png" /></p>
+<p><img src="assets/image-20251118173032364.png" alt="image-20251118173032364" style="zoom: 90%;" /></p>
+<p><img alt="image-20251204093624077" src="../assets/image-20251204093624077.png" /></p>
+<p><img alt="image-20251118173126341" src="../assets/image-20251118173126341.png" /></p>
+<h6 id="_8">实例<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h6>
+<p><a href="https://zhuanlan.zhihu.com/p/1966516064595715212">告别失配！实用的版图匹配技巧 ①（附仿真验证说明） - 知乎</a></p>
+<p><img alt="image-20251117182541286" src="../assets/image-20251117182541286.png" /></p>
+<p><img alt="image-20251117183207081" src="../assets/image-20251117183207081.png" /></p>
+<p><img alt="image-20251117183219299" src="../assets/image-20251117183219299.png" /></p>
+<p><img alt="image-20251117183420324" src="../assets/image-20251117183420324.png" /></p>
+<p><img alt="image-20251118173059912" src="../assets/image-20251118173059912.png" /></p>
+<h5 id="wpe">WPE<a class="headerlink" href="#wpe" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251204093425205" src="../assets/image-20251204093425205.png" /></p>
+<ul>
+<li>
+<p>为了减少闩锁效应（latchup），制造过程中会使用高能离子注入来创建深倒置阱剖面（deep retrograde well profile），改变了阱区的掺杂剖面，</p>
+</li>
+<li>
+<p>在先进技术节点（如纳米级CMOS），LDEs会导致晶体管性能参数（如阈值电压、迁移率）发生变化</p>
+</li>
+<li>
+<p>影响：改变<code>Vth</code> of a device based on its <mark>distance from the well edge</mark>  </p>
+</li>
+<li>
+<p>The WPE induced mismatch can be <mark>minimized by keeping well edges far from devices</mark> or by maintaining equal well spacing for the devices to be matched</p>
+</li>
+</ul>
+<p><img alt="image-20251204092445982" src="../assets/image-20251204092445982.png" /></p>
+<h5 id="ose">OSE<a class="headerlink" href="#ose" title="Permanent link">&para;</a></h5>
+<p>栅极之间的间距变化会影响多晶硅栅周围应力材料（如氮化硅）的体积，从而调制应力并改变Vth。</p>
+<h4 id="variations">variations<a class="headerlink" href="#variations" title="Permanent link">&para;</a></h4>
+<p>学术解释：</p>
+<p>--cite--&gt;<a href="">Common-Centroid Layouts for Analog Circuits: Advantages and Limitations</a></p>
+<p><img src="assets/image-20251204142612730.png" alt="image-20251204142612730" style="zoom: 65%;" /></p>
+<p><img src="assets/image-20251204142631536.png" alt="image-20251204142631536" style="zoom: 65%;" /></p>
+<p><img src="assets/image-20251204142824797.png" alt="image-20251204142824797" style="zoom: 40%;" /></p>
+<p>--cite--&gt;<a href="">Constructive Place-and-Route for FinFET-Based Transistor Arrays in Analog Circuits Under Nonlinear Gradients</a></p>
+<p><img alt="image-20251205092053721" src="../assets/image-20251205092053721.png" /></p>
+<p><img alt="image-20251205092205334" src="../assets/image-20251205092205334.png" /></p>
+<h5 id="random-variations">random variations<a class="headerlink" href="#random-variations" title="Permanent link">&para;</a></h5>
+<p>Analog circuit performance can degrade due to random and spatial variations</p>
+<p>can be mitigated using larger-sized devices  [2] [3] However, larger device may have more spatial variations as the distance between the devices increases [3].  --cit--&gt;, Analog Transistor Placement Optimization Considering Nonlinear Spatial Variations</p>
+<ul>
+<li><img alt="image-20251204132825535" src="../assets/image-20251204132825535.png" /></li>
+<li><img alt="image-20251204132912065" src="../assets/image-20251204132912065.png" /></li>
+</ul>
+<p>However, increasing the size may cause the devices to become more sensitive to process gradients  [2].</p>
+<ul>
+<li><img alt="image-20251204195318201" src="../assets/image-20251204195318201.png" /></li>
+</ul>
+<p>random dopant fluctuations (RDF)</p>
+<h5 id="spatial-variations">spatial variations<a class="headerlink" href="#spatial-variations" title="Permanent link">&para;</a></h5>
+<p>use common-centroid, which effectively reduces <code>linear variations</code> or <code>first-order effect</code></p>
+<p>Several factors, including <code>process variations</code>, <code>thermal distribution</code> or uneven <code>mechanical stress</code> from other circuit layers, can contribute to spatial variations</p>
+<p>The spatial variations can be modeled by Taylor series, where the lower order terms have greater impacts on the mismatch among devices [3] [4] [5] [6]</p>
+<ul>
+<li><img src="assets/image-20251204133228675.png" alt="image-20251204133228675" style="zoom: 70%;" /></li>
+</ul>
+<p>However, for high performance systems, layout must be optimized considering <code>nonlinear or higher order effects</code> [3] [4] [5] [6] [10] [11]</p>
+<ul>
+<li><img alt="image-20251204133512055" src="../assets/image-20251204133512055.png" /></li>
+<li>Spatial variations have <code>linear</code> and <code>nonlinear</code> components</li>
+<li><img alt="image-20251204154215459" src="../assets/image-20251204154215459.png" /></li>
+<li><img alt="image-20251204154350909" src="../assets/image-20251204154350909.png" /></li>
+<li><img alt="image-20251205101928335" src="../assets/image-20251205101928335.png" /></li>
+</ul>
+<h5 id="gradient-based-variations">Gradient-Based Variations<a class="headerlink" href="#gradient-based-variations" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251205102128219" src="../assets/image-20251205102128219.png" /></p>
+<h4 id="em">电迁移（EM）<a class="headerlink" href="#em" title="Permanent link">&para;</a></h4>
+<p>电迁移可以被形象地理解为金属导线中的“动脉硬化”。当大量电子（电流）长时间持续地流过一根细小的金属导线时，会像水流冲击河床一样，对导线原子产生一个持续的推力（电子风）</p>
+<p>影响：</p>
+<ul>
+<li><strong>短期</strong>：金属原子被“吹走”，导致导线局部变薄，电阻逐渐增大。</li>
+<li><strong>长期</strong>：最终会在高电流密度处形成<strong>开路</strong>（导线断裂），电路功能完全失效。</li>
+<li><strong>工艺演进下的恶化</strong>：在旧工艺中，这个问题主要发生在较粗的上层金属。但在纳米级工艺中，最底层的金属导线变得极细，电流密度急剧升高，使得<strong>电迁移成为所有金属层都必须严肃对待的可靠性头号杀手</strong>，尤其是在充满大直流电流的模拟电路和电源网络中。</li>
+</ul>
+<p><strong>对具体电路的破坏性影响</strong>：</p>
+<ul>
+<li><strong>电流镜</strong>：连接匹配晶体管的金属线上的寄生电阻，会导致它们的源极电压出现微小差异。这会直接破坏精确的<strong>电流比例关系</strong>，使电路失去功能。</li>
+<li><strong>差分对/OTA</strong>：寄生电阻会降低电路的<strong>跨导（Gm）</strong>，这是模拟电路的核心性能指标，直接导致放大器增益、带宽等关键性能的劣化。</li>
+</ul>
+<p>can be reduced by identifying sensitive wires and using <mark>multiple parallel connections</mark> between nodes,</p>
+<h4 id="_9">参考<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1dL411n7c2?spm_id_from=333.788.videopod.episodes&amp;vd_source=ea5f077dc692dc32725d05ff92da61a5">集成电路版图设计技术更新版_哔哩哔哩_bilibili</a></li>
+<li><a href="版图知识大总结_陆晓欢.pdf">版图知识大总结_陆晓欢.pdf</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/690311740">Finger对MOS管的影响以及finger与Multiple的区别（浅显理解） - 知乎</a></li>
+<li><a href="https://blog.csdn.net/Cecilia_yxy/article/details/134325937">fingers和multiplier_inv电路中multiplier跟fingers的区别-CSDN博客</a></li>
+<li></li>
+</ul>
+<h3 id="_10">版图绘制方法<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="placement">placement<a class="headerlink" href="#placement" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251204154912770" src="../assets/image-20251204154912770.png" /></p>
+<h5 id="clustered">clustered<a class="headerlink" href="#clustered" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251204154922277" src="../assets/image-20251204154922277.png" /></p>
+<h5 id="interdigitating">Interdigitating<a class="headerlink" href="#interdigitating" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>U may assume that interdigitization is a special case of a <mark>common centroid</mark> but with <mark>only one row</mark></p>
+</li>
+<li>
+<p>相比cc,在==面积效率和局部热管理==上更好，但可能引入额外寄生电容。</p>
+</li>
+<li>
+<p>Interdigitated适合==面积受限或高频场景==</p>
+</li>
+<li>
+<p><a href="https://www.edaboard.com/threads/common-centroid-interdigitization.58378/">In transistor matching if the total length of the mirror <mark>exceeds 80um or 100um</mark>, try to use common centroid for better matching</a></p>
+</li>
+<li>
+<p>virtuoso的操作https://youtu.be/hy_APHz8XwQ?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7</p>
+</li>
+<li>
+<p>原理：</p>
+</li>
+</ul>
+<p><img alt="image-20251126213635791" src="../assets/image-20251126213635791.png" /></p>
+<p><img alt="image-20251126213615569" src="../assets/image-20251126213615569.png" /></p>
+<p><img alt="image-20251124200855907" src="../assets/image-20251124200855907.png" /></p>
+<p><img alt="image-20251124182632825" src="../assets/image-20251124182632825.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>貌似finger必须是双数。为了源漏共用？</p>
+<p><a href="https://www.edaboard.com/threads/common-centroid-interdigitization.58378/">in interdigitised pattern all the transistors are in interleaved pattern like suppose there are two transistors with 2 fingers each</a></p>
+</blockquote>
+<h6 id="interdigitation-patterns">Interdigitation Patterns<a class="headerlink" href="#interdigitation-patterns" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251125085713644" src="../assets/image-20251125085713644.png" /></p>
+<h5 id="common-centroid_1">Common Centroid<a class="headerlink" href="#common-centroid_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p><strong>Common Centroid</strong> is more advanced matching technique, suitable for more complex analog structures, such as <mark>differential pairs</mark>, BJT arrays in Bandgaps, R/C DAC array etc. </p>
+</li>
+<li>
+<p>相比idg在降低偏移电压和改善线性度方面更优，但需要更大面积和更复杂路由。</p>
+</li>
+<li>
+<p>Common-Centroid适合高精度应用（如低偏移要求）</p>
+</li>
+<li>
+<p>“共质心布局的缺点是显而易见的。这就需要==交叉连接器件==，增加了匹配器件之间的==分离==(area⬆️)，并且在线性工艺梯度不是主要限制的情况下可能会使匹配恶化。”</p>
+</li>
+<li>
+<p>在匹配vs区域的情况下，赢家肯定是匹配。因此，当采用cc法时，面积是最不重要的。如果晶体管没有正确匹配，那么整个电路就会被搞砸。所以cc是一个福音。不可能总是用cc，但只要有可能，最好的办法就是用它。<a href="https://www.edaboard.com/threads/common-centroid-interdigitization.58378/">Common Centroid &amp; Interdigitization | Forum for Electronics</a></p>
+</li>
+<li>
+<p>common centroid layout provides <mark>better matching</mark> as in this method gradients are canceled in <mark>both X and Y direction</mark>. Interdigitized method provides gradient cancellation in <mark>one direction only</mark>.</p>
+</li>
+<li>
+<p>virtuoso的操作https://youtu.be/mca7NKcTlhU?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7</p>
+</li>
+<li>
+<p>Commoncentroid (CC) is a special layout technique which has been shown to be beneficial in reducing first-order variations [6] [7] [8] [9]</p>
+</li>
+<li>
+<p><img src="assets/image-20251204133356229.png" alt="image-20251204133356229" style="zoom: 70%;" /></p>
+</li>
+<li>
+<p>Common-centroid (CC) layouts are widely used in analog design to make circuits resilient to variations by matching device characteristics. However, CC layout may involve increased routing complexity and higher parasitics than other alternative layout schemes. </p>
+</li>
+<li>
+<p>Commoncentroid (CC) layouts have been shown to be better than other alternatives such as clustered and interdigitated patterns for mitigating process-induced linear variations [3]  and are widely used to match circuit elements [2], [4], [5], [6], [7]. </p>
+</li>
+</ul>
+<p><img src="assets/image-20251204195441794.png" alt="image-20251204195441794" style="zoom: 40%;" /></p>
+<ul>
+<li>square-like pattern offers the best matching performance [14] [11] --cite--&gt;<img alt="image-20251204173246462" src="../assets/image-20251204173246462.png" /><img alt="image-20251204173254929" src="../assets/image-20251204173254929.png" /></li>
+</ul>
+<blockquote>
+<p>并没有说方形会带来更好的性能</p>
+</blockquote>
+<ul>
+<li>One of the fundamental rules for CC layouts underscores the importance of achieving the maximum degree of dispersion [1]</li>
+</ul>
+<p><img alt="image-20251204212312726" src="../assets/image-20251204212312726.png" /></p>
+<ul>
+<li>
+<p>It is important to note that CC layouts are generally not preferred for <mark>high-frequency</mark> applications due to <mark>high parasitic effects</mark>.</p>
+</li>
+<li>
+<p>器件匹配得越好，连线往往越复杂</p>
+</li>
+<li>
+<p>原理：<img alt="image-20251126213434402" src="../assets/image-20251126213434402.png" /></p>
+</li>
+<li>
+<p>学术解释first-order process gradient</p>
+</li>
+</ul>
+<p>--cite--&gt;<a href="">DATE21-Common-Centroid Layouts for Analog Circuits: Advantages and Limitations</a></p>
+<p><img src="assets/image-20251204141357826.png" alt="image-20251204141357826" style="zoom: 40%;" /><img src="assets/image-20251204141414427.png" alt="image-20251204141414427" style="zoom: 40%;" /></p>
+<p><img alt="image-20251117192518533" src="../assets/image-20251117192518533.png" /></p>
+<h6 id="2">2器件示例<a class="headerlink" href="#2" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251124201004547" src="../assets/image-20251124201004547.png" /></p>
+<p><img src="assets/image-20251126184220773.png" alt="image-20251126184220773" style="zoom: 65%;" /></p>
+<p><img alt="image-20251124183144139" src="../assets/image-20251124183144139.png" /></p>
+<p><img alt="image-20251125102253149" src="../assets/image-20251125102253149.png" /></p>
+<p><img alt="image-20251124205150034" src="../assets/image-20251124205150034.png" /></p>
+<h6 id="3">3器件示例<a class="headerlink" href="#3" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251124190336284" src="../assets/image-20251124190336284.png" /></p>
+<h6 id="4">4器件示例<a class="headerlink" href="#4" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251117194458082" src="../assets/image-20251117194458082.png" /></p>
+<h6 id="ccidg">cc和idg可以混合<a class="headerlink" href="#ccidg" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251124190743429" src="../assets/image-20251124190743429.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>感觉具体那种效果好很难说</p>
+</blockquote>
+<h6 id="_11">不相等/不规则的数量<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251124190417956" src="../assets/image-20251124190417956.png" /></p>
+<p><img alt="image-20251124205453400" src="../assets/image-20251124205453400.png" /></p>
+<p><img alt="image-20251117204025955" src="../assets/image-20251117204025955.png" /></p>
+<h6 id="cc-patterns">CC Patterns<a class="headerlink" href="#cc-patterns" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251124183242920" src="../assets/image-20251124183242920.png" /></p>
+<p><img alt="image-20251125090012693" src="../assets/image-20251125090012693.png" /></p>
+<h5 id="root-device-method">电阻电容根器件法(Root Device Method)<a class="headerlink" href="#root-device-method" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251118090048476" src="../assets/image-20251118090048476.png" /></p>
+<p><img alt="image-20251117192200155" src="../assets/image-20251117192200155.png" /></p>
+<p><img alt="image-20251124204301282" src="../assets/image-20251124204301282.png" /></p>
+<p><img alt="image-20251124194435852" src="../assets/image-20251124194435852.png" /></p>
+<p><img alt="image-20251124194606624" src="../assets/image-20251124194606624.png" /></p>
+<h5 id="dummy">Dummy虚拟器件<a class="headerlink" href="#dummy" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251117192358362" src="../assets/image-20251117192358362.png" /></p>
+<h5 id="_12">考虑源漏共用<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h5>
+<p>A layout that does not share diffusion region can lead to worse routing length and may degrade spatial variations due to increased layout area.</p>
+<p>Diffusion sharing is a widely used concept in analog applications [19] . Sharing diffusion region not only reduces layout area and routing cost but also minimizes spatial variation [21]. However, fully sharing diffusion region without using dummies is not always possible in a CC type layout  </p>
+<p>minimizing only the dummy count leads to inferior results --cite--&gt;<a href="">Multiobjective Optimization for Common-Centroid Placement of Analog Transistors</a></p>
+<p>一个很好的图表示：</p>
+<p><img alt="image-20251204160000104" src="../assets/image-20251204160000104.png" /></p>
+<p><img alt="image-20251125100601461" src="../assets/image-20251125100601461.png" /></p>
+<p><img src="assets/image-20251125094654129.png" alt="image-20251125094654129" style="zoom: 55%;" /></p>
+<p><img src="assets/image-20251125100646967.png" alt="image-20251125100646967" style="zoom: 70%;" /></p>
+<blockquote>
+<p>m和nf用户定下了，我们应该改不了。这也约束了算法的通用性。</p>
+</blockquote>
+<h5 id="_13">参考<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h5>
+<ul>
+<li><a href="../Analog/模拟电路版图设计中的匹配艺术.pdf">模拟电路版图设计中的匹配艺术</a></li>
+<li><a href="https://analoghub.ie/category/Layout/article/layoutMatchingPatterns">Matching patterns - AnalogHub</a></li>
+<li><a href="https://siliconvlsi.com/matching-technique-in-analog-layout/">Matching Technique in Analog Layout - Siliconvlsi</a></li>
+<li><a href="https://www.youtube.com/watch?v=KzH6KV-a6BA">CMOS Inverter Layout (Cadence Layout XL)</a></li>
+<li><a href="https://siliconvlsi.com/matching-technique-in-analog-layout/">Matching Technique in Analog Layout - Siliconvlsi</a></li>
+<li><a href="https://neu-ucb-tvip.github.io/tvip-analog-workspace/Analog_Layout_Guide/#interdigitation-patterns">Analog Layout Guide – Nextra</a></li>
+<li><a href="https://people.engr.tamu.edu/spalermo/ecen474/Lab2.pdf">people.engr.tamu.edu/spalermo/ecen474/Lab2.pdf</a></li>
+<li><img alt="image-20251126184530611" src="../assets/image-20251126184530611.png" /></li>
+<li>Thanks to hejing0901@primarius-tech.com</li>
+</ul>
+<h4 id="routing">routing<a class="headerlink" href="#routing" title="Permanent link">&para;</a></h4>
+<p>Route signals symmetrically to reduce IR drops and parasitic mismatches on either branch.</p>
+<h5 id="_14">过孔<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h5>
+<p>纳米级技术中的通孔电阻同样显著，且较低金属层对单向布线的要求使得CC布局必须采用通孔数量较少的布线方案。--cite--&gt;[Performance-Aware Common-Centroid Placement and Routing of Transistor Arrays in Analog Circuits]</p>
+<h5 id="_15">高频信号线<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h5>
+<p>高频信号线走线采用高层金属走线，高层金属厚度大，寄生电阻小，寄生电容也小；高频信号线尽量走直线；避免平行走线，采用不同层金属走线，或者加大同层金属走线的间距以减小耦合和串扰</p>
+<p>All the critical signals should be shielded with gnd or clean reference signal</p>
+<p>For high speed signals, the shield line shouldn’t be put closer to the signal toavoid loading</p>
+<h5 id="_16">关键信号<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h5>
+<p>关键信号要离PAD足够近，以减小走线寄生电容，直流信号的PAD由于考虑到漏压降的问题，走线越宽，有利于减小压降。</p>
+<p>Use proper spacing between two signal</p>
+<h5 id="_17">电迁移<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124195541622" src="../assets/image-20251124195541622.png" /></p>
+<p><img alt="image-20251124195548748" src="../assets/image-20251124195548748.png" /></p>
+<h5 id="tiling">Tiling?<a class="headerlink" href="#tiling" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124195824854" src="../assets/image-20251124195824854.png" /></p>
+<p><img alt="image-20251124195845168" src="../assets/image-20251124195845168.png" /></p>
+<h5 id="antenna-effect">Antenna Effect<a class="headerlink" href="#antenna-effect" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124195929141" src="../assets/image-20251124195929141.png" /></p>
+<p><img alt="image-20251124195938320" src="../assets/image-20251124195938320.png" /></p>
+<h5 id="latchup">Latchup<a class="headerlink" href="#latchup" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124195921855" src="../assets/image-20251124195921855.png" /></p>
+<h5 id="power">Power<a class="headerlink" href="#power" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124200035088" src="../assets/image-20251124200035088.png" /></p>
+<p><img alt="image-20251124200047659" src="../assets/image-20251124200047659.png" /></p>
+<p><img alt="image-20251124200056495" src="../assets/image-20251124200056495.png" /></p>
+<h5 id="ir-drop">IR drop<a class="headerlink" href="#ir-drop" title="Permanent link">&para;</a></h5>
+<p>IR drop <strong>CANNOT BE IGNORED</strong> in modern nodes, particularly when wide metal lines are not used for power/ground or high-current paths.</p>
+<p>Always consider adding more metal width and multiple vias to keep IR drops minimal and symmetrical.</p>
+<p><img alt="image-20251124211531057" src="../assets/image-20251124211531057.png" /></p>
+<p><img alt="image-20251125091535340" src="../assets/image-20251125091535340.png" /></p>
+<h5 id="_18">参考<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h5>
+<p><a href="https://www.eet.bme.hu/~bognar/rfic/Layout02.pdf">eet.bme.hu/~bognar/rfic/Layout02.pdf</a></p>
+<p><a href="https://www.ee.iitm.ac.in/vlsi/_media/courses/ee5325_2019/ee5325_lecture48_6nov2019.pdf">ee.iitm.ac.in/vlsi/_media/courses/ee5325_2019/ee5325_lecture48_6nov2019.pdf</a></p>
+<h4 id="_19">减小失配方法总结<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<h5 id="overview">overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Place transistor segments in the areas of low-stress gradients.</li>
+<li>Place transistors in <mark>close proximity</mark>. Keep the layout of the transistors as <mark>compact</mark> as possible</li>
+<li>Orient transistors in the same direction.</li>
+<li>Whenever possible use <mark>Common centroid</mark> layouts.</li>
+<li>Place transistors well away from the <mark>power</mark> devices.</li>
+<li>For current matching keep the overdrive voltage large.</li>
+<li>For voltage, matching keeps overdrive voltage smaller.</li>
+<li><img alt="image-20251124192524946" src="../assets/image-20251124192524946.png" /></li>
+</ul>
+<p><img alt="image-20251124193716981" src="../assets/image-20251124193716981.png" /></p>
+<h5 id="_20">增加尺寸<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251230145315622" src="../assets/image-20251230145315622.png" /></p>
+<p><img alt="image-20251230145332911" src="../assets/image-20251230145332911.png" /></p>
+<p>--cite--&gt;<a href="Layout Symmetries: Quantification and Application
+to Cancel Nonlinear Process Gradients">TCAD17</a></p>
+<p><img alt="image-20251117202516850" src="../assets/image-20251117202516850.png" /></p>
+<h5 id="_21">远离噪声（相同距离）<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124163922221" src="../assets/image-20251124163922221.png" /></p>
+<h5 id="dummy_1">dummy<a class="headerlink" href="#dummy_1" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124163944401" src="../assets/image-20251124163944401.png" /></p>
+<blockquote>
+<p>[!CAUTION]</p>
+<p>不过貌似正常都只是在两边放dummy，可能严格的才需要？</p>
+<p>[!WARNING]</p>
+<p>工艺越先进越要二维的dummy</p>
+</blockquote>
+<h5 id="cc">CC考虑二阶效应<a class="headerlink" href="#cc" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251230145830824" src="../assets/image-20251230145830824.png" /></p>
+<p>--cite--&gt;<a href="Layout Symmetries: Quantification and Application
+to Cancel Nonlinear Process Gradients">TCAD17</a></p>
+<h4 id="other">other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>为了防止<strong>闩锁效应</strong>，电路版图设计的角度，NMOS和PMOS附近设置尽可能多的接触孔以减小寄生电阻，或者添加保护环；</p>
+</li>
+<li>
+<p>要注意<a href="https://zhida.zhihu.com/search?content_id=220772738&amp;content_type=Article&amp;match_order=1&amp;q=天线效应&amp;zhida_source=entity">天线效应</a>和<a href="https://zhida.zhihu.com/search?content_id=220772738&amp;content_type=Article&amp;match_order=1&amp;q=电迁移&amp;zhida_source=entity">电迁移</a>，长的金属要不断进行跳线来减弱天线效应，在大电流的走线上，金属线宽要足够大，如果不够可以采用多层金属分流。</p>
+</li>
+<li>
+<p>在模拟模块和数字模块之间要加隔离环以隔离噪声干扰。</p>
+</li>
+<li>
+<p>无论怎么努力改进失配，Bipolar工艺比CMOS工艺的匹配性更好，原因如下：</p>
+</li>
+</ul>
+<p>（1）Bipolar失调表达式中不包含阈值电压Vt的离散影响；</p>
+<p>（2）Bipolar的比例因子为kT/q，小于CMOS器件的Vov/2；</p>
+<p>（3）Bipolar失调电压随温度的漂移很容易控制，减小Vos的同时也会减小失调电压的温漂；</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="_22">参考<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<p><a href="https://neu-ucb-tvip.github.io/tvip-analog-workspace/Analog_Layout_Guide/">Analog Layout Guide – Nextra</a></p>
+<h3 id="pattern">常见pattern版图<a class="headerlink" href="#pattern" title="Permanent link">&para;</a></h3>
+<h4 id="overview_1">overview<a class="headerlink" href="#overview_1" title="Permanent link">&para;</a></h4>
+<p>the <strong>Interdigitation</strong> is a <mark>less complex</mark> method, and it would be sufficient for structures like small <mark>current mirrors</mark> and <mark>biasing circuits</mark>. Using this pattern will be <strong>more area-efficient</strong> and allows <strong>simple routing</strong>.</p>
+<p>When we are talking about structures that require <strong>maximum precision</strong> - such as R/C DAC arrays, differential pairs - we have to use the <strong>Common Centroid</strong> to achieve the best performance. </p>
+<p><img alt="image-20251124170401087" src="../assets/image-20251124170401087.png" /></p>
+<p><img alt="image-20251125090815543" src="../assets/image-20251125090815543.png" /></p>
+<blockquote>
+<p>也不一定，我看也有挺多电流镜用CC的</p>
+</blockquote>
+<p><img src="assets/image-20251204154957700.png" alt="image-20251204154957700" style="zoom: 90%;" /></p>
+<p>-- cite--&gt;<a href="">DATE21-Common-Centroid Layouts for Analog Circuits: Advantages and Limitations</a></p>
+<p><img alt="image-20251204154754125" src="../assets/image-20251204154754125.png" /></p>
+<p>-- cite--&gt;<a href="">DATE24 Analog Transistor Placement Optimization Considering Nonlinear Spatial Variations</a></p>
+<h4 id="_23">电流镜<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<h5 id="_24">基本电流镜<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h5>
+<p><img src="assets/image-20251117194841219.png" alt="image-20251117194841219" style="zoom: 35%;" /></p>
+<p><img alt="image-20251124150322926" src="../assets/image-20251124150322926.png" /></p>
+<h5 id="cascode">cascode电流镜<a class="headerlink" href="#cascode" title="Permanent link">&para;</a></h5>
+<p>源漏共用</p>
+<p><img alt="image-20251124192136470" src="../assets/image-20251124192136470.png" /></p>
+<h5 id="_25">共源共栅电流镜<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h5>
+<p><a href="https://blog.csdn.net/qq_49315469/article/details/129650954">IC Layout版图实操重要知识-电流镜_电流镜版图匹配设计-CSDN博客</a></p>
+<p><img alt="image-20251124141230390" src="../assets/image-20251124141230390.png" /></p>
+<p>两种匹配方式，一种是B A A B，将器件摆放成一排然后两边加dummy，最后再围上P环</p>
+<p><img alt="image-20251124141208614" src="../assets/image-20251124141208614.png" /></p>
+<p>另外一种匹配方式是摆放成两排，交叉匹配，即第一排为dummy A B dummy，第二排为dummy B A dummy，然后再围上P环</p>
+<p><img alt="image-20251124141217239" src="../assets/image-20251124141217239.png" /></p>
+<h5 id="_26">多路输出电流镜<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251124170007459" src="../assets/image-20251124170007459.png" /></p>
+<p><img alt="image-20251124170045229" src="../assets/image-20251124170045229.png" /></p>
+<p><img alt="image-20251124170057535" src="../assets/image-20251124170057535.png" /></p>
+<p>https://www.youtube.com/watch?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7&amp;v=mca7NKcTlhU&amp;embeds_referring_euri=https%3A%2F%2Fanaloghub.ie%2F&amp;source_ve_path=MjM4NTE</p>
+<p><img alt="image-20251124205525800" src="../assets/image-20251124205525800.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>相比idg，cc数量翻倍了？为了全部源漏共用，idg只能这么设计！注意每一个B-B或者C-C之间都是D端的，两边的都是共用的GND</p>
+</blockquote>
+<p><img alt="image-20251125093612920" src="../assets/image-20251125093612920.png" /></p>
+<p><img alt="image-20251125093701814" src="../assets/image-20251125093701814.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>M7飞哪去了？</p>
+</blockquote>
+<h4 id="_27">差分对<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><a href="https://blog.csdn.net/weixin_52567455/article/details/129659950">版图匹配之差分电流镜_电流镜版图匹配设计-CSDN博客</a></p>
+</li>
+<li>
+<p>差分对必须采用双排的==共质心ABBA==形式。除非在不重要的cell，得到电路准许才可画一排。<mark>必须加dummy</mark>(一排，两排)</p>
+<blockquote>
+<p>！一定是一对的吗</p>
+</blockquote>
+</li>
+<li>
+<p>在m&lt;4的情况下，s/D端不合并的画法匹配度比源漏合并的高一些。具体看长度差距分析，超过4个不建议用s、D不合并方法</p>
+</li>
+<li>
+<p>差分对的匹配需加dummy</p>
+</li>
+<li>
+<p>差分对一般采用ABBA、二维的匹配方式，较之AABB式的匹配具有中心对称，能够减小失配，更佳性能的优点，差分对中的ABBA匹配形式且merge的情况需要保证左右，上下都具备这种形式，且在一个方向上管子数量为4X(X &gt; 1时),A可以等于aa，B=bb</p>
+<p><img alt="merge的差分对" src="https://i-blog.csdnimg.cn/blog_migrate/4c8fc0d00fa57f347e83805cecabf9b5.png#pic_center" /></p>
+</li>
+<li>
+<p>差分对的gate连线需要特别注意，非交叉位置相邻gate间的连线不要出现多层金属叠层连通的情况，且最好用m2连接，所有gate上面的金属孔要一致</p>
+<p><img alt="在这里插入图片描述" src="../assets/da32a7feaa6221f765d98798081c983b.png" /></p>
+</li>
+<li>
+<p>差分的gate与源漏的线分别出在两边，gate必须加屏蔽线</p>
+</li>
+<li>
+<p>差分对上面不允许跨其他线，自身源漏线也尽量不要跨，有线道的情况下要留出源漏线的走线位置，且最好有屏蔽，加屏蔽时头的地方要每层金属都包住</p>
+</li>
+</ul>
+<p><img alt="image-20251125093518249" src="../assets/image-20251125093518249.png" /></p>
+<p><img alt="image-20251125093505161" src="../assets/image-20251125093505161.png" /></p>
+<ul>
+<li><img alt="image-20251124145659358" src="../assets/image-20251124145659358.png" /></li>
+</ul>
+<p><a href="https://wenku.csdn.net/column/658wg015qj">【Analog Layout Considerations】布局中的匹配与对称性技术_Importance of Symmetry in Analog Layout - CSDN文库</a></p>
+<p><a href="https://blog.csdn.net/weixin_44606092/article/details/134468049">电路设计：差分对原理与版图绘制关键-CSDN博客</a></p>
+<h4 id="cap">cap<a class="headerlink" href="#cap" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251125091444620" src="../assets/image-20251125091444620.png" /></p>
+<h4 id="_28">其他<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251125101746517" src="../assets/image-20251125101746517.png" /></p>
+<p><img alt="image-20251125101804692" src="../assets/image-20251125101804692.png" /></p>
+<h2 id="placement_1">placement 算法<a class="headerlink" href="#placement_1" title="Permanent link">&para;</a></h2>
+<h3 id="_29">三种布局范式<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>结合数字 APR 综合的</p>
+</li>
+<li>
+<p>仍然缺乏普遍适用性  </p>
+</li>
+<li>
+<p>Procedural</p>
+</li>
+<li>
+<p>程序性布局生成器在开发参数化单元以及整合用于编码器件放置和布线的脚本方面仍然需要大量的人工劳动。尽管如此，这些方法在将设计迁移到不同技术节点时已显著减少了人工工作量。</p>
+</li>
+<li>
+<p>基于优化的</p>
+</li>
+<li>
+<p>基于优化的布局综合的典型流程将布局考虑因素表述为用户定义的参数或约束</p>
+</li>
+</ul>
+<h3 id="ga">GA<a class="headerlink" href="#ga" title="Permanent link">&para;</a></h3>
+<p>Kubalík et al. (2019) and Kubalík et al. (2023)   FLP   </p>
+<h3 id="simulated-annealing">Simulated Annealing<a class="headerlink" href="#simulated-annealing" title="Permanent link">&para;</a></h3>
+<p>Historically, most analog placement methods were based on simulated annealing and focused on handling geometrical constraints such as symmetry that are specific to analog ICs <a href="">DATE22[4]–[8]</a></p>
+<h4 id="_30">优点<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<ul>
+<li>flexibility in incorporating different types of cost functions  </li>
+</ul>
+<h4 id="_31">缺点<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
+<ul>
+<li>not a fast algorithm in general</li>
+<li>its runtime speed is acceptable for analog IC designs, which typically have much less elements than digital circuits. </li>
+<li>the approach cannot guarantee good performance for large-scale analog netlists  </li>
+<li>cannot utilize past or external knowledge to enhance exploration of the solution space, as each problem instance is optimized anew.</li>
+</ul>
+<h4 id="_32">相关论文<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><img alt="image-20251022093326904" src="../assets/image-20251022093326904.png" /></p>
+</li>
+<li>
+<p><img alt="image-20251013095453449" src="../assets/image-20251013095453449.png" /></p>
+</li>
+<li>
+<p><img alt="image-20251013100925187" src="../assets/image-20251013100925187.png" /></p>
+</li>
+<li>
+<p>Cohn, J., Garrod, D., et al. (1991). KOAN/ANAGRAM II: new tools for device-level analog placement and routing. IEEE Journal of Solid-State Circuits, 26(3): 330–342</p>
+</li>
+<li>
+<p>Martins, R., Lourenc¸o, N., and Horta, N. (2015). Multiobjective optimization of analog integrated circuit placement hierarchy in absolute coordinates. </p>
+</li>
+</ul>
+<p>Expert Systems with Applications, 42(23): 9137–9151.</p>
+<ul>
+<li></li>
+</ul>
+<h3 id="lp">LP<a class="headerlink" href="#lp" title="Permanent link">&para;</a></h3>
+<p>Analytical Approaches  </p>
+<h4 id="nlp">NLP<a class="headerlink" href="#nlp" title="Permanent link">&para;</a></h4>
+<p>non-linear programming (NLP)  </p>
+<p>absolute representation, where each element is described by its actual coordinates. While this approach makes it <mark>easy to describe the majority of the constraints</mark>, it can produce <mark>infeasible solutions</mark> due to the overlapping of design elements. which initially determine the <mark>global placement</mark> using <code>Nonlinear Programming</code> and then produce feasible placement using <code>Linear Programming (LP)</code> or other methods. (类似 SA)</p>
+<p>For conventional performanceoblivious analog placement, analytical techniques are <mark>55×</mark> faster than <code>simulated annealing</code>. However, not all analytical techniques can reduce area and wirelength compared to simulated annealing. </p>
+<p>cannot utilize past or external knowledge to enhance exploration of the solution space, as each problem instance is optimized anew.</p>
+<ul>
+<li>[ICCAD20: 29, 40]  </li>
+</ul>
+<p><img alt="image-20251014155910435" src="../assets/image-20251014155910435.png" /></p>
+<ul>
+<li>
+<p>in theory has advantages in scalability. However, NLP needs to relax the constraints and therefore requires extra post-processing step to legalize the results.</p>
+</li>
+<li>
+<p>the constraint relaxation and the <mark>extra legalization step</mark> restrict its potential to handle various constraints simultaneously. </p>
+</li>
+<li>
+<p>Xu et al. (2017)  </p>
+</li>
+<li>
+<p>(Mirhoseini et al., 2021)   </p>
+</li>
+<li>
+<p>Chen, T.-C., Jiang, Z.-W., et al. (2008). NTUplace3</p>
+</li>
+<li>
+<p>Xu, B., Li, S., et al. (2019a). Device layer-aware analytical placement for analog circuits. </p>
+</li>
+<li>
+<p>Lin, Y., Li, Y., et al. (2022). Are analytical techniques worthwhile for analog IC placement?</p>
+</li>
+</ul>
+<p><img alt="image-20251021102036831" src="../assets/image-20251021102036831.png" /></p>
+<h4 id="ilp">ILP<a class="headerlink" href="#ilp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>相关论文：</li>
+<li>ROC24: Automated placement of analog integrated circuits using priority-based constructive heuristic</li>
+<li>Grus et al. (2023)  </li>
+<li>Xu, B., Li, S., et al. (2017). Hierarchical and analytical placement techniques for high-performance analog circuits.  </li>
+<li>It is important to mention that although ILP does not scale well for large problems, the problem sizes of analog circuits are generally small, making an ILP solution tractable</li>
+<li>Since our layout system is built on discrete grids, integer solutions are preferred. </li>
+</ul>
+<h4 id="milp">MILP<a class="headerlink" href="#milp" title="Permanent link">&para;</a></h4>
+<p>mixed-integer-programming (MILP)  </p>
+<ul>
+<li>[ICCAD20: 39, 41]  </li>
+<li>B. Xu et al., “Hierarchical and analytical placement techniques for highperformance analog circuits,” in Proc. ISPD, 2017, pp. 55–62  </li>
+<li>MILP is limited to linear objective and constraints and its scalability is concerned. </li>
+<li>it suffers from poor scalability for large-scale circuits.</li>
+</ul>
+<h3 id="combinatorial-optimization">combinatorial optimization<a class="headerlink" href="#combinatorial-optimization" title="Permanent link">&para;</a></h3>
+<p>相关论文：</p>
+<ul>
+<li>ROC24: Automated placement of analog integrated circuits using priority-based constructive heuristic</li>
+<li>pocket: additional free space around the devices  </li>
+</ul>
+<h3 id="smt-formulation">SMT formulation<a class="headerlink" href="#smt-formulation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>特点：</p>
+</li>
+<li>
+<p>The flexible syntax of SMT enables efficient problem modeling and various constraint support. </p>
+</li>
+<li>
+<p>SMT formulas supports richer modeling expressions (e.g., if-then-else, either-or, Boolean cardinality), thus amenable for efficient, versatile formulations for placement instances</p>
+</li>
+<li>
+<p>介绍：</p>
+</li>
+</ul>
+<p><img alt="image-20251016105910161" src="../assets/image-20251016105910161.png" /></p>
+<ul>
+<li>
+<p>相关论文：</p>
+</li>
+<li>
+<p>S. M. Saif et al. , “Pareto front analog layout placement using satisfiability modulo theories,” in Proc. DATE, 2016, pp. 1411–1416.</p>
+</li>
+<li>DATE22:  Routability-Aware Placement for Advanced FinFET Mixed-Signal Circuits using Satisfiability Modulo Theories</li>
+<li>Used in Lin et al. (2009), Dayasagar and Sudhakar (2023) and Shanthi et al. (2022),</li>
+</ul>
+<h3 id="b-treeo-tree">B*-tree/O-tree<a class="headerlink" href="#b-treeo-tree" title="Permanent link">&para;</a></h3>
+<ul>
+<li>一般和启发式方法配合</li>
+<li>deterministic</li>
+<li>相关论文</li>
+<li>P.-Y. Chou, H.-C. Ou, and Y.-W. Chang, “Heterogeneous <code>b*-trees</code> for analog placement with symmetry and regularity considerations,” in Proc. ICCAD. IEEE, <mark>2011</mark>, pp. 512–516.</li>
+<li>Y. Pang, F. Balasa, K. Lampaert, and C.-K. Cheng, “Block placement with symmetry constraints based on the <code>o-tree</code> non-slicing representation,” in Proc. DAC, <mark>2000</mark>, pp. 464–467</li>
+<li><img alt="image-20251022135409778" src="../assets/image-20251022135409778.png" /></li>
+</ul>
+<h3 id="sequence-pairs">sequence pairs<a class="headerlink" href="#sequence-pairs" title="Permanent link">&para;</a></h3>
+<p>一般和启发式方法配合</p>
+<p>topological representation, which determines the relative positions between devices. </p>
+<p><img alt="image-20251020100755950" src="../assets/image-20251020100755950.png" /></p>
+<p>相关论文</p>
+<h2 id="-">- <img alt="image-20251022135342653" src="../assets/image-20251022135342653.png" /><a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
+<h3 id="forced-directed-approach">Forced-directed approach<a class="headerlink" href="#forced-directed-approach" title="Permanent link">&para;</a></h3>
+<p>Spindler, P., Schlichtmann, U., and Johannes, F. M. (2008). Kraftwerk2—A fast force-directed quadratic placement approach using an accurate net model.</p>
+<ul>
+<li>
+<p>相关论文：</p>
+</li>
+<li>
+<p>originally proposed in Murata et al. (1996). It utilizes two permutations of devices, which encode the placement. Authors of Balasa and Lampaert (1999) extend this representation to handle crucial features such as symmetry groups. The sequence pair representation was further extended to handle general constraints such as abutment (two devices are placed exactly next to each other) in </p>
+</li>
+<li>
+<p>Ma et al. (2011), and this work finally became the core of the placer of the open-source tool <mark>ALIGN</mark> (Dhar et al., 2021).</p>
+</li>
+<li>
+<p>Oliveira, J. F., Junior, A. N., et al. (2016). A survey on ´heuristics for the two-dimensional rectangular strip <code>packing problem</code>. Pesquisa Operacional, 36:197–226.</p>
+</li>
+</ul>
+<h2 id="_33">数据集<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h2>
+<h4 id="magical">MAGICAL<a class="headerlink" href="#magical" title="Permanent link">&para;</a></h4>
+<ul>
+<li><img alt="image-20251015111556317" src="../assets/image-20251015111556317.png" /></li>
+<li><img src="assets/image-20251020154710476.png" alt="image-20251020154710476" style="zoom: 55%;" /></li>
+<li><img src="assets/image-20251020154730583.png" alt="image-20251020154730583" style="zoom: 65%;" /></li>
+</ul>
+<h4 id="align">ALIGN<a class="headerlink" href="#align" title="Permanent link">&para;</a></h4>
+<p>consisting of 1390 OTA circuits, including bias networks</p>
+<h4 id="mcnc">MCNC<a class="headerlink" href="#mcnc" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251017101706006" src="../assets/image-20251017101706006.png" /></p>
+<h4 id="gsrc">GSRC<a class="headerlink" href="#gsrc" title="Permanent link">&para;</a></h4>
+<p><img alt="image-20251017101723040" src="../assets/image-20251017101723040.png" /></p>
+<h4 id="amsnet">AMSnet<a class="headerlink" href="#amsnet" title="Permanent link">&para;</a></h4>
+<p><a href="https://amsnet2-0.github.io/AMSNet2.0.github.io/">AMSnet 2.0: A Large AMS Database with AI Segmentation for Net Detection</a></p>
+<h4 id="aicircuit">AICircuit<a class="headerlink" href="#aicircuit" title="Permanent link">&para;</a></h4>
+<p>aiccircuit 是一个全面的多层次数据集和基准，用于开发和评估模拟和射频电路设计中的 ML 算法。aiccircuit 包括七个常用的基本电路和两个由多个电路块组成的复杂无线收发器系统，涵盖了实际应用中遇到的各种设计场景。我们广泛评估了数据集上的各种 ML 算法，揭示了 ML 算法在学习从设计规范到所需电路参数的映射方面的潜力。</p>
+<h2 id="_34">综述<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h2>
+<h4 id="-routing-ieee-access-2023-analog-integrated-circuit-routing-techniques-an-extensive-review-">-routing-IEEE Access-2023-Analog Integrated Circuit Routing Techniques: An Extensive Review---<a class="headerlink" href="#-routing-ieee-access-2023-analog-integrated-circuit-routing-techniques-an-extensive-review-" title="Permanent link">&para;</a></h4>
+<h5 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>as A/RF design moved into <mark>advanced integration technology nodes</mark>, the increasing number of design rules/constraints, wire resistance, congestion, and interwire parasitic growth is constantly challenging existing automatic routing techniques and keeping pressure on their improvement.  average number of layout design rules contained in process design kits (PDKs) has escalated from below 1000 rules in 180/130-nanometer nodes to more than 10 times in 22-nanometer and below [5]</p>
+</li>
+<li>
+<p>In the analog domain, it is widely acknowledged that circuits/systems’ performance is critically dependent on the <mark>parasitic</mark> structures induced by the layout. Thus, analog routing has historically been a handcrafting process, requiring a different level of attention and detail than its digital counterpart</p>
+</li>
+<li>
+<p>designers are usually <mark>skeptical</mark> about the success/reliability of other routing tools with a higher level of automation, as they usually involve non-systematic/stochastic processes</p>
+</li>
+<li>
+<p>PiS &amp; LaS flow</p>
+</li>
+</ul>
+<p><img alt="image-20251011085357369" src="../assets/image-20251011085357369.png" /></p>
+<ul>
+<li>
+<p>Language: BALLISTIC [21], MSL [22]</p>
+</li>
+<li>
+<p>procedural routing generators (PRGs)  method:</p>
+</li>
+</ul>
+<p><img alt="image-20251011085330439" src="../assets/image-20251011085330439.png" /></p>
+<ul>
+<li>template-based routing generators (TbRGs)  </li>
+</ul>
+<p>They are particularly useful when a validated previously designed layout, i.e., a legacy layout, has to be migrated to other(s) close/similar technology node(s) or changes in the design are needed.</p>
+<p><img alt="image-20251011085347651" src="../assets/image-20251011085347651.png" /></p>
+<ul>
+<li>sequential path-finding generators (SPfGs).  </li>
+</ul>
+<p><img alt="image-20251011103020675" src="../assets/image-20251011103020675.png" /></p>
+<ul>
+<li>
+<p>模拟布线中研究最广泛的两种非理想现象是电迁移和 IR 压降。电迁移指的是在高电流密度作用下，电源网络和信号线中的材料迁移； IR 压降则是由于互连线电阻导致的网络电压波动，会影响电路性能。这些非理想现象最终可以通过使用具有 <mark>可变线宽的布线算法</mark> 来缓解</p>
+</li>
+<li>
+<p>integer linear programming (ILP) and evolutionary routing generators</p>
+</li>
+</ul>
+<p>同时处理所有网络  </p>
+<p><img alt="image-20251011104133697" src="../assets/image-20251011104133697.png" /></p>
+<ul>
+<li>ML</li>
+</ul>
+<p><img alt="image-20251011105759005" src="../assets/image-20251011105759005.png" /></p>
+<ul>
+<li>ARouter Timeline</li>
+</ul>
+<p><img alt="image-20251011112036223" src="../assets/image-20251011112036223.png" /></p>
+<p><img src="assets/image-20251011112410945.png" alt="image-20251011112410945" style="zoom: 60%;" /></p>
+<p><img src="assets/image-20251011112814149.png" alt="image-20251011112814149" style="zoom: 60%;" /></p>
+<h4 id="-asp-dac-2024-performance-driven-analog-layout-automation-current-status-and-future-directions-cuhk-bei-yu">--ASP DAC-2024-Performance Driven Analog Layout Automation: Current Status and Future Directions--CUHK Bei Yu<a class="headerlink" href="#-asp-dac-2024-performance-driven-analog-layout-automation-current-status-and-future-directions-cuhk-bei-yu" title="Permanent link">&para;</a></h4>
+<h5 id="background_1">Background<a class="headerlink" href="#background_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Conventionally, research in academic analog place-and-route (PNR) algorithms often targets the optimization of proxy objectives, such as wire length and area [1].  Such an approach fails to reveal the</li>
+</ul>
+<p>capability of the automation algorithms for important metrics such as performance and manufacturability.</p>
+<ul>
+<li>
+<p>template-based methods</p>
+</li>
+<li>
+<p>utilize user-defined layout patterns or floorplans to implement the layout</p>
+</li>
+<li>
+<p>BAG [2] and LAYGO [3], [4]  </p>
+</li>
+<li>
+<p>a general and effective approach to considering post-layout circuit performance remains an open question.</p>
+</li>
+<li>
+<p>Analog circuit performance is highly sensitive to layout intricacies and can be adversely affected by layout parasitics, coupling, and noise</p>
+</li>
+<li>
+<p>Manual design often relies on experience, design expertise, and trial-and-error to search for a satisfactory layout.</p>
+</li>
+<li>
+<p>Symmetry constraints have played a crucial role in analog layout design</p>
+</li>
+<li></li>
+</ul>
+<h4 id="challenges-and-opportunities-toward-fully-automated-analog-layout-design-jos20-dzp">Challenges and opportunities toward fully automated analog layout design-JoS20-DZP<a class="headerlink" href="#challenges-and-opportunities-toward-fully-automated-analog-layout-design-jos20-dzp" title="Permanent link">&para;</a></h4>
+<h2 id="placement_2">Placement<a class="headerlink" href="#placement_2" title="Permanent link">&para;</a></h2>
+<p>Routability-aware placement for advanced finfet mixed-signal circuits using satisfiability modulo theories</p>
+<h3 id="placer-stochastic">Placer-stochastic<a class="headerlink" href="#placer-stochastic" title="Permanent link">&para;</a></h3>
+<p>SA/</p>
+<h4 id="tcad10-sa-efyy"><a href="">TCAD10-SA-EFYY</a><a class="headerlink" href="#tcad10-sa-efyy" title="Permanent link">&para;</a></h4>
+<ul>
+<li></li>
+</ul>
+<h3 id="placer-analytical">Placer-analytical<a class="headerlink" href="#placer-analytical" title="Permanent link">&para;</a></h3>
+<h4 id="-system-signal-flow-iccad20-uta"><a href="">-system signal flow-ICCAD20--UTA</a><a class="headerlink" href="#-system-signal-flow-iccad20-uta" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://github.com/krzhu/IdeaPlaceEx">OpenSource!</a></li>
+<li>non-linear programming-based (<code>NLP</code>) <code>global placement</code> </li>
+<li>linear-programming-based (<code>LP</code>) legalization, minimizing the <mark>area and wirelength</mark>.  </li>
+<li>we spread the modules considering the placement objectives and the constraint penalties using <code>gradient descent-based optimization</code>. </li>
+<li></li>
+</ul>
+<h5 id="background_2">background<a class="headerlink" href="#background_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>However, the <code>hyper-edge net models</code> often underestimate the importance of the <mark>directions of signals</mark></p>
+</li>
+<li>
+<p>problem1: 需要的是关键信号线的线短些</p>
+<p><img src="assets/image-20251014094436896.png" alt="image-20251014094436896" style="zoom: 50%;" /></p>
+<p><img src="assets/image-20251014094532891.png" alt="image-20251014094532891" style="zoom: 45%;" /></p>
+</li>
+<li>
+<p>privious work: </p>
+<p><img src="assets/image-20251014094800145.png" alt="image-20251014094800145" style="zoom: 45%;" /></p>
+</li>
+<li>
+<p>current flow-related constraints: the direct current from the <mark>supply (VDD) to the sink (VSS)</mark> is constrained to be monotonic in one direction</p>
+<ul>
+<li>[28, 31, 36, 37]  </li>
+<li>such constraints are not easy to be extended to general <mark>signals and system-level circuits.</mark>  </li>
+</ul>
+</li>
+</ul>
+<h5 id="contribution">contribution<a class="headerlink" href="#contribution" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>NLP-based global placement </p>
+<p>leveraging the prior knowledge of <mark>power/ground</mark> routing in analog layouts  </p>
+</li>
+<li>
+<p>a holistic method to update the parameters and multipliers</p>
+</li>
+</ul>
+<h5 id="flow">flow<a class="headerlink" href="#flow" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251014112051182" src="../assets/image-20251014112051182.png" /></p>
+<p><img alt="image-20251014160747652" src="../assets/image-20251014160747652.png" /></p>
+<h5 id="model">model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h5>
+<h6 id="nlp-for-gp">NLP for GP:<a class="headerlink" href="#nlp-for-gp" title="Permanent link">&para;</a></h6>
+<ul>
+<li>
+<p>目标和约束</p>
+<p><img alt="image-20251014140542605" src="../assets/image-20251014140542605.png" /></p>
+</li>
+<li>
+<p>overlap 计算</p>
+<p><img alt="image-20251014140714579" src="../assets/image-20251014140714579.png" /></p>
+</li>
+<li>
+<p>对称计算</p>
+<p><img alt="image-20251014140806211" src="../assets/image-20251014140806211.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>这里只写了一个方向的</p>
+</blockquote>
+</li>
+<li>
+<p>更详细的目标：</p>
+<p><img alt="image-20251014141138007" src="../assets/image-20251014141138007.png" /></p>
+<ul>
+<li>SSF</li>
+</ul>
+<p><img alt="image-20251014142423654" src="../assets/image-20251014142423654.png" /></p>
+<ul>
+<li>SWL</li>
+</ul>
+<p>HPWL+log-sum-exponential (LSE)  </p>
+<p><img alt="image-20251014142643048" src="../assets/image-20251014142643048.png" /></p>
+<ul>
+<li>PWL</li>
+</ul>
+<p>(PG) nets are often routed in a different approach from the signals</p>
+<p>the pins of PG nets are more likely to be individually connected to the current supply/sink</p>
+<p>for the PG nets </p>
+<ul>
+<li>pins are considered separately instead of being modeled as in a net-wise <mark>hyper-edge</mark></li>
+<li>only the <mark>vertical distance</mark> to the current supply/sink is considered.</li>
+</ul>
+<p><img alt="image-20251014143248812" src="../assets/image-20251014143248812.png" /></p>
+<ul>
+<li>
+<p>CRF</p>
+</li>
+<li>
+<p><code>𝛾𝐶𝑅𝐹</code>  is a parameter to control the smoothness and accuracy of the LSE approximation</p>
+</li>
+<li>
+<p>OVL</p>
+</li>
+<li>
+<p>smoothed version of Equation 1  </p>
+</li>
+<li>
+<p>ASYM</p>
+</li>
+<li>
+<p>The asymmetry penalty is the smoothed version of Equation 2   </p>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="adam-optimizer">ADAM optimizer<a class="headerlink" href="#adam-optimizer" title="Permanent link">&para;</a></h6>
+<h6 id="settings">𝝀 settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h6>
+<h6 id="settings_1">𝜸 settings<a class="headerlink" href="#settings_1" title="Permanent link">&para;</a></h6>
+<h6 id="legalization">Legalization<a class="headerlink" href="#legalization" title="Permanent link">&para;</a></h6>
+<ul>
+<li>based on the plane sweep line algorithm from [9]  </li>
+<li><img alt="image-20251014160658042" src="../assets/image-20251014160658042.png" /></li>
+<li></li>
+</ul>
+<h5 id="experiment">experiment<a class="headerlink" href="#experiment" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251014092807654" src="../assets/image-20251014092807654.png" /></p>
+<ul>
+<li>used detailed router [5]  </li>
+<li>We achieve 34%, 23%, and 10% reductions in area, routed wirelength and number of VIAs over [40]</li>
+<li><img alt="image-20251014160834424" src="../assets/image-20251014160834424.png" /></li>
+<li><img alt="image-20251014161451615" src="../assets/image-20251014161451615.png" /></li>
+<li><img alt="image-20251014161525242" src="../assets/image-20251014161525242.png" /></li>
+<li><img alt="image-20251014161600273" src="../assets/image-20251014161600273.png" /></li>
+<li></li>
+</ul>
+<h5 id="_35"><a class="headerlink" href="#_35" title="Permanent link">&para;</a></h5>
+<h4 id="-ganwell-generation-aspdac22-gan-uta"><a href="">-GAN+Well Generation-ASPDAC22-GAN-UTA</a><a class="headerlink" href="#-ganwell-generation-aspdac22-gan-uta" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>analytical well-aware non-linear programming-based analog placer</p>
+</li>
+<li>
+<p>formulate the <code>well proximity effect (WPE)</code> handling as constraints and solve them in our placement engine.</p>
+</li>
+<li>
+<p>uses a <code>generative adversarial network (GAN)</code> for generating wells and guides the placement process</p>
+</li>
+<li>
+<p>optimizes for area and wirelength.</p>
+</li>
+<li>
+<p>前置工作：</p>
+<ul>
+<li><code>WellGAN</code>: Generative-adversarial-network-guided well generation for analog/mixed-signal circuit layout. <code>WellGAN</code>  generates the wells after the placement which might be <mark>sub-optimal</mark></li>
+<li><code>NLP</code> Placer 类似 <a href="">ICCAD20 SSF</a> 那篇</li>
+</ul>
+</li>
+<li>
+<p>to reduce area and half-perimeter wirelength  </p>
+</li>
+<li>
+<p>problem formulation</p>
+<p><img alt="image-20251015133923413" src="../assets/image-20251015133923413.png" /></p>
+<p><img alt="image-20251015133935489" src="../assets/image-20251015133935489.png" /></p>
+</li>
+<li></li>
+</ul>
+<h5 id="background_3">background<a class="headerlink" href="#background_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>what is well:</p>
+<p><img alt="image-20251015130844365" src="../assets/image-20251015130844365.png" /></p>
+</li>
+<li>
+<p>automatic layout frameworks often use individual wells for each PMOS, e.g., ALIGN [3] and MAGICAL [4], [5].</p>
+</li>
+</ul>
+<h5 id="contribution_1">contribution<a class="headerlink" href="#contribution_1" title="Permanent link">&para;</a></h5>
+<ul>
+<li>propose a new well-aware placement methodology  </li>
+<li>consider wells as fence region constraints  </li>
+<li>formulate WPE as minimum device-well-edge distance constraints and propose an efficient well legalization algorithm.</li>
+</ul>
+<h5 id="flow_1">flow<a class="headerlink" href="#flow_1" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251015133601567" src="../assets/image-20251015133601567.png" /></p>
+<p><img src="assets/image-20251015134723471.png" alt="image-20251015134723471" style="zoom: 70%;" /></p>
+<h5 id="model_1">model<a class="headerlink" href="#model_1" title="Permanent link">&para;</a></h5>
+<h6 id="gan">GAN<a class="headerlink" href="#gan" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015132854116" src="../assets/image-20251015132854116.png" /></p>
+<p><img src="assets/image-20251015133125234.png" alt="image-20251015133125234" style="zoom: 65%;" /></p>
+<h6 id="wpe_1">WPE<a class="headerlink" href="#wpe_1" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015133342779" src="../assets/image-20251015133342779.png" /></p>
+<p><img alt="image-20251015133552450" src="../assets/image-20251015133552450.png" /></p>
+<h6 id="nlp-placer">NLP Placer<a class="headerlink" href="#nlp-placer" title="Permanent link">&para;</a></h6>
+<ul>
+<li>
+<p>NLP 目标：</p>
+<p><img alt="image-20251015135253191" src="../assets/image-20251015135253191.png" /></p>
+</li>
+<li></li>
+</ul>
+<h5 id="data">data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h5>
+<p>from <code>WellGAN</code>：(OTA) with different architectures (OTA1, OTA2, OTA3, and OTA4), two comparators with the same topology but with different sizing (COMP1 and COMP2), a bootstrap switch (BOOTSTRAP), and a resistor digital-to-analog converter unit (RDAC). </p>
+<h5 id="experiment_1">experiment<a class="headerlink" href="#experiment_1" title="Permanent link">&para;</a></h5>
+<p>baseline:</p>
+<ul>
+<li>The first baseline uses individual wells, denoted as “individual wells”</li>
+<li>second baseline is to generate wells after placement using GANbased well generation, denoted as “WellGAN after placements”.  </li>
+</ul>
+<h6 id="single-well-type">single well type<a class="headerlink" href="#single-well-type" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015141032575" src="../assets/image-20251015141032575.png" /></p>
+<h6 id="multi-well-type">multi-well type<a class="headerlink" href="#multi-well-type" title="Permanent link">&para;</a></h6>
+<p><img src="assets/image-20251015141354021.png" alt="image-20251015141354021" style="zoom: 50%;" /></p>
+<p><img alt="image-20251015141538992" src="../assets/image-20251015141538992.png" /></p>
+<h6 id="wpe-effect">WPE effect<a class="headerlink" href="#wpe-effect" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015141656409" src="../assets/image-20251015141656409.png" /></p>
+<h4 id="eplace-a-nlpgnn-date22-are-analytical-techniques-worthwhile-for-analog-ic-placement-tau">ePlace A-NLP+GNN-DATE22-Are Analytical Techniques Worthwhile for Analog IC Placement-TAU<a class="headerlink" href="#eplace-a-nlpgnn-date22-are-analytical-techniques-worthwhile-for-analog-ic-placement-tau" title="Permanent link">&para;</a></h4>
+<ul>
+<li>GNN</li>
+<li>Device Flipping  </li>
+<li><a href="">privious work</a>: J. Lu et al., “ePlace-MS: Electrostatics-based placement for mixed-size circuits,”  IEEE TCAD, vol. 34, no. 5, pp. 685–698, 2015</li>
+<li>results indicate that not every analytical technique is superior to simulated annealing in solution quality.</li>
+<li>it is widely recognized that analog circuit performance can be seriously affected by the quality of placement [18], [19], most existing placement techniques are unable to directly optimize performance. </li>
+</ul>
+<h5 id="background_4">background<a class="headerlink" href="#background_4" title="Permanent link">&para;</a></h5>
+<h5 id="contribution_2">contribution<a class="headerlink" href="#contribution_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><img alt="image-20251020190609756" src="../assets/image-20251020190609756.png" /></li>
+<li><img alt="image-20251020191213196" src="../assets/image-20251020191213196.png" /></li>
+</ul>
+<h5 id="flow_2">flow<a class="headerlink" href="#flow_2" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>global placement</code> based on <code>NLP</code> and a stage of <code>legalization and detailed placement</code>. </li>
+</ul>
+<p><img alt="image-20251020190851888" src="../assets/image-20251020190851888.png" /></p>
+<h5 id="model_2">model<a class="headerlink" href="#model_2" title="Permanent link">&para;</a></h5>
+<h6 id="gp-nlp">GP: NLP<a class="headerlink" href="#gp-nlp" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020190105098" src="../assets/image-20251020190105098.png" /></p>
+<p><img alt="image-20251020190509990" src="../assets/image-20251020190509990.png" /></p>
+<p><img alt="image-20251020190518079" src="../assets/image-20251020190518079.png" /></p>
+<p><img alt="image-20251021110348083" src="../assets/image-20251021110348083.png" /></p>
+<h6 id="legalization-and-detailed-placementilp">Legalization and Detailed Placement：ILP<a class="headerlink" href="#legalization-and-detailed-placementilp" title="Permanent link">&para;</a></h6>
+<ul>
+<li>device flipping  </li>
+<li><img alt="image-20251021112427985" src="../assets/image-20251021112427985.png" /></li>
+<li><img alt="image-20251021112422638" src="../assets/image-20251021112422638.png" /></li>
+</ul>
+<h5 id="data_1">data<a class="headerlink" href="#data_1" title="Permanent link">&para;</a></h5>
+<p>The testcases include three Operational Transconductance Amplifier (OTA) designs, two comparator designs, two Voltage Controlled Oscillator (VCO) designs, an analog adder, a Variable Gain Amplifier (VGA) and an Switched Capacitor Filter (SCF). </p>
+<p>GF12nm PDK  </p>
+<h5 id="experiment_2">experiment<a class="headerlink" href="#experiment_2" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251021113910891" src="../assets/image-20251021113910891.png" /></p>
+<p><img alt="image-20251021113939595" src="../assets/image-20251021113939595.png" /></p>
+<p><img alt="image-20251021114037843" src="../assets/image-20251021114037843.png" /></p>
+<h4 id="-ilpcor24pre-icores23-stm"><a href="">-ILP+COR24Pre- ICORES23--STM</a><a class="headerlink" href="#-ilpcor24pre-icores23-stm" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Our proposed ILP solution derives its core ideas from approaches used for general <code>rectangle packing problem</code> (Korf et al., 2010; Berger et al., 2009). </li>
+<li><a href="https://blog.csdn.net/JESSIENOTCAR/article/details/134990427">FLP 问题</a></li>
+<li>BCD 工艺</li>
+</ul>
+<h5 id="background_5">background<a class="headerlink" href="#background_5" title="Permanent link">&para;</a></h5>
+<h5 id="contribution_3">contribution<a class="headerlink" href="#contribution_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li>ILP formulation of the placement problem.  </li>
+<li>Method based on <code>force-directed graph drawing (FDGD)</code> for finding partial initial solution used as a warm start to ILP model, which significantly improves the performance of the utilized <code>Gurobi</code> (Gurobi Optimization, LLC, 2021) solver.</li>
+</ul>
+<h5 id="model_3">model<a class="headerlink" href="#model_3" title="Permanent link">&para;</a></h5>
+<h6 id="constraintion">constraintion<a class="headerlink" href="#constraintion" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020110640942" src="../assets/image-20251020110640942.png" /></p>
+<h6 id="block">block<a class="headerlink" href="#block" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020110826238" src="../assets/image-20251020110826238.png" /></p>
+<h6 id="aspect-ratio">Aspect Ratio<a class="headerlink" href="#aspect-ratio" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020111216242" src="../assets/image-20251020111216242.png" /></p>
+<h6 id="fdgd">FDGD<a class="headerlink" href="#fdgd" title="Permanent link">&para;</a></h6>
+<p>背景：</p>
+<p><img alt="image-20251020131003218" src="../assets/image-20251020131003218.png" /></p>
+<p>一个继续改进的点：a number of decision variables grows quadratically with an increasing number of independent rectangles to be placed.</p>
+<p><img alt="image-20251020131947552" src="../assets/image-20251020131947552.png" /></p>
+<h5 id="data_2">data<a class="headerlink" href="#data_2" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251020132602890" src="../assets/image-20251020132602890.png" /></p>
+<h5 id="experiment_3">experiment<a class="headerlink" href="#experiment_3" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Gurobi ILP solver v9.1.2  </li>
+<li>four threads </li>
+</ul>
+<p><img alt="image-20251020132553130" src="../assets/image-20251020132553130.png" /></p>
+<p><img alt="image-20251020132626872" src="../assets/image-20251020132626872.png" /></p>
+<p><img alt="image-20251020133252845" src="../assets/image-20251020133252845.png" /></p>
+<blockquote>
+<p>[!TIP]</p>
+<p>都比手工的差 </p>
+</blockquote>
+<h4 id="-priority-basedassociated-constraints-cor24-coheuristicrl-"><a href="">-Priority-based+associated constraints -COR24-CO+heuristic+RL-</a><a class="headerlink" href="#-priority-basedassociated-constraints-cor24-coheuristicrl-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>build on our previous conference papers (Grus et al., 2023; Grus and Hanzálek , 2024), and FLP (Kubalík et al., 2019).</li>
+<li>Method based on <code>force-directed graph drawing (FDGD)</code> for finding partial initial solution used as a warm start to ILP model, which significantly improves the performance of the utilized <code>Gurobi</code> solver</li>
+</ul>
+<h5 id="background_6">background<a class="headerlink" href="#background_6" title="Permanent link">&para;</a></h5>
+<ul>
+<li><img alt="image-20251017133247822" src="../assets/image-20251017133247822.png" /></li>
+</ul>
+<h5 id="contribution_4">contribution<a class="headerlink" href="#contribution_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>associated constraints  </li>
+<li>Priority-based constructive heuristic inspired by Kubalík et al. (2019) maps each indirect representation to a feasible placement</li>
+</ul>
+<h5 id="flow_3">flow<a class="headerlink" href="#flow_3" title="Permanent link">&para;</a></h5>
+<h5 id="model_4">model<a class="headerlink" href="#model_4" title="Permanent link">&para;</a></h5>
+<h6 id="constraints">constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251017135343944" src="../assets/image-20251017135343944.png" /></p>
+<p><img alt="image-20251017135351981" src="../assets/image-20251017135351981.png" /></p>
+<p><img alt="image-20251017135413769" src="../assets/image-20251017135413769.png" /></p>
+<p><img alt="image-20251017135429896" src="../assets/image-20251017135429896.png" /></p>
+<p><img alt="image-20251017135610198" src="../assets/image-20251017135610198.png" /></p>
+<p><img alt="image-20251017135742129" src="../assets/image-20251017135742129.png" /></p>
+<p><img alt="image-20251017140058223" src="../assets/image-20251017140058223.png" /></p>
+<p><img alt="image-20251017140248776" src="../assets/image-20251017140248776.png" /></p>
+<p><img alt="image-20251017140425705" src="../assets/image-20251017140425705.png" /></p>
+<h6 id="_36">对称约束<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h6>
+<p>注意一个 G 只有一个 x~G~</p>
+<p><img alt="image-20251017141018905" src="../assets/image-20251017141018905.png" /></p>
+<p><img alt="image-20251017141033293" src="../assets/image-20251017141033293.png" /></p>
+<p><img alt="image-20251017141209356" src="../assets/image-20251017141209356.png" /></p>
+<p><img alt="image-20251017141350285" src="../assets/image-20251017141350285.png" /></p>
+<p><img alt="image-20251017141436186" src="../assets/image-20251017141436186.png" /></p>
+<h6 id="_37">版图形状<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251017142252546" src="../assets/image-20251017142252546.png" /></p>
+<h6 id="_38">宽高比<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251017143852240" src="../assets/image-20251017143852240.png" /></p>
+<h6 id="_39"><strong>面积近似</strong><a class="headerlink" href="#_39" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251017143905923" src="../assets/image-20251017143905923.png" /></p>
+<p><img alt="image-20251017144042835" src="../assets/image-20251017144042835.png" /></p>
+<p><img alt="image-20251017144534371" src="../assets/image-20251017144534371.png" /></p>
+<h6 id="constructive-heuristic">Constructive heuristic<a class="headerlink" href="#constructive-heuristic" title="Permanent link">&para;</a></h6>
+<h5 id="data_3">data<a class="headerlink" href="#data_3" title="Permanent link">&para;</a></h5>
+<h5 id="experiment_4">experiment<a class="headerlink" href="#experiment_4" title="Permanent link">&para;</a></h5>
+<h4 id="aiplacer-gnn-unsupervised-aspdac25-ustc"><a href="">AIPlacer-GNN unsupervised-ASPDAC25--USTC</a><a class="headerlink" href="#aiplacer-gnn-unsupervised-aspdac25-ustc" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>the first multi-task learning model for analog placement automation.</p>
+</li>
+<li>
+<p>baseline: <a href="">DAC21</a></p>
+</li>
+<li>
+<p>Concept of <code>global position</code> is interesting</p>
+<p><img src="assets/image-20251022103121263.png" alt="image-20251022103121263" style="zoom: 40%;" /></p>
+</li>
+<li>
+<blockquote>
+<p>[! WARNING]</p>
+<div class="highlight"><pre><span></span><code>&gt; 这里的非监督其实和 NLP 是差不多的概念？⚠️ 非监督但是也分了测试集和训练集
+
+&gt; 没有提 `Legalization`？是不需要吗？
+</code></pre></div>
+</blockquote>
+</li>
+</ul>
+<h5 id="background_7">background<a class="headerlink" href="#background_7" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Although recent works have investigated ML-based analog placement automation, these arts face complex training datasets and efficiency challenges.   </li>
+</ul>
+<h5 id="contribution_5">contribution<a class="headerlink" href="#contribution_5" title="Permanent link">&para;</a></h5>
+<ul>
+<li>the first multi-task learning model for analog placement automation.</li>
+<li>A practical scheme  </li>
+<li>An unsupervised loss function  </li>
+</ul>
+<h5 id="flow_4">flow<a class="headerlink" href="#flow_4" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251022095910268" src="../assets/image-20251022095910268.png" /></p>
+<h6 id="input">Input<a class="headerlink" href="#input" title="Permanent link">&para;</a></h6>
+<ul>
+<li>
+<p>a SPICE netlist(an un-directed graph)</p>
+<ul>
+<li>
+<p>node feature(12 dim):</p>
+</li>
+<li>
+<p>(length and width) , 2 dim </p>
+</li>
+<li>
+<p>device type (i.e., NMOS, PMOS, PASSIVE), 3 dim</p>
+</li>
+<li>
+<p>global positional info (5 dim)</p>
+<ul>
+<li>
+<p>calculate the shortest path from the POWER(GND) port to PMOS (NMOS), respectively. The shortest path length refers to the device position, which is transformed into a 5-dimensional one-hot vector. </p>
+</li>
+<li>
+<p>the global position of the device is highly consistent with the actual order of <mark>current flows</mark> in the circuit (shown in the red arrow).</p>
+</li>
+<li>
+<p><img alt="image-20251022101101592" src="../assets/image-20251022101101592.png" /></p>
+</li>
+<li>
+<blockquote>
+<p>[! WARNING]</p>
+<p>固定只能有 5 个 dim 感觉电路如果再大点就不适配了</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>init positional info (2 dim)  </p>
+<p><img alt="image-20251022101821521" src="../assets/image-20251022101821521.png" /></p>
+</li>
+<li>
+<p>constraint relation</p>
+</li>
+<li>
+<p><img alt="image-20251022103328667" src="../assets/image-20251022103328667.png" /></p>
+</li>
+<li>
+<p>𝑴1 matrix: <img alt="image-20251022103442426" src="../assets/image-20251022103442426.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>是否会有例外？</p>
+</blockquote>
+</li>
+<li>
+<p>𝑴2 matrix: </p>
+<p>对称信息</p>
+<blockquote>
+<p>[!TIP]</p>
+<p>没有区分 x/y 对称，还有对称组？</p>
+<p>感觉还有很大提升空间</p>
+</blockquote>
+</li>
+<li>
+<p>𝑴3 matrix: </p>
+<p>current-flow VDD2VSS</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="mode">mode<a class="headerlink" href="#mode" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>GAT</strong> to realize the feature interactions between nodes. </li>
+<li><strong>RGCN</strong> for constraint relation<ul>
+<li><img alt="image-20251022105510073" src="../assets/image-20251022105510073.png" /></li>
+</ul>
+</li>
+<li><strong>MTN</strong> Decoder  <ul>
+<li>MMOE-based</li>
+<li><img src="assets/image-20251022110342890.png" alt="image-20251022110342890" style="zoom: 55%;" /></li>
+</ul>
+</li>
+</ul>
+<h6 id="loss">loss<a class="headerlink" href="#loss" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>无监督感觉就是想 NLP 一样找最小值？</p>
+</blockquote>
+<p><img alt="image-20251022112547681" src="../assets/image-20251022112547681.png" /></p>
+<p><img alt="image-20251022112609186" src="../assets/image-20251022112609186.png" /></p>
+<p><img alt="image-20251022112618046" src="../assets/image-20251022112618046.png" /></p>
+<p><img alt="image-20251022112622707" src="../assets/image-20251022112622707.png" /></p>
+<p><img alt="image-20251022112630063" src="../assets/image-20251022112630063.png" /></p>
+<p><img alt="image-20251022112634881" src="../assets/image-20251022112634881.png" /></p>
+<h5 id="data_4">data<a class="headerlink" href="#data_4" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>TSMC180</p>
+</li>
+<li>
+<p>13 type <mark><strong>OTA only</strong></mark></p>
+</li>
+</ul>
+<h5 id="experiment_5">experiment<a class="headerlink" href="#experiment_5" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>⚠️ 非监督但是也分了测试集和训练集</p>
+</li>
+<li>
+<p><img alt="image-20251022113927606" src="../assets/image-20251022113927606.png" /></p>
+</li>
+<li>
+<p><img alt="image-20251022113931810" src="../assets/image-20251022113931810.png" /></p>
+<blockquote>
+<p><code>global position</code> 分开的很明确</p>
+</blockquote>
+</li>
+<li>
+<p>Ablation Study  </p>
+<p><img alt="image-20251022114054367" src="../assets/image-20251022114054367.png" /></p>
+</li>
+</ul>
+<h3 id="placer-dl">Placer-DL<a class="headerlink" href="#placer-dl" title="Permanent link">&para;</a></h3>
+<h4 id="sacplace-madrlsymmetry-date25-madrl-cas"><a href="">SACPlace-MADRL+symmetry-DATE25-MADRL-CAS</a><a class="headerlink" href="#sacplace-madrlsymmetry-date25-madrl-cas" title="Permanent link">&para;</a></h4>
+<ul>
+<li></li>
+</ul>
+<h5 id="background_8">background<a class="headerlink" href="#background_8" title="Permanent link">&para;</a></h5>
+<h2 id="-_1">- <img alt="image-20251023135142915" src="../assets/image-20251023135142915.png" /><a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h2>
+<h5 id="contribution_6">contribution<a class="headerlink" href="#contribution_6" title="Permanent link">&para;</a></h5>
+<ul>
+<li>symmetry-aware  </li>
+<li>introduce cumulative rewards  </li>
+<li>multi-agent  </li>
+</ul>
+<h5 id="flow_5">flow<a class="headerlink" href="#flow_5" title="Permanent link">&para;</a></h5>
+<p>SACPlace initially extracts layout information and various constraints as the input information for placement refinement and evaluation.</p>
+<p><img alt="image-20251023141038136" src="../assets/image-20251023141038136.png" /></p>
+<h5 id="model_5">model<a class="headerlink" href="#model_5" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251023140803790" src="../assets/image-20251023140803790.png" /></p>
+<p><img alt="image-20251023140846373" src="../assets/image-20251023140846373.png" /></p>
+<ul>
+<li><mark>each device</mark> to be placed is treated as an individual <mark>agent</mark></li>
+<li>Initially, all devices are intentionally overlapped to facilitate the forward progress of DRL optimization.</li>
+</ul>
+<h6 id="state">state<a class="headerlink" href="#state" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251023142752590" src="../assets/image-20251023142752590.png" /></p>
+<h6 id="action">action<a class="headerlink" href="#action" title="Permanent link">&para;</a></h6>
+<p>action space A ensures symmetrical actions  </p>
+<p><img alt="image-20251023143047529" src="../assets/image-20251023143047529.png" /></p>
+<p><img alt="image-20251023143011197" src="../assets/image-20251023143011197.png" /></p>
+<h6 id="reward">reward<a class="headerlink" href="#reward" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251023143026188" src="../assets/image-20251023143026188.png" /></p>
+<p><img alt="image-20251023143128437" src="../assets/image-20251023143128437.png" /></p>
+<p><img alt="image-20251023143137543" src="../assets/image-20251023143137543.png" /></p>
+<p><img alt="image-20251023143150167" src="../assets/image-20251023143150167.png" /></p>
+<h6 id="marl">MARL<a class="headerlink" href="#marl" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>没看懂</p>
+</blockquote>
+<h5 id="data_5">data<a class="headerlink" href="#data_5" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251023144002040" src="../assets/image-20251023144002040.png" /></p>
+<blockquote>
+<p>SAGERoute!</p>
+</blockquote>
+<h5 id="experiment_6">experiment<a class="headerlink" href="#experiment_6" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>compare different SOTA DRL approaches  </p>
+</li>
+<li>
+<p><img alt="image-20251023144230270" src="../assets/image-20251023144230270.png" /></p>
+</li>
+</ul>
+<blockquote>
+<p>都是和 RL 的方法比较，和 Virtuoso 的自动布局布线</p>
+<p>Virtuoso, struggles to adequately meet symmetry constraints  </p>
+</blockquote>
+<ul>
+<li>
+<p><img alt="image-20251023144422911" src="../assets/image-20251023144422911.png" /></p>
+</li>
+<li>
+<p><img alt="image-20251023144554394" src="../assets/image-20251023144554394.png" /></p>
+</li>
+</ul>
+<h3 id="placer-other">Placer-other<a class="headerlink" href="#placer-other" title="Permanent link">&para;</a></h3>
+<h4 id="-interactive-layout-editinginstant-legalization-dac21-pek-gao-lin"><a href="">-Interactive Layout Editing+instant legalization-DAC21--PEK Gao, Lin</a><a class="headerlink" href="#-interactive-layout-editinginstant-legalization-dac21-pek-gao-lin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>legalization </li>
+<li>交互的</li>
+<li>adopt analog placement engine of MAGICAL [2] to generate the initial placement results shown to the users. </li>
+</ul>
+<h5 id="background_9">background<a class="headerlink" href="#background_9" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>shortcoming of full-auto flow</p>
+<p><img alt="image-20251015091730344" src="../assets/image-20251015091730344.png" /></p>
+</li>
+<li>
+<p>In other words, designers expect a tool to improve their productivity but still have full control over the design process.</p>
+</li>
+<li>
+<p>So far, developing an end-to-end flow that can generate highquality and stable solutions is still challenging, as it is hard to define a universal analytical objective for analog layout problems.</p>
+</li>
+<li></li>
+</ul>
+<h5 id="contribution_7">contribution<a class="headerlink" href="#contribution_7" title="Permanent link">&para;</a></h5>
+<ul>
+<li><code>interactive analog placement</code> framework that supports <mark>commands</mark> for fast layout editing  </li>
+<li>an instant <code>legalization algorithm</code> for incremental layout update with <mark>linear time complexity</mark></li>
+<li>Experimental results on open-source analog circuits such as comparators, amplifiers, and data converters demonstrate that the framework can enable efficient layout editing and reduce the turn-around time for layout designers.</li>
+</ul>
+<h5 id="flow_6">flow<a class="headerlink" href="#flow_6" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251015095802524" src="../assets/image-20251015095802524.png" /></p>
+<ul>
+<li>All events on the interface are encoded as commands.  </li>
+<li></li>
+</ul>
+<h5 id="model_6">model<a class="headerlink" href="#model_6" title="Permanent link">&para;</a></h5>
+<h6 id="command-set">command set<a class="headerlink" href="#command-set" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015100823071" src="../assets/image-20251015100823071.png" /></p>
+<h6 id="constraint-graph">constraint graph<a class="headerlink" href="#constraint-graph" title="Permanent link">&para;</a></h6>
+<h6 id="instant-legalization">Instant Legalization<a class="headerlink" href="#instant-legalization" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015102613744" src="../assets/image-20251015102613744.png" /></p>
+<p><img alt="image-20251015101652692" src="../assets/image-20251015101652692.png" /></p>
+<p>legalizer can handle both flat circuits and hierarchical circuits.  For hierarchical circuits, the legalization process starts with the leaf-level subcircuits in the circuit hierarchy tree.</p>
+<h6 id="mcggm">MCG(G^M^)<a class="headerlink" href="#mcggm" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251015102654826" src="../assets/image-20251015102654826.png" /></p>
+<p>有向无环图 directed acyclic graph (DAG)  </p>
+<p><img alt="image-20251015103309803" src="../assets/image-20251015103309803.png" /></p>
+<p>linear ordering S ={v2; v1; v5; v3; v4}  </p>
+<p><img alt="image-20251015104040089" src="../assets/image-20251015104040089.png" /></p>
+<h6 id="layout-partitioning">Layout Partitioning<a class="headerlink" href="#layout-partitioning" title="Permanent link">&para;</a></h6>
+<p>two symmetry groups  </p>
+<p><img alt="image-20251015104442779" src="../assets/image-20251015104442779.png" /></p>
+<p><img alt="image-20251015104542827" src="../assets/image-20251015104542827.png" /></p>
+<h6 id="topo-sort-based-legalization">topo-sort based legalization<a class="headerlink" href="#topo-sort-based-legalization" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>[!TIP]</p>
+<p>前面没怎么看懂，之后再看看</p>
+</blockquote>
+<p><img alt="image-20251015105642908" src="../assets/image-20251015105642908.png" /></p>
+<h5 id="experiment_7">experiment<a class="headerlink" href="#experiment_7" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251015110029781" src="../assets/image-20251015110029781.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>A~2~是什么？</p>
+</blockquote>
+<p>比 MAGICAL（基于 LP）的快很多</p>
+<p><img alt="image-20251015111504972" src="../assets/image-20251015111504972.png" /></p>
+<h3 id="placer-adv">Placer-adv<a class="headerlink" href="#placer-adv" title="Permanent link">&para;</a></h3>
+<h4 id="-amsfinfet-date22-dzp"><a href="">-AMS+FinFET-DATE22--DZP</a><a class="headerlink" href="#-amsfinfet-date22-dzp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>FinFET</p>
+</li>
+<li>
+<p>SMT formulation</p>
+</li>
+<li>
+<p>problem formulation：</p>
+</li>
+</ul>
+<h5 id="background_10">background<a class="headerlink" href="#background_10" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>FinFET reigon-based layout 新增的 constraint:</p>
+<p><img alt="image-20251016103049745" src="../assets/image-20251016103049745.png" /></p>
+</li>
+<li>
+<p>两个相关 privious works</p>
+<ul>
+<li><img src="assets/image-20251016105124494.png" alt="image-20251016105124494" style="zoom: 50%;" /></li>
+<li><img src="assets/image-20251016105323503.png" alt="image-20251016105323503" style="zoom: 45%;" /></li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h5 id="contributuion">contributuion<a class="headerlink" href="#contributuion" title="Permanent link">&para;</a></h5>
+<ul>
+<li>an <code>SMT-based</code> placement framework targeting a new <code>region-based</code> layout for advanced FinFET AMS designs</li>
+<li>a <code>window-based</code> pin density checking SMT formulation for placement routability consideration.</li>
+<li>leverage <code>incremental SMT</code> solving techniques for efficient wirelength optimization, enabling the application of our framework to <code>large-scale designs.</code></li>
+</ul>
+<h5 id="experiment_8">experiment<a class="headerlink" href="#experiment_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>Z3 SMT solver  </p>
+</li>
+<li>
+<p>商用数据集：BUF, VCO</p>
+<p><img alt="image-20251016111324440" src="../assets/image-20251016111324440.png" /></p>
+</li>
+<li>
+<p>TSMC 5nm</p>
+</li>
+<li>
+<p>use <a href="">ICCAD20</a> analog router [18]</p>
+</li>
+</ul>
+<h3 id="popt-dl">POpt-DL<a class="headerlink" href="#popt-dl" title="Permanent link">&para;</a></h3>
+<h4 id="-survey-mlsa-isvlsi20-uta-"><a href="">-survey ML+SA-ISVLSI20--UTA-</a><a class="headerlink" href="#-survey-mlsa-isvlsi20-uta-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一个实验性质的对比工作，NN, RF, SVM</li>
+<li>Placer 基于 <a href="">TCAD10-SA-EFYY</a> 的工作</li>
+<li>OTA only</li>
+<li><img alt="image-20251013101351269" src="../assets/image-20251013101351269.png" /></li>
+</ul>
+<h5 id="background_11">background<a class="headerlink" href="#background_11" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>most of the previous works are focused on geometric constraint</p>
+</li>
+<li>
+<p>the impact of layout on analog circuit performance can be very large due to significant RC (Resistance and Capacitance) parasitic generated in layout.</p>
+</li>
+<li>
+<p><img alt="image-20251013092848932" src="../assets/image-20251013092848932.png" /></p>
+</li>
+<li>
+<p>the layout effect on performance is often very complex and thus difficult to be quickly and accurately estimated</p>
+</li>
+<li></li>
+</ul>
+<h5 id="contribution_8">contribution<a class="headerlink" href="#contribution_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>directly optimizes circuit performance during placement</li>
+<li>It can directly optimize analog circuit performance along with conventional objectives, including wirelength, area and geometric constraints such as symmetry constraints</li>
+</ul>
+<h5 id="experiment_9">experiment<a class="headerlink" href="#experiment_9" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251013102653336" src="../assets/image-20251013102653336.png" /></p>
+<h4 id="-placement-quality-prediction-via-transfer-learning-date20-cnn-uta"><a href="">-Placement Quality Prediction via Transfer Learning-DATE20-CNN-UTA</a><a class="headerlink" href="#-placement-quality-prediction-via-transfer-learning-date20-cnn-uta" title="Permanent link">&para;</a></h4>
+<ul>
+<li>OTA only</li>
+<li>a new methodology to shorten the gap in post layout performance modeling for analog circuits.</li>
+<li>Magical  to generate layouts</li>
+<li><a href="https://github.com/magical-eda/UT-AnLay">Opensource!</a></li>
+</ul>
+<h5 id="background_12">background<a class="headerlink" href="#background_12" title="Permanent link">&para;</a></h5>
+<ul>
+<li>hand-crafted constraints are often questionable in explainability and confidence, and lack flexibility and generality in meeting the detailed needs of different scenarios. </li>
+<li>a mapping between a given layout and the expected post layout performance is imperative yet still challenging</li>
+<li>One major bottleneck of design exploration is the runtime involved with post layout simulations. </li>
+</ul>
+<h5 id="contribution_9">contribution<a class="headerlink" href="#contribution_9" title="Permanent link">&para;</a></h5>
+<ul>
+<li>proposed approach leverages an automatic flow to generate high-quality labeled training data</li>
+<li>a transfer learning scheme that significantly reduces the amount of data needed during training</li>
+</ul>
+<h5 id="model_7">model<a class="headerlink" href="#model_7" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251014091716280" src="../assets/image-20251014091716280.png" /></p>
+<h5 id="data_6">data<a class="headerlink" href="#data_6" title="Permanent link">&para;</a></h5>
+<p>create a balanced data with the worst performing  25th percentile layout labeled as 1 and the best </p>
+<p>25th as 0. （分类）</p>
+<p>他说的数据剪枝貌似就是分类为 0 的电路只选性能 25%以下的，1 的电路只选 75%以上的</p>
+<p>we propose divide the circuit into the following subcircuits based on functionality</p>
+<p><img alt="image-20251014084633650" src="../assets/image-20251014084633650.png" /></p>
+<p>In all our experiment, the image size is selected to be 64*64. </p>
+<p><img alt="image-20251014085026977" src="../assets/image-20251014085026977.png" /></p>
+<p><img alt="image-20251014085035527" src="../assets/image-20251014085035527.png" /></p>
+<h5 id="experiment_10">experiment<a class="headerlink" href="#experiment_10" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251014085547313" src="../assets/image-20251014085547313.png" /></p>
+<p><img alt="image-20251014085836060" src="../assets/image-20251014085836060.png" /></p>
+<h4 id="-constraint-evaluation-aspdac21-svmmlp-"><a href="">-Constraint Evaluation-ASPDAC21-SVM+MLP-</a><a class="headerlink" href="#-constraint-evaluation-aspdac21-svmmlp-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基于 <a href="#TCAD10-SA-EFYY">TCAD10-SA</a> 方法的 Placer</li>
+<li>testcase: three 12nm OTA </li>
+</ul>
+<h5 id="background_13">background<a class="headerlink" href="#background_13" title="Permanent link">&para;</a></h5>
+<ul>
+<li>the interconnect parasitic correlation may not be linear over the search space</li>
+</ul>
+<h5 id="experiment_11">experiment<a class="headerlink" href="#experiment_11" title="Permanent link">&para;</a></h5>
+<h4 id="-analog-placement-quality-prediction-aspdac23-nas-du"><a href="">-Analog Placement Quality Prediction-ASPDAC23-NAS-DU</a><a class="headerlink" href="#-analog-placement-quality-prediction-aspdac23-nas-du" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="">DATE20</a> 的延伸，就是用 NAS 优化了一下？</li>
+<li>NAS: <a href="https://zhuanlan.zhihu.com/p/127194745"> 神经架构搜索（NAS）简要介绍 - 知乎</a></li>
+<li></li>
+</ul>
+<h5 id="background_14">background<a class="headerlink" href="#background_14" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Severalrecent studies apply machine learning (ML) techniques to directly predict the impact of placement on circuit performance or even guide the placement process. However, the significant diversity in analog design topologies can lead to different impacts on performance metrics (e.g., common-mode rejection ratio (CMRR) or offset voltage). </li>
+<li></li>
+</ul>
+<h5 id="data_7">data<a class="headerlink" href="#data_7" title="Permanent link">&para;</a></h5>
+<p>using the same open-sourced dataset and the same setting as the work <a href="">DATE20</a></p>
+<h2 id="routing_1">Routing<a class="headerlink" href="#routing_1" title="Permanent link">&para;</a></h2>
+<h4 id="ldsa-description-script-for-layout-templates">LDS—A description script for layout templates<a class="headerlink" href="#ldsa-description-script-for-layout-templates" title="Permanent link">&para;</a></h4>
+<h4 id="bag">BAG<a class="headerlink" href="#bag" title="Permanent link">&para;</a></h4>
+<ul>
+<li>grid and template-based </li>
+</ul>
+<h4 id="laygo1">LAYGO1<a class="headerlink" href="#laygo1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>grid and template-based </li>
+<li>类似 <a href="# BAG">BAG</a></li>
+</ul>
+<h4 id="laygo2">LAYGO2<a class="headerlink" href="#laygo2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://github.com/niftylab/laygo2">OpenSource!</a></li>
+</ul>
+<h4 id="analog-and-mixed-signal-layout-automation-using-digital-place-and-route-tools">Analog and mixed-signal layout automation using digital place-and-route tools<a class="headerlink" href="#analog-and-mixed-signal-layout-automation-using-digital-place-and-route-tools" title="Permanent link">&para;</a></h4>
+<ul>
+<li>digital PR tools base</li>
+<li>a fully automated solution where the physical design process is treated as an optimization process.</li>
+</ul>
+<h2 id="dtco">DTCO<a class="headerlink" href="#dtco" title="Permanent link">&para;</a></h2>
+<h4 id="-boclosed-loopssf-post-dac20-uta"><a href="">-BO+closed loop+SSF post-DAC20--UTA</a><a class="headerlink" href="#-boclosed-loopssf-post-dac20-uta" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>closed loop</p>
+</li>
+<li>
+<p><a href="">MAGICAL</a> 的一部分</p>
+</li>
+<li>
+<p>problem formulation</p>
+</li>
+</ul>
+<p><img alt="image-20251021190625931" src="../assets/image-20251021190625931.png" /></p>
+<h5 id="background_15">background<a class="headerlink" href="#background_15" title="Permanent link">&para;</a></h5>
+<h5 id="contribution_10">contribution<a class="headerlink" href="#contribution_10" title="Permanent link">&para;</a></h5>
+<ul>
+<li>closed loop</li>
+<li>automatic symmetry constraint detection both between devices and subcircuits</li>
+<li></li>
+</ul>
+<h5 id="flow_7">flow<a class="headerlink" href="#flow_7" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251021193214407" src="../assets/image-20251021193214407.png" /></p>
+<p><img alt="image-20251021193203544" src="../assets/image-20251021193203544.png" /></p>
+<blockquote>
+<p>DFS-based</p>
+</blockquote>
+<h5 id="model_8">model<a class="headerlink" href="#model_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>Gaussian process regression (GPR) and MOBO</p>
+</li>
+<li>
+<p>classify symmetry constraints into two categories  </p>
+</li>
+<li>
+<p>Device Symmetry, graph isomorphic algorithms</p>
+</li>
+<li>
+<p>System Symmetry</p>
+</li>
+<li>
+<p>Close loop:</p>
+</li>
+</ul>
+<p><img alt="image-20251021201308144" src="../assets/image-20251021201308144.png" /></p>
+<h5 id="data_8">data<a class="headerlink" href="#data_8" title="Permanent link">&para;</a></h5>
+<h5 id="experiment_12">experiment<a class="headerlink" href="#experiment_12" title="Permanent link">&para;</a></h5>
+<ul>
+<li>GPflow  to do MOBO</li>
+</ul>
+<h2 id="gate-sizing">Gate Sizing<a class="headerlink" href="#gate-sizing" title="Permanent link">&para;</a></h2>
+<h4 id="-dac-2024-marl-mohsen-et-al-"><a href="">- -DAC-2024-MARL-Mohsen et al-</a><a class="headerlink" href="#-dac-2024-marl-mohsen-et-al-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Model-Based Policy Optimization (MBPO) to highly boost the sample efficiency of reinforcement learning for analog circuit sizing  </li>
+<li>Integrated in the Twin Delayed DDPG (TD3) algorithm  </li>
+<li></li>
+</ul>
+<h4 id="pzta-transferable-circuit-theory-inspired-iseda-2025-fudan-"><a href="">PZTA-Transferable Circuit Theory-Inspired-ISEDA-2025- -Fudan-</a><a class="headerlink" href="#pzta-transferable-circuit-theory-inspired-iseda-2025-fudan-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>a transferable pole-zero-based transient assertion (PZTA) system</li>
+</ul>
+<h5 id="background_16">background<a class="headerlink" href="#background_16" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Transient simulation is a major computational bottleneck in analog circuit sizing optimization, especially when</li>
+</ul>
+<p>the circuit is unstable.</p>
+<ul>
+<li>Simulation-based methods achieve high accuracy but suffer from inefficiency, while surrogate-based ap</li>
+</ul>
+<p>proaches promise speedups but struggle with prediction errors and high computational costs. </p>
+<h4 id="routing_2">Routing<a class="headerlink" href="#routing_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>概伦和北大合作的</li>
+<li>for analog/mixed-signal integrated circuits.  </li>
+</ul>
+<h5 id="background_17">background<a class="headerlink" href="#background_17" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Most previous work has focused only on <mark>geometric constraints</mark> or basic <mark>electrical constraints</mark>, lacking <mark>holistic</mark> and <mark>systematic</mark> investigation.</li>
+<li>categorize routing constraints into：</li>
+<li>geometric constraints (e.g., design rules) </li>
+<li>electrical constraints (e.g., EM and IR drop constraints on power/ground nets, symmetry nets, sensitive area constraint, etc.)</li>
+<li>privious works‘ limitation</li>
+<li>no tackles multiple constraints  </li>
+<li>ignore the differences in resistance and capacitance caused by different net routing topologies when handling EM and IR drop constraints</li>
+</ul>
+<h5 id="contribution_11">contribution<a class="headerlink" href="#contribution_11" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20250717134247641" src="../assets/image-20250717134247641.png" /></p>
+<ul>
+<li>considers both geometric and electrical constraints  </li>
+<li>compatible with manually placed layouts  </li>
+<li>a novel Steiner tree based wire sizing scheme</li>
+<li>considers both net routing topologies and wire sizes with accurate estimation of resistance and capacitance for EM and IR drop constraints</li>
+<li>a multi-constraint aware routing algorithm</li>
+<li>work with complicated constraints and the wire sizing scheme</li>
+</ul>
+<h2 id="netlist-annotation-constraint-generation">Netlist Annotation &amp; Constraint Generation<a class="headerlink" href="#netlist-annotation-constraint-generation" title="Permanent link">&para;</a></h2>
+<p>Liu M, Li W, Zhu K, et al. S3DET: Detecting system symmetry constraints for analog circuits with graph similarity. Proc ASPDAC, 2020, 193  基于快速图相似性  </p>
+<p>Kunal K, Poojary P, Dhar T, et al. A general approach for identifying hierarchical symmetry constraints for analog circuit layout. Proc ICCAD, 2020</p>
+<p>Kunal K, Dhar T, Madhusudan M, et al. GANA: <mark>Graph convolutional network based</mark> automated netlist annotation for analog circuits. Proc DATE, 2020  </p>
+<p>templates-based:</p>
+<p><img alt="image-20251022164349284" src="../assets/image-20251022164349284.png" /></p>
+<p>knowledge-based:</p>
+<p><img alt="image-20251022164357347" src="../assets/image-20251022164357347.png" /></p>
+<p>templates and knowledge-based</p>
+<p><img alt="image-20251022164413837" src="../assets/image-20251022164413837.png" /></p>
+<h2 id="design-rule-abstraction">Design rule abstraction<a class="headerlink" href="#design-rule-abstraction" title="Permanent link">&para;</a></h2>
+<p><img alt="image-20251022170844515" src="../assets/image-20251022170844515.png" /></p>
+<h2 id="pcell-generator">PCell Generator<a class="headerlink" href="#pcell-generator" title="Permanent link">&para;</a></h2>
+<h4 id="align-opt-date21-"><a href="">ALIGN-opt-DATE21--</a><a class="headerlink" href="#align-opt-date21-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>一个方法上的改进，但是没仔细说PCell的生成</li>
+</ul>
+<h5 id="background_18">background<a class="headerlink" href="#background_18" title="Permanent link">&para;</a></h5>
+<ul>
+<li>The quality of primitive cell layout is critical for design performance</li>
+</ul>
+<h3 id="array-cc-pr">Array CC PR<a class="headerlink" href="#array-cc-pr" title="Permanent link">&para;</a></h3>
+<p><img alt="image-20251204172818005" src="../assets/image-20251204172818005.png" /></p>
+<p><img alt="image-20251204172833777" src="../assets/image-20251204172833777.png" /></p>
+<h4 id="toread">TOREAD<a class="headerlink" href="#toread" title="Permanent link">&para;</a></h4>
+<h5 id="cap_1">cap<a class="headerlink" href="#cap_1" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251203152910054" src="../assets/image-20251203152910054.png" /></p>
+<h5 id="mos_1">mos<a class="headerlink" href="#mos_1" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251205100808025" src="../assets/image-20251205100808025.png" /></p>
+<p><img src="assets/image-20251205095313179.png" alt="image-20251205095313179" style="zoom: 135%;" /></p>
+<blockquote>
+<p>diffusion share</p>
+</blockquote>
+<p><img alt="image-20251203152941324" src="../assets/image-20251203152941324.png" /></p>
+<p><img alt="image-20251203153001203" src="../assets/image-20251203153001203.png" /></p>
+<p>文献[13]和[14]提出了构造性算法来生成晶体管阵列的共质心（CC）版图模式。其中[14]还在布局生成过程中考虑了热效应。然而，这两项研究均未解决布线问题、晶体管间扩散区共享问题或布局相关效应（LDEs）。文献[15]提出了一种扩散区共享感知的CC布局布线算法，<img alt="image-20251203153356107" src="../assets/image-20251203153356107.png" /></p>
+<p><img alt="image-20251203151142265" src="../assets/image-20251203151142265.png" /></p>
+<h4 id="-eulerian-path-icasic-03-tsinghua"><a href="">-Eulerian Path-ICASIC-03--Tsinghua</a><a class="headerlink" href="#-eulerian-path-icasic-03-tsinghua" title="Permanent link">&para;</a></h4>
+<ul>
+<li>$\mathcal{O}(n)$</li>
+<li>dummy insert</li>
+<li>two dimension cc</li>
+</ul>
+<h5 id="background_19">background<a class="headerlink" href="#background_19" title="Permanent link">&para;</a></h5>
+<h5 id="contribution_12">contribution<a class="headerlink" href="#contribution_12" title="Permanent link">&para;</a></h5>
+<h5 id="flow_8">flow<a class="headerlink" href="#flow_8" title="Permanent link">&para;</a></h5>
+<h5 id="model_9">model<a class="headerlink" href="#model_9" title="Permanent link">&para;</a></h5>
+<p>the follow five rules should beconsidered [9]. </p>
+<ol>
+<li>Coincidence</li>
+<li>Symmetry</li>
+<li>Dispersion</li>
+<li>Compactness</li>
+<li>Orientation</li>
+</ol>
+<p><img alt="image-20251230144541766" src="../assets/image-20251230144541766.png" /></p>
+<p><img alt="image-20251230144530681" src="../assets/image-20251230144530681.png" /></p>
+<h5 id="data_9">data<a class="headerlink" href="#data_9" title="Permanent link">&para;</a></h5>
+<h5 id="experiment_13">experiment<a class="headerlink" href="#experiment_13" title="Permanent link">&para;</a></h5>
+<h4 id="layout-symmetries-tcad-17-"><a href="">Layout Symmetries--TCAD-17--</a><a class="headerlink" href="#layout-symmetries-tcad-17-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>arbitrary numbers of rows and columns</li>
+<li>applicable to all device types</li>
+<li>主要是比较与总结，非常全面</li>
+<li>但是只有AB两个器件</li>
+</ul>
+<h5 id="contribution_13">contribution<a class="headerlink" href="#contribution_13" title="Permanent link">&para;</a></h5>
+<h5 id="model_10">model<a class="headerlink" href="#model_10" title="Permanent link">&para;</a></h5>
+<h6 id="_40">匹配梯度模型<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251230154251978" src="../assets/image-20251230154251978.png" /></p>
+<p><img alt="image-20251230154926331" src="../assets/image-20251230154926331.png" /></p>
+<p><img alt="image-20251230154941365" src="../assets/image-20251230154941365.png" /></p>
+<p><img alt="image-20251230154948700" src="../assets/image-20251230154948700.png" /></p>
+<h6 id="_41">对称类型<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251230160306030" src="../assets/image-20251230160306030.png" /></p>
+<p><img alt="image-20251230160341028" src="../assets/image-20251230160341028.png" /></p>
+<p><img alt="image-20251230160412572" src="../assets/image-20251230160412572.png" /></p>
+<p><img alt="image-20251230160652955" src="../assets/image-20251230160652955.png" /></p>
+<h6 id="_42">离散度<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251230152246548" src="../assets/image-20251230152246548.png" /></p>
+<p><img alt="image-20251230152236649" src="../assets/image-20251230152236649.png" /></p>
+<p><img alt="image-20251230160710861" src="../assets/image-20251230160710861.png" /></p>
+<p><img alt="image-20251230160744405" src="../assets/image-20251230160744405.png" /></p>
+<p><img alt="image-20251230160825786" src="../assets/image-20251230160825786.png" /></p>
+<h6 id="_43">三种算法<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h6>
+<ol>
+<li>
+<p>行数模4余1</p>
+</li>
+<li>
+<p>行数模4余3</p>
+</li>
+<li>
+<p>行数为偶数</p>
+</li>
+</ol>
+<p><img alt="image-20251230161311247" src="../assets/image-20251230161311247.png" /></p>
+<blockquote>
+<p>只适合两个器件，同时不考虑abut</p>
+<p>大数量的二管差分对和电流镜可以用</p>
+</blockquote>
+<h6 id="do-linear-gradients-cancel-in-common-centroid-layouts">DO LINEAR GRADIENTS CANCEL IN COMMON CENTROID LAYOUTS？<a class="headerlink" href="#do-linear-gradients-cancel-in-common-centroid-layouts" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251230162005563" src="../assets/image-20251230162005563.png" /></p>
+<h5 id="experiment_14">experiment<a class="headerlink" href="#experiment_14" title="Permanent link">&para;</a></h5>
+<h4 id="-choose-pattern-date-21-sharma"><a href="">-Choose pattern-DATE-21--Sharma</a><a class="headerlink" href="#-choose-pattern-date-21-sharma" title="Permanent link">&para;</a></h4>
+<ul>
+<li>讨论了什么时候用什么pattern， 很深的理论分析，</li>
+<li>TODO: 没看懂.</li>
+<li>结论</li>
+<li><img src="assets/image-20251204151246713.png" alt="image-20251204151246713" style="zoom: 85%;" /></li>
+</ul>
+<h5 id="background_20">background<a class="headerlink" href="#background_20" title="Permanent link">&para;</a></h5>
+<ul>
+<li>LDE and Variation  </li>
+</ul>
+<h4 id="-performance-aware-common-centroid-placement-and-routing-iccad-21-sharma"><a href="">-Performance-Aware Common-Centroid Placement and Routing-ICCAD-21--Sharma</a><a class="headerlink" href="#-performance-aware-common-centroid-placement-and-routing-iccad-21-sharma" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Performance-Aware:  maximizes diffusion sharing, incorporates length of diffusion (LOD) based stress-induced performance variations, and mitigates resistive parasitics and electromigration (EM) hotspots</li>
+<li>Placement and Routing </li>
+<li>FinFET</li>
+</ul>
+<h5 id="background_21">background<a class="headerlink" href="#background_21" title="Permanent link">&para;</a></h5>
+<ul>
+<li>LDE</li>
+<li><img alt="image-20251204103519600" src="../assets/image-20251204103519600.png" /></li>
+</ul>
+<h5 id="flow_9">flow<a class="headerlink" href="#flow_9" title="Permanent link">&para;</a></h5>
+<h5 id="model_11">model<a class="headerlink" href="#model_11" title="Permanent link">&para;</a></h5>
+<h6 id="placement_3">placement<a class="headerlink" href="#placement_3" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251204103503323" src="../assets/image-20251204103503323.png" /></p>
+<p><img alt="image-20251204103453214" src="../assets/image-20251204103453214.png" /></p>
+<p><img alt="image-20251204094753384" src="../assets/image-20251204094753384.png" /></p>
+<h6 id="routing_3">routing<a class="headerlink" href="#routing_3" title="Permanent link">&para;</a></h6>
+<p>EM and IR drop aware</p>
+<p>can be reduced by identifying sensitive wires and using <mark>multiple parallel connections</mark> between nodes,</p>
+<p><strong>overall scheme</strong> is to connect all cells of the same device in a row using <mark>horiztontal</mark> wires, and to connect cells across rows using <mark>vertical</mark> wires. </p>
+<h5 id="experiment_15">experiment<a class="headerlink" href="#experiment_15" title="Permanent link">&para;</a></h5>
+<p>env</p>
+<ul>
+<li>simulate spatial variations random fields  tool: <a href="https://github.com/GeoStat-Framework/GSTools">GeoStat-Framework/GSTools: GSTools - A geostatistical toolbox: random fields, variogram estimation, covariance models, kriging and much more</a></li>
+</ul>
+<h4 id="-cc-nonlinear-spatial-variations-opt-date-24-sa-uta"><a href="https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/10546584/">-CC nonlinear spatial variations Opt-DATE-24-SA-UTA</a><a class="headerlink" href="#-cc-nonlinear-spatial-variations-opt-date-24-sa-uta" title="Permanent link">&para;</a></h4>
+<ul>
+<li>minimizing nonlinear spatial variations.  </li>
+<li>placment only</li>
+<li>more general: consider diffusion break, routing complexity, nonlinear spatial variations and  LDE</li>
+<li>not-cc</li>
+<li>没后仿</li>
+</ul>
+<h5 id="background_22">background<a class="headerlink" href="#background_22" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>LDE and Variation</p>
+</li>
+<li>
+<p>[14, 7] have proposed custom algorithm for symmetric transistor placement, which handles layout constraints. However, this method is limited to producing layouts of the <code>CC</code> type, making it inefficient in handling nonlinear variations？</p>
+</li>
+</ul>
+<p>The method also lacks a welldefined objective in the problem formulation, hindering the ability to prioritize one constraint over another. </p>
+<p>Furthermore, the layout constraints are handled separately through post-processing steps after placement, which can lead to <mark>sub-optimal</mark> results.</p>
+<ul>
+<li>
+<p><img src="assets/image-20251204153031143.png" alt="image-20251204153031143" style="zoom: 35%;" /></p>
+</li>
+<li></li>
+</ul>
+<h5 id="contribution_14">contribution<a class="headerlink" href="#contribution_14" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251204155553693" src="../assets/image-20251204155553693.png" /></p>
+<h5 id="flow_10">flow<a class="headerlink" href="#flow_10" title="Permanent link">&para;</a></h5>
+<p>Our approach <mark>starts with an initial placement</mark> of unit cells</p>
+<p><img src="assets/image-20251204155432166.png" alt="image-20251204155432166" style="zoom:95%;" /></p>
+<h5 id="model_12">model<a class="headerlink" href="#model_12" title="Permanent link">&para;</a></h5>
+<h6 id="_44">空间误差<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251204163535801" src="../assets/image-20251204163535801.png" /></p>
+<p><img alt="image-20251204163545968" src="../assets/image-20251204163545968.png" /></p>
+<p><img alt="image-20251204163558885" src="../assets/image-20251204163558885.png" /></p>
+<h6 id="_45">布线复杂度<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h6>
+<p><img src="assets/image-20251204164447501.png" alt="image-20251204164447501" style="zoom: 75%;" /></p>
+<p>56</p>
+<p>𝑂(𝑛2)  </p>
+<h6 id="lod_1">LOD效应<a class="headerlink" href="#lod_1" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251204164856058" src="../assets/image-20251204164856058.png" /></p>
+<p><img alt="image-20251204164851521" src="../assets/image-20251204164851521.png" /></p>
+<p><img alt="image-20251204165112547" src="../assets/image-20251204165112547.png" /></p>
+<h6 id="diffusion-break">Diffusion Break<a class="headerlink" href="#diffusion-break" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251204172336269" src="../assets/image-20251204172336269.png" /></p>
+<h6 id="sa">SA 优化<a class="headerlink" href="#sa" title="Permanent link">&para;</a></h6>
+<p>SA适合这种小规模的问题</p>
+<p><img alt="image-20251204172501000" src="../assets/image-20251204172501000.png" /></p>
+<p>init solution:</p>
+<p><img alt="image-20251204173727845" src="../assets/image-20251204173727845.png" /></p>
+<p>Random Perturbation  </p>
+<p><img alt="image-20251204184759584" src="../assets/image-20251204184759584.png" /></p>
+<p><img alt="image-20251204185321214" src="../assets/image-20251204185321214.png" /></p>
+<h5 id="data_10">data<a class="headerlink" href="#data_10" title="Permanent link">&para;</a></h5>
+<h5 id="experiments">experiments<a class="headerlink" href="#experiments" title="Permanent link">&para;</a></h5>
+<h6 id="setting">setting<a class="headerlink" href="#setting" title="Permanent link">&para;</a></h6>
+<p>g: random</p>
+<p><img alt="image-20251204190705448" src="../assets/image-20251204190705448.png" /></p>
+<p>result</p>
+<p><img alt="image-20251204191514795" src="../assets/image-20251204191514795.png" /></p>
+<p>这个生成的pattern一眼看着应该挺难接受的</p>
+<p><img alt="image-20251204192107913" src="../assets/image-20251204192107913.png" /></p>
+<p><img alt="image-20251204192112672" src="../assets/image-20251204192112672.png" /></p>
+<blockquote>
+<p>[!WARNING]</p>
+<p>没说时间，没后仿</p>
+<p><img alt="image-20251204192245775" src="../assets/image-20251204192245775.png" /></p>
+</blockquote>
+<h4 id="-nonlinear-gradients-tcad-24-sharma"><a href="">-Nonlinear Gradients -TCAD-24--Sharma</a><a class="headerlink" href="#-nonlinear-gradients-tcad-24-sharma" title="Permanent link">&para;</a></h4>
+<ul>
+<li>FinFET-Based  </li>
+<li>Sharma 这个方向的第三篇</li>
+<li>dispersion</li>
+<li>optimize the placement for second-order gradients  </li>
+<li>routing 和之前的工作一样</li>
+<li>详细阐述了为什么要引入空间位置的非线性成分</li>
+<li></li>
+</ul>
+<h5 id="background_23">background<a class="headerlink" href="#background_23" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p>LED, EM, Variation  </p>
+</li>
+<li>
+<p><img alt="image-20251205103201370" src="../assets/image-20251205103201370.png" /></p>
+</li>
+<li>
+<p><img alt="image-20251205103152625" src="../assets/image-20251205103152625.png" /></p>
+</li>
+</ul>
+<blockquote>
+<p>[!CAUTION]</p>
+<p>这里是分开来相等，但是在<a href="">DATE24</a>中，每个component和起来相等</p>
+</blockquote>
+<ul>
+<li>
+<p><img alt="image-20251205103505575" src="../assets/image-20251205103505575.png" /></p>
+</li>
+<li>
+<p><img alt="image-20251205103514870" src="../assets/image-20251205103514870.png" /></p>
+</li>
+</ul>
+<h5 id="model_13">model<a class="headerlink" href="#model_13" title="Permanent link">&para;</a></h5>
+<h6 id="_46">之前的方法：<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251205112341203" src="../assets/image-20251205112341203.png" /></p>
+<p><img alt="image-20251205112140586" src="../assets/image-20251205112140586.png" /></p>
+<blockquote>
+<p>[!CAUTION]</p>
+<p>如果是8列
+(g)下一次放置就完蛋了</p>
+</blockquote>
+<h6 id="new-method">new method<a class="headerlink" href="#new-method" title="Permanent link">&para;</a></h6>
+<p>extensible to higher than second-order gradients, but in practice it is unlikely that such an analysis is necessary in real world scenarios.</p>
+<p>by swapping unit cell</p>
+<p><img alt="image-20251205135212470" src="../assets/image-20251205135212470.png" /></p>
+<p><img alt="image-20251205135202673" src="../assets/image-20251205135202673.png" /></p>
+<p><img alt="image-20251205133058621" src="../assets/image-20251205133058621.png" /></p>
+<blockquote>
+<p>[!CAUTION]</p>
+<p><img alt="image-20251205133035907" src="../assets/image-20251205133035907.png" /></p>
+</blockquote>
+<h5 id="datasetting">data/setting<a class="headerlink" href="#datasetting" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251205135447899" src="../assets/image-20251205135447899.png" /></p>
+<h5 id="experiment_16">experiment<a class="headerlink" href="#experiment_16" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251205142305511" src="../assets/image-20251205142305511.png" /></p>
+<p><img alt="image-20251205142311113" src="../assets/image-20251205142311113.png" /></p>
+<p><img alt="image-20251205142255439" src="../assets/image-20251205142255439.png" /></p>
+<p><img alt="image-20251205142247664" src="../assets/image-20251205142247664.png" /></p>
+<p>impact of secondorder gradients increases significantly with the <mark>layout size</mark>  </p>
+<p><img alt="image-20251205142350505" src="../assets/image-20251205142350505.png" /></p>
+<blockquote>
+<p>Intel(R) Core i7 8665U CPU @1.90 GHz</p>
+</blockquote>
+<p><img alt="image-20251205142509367" src="../assets/image-20251205142509367.png" /></p>
+<h4 id="-multiobjective-optimization-tcad-25-sa-supriyo"><a href="">-Multiobjective Optimization-TCAD-25-SA-Supriyo</a><a class="headerlink" href="#-multiobjective-optimization-tcad-25-sa-supriyo" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Multi-object: degree of dispersion, routing complexity, diffusion sharing, and layout dependent effects.</p>
+</li>
+<li>
+<p>constraints, including degree of dispersion, routing complexity, diffusion sharing, and layout dependent effects.</p>
+</li>
+<li>
+<p>Supriyo 上一个工作的期刊，多了很多东西</p>
+</li>
+<li>
+<p>SA换成 支持==多目标优化==的 AMOSA [22]， 不需要调参了  </p>
+</li>
+</ul>
+<p><img alt="image-20251204201825626" src="../assets/image-20251204201825626.png" /></p>
+<ul>
+<li>
+<p>CC-type， 上一个工作可能出现 not CC?</p>
+</li>
+<li>
+<p>增加了dummy count的考虑</p>
+</li>
+<li>
+<p>增加了离散程度的</p>
+</li>
+<li>
+<p>，没有使用</p>
+</li>
+<li>
+<p>placement only</p>
+</li>
+<li>
+<p>可以也没给run time</p>
+</li>
+</ul>
+<blockquote>
+<p>之后可能往高频/routing/Post-Layout Aware去做？</p>
+</blockquote>
+<h5 id="background_24">background<a class="headerlink" href="#background_24" title="Permanent link">&para;</a></h5>
+<ul>
+<li>LED and Variation  </li>
+</ul>
+<h5 id="contribution_15">contribution<a class="headerlink" href="#contribution_15" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251204202619435" src="../assets/image-20251204202619435.png" /></p>
+<ul>
+<li>XY/180°</li>
+</ul>
+<h5 id="flow_11">flow<a class="headerlink" href="#flow_11" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251204214330618" src="../assets/image-20251204214330618.png" /></p>
+<h6 id="init-placement">init placement<a class="headerlink" href="#init-placement" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251204205558760" src="../assets/image-20251204205558760.png" /></p>
+<p>mirroring strategy of device placement using the X==X==/180  transformation proves insufficient</p>
+<p>XY/180◦ transformation can be applied only to devices having the same number of units</p>
+<p><img alt="image-20251204211430089" src="../assets/image-20251204211430089.png" /></p>
+<h5 id="model_14">model<a class="headerlink" href="#model_14" title="Permanent link">&para;</a></h5>
+<h6 id="amosa-based">AMOSA-based<a class="headerlink" href="#amosa-based" title="Permanent link">&para;</a></h6>
+<p>we store the solution==s== in new-pts（AMOSA store one solution）</p>
+<blockquote>
+<p>TOREAD</p>
+</blockquote>
+<p><img alt="image-20251204212726442" src="../assets/image-20251204212726442.png" /></p>
+<h6 id="constration">constration<a class="headerlink" href="#constration" title="Permanent link">&para;</a></h6>
+<p>Degree of Dispersion  </p>
+<p><img alt="image-20251204212138057" src="../assets/image-20251204212138057.png" /></p>
+<p><img alt="image-20251204212529230" src="../assets/image-20251204212529230.png" /></p>
+<p>Layout Dependent Effects  </p>
+<p><img alt="image-20251204212714886" src="../assets/image-20251204212714886.png" /></p>
+<p><img alt="image-20251204212112221" src="../assets/image-20251204212112221.png" /></p>
+<p><img alt="image-20251204212745127" src="../assets/image-20251204212745127.png" /></p>
+<p><img alt="image-20251204212751954" src="../assets/image-20251204212751954.png" /></p>
+<p>Routing Cost  </p>
+<p><img alt="image-20251204214103350" src="../assets/image-20251204214103350.png" /></p>
+<p><img alt="image-20251204214108804" src="../assets/image-20251204214108804.png" /></p>
+<blockquote>
+<p>[!CAUTION]</p>
+<p>再换成RSMT？</p>
+<p>有这么麻烦吗</p>
+</blockquote>
+<h5 id="data-and-env">Data and Env<a class="headerlink" href="#data-and-env" title="Permanent link">&para;</a></h5>
+<p>TSMC 40 nm PDK  </p>
+<p>Virtuoso schematic and GXL layout environment   </p>
+<p><mark>manually</mark> create  the topology (i.e., the pattern) using the Modgen feature  </p>
+<blockquote>
+<p>Modgen feature 是什么？</p>
+</blockquote>
+<p>Calibre nmLVS and PEX  </p>
+<blockquote>
+<p>不用过DRC，也难过</p>
+</blockquote>
+<p>Labels and NWELL are created <mark>manually</mark>  </p>
+<p><img alt="image-20251204220537174" src="../assets/image-20251204220537174.png" /></p>
+<blockquote>
+<p>感觉case的单元数量都挺大的。不过小的话好像也没什么优化必要</p>
+</blockquote>
+<h5 id="experiment_17">experiment<a class="headerlink" href="#experiment_17" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251204215809188" src="../assets/image-20251204215809188.png" /></p>
+<p><img alt="image-20251204220515336" src="../assets/image-20251204220515336.png" /></p>
+<p><img alt="image-20251204221428560" src="../assets/image-20251204221428560.png" /></p>
+<p><img alt="image-20251204221432124" src="../assets/image-20251204221432124.png" /></p>
+<p><img alt="image-20251204221413690" src="../assets/image-20251204221413690.png" /></p>
+<p><img alt="image-20251204221418141" src="../assets/image-20251204221418141.png" /></p>
+<h2 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h2>
+<h3 id="generator">Generator<a class="headerlink" href="#generator" title="Permanent link">&para;</a></h3>
+<h4 id="pcell">PCell<a class="headerlink" href="#pcell" title="Permanent link">&para;</a></h4>
+<h2 id="-cadence">- Cadence<a class="headerlink" href="#-cadence" title="Permanent link">&para;</a></h2>
+<h4 id="pycells">PyCells<a class="headerlink" href="#pycells" title="Permanent link">&para;</a></h4>
+<ul>
+<li>related tools：pycell studio</li>
+<li>Synopsys</li>
+</ul>
+<h4 id="bag12">BAG1/2<a class="headerlink" href="#bag12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>2013/2018</p>
+</li>
+<li>
+<p>Berkeley Analog Generator (BAG)</p>
+</li>
+<li>
+<p><a href="https://github.com/ucb-art/BAG_framework">OpenSource</a></p>
+</li>
+<li>
+<p>PyCell-based</p>
+</li>
+<li>
+<p>procedural based, users have to write significant amount of codes, limiting the wide adoption of the solutions</p>
+</li>
+</ul>
+<p>程序性布局生成器在开发参数化单元以及整合用于编码器件放置和布线的脚本方面仍然需要大量的人工劳动。尽管如此，这些方法在将设计迁移到不同技术节点时已显著减少了人工工作量。</p>
+<h3 id="netlist2gds">Netlist2GDS<a class="headerlink" href="#netlist2gds" title="Permanent link">&para;</a></h3>
+<h4 id="magical_1">MAGICAL<a class="headerlink" href="#magical_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://github.com/magical-eda/MAGICAL">magical-eda/MAGICAL: Machine Generated Analog IC Layout</a></li>
+<li>IDEA program  “no human in the loop”   </li>
+<li></li>
+</ul>
+<h5 id="flow_12">flow<a class="headerlink" href="#flow_12" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251015190632878" src="../assets/image-20251015190632878.png" /></p>
+<ul>
+<li>MAGICAL supports different device types, including PMOS, NMOS, MOM capacitors, and poly resisters. </li>
+<li>Transistors can have additional attributes such as lvt (low threshold voltage), hvt (high threshold voltage) and na (native device)</li>
+</ul>
+<h5 id="files">files<a class="headerlink" href="#files" title="Permanent link">&para;</a></h5>
+<p>Benchmark circuit examples are under <code>examples/</code></p>
+<h5 id="case">case<a class="headerlink" href="#case" title="Permanent link">&para;</a></h5>
+<p>three OTA</p>
+<p>one COMP</p>
+<p>two ADC</p>
+<ul>
+<li>The ADC circuits are relatively large and have a hierarchy.</li>
+<li>All circuits contain symmetry group constraints.   </li>
+</ul>
+<h5 id="model_15">model<a class="headerlink" href="#model_15" title="Permanent link">&para;</a></h5>
+<p>MAGICAL 会为每个 PMOS 器件生成单独的 NWELL 接触孔</p>
+<h6 id="constraint-extraction">CONSTRAINT EXTRACTION<a class="headerlink" href="#constraint-extraction" title="Permanent link">&para;</a></h6>
+<h6 id="graph-abstraction">Graph Abstraction<a class="headerlink" href="#graph-abstraction" title="Permanent link">&para;</a></h6>
+<p>netlist -&gt; graph</p>
+<p><code>Devices</code>, <code>pins</code>, and <code>nets</code> are all represented as nodes. </p>
+<h6 id="seed-pattern-detection">Seed Pattern Detection<a class="headerlink" href="#seed-pattern-detection" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020141026483" src="../assets/image-20251020141026483.png" /></p>
+<p><img alt="image-20251020141322835" src="../assets/image-20251020141322835.png" /></p>
+<p>模式匹配</p>
+<h6 id="signal-flow-based-graph-traversal">Signal Flow Based Graph Traversal<a class="headerlink" href="#signal-flow-based-graph-traversal" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020141311332" src="../assets/image-20251020141311332.png" /></p>
+<p>define <code>current directions</code> </p>
+<h6 id="constraints-post-processing">Constraints Post-processing<a class="headerlink" href="#constraints-post-processing" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251020141401206" src="../assets/image-20251020141401206.png" /></p>
+<p><img alt="image-20251020141136642" src="../assets/image-20251020141136642.png" /></p>
+<h6 id="placer">placer<a class="headerlink" href="#placer" title="Permanent link">&para;</a></h6>
+<ul>
+<li>IO:</li>
+<li>The inputs to the placer include the circuit netlist, extracted constraints, generated devices, and process technologydependent design rules  </li>
+<li>The outputs are the legalized GDSII layout of the placement result and pin information for routing.</li>
+<li>satisfying the symmetry constraints and design rules. </li>
+<li>基于 <a href="">ISPD19, XU</a>, NLP</li>
+<li>NLP<ul>
+<li>we can get a global placement result encouraging symmetry and boundary constraints with short wirelength and small device overlapping</li>
+</ul>
+</li>
+<li>legalization  and detailed placement<ul>
+<li>constructing the constraint graphs  </li>
+<li><code>constraint graphs and plane sweep algorithm</code>: J. Doenhardt and T. Lengauer, “Algorithmic aspects of one-dimensional layout compaction,”  IEEE TCAD, vol. 6, no. 5, pp. 863–878, 1987</li>
+<li>missing positional constraint edges: <a href="">ISPD19, XU</a></li>
+<li>linear programming (LP)</li>
+<li>optimize the wirelength for the given legal placement  </li>
+</ul>
+</li>
+<li><code>Post-Placement Optimization</code>：WellGAN </li>
+</ul>
+<h6 id="router">router<a class="headerlink" href="#router" title="Permanent link">&para;</a></h6>
+<ul>
+<li>two stages, global and detailed routing  </li>
+<li><img alt="image-20251020152730277" src="../assets/image-20251020152730277.png" /></li>
+<li>global routing: grid-based A* search routing engine, 3D grid, two-pin nets, RRR</li>
+<li>detailed routing: a sequential A* search kernel is applied  </li>
+<li>net constraintion</li>
+<li></li>
+</ul>
+<h5 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h5>
+<p>To clone the repository and submodules, go to the path to download the repository.</p>
+<div class="highlight"><pre><span></span><code># clone the repository 
+git clone https://github.com/magical-eda/MAGICAL.git
+git submodule init
+git submodule update
+</code></pre></div>
+<p>You can use the Docker container to avoid building all the dependencies yourself.</p>
+<ol>
+<li>
+<p>Install Docker on <a href="https://docs.docker.com/install/">Linux</a>.</p>
+</li>
+<li>
+<p>Navigate to the repository.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>cd MAGICAL
+</code></pre></div>
+<ol>
+<li>
+<p>Get the docker container with either of the following options.</p>
+</li>
+<li>
+<p>Option 1 (Recommended): pull from the cloud <a href="https://hub.docker.com/r/jayl940712/magical">jayl940712/magical</a>.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker pull jayl940712/magical:latest
+</code></pre></div>
+<ul>
+<li>Option 2: build the container.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>docker build . --file Dockerfile --tag magical:latest
+</code></pre></div>
+<ol>
+<li>Run the docker container</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker run -it -v $(pwd):/MAGICAL jayl940712/magical:latest bash
+</code></pre></div>
+<p>Or if you used option 2 to build the container</p>
+<div class="highlight"><pre><span></span><code>docker run -it -v $(pwd):/MAGICAL magical:latest bash
+</code></pre></div>
+<h4 id="align_1">ALIGN<a class="headerlink" href="#align_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><a href="https://github.com/ALIGN-analoglayout/ALIGN-public?tab=readme-ov-file">ALIGN-analoglayout/ALIGN-public</a></p>
+</li>
+<li>
+<p><a href="https://align-analoglayout.github.io/ALIGN-public/index.html">ALIGN: Document</a>, MAGICAL 没有文档</p>
+</li>
+<li>
+<p>The goal of ALIGN (Analog Layout, Intelligently Generated from Netlists) is to automatically translate an unannotated (or partially annotated) <code>SPICE netlist</code> of an analog circuit to a <code>GDSII layout</code>.</p>
+</li>
+<li>
+<p>also releases a set of analog circuit designs.</p>
+</li>
+<li>
+<p>covering four broad classes of functionality  </p>
+</li>
+</ul>
+<p><img alt="image-20251022153130808" src="../assets/image-20251022153130808.png" /></p>
+<ul>
+<li></li>
+</ul>
+<h5 id="core-concept">Core concept<a class="headerlink" href="#core-concept" title="Permanent link">&para;</a></h5>
+<p>hierarchical</p>
+<p><img alt="image-20251022183329802" src="../assets/image-20251022183329802.png" /></p>
+<h5 id="flow_13">flow<a class="headerlink" href="#flow_13" title="Permanent link">&para;</a></h5>
+<p><a href="https://align-analoglayout.github.io/ALIGN-public/notes/flow.html#inputs">ALIGN: flow — ALIGN</a></p>
+<p><img alt="image-20251022161205946" src="../assets/image-20251022161205946.png" /></p>
+<ul>
+<li>
+<p>netlist</p>
+</li>
+<li>
+<p>"Only one .sp file allowed"</p>
+</li>
+<li>
+<p><code>primitive_lib = generate_hierarchy(netlist, subckt, topology_dir, flatten, pdk_dir)</code></p>
+<ul>
+<li>align/config</li>
+</ul>
+<p><img alt="image-20251028171031368" src="../assets/image-20251028171031368.png" /></p>
+<ul>
+<li>
+<p>"basic_template.sp"： template library</p>
+<p><img alt="image-20251028173228465" src="../assets/image-20251028173228465.png" /></p>
+</li>
+<li>
+<p>"user_template.sp"</p>
+</li>
+<li>
+<p><code>read_lib</code> 获取 template(PCell)</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>primitives = generate_primitives(primitive_lib, pdk_dir, primitive_dir, netlist_dir, blackbox_dir, scale)</code></p>
+<ul>
+<li>一个primitive的dict内容：</li>
+</ul>
+<p><img alt="image-20251029104422761" src="../assets/image-20251029104422761.png" /></p>
+</li>
+<li>
+<p><code>generate_pnr</code></p>
+</li>
+</ul>
+<h6 id="netlist-auto-annotation">Netlist auto-annotation<a class="headerlink" href="#netlist-auto-annotation" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251022161143098" src="../assets/image-20251022161143098.png" /></p>
+<p>The input to ALIGN is a SPICE netlist that is converted to a <code>graph</code> representation</p>
+<p>uses two approaches   </p>
+<ul>
+<li>
+<p>ML-based methods</p>
+<p>Details of the approach are provided in <a href="">GANA</a></p>
+</li>
+<li>
+<p>Graph-traversal-based methods  </p>
+<p>for blocks that lie <mark>outside the scope of the GCN training set</mark>, we use graph-based approaches to recognize repeated structures within a circuit.</p>
+<p><code>approximate subgraph isomorphism</code>  </p>
+</li>
+</ul>
+<p>可以找到 primitives/hierarchy/symmetry</p>
+<p>example:</p>
+<p><img alt="image-20251022170056167" src="../assets/image-20251022170056167.png" /></p>
+<blockquote>
+<p>It is important to note that the best layout hierarchy may sometimes differ from a logical netlist hierarchy</p>
+</blockquote>
+<h6 id="design-rule-capture">Design rule capture<a class="headerlink" href="#design-rule-capture" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251022161522067" src="../assets/image-20251022161522067.png" /></p>
+<p><img alt="image-20251022170951260" src="../assets/image-20251022170951260.png" /></p>
+<h6 id="constraint-generation">Constraint generation<a class="headerlink" href="#constraint-generation" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251022161600188" src="../assets/image-20251022161600188.png" /></p>
+<p>two type of constraints:</p>
+<ol>
+<li>Geometric constraints,</li>
+</ol>
+<p>symmetry, matching, and common-centroid constraints</p>
+<p><a href="">GCN-based method</a></p>
+<ol>
+<li>Electrical constraints  </li>
+</ol>
+<p>bound the maximum parasitics at any node of the circuit</p>
+<p><img alt="image-20251022173638181" src="../assets/image-20251022173638181.png" /></p>
+<p><img alt="image-20251022173715045" src="../assets/image-20251022173715045.png" /></p>
+<h6 id="parameterized-primitive-layout-generation">Parameterized primitive layout generation<a class="headerlink" href="#parameterized-primitive-layout-generation" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251022162636097" src="../assets/image-20251022162636097.png" /></p>
+<p>provides the user with a predefined <code>library</code> of parameterizable primitives</p>
+<p><img alt="image-20251023162826060" src="../assets/image-20251023162826060.png" /></p>
+<p><img alt="image-20251023083853426" src="../assets/image-20251023083853426.png" /></p>
+<h6 id="hierarchical-block-assembly">Hierarchical block assembly<a class="headerlink" href="#hierarchical-block-assembly" title="Permanent link">&para;</a></h6>
+<p><img alt="image-20251022162530398" src="../assets/image-20251022162530398.png" /></p>
+<p>placement</p>
+<ul>
+<li>SA+sequence pairs  [TCAD11]</li>
+</ul>
+<p>router</p>
+<ul>
+<li>can employ one of the two detailed routers</li>
+<li><code>integer linear programming</code> formulation and an <code>A* algorithm</code>;  this works particularly well for more <mark>sparse designs</mark></li>
+<li>A <code>satisfiability-based</code> <a href="github.com/ALIGN-analoglayout/AnalogDetailedRouter">detailed router</a>, released by Intel, is well suited for <mark>congested</mark> designs</li>
+</ul>
+<h5 id="constraintion_1">constraintion<a class="headerlink" href="#constraintion_1" title="Permanent link">&para;</a></h5>
+<p><a href="https://align-analoglayout.github.io/ALIGN-public/notes/const.html">Constraints — ALIGN</a></p>
+<ul>
+<li>
+<p>SymmetricBlocks</p>
+</li>
+<li>
+<p>Order</p>
+</li>
+<li>
+<p>align</p>
+</li>
+<li>
+<p>Enclose</p>
+</li>
+<li>
+<p>Spread</p>
+</li>
+<li>
+<p>aspect ratio</p>
+</li>
+</ul>
+<p>Define <mark>lower and upper bounds</mark> on aspect ratio (=width/height) of a <mark>subcircuit</mark></p>
+<ul>
+<li>
+<p>Boundary</p>
+</li>
+<li>
+<p>CompactPlacement？</p>
+</li>
+<li>
+<p>SameTemplate？</p>
+</li>
+<li>
+<p>CreateAlias？</p>
+</li>
+<li>
+<p>GroupBlocks</p>
+</li>
+</ul>
+<p>Forces a <mark>hierarchy</mark> creation for group of instances. This brings the instances <mark>closer</mark>. This reduces the problem statement for placer thus providing better solutions.</p>
+<p><img alt="image-20251031134346066" src="../assets/image-20251031134346066.png" /></p>
+<p><img src="assets/image-20251031134359494.png" alt="image-20251031134359494" style="zoom: 75%;" /></p>
+<ul>
+<li>
+<p>DoNotIdentify</p>
+</li>
+<li>
+<p>BlockDistance</p>
+</li>
+<li>
+<p>guard ring</p>
+</li>
+<li>
+<p>GroupCaps</p>
+</li>
+<li>
+<p>NetConst</p>
+</li>
+<li>
+<p>PortLocation</p>
+</li>
+<li>
+<p>SymmetricNets</p>
+</li>
+<li>
+<p>MultiConnection</p>
+</li>
+<li>
+<p>PowerPorts</p>
+</li>
+<li>
+<p>GroundPorts</p>
+</li>
+<li>
+<p>ClockPorts</p>
+</li>
+<li>
+<p>DoNotUseLib</p>
+</li>
+<li>
+<p><img alt="image-20251023160914344" src="../assets/image-20251023160914344.png" /></p>
+</li>
+</ul>
+<h5 id="pdk-abstraction">PDK abstraction<a class="headerlink" href="#pdk-abstraction" title="Permanent link">&para;</a></h5>
+<ul>
+<li>
+<p><a href="..\Analog\Tools\ALIGN_PDK_Abstraction_Guide.pptx">Doc</a></p>
+</li>
+<li>
+<p><a href="https://align-analoglayout.github.io/ALIGN-public/notes/adding_pdk.html">PDK abstraction — Detailed explanation</a></p>
+</li>
+<li>
+<p><img alt="image-20251027161905244" src="../assets/image-20251027161905244.png" /></p>
+</li>
+<li>
+<p>Files:</p>
+</li>
+</ul>
+<p><img src="assets/image-20251027162219298.png" alt="image-20251027162219298" style="zoom: 70%;" /></p>
+<h6 id="layerjson">layer.json<a class="headerlink" href="#layerjson" title="Permanent link">&para;</a></h6>
+<ul>
+<li><a href="https://techovedas.com/what-is-front-endfeol-middle-end-and-back-end-of-linebeol-in-semiconductor-manufacturing/">What is Front End(FEOL), Middle End, and Back End of Line(BEOL)</a></li>
+<li>Metal names in the ‘layers.json’ must start with ‘M’ </li>
+<li>Via names in the ‘layers.json’ must start with ‘V’</li>
+<li>Do not use FEOL layer names starting with ‘M’ or ‘V’</li>
+<li>All dimensions are in nanometer</li>
+<li><a href="https://align-analoglayout.github.io/ALIGN-public/notes/adding_pdk.html">PDK abstraction — Detailed explanation</a> 中有 json 字段的详细解释</li>
+<li>Metal/Via</li>
+<li>Poly</li>
+<li>Fin</li>
+<li>N/Pwell</li>
+<li>vt_type(RVT/LVT/HVT/SLVT)</li>
+<li>active</li>
+<li>Boundary Layers</li>
+<li>MOM Cap</li>
+</ul>
+<p><strong>BEOL(Back End of Line) Design rules</strong></p>
+<p><img alt="image-20251023161838750" src="../assets/image-20251023161838750.png" /></p>
+<p><strong>FEOL (Front End of Line) Design rules</strong></p>
+<p>These layers are used by the <code>cell generator</code> and may vary based on the <code>PDK</code>.</p>
+<blockquote>
+<p>一些关于衬底的，比如 PC 层</p>
+</blockquote>
+<h6 id="modelsp">model.sp<a class="headerlink" href="#modelsp" title="Permanent link">&para;</a></h6>
+<ul>
+<li>
+<p>Define <mark>models for devices available in a pdk</mark></p>
+</li>
+<li>
+<p>The model names are used in ‘annotation phase’</p>
+</li>
+<li>
+<p>example</p>
+</li>
+</ul>
+<p><img src="assets/image-20251027162938213.png" alt="image-20251027162938213" style="zoom: 60%;" /></p>
+<ul>
+<li></li>
+</ul>
+<h5 id="pcell-generator_1">PCell Generator<a class="headerlink" href="#pcell-generator_1" title="Permanent link">&para;</a></h5>
+<p><img alt="image-20251023163213457" src="../assets/image-20251023163213457.png" /></p>
+<p>four basic cell types:</p>
+<ul>
+<li><a href="https://github.com/ALIGN-analoglayout/ALIGN-public/blob/master/pdks/FinFET14nm_Mock_PDK/Align_primitives.py">Transistor</a></li>
+<li><a href="https://github.com/ALIGN-analoglayout/ALIGN-public/blob/master/pdks/FinFET14nm_Mock_PDK/fabric_Cap.py">Capacitor</a></li>
+<li><a href="https://github.com/ALIGN-analoglayout/ALIGN-public/blob/master/pdks/FinFET14nm_Mock_PDK/fabric_Res.py">Resistor</a>.</li>
+<li><a href="https://github.com/ALIGN-analoglayout/ALIGN-public/blob/master/pdks/FinFET14nm_Mock_PDK/fabric_ring.py">Guard ring</a>.</li>
+</ul>
+<p>Cell fabric module defines the common structure for cell generation utilities which are used in the primitive generator. This remains common across PDKs.</p>
+<h5 id="hierarchical-analog-placer-and-router-flow">Hierarchical Analog Placer and Router Flow<a class="headerlink" href="#hierarchical-analog-placer-and-router-flow" title="Permanent link">&para;</a></h5>
+<p><a href="https://github.com/ALIGN-analoglayout/ALIGN-public/blob/master/PlaceRouteHierFlow/README.md">ALIGN-public/PlaceRouteHierFlow/README.md at master · ALIGN-analoglayout/ALIGN-public</a></p>
+<h5 id="install_1">install<a class="headerlink" href="#install_1" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>[!CAUTION]</p>
+<ol>
+<li>
+<p>CMake 版本不能太高，实测 <code>cmake4.1</code> 不行。<code>cmake3.29.3</code> 可以但是也有警告。</p>
+</li>
+<li>
+<p>为了防止 github 在线下载问题，需要手动下载一份 <code>https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent/archive/refs/tags/v3.7.3.tar.gz</code> 和 <code>https://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.11/lp_solve_5.5.2.11_source.tar.gz/download</code></p>
+</li>
+</ol>
+<p>解压然后指定 CMAKE_ARGS 到对应路径
+</p>
+<p>学校服务器 g++版本太低，需要自己下</p>
+<p><code>conda install -y -c conda-forge gcc_linux-64=10 gxx_linux-64=10 cmake=3.29.3 make gdb</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>align<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+
+conda<span class="w"> </span>activate<span class="w"> </span>align
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-y<span class="w"> </span>boost<span class="w"> </span>lpsolve55
+conda<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<span class="nb">source</span><span class="w"> </span>install_deps.sh
+conda<span class="w"> </span>list
+pip<span class="w"> </span>uninstall<span class="w"> </span>cmake
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">cmake</span><span class="o">==</span><span class="m">3</span>.29.3
+<span class="c1"># 为了防止github在线下载问题，需要手动下载一份`https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent/archive/refs/tags/v3.7.3.tar.gz` 和 `https://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.11/lp_solve_5.5.2.11_source.tar.gz/download`</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FETCHCONTENT_SOURCE_DIR_JSON</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/Downloads/nlohmann_json_cmake_fetchcontent-3.7.3
+<span class="nb">export</span><span class="w"> </span><span class="nv">FETCHCONTENT_SOURCE_DIR_LPSOLVE</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/Downloads/lp_solve_5.5
+<span class="c1"># export FETCHCONTENT_FULLY_DISCONNECTED=ON      # 可保持，防止再次访问外网</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&quot;-DFETCHCONTENT_SOURCE_DIR_JSON=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/Downloads/nlohmann_json_cmake_fetchcontent-3.7.3 \</span>
+<span class="s2">                   -DFETCHCONTENT_SOURCE_DIR_LPSOLVE=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/Downloads/lp_solve_5.5&quot;</span>
+<span class="nv">BUILD_TYPE</span><span class="o">=</span><span class="s1">&#39;RelWithDebInfo&#39;</span><span class="w"> </span><span class="nv">BUILD_TESTING</span><span class="o">=</span><span class="s1">&#39;ON&#39;</span><span class="w"> </span>python<span class="w"> </span>setup.py<span class="w"> </span>develop<span class="w"> </span>-v
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>(align) pengxuan@user-Super-Server:~/Software/ALIGN-public$ conda list
+# packages in environment at /home/pengxuan/Software/miniconda3/envs/align:
+#
+# Name                     Version          Build                 Channel
+_libgcc_mutex              0.1              main
+_openmp_mutex              5.1              1_gnu
+align                      0.9.8            pypi_0                pypi
+blinker                    1.9.0            pypi_0                pypi
+boost                      1.78.0           py310hc4a4660_0       conda-forge
+boost-cpp                  1.78.0           h75c5d50_1            conda-forge
+bzip2                      1.0.8            h5eee18b_6
+ca-certificates            2025.10.5        hbd8a1cb_0            conda-forge
+certifi                    2025.10.5        pypi_0                pypi
+cffi                       1.15.1           pypi_0                pypi
+charset-normalizer         3.4.4            pypi_0                pypi
+click                      8.3.0            pypi_0                pypi
+cmake                      3.29.3           pypi_0                pypi
+colorlog                   6.10.1           pypi_0                pypi
+coverage                   7.11.0           pypi_0                pypi
+dash                       3.2.0            pypi_0                pypi
+distro                     1.9.0            pypi_0                pypi
+exceptiongroup             1.3.0            pypi_0                pypi
+execnet                    2.1.1            pypi_0                pypi
+expat                      2.7.1            h6a678d5_0
+flask                      3.1.2            pypi_0                pypi
+flatdict                   4.0.1            pypi_0                pypi
+gdspy                      1.6.13           pypi_0                pypi
+icu                        70.1             h27087fc_0            conda-forge
+idna                       3.11             pypi_0                pypi
+importlib-metadata         8.7.0            pypi_0                pypi
+iniconfig                  2.3.0            pypi_0                pypi
+itsdangerous               2.2.0            pypi_0                pypi
+jinja2                     3.1.6            pypi_0                pypi
+ld_impl_linux-64           2.44             h153f514_2
+libblas                    3.9.0            37_h4a7cf45_openblas  conda-forge
+libcblas                   3.9.0            37_h0358290_openblas  conda-forge
+libffi                     3.4.4            h6a678d5_1
+libgcc-ng                  11.2.0           h1234567_1
+libgfortran-ng             13.2.0           h69a702a_0            conda-forge
+libgfortran5               13.2.0           ha4646dd_0            conda-forge
+libgomp                    11.2.0           h1234567_1
+liblapack                  3.9.0            37_h47877c9_openblas  conda-forge
+libnsl                     2.0.0            h5eee18b_0
+libopenblas                0.3.30           h46f56fc_0
+libstdcxx-ng               11.2.0           h1234567_1
+libuuid                    1.41.5           h5eee18b_0
+libxcb                     1.17.0           h9b100fa_0
+libzlib                    1.3.1            hb25bd0a_0
+lp_solve                   5.5.2.5          h14c3975_1001         conda-forge
+lpsolve55                  5.5              py310h96516ba_1004    conda-forge
+lz4-c                      1.9.3            h9c3ff4c_1            conda-forge
+markupsafe                 3.0.3            pypi_0                pypi
+memory-profiler            0.61.0           pypi_0                pypi
+mip                        1.15.0           pypi_0                pypi
+more-itertools             10.8.0           pypi_0                pypi
+narwhals                   2.9.0            pypi_0                pypi
+ncurses                    6.5              h7934f7d_0
+nest-asyncio               1.6.0            pypi_0                pypi
+networkx                   3.4.2            pypi_0                pypi
+ninja                      1.13.0           pypi_0                pypi
+numpy                      2.2.6            pypi_0                pypi
+openssl                    3.0.18           hd6dcaed_0
+packaging                  25.0             pypi_0                pypi
+pandas                     2.3.3            pypi_0                pypi
+pip                        25.3             pypi_0                pypi
+plotly                     6.3.1            pypi_0                pypi
+pluggy                     1.6.0            pypi_0                pypi
+psutil                     7.1.2            pypi_0                pypi
+pthread-stubs              0.3              h0ce48e5_1
+pybind11                   3.0.1            pypi_0                pypi
+pycparser                  2.23             pypi_0                pypi
+pydantic                   1.10.24          pypi_0                pypi
+pygments                   2.19.2           pypi_0                pypi
+pytest                     8.4.2            pypi_0                pypi
+pytest-cov                 7.0.0            pypi_0                pypi
+pytest-cpp                 2.6.0            pypi_0                pypi
+pytest-rerunfailures       16.1             pypi_0                pypi
+pytest-timeout             2.4.0            pypi_0                pypi
+pytest-xdist               3.8.0            pypi_0                pypi
+python                     3.10.19          h6fa692b_0
+python-dateutil            2.9.0.post0      pypi_0                pypi
+python-gdsii               0.2.1            pypi_0                pypi
+python_abi                 3.10             2_cp310               conda-forge
+pytz                       2025.2           pypi_0                pypi
+pyyaml                     6.0.3            pypi_0                pypi
+readline                   8.3              hc2a1206_0
+requests                   2.32.5           pypi_0                pypi
+retrying                   1.4.2            pypi_0                pypi
+scikit-build               0.18.1           pypi_0                pypi
+setuptools                 80.9.0           py310h06a4308_0
+six                        1.17.0           pypi_0                pypi
+sqlite                     3.50.2           hb25bd0a_1
+tk                         8.6.15           h54e0aa7_0
+tomli                      2.3.0            pypi_0                pypi
+typing-extensions          4.15.0           pypi_0                pypi
+tzdata                     2025.2           pypi_0                pypi
+urllib3                    2.5.0            pypi_0                pypi
+werkzeug                   3.1.3            pypi_0                pypi
+wheel                      0.45.1           py310h06a4308_0
+xorg-libx11                1.8.12           h9b100fa_1
+xorg-libxau                1.0.12           h9b100fa_0
+xorg-libxdmcp              1.1.5            h9b100fa_0
+xorg-xorgproto             2024.1           h5eee18b_1
+xz                         5.6.4            h5eee18b_1
+z3-solver                  4.15.3.0         pypi_0                pypi
+zipp                       3.23.0           pypi_0                pypi
+zlib                       1.3.1            hb25bd0a_0
+zstd                       1.5.2            h8a70e8d_1            conda-forge
+</code></pre></div>
+<h6 id="bug">bug<a class="headerlink" href="#bug" title="Permanent link">&para;</a></h6>
+<p>GLIBCXX_3.4.30' not found</p>
+<div class="highlight"><pre><span></span><code>Traceback<span class="w"> </span><span class="o">(</span>most<span class="w"> </span>recent<span class="w"> </span>call<span class="w"> </span>last<span class="o">)</span>:
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/home/pengxuan/Software/miniconda3/envs/align/bin/schematic2layout.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span>import<span class="w"> </span>align
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/home/pengxuan/Software/ALIGN-public/align/__init__.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">6</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span>from<span class="w"> </span>.main<span class="w"> </span>import<span class="w"> </span>schematic2layout
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/home/pengxuan/Software/ALIGN-public/align/main.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">14</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span>from<span class="w"> </span>.pnr<span class="w"> </span>import<span class="w"> </span>generate_pnr
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/home/pengxuan/Software/ALIGN-public/align/pnr/__init__.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span>from<span class="w"> </span>.checkers<span class="w"> </span>import<span class="w"> </span>*
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/home/pengxuan/Software/ALIGN-public/align/pnr/checkers.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span>from<span class="w"> </span>.router<span class="w"> </span>import<span class="w"> </span>NType
+<span class="w">  </span>File<span class="w"> </span><span class="s2">&quot;/home/pengxuan/Software/ALIGN-public/align/pnr/router.py&quot;</span>,<span class="w"> </span>line<span class="w"> </span><span class="m">12</span>,<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;module&gt;
+<span class="w">    </span>from<span class="w"> </span>..<span class="w"> </span>import<span class="w"> </span>PnR
+ImportError:<span class="w"> </span>/home/pengxuan/Software/miniconda3/envs/align/bin/../lib/libstdc++.so.6:<span class="w"> </span>version<span class="w"> </span><span class="sb">`</span>GLIBCXX_3.4.30<span class="err">&#39;</span><span class="w"> </span>not<span class="w"> </span>found<span class="w"> </span><span class="o">(</span>required<span class="w"> </span>by<span class="w"> </span>/home/pengxuan/Software/ALIGN-public/align/PnR.cpython-310-x86_64-linux-gnu.so<span class="o">)</span>
+</code></pre></div>
+<blockquote>
+<p>fix: <code>conda install -c conda-forge "libstdcxx-ng&gt;=13.2.0"</code></p>
+</blockquote>
+<h5 id="debug">debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Debug schematic2layout&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;debugpy&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/bin/schematic2layout.py&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;${workspaceFolder}/examples/telescopic_ota&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;-p&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;${workspaceFolder}/pdks/FinFET14nm_Mock_PDK/&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/work&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;console&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integratedTerminal&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;justMyCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="viewer">viewer<a class="headerlink" href="#viewer" title="Permanent link">&para;</a></h3>
+<h4 id="klayout">KLayout<a class="headerlink" href="#klayout" title="Permanent link">&para;</a></h4>
+<p><a href="https://www.klayout.de/doc-qt5/manual/basic.html">KLayout Layout Viewer And Editor</a></p>
+<h5 id="install_2">install<a class="headerlink" href="#install_2" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>无 sudo 权限 local 下载</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="m">535</span><span class="w">  </span>rm<span class="w"> </span>-rf<span class="w"> </span>../local/
+<span class="w">  </span><span class="m">536</span><span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/local/klayout<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/local/klayout
+<span class="w">  </span><span class="m">537</span><span class="w">  </span>dpkg-deb<span class="w"> </span>-x<span class="w"> </span>~/Downloads/klayout_0.30.4-1_amd64.deb<span class="w"> </span>.
+<span class="w">  </span><span class="m">538</span><span class="w">  </span>ls
+<span class="w">  </span><span class="m">539</span><span class="w">  </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+<span class="w">  </span><span class="m">540</span><span class="w">  </span>klayout<span class="w"> </span>-v
+<span class="w">  </span><span class="m">541</span><span class="w">  </span>find<span class="w"> </span>~/local/klayout<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;libklayout_tl.so*&#39;</span>
+<span class="w">  </span><span class="m">542</span><span class="w">  </span>find<span class="w"> </span>~/local/klayout<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;x86_64-linux-gnu&#39;</span>
+<span class="w">  </span><span class="m">543</span><span class="w">  </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+<span class="w">  </span><span class="m">544</span><span class="w">  </span>klayout<span class="w"> </span>-v
+<span class="w">  </span><span class="m">545</span><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/klayout:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="m">546</span><span class="w">  </span>klayout<span class="w"> </span>-v
+<span class="w">  </span><span class="m">547</span><span class="w">  </span>tree<span class="w"> </span>usr/
+<span class="w">  </span><span class="m">548</span><span class="w">  </span>apt<span class="w"> </span>download<span class="w"> </span>libgit2-28
+<span class="w">  </span><span class="m">549</span><span class="w">  </span>ls
+<span class="w">  </span><span class="m">550</span><span class="w">  </span>find<span class="w"> </span><span class="s2">&quot;libgit2*&quot;</span>
+<span class="w">  </span><span class="m">551</span><span class="w">  </span>find<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;libgit2*&quot;</span>
+<span class="w">  </span><span class="m">552</span><span class="w">  </span>dpkg-deb<span class="w"> </span>-x<span class="w"> </span>libgit2-28_*.deb<span class="w"> </span>~/local/klayout
+<span class="w">  </span><span class="m">553</span><span class="w">  </span>find<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;libgit2*&quot;</span>
+<span class="w">  </span><span class="m">554</span><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/x86_64-linux-gnu:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/klayout:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="m">555</span><span class="w">  </span>klayout<span class="w"> </span>-v
+<span class="w">  </span><span class="m">556</span><span class="w">  </span>find<span class="w"> </span>libQt5Xml.so.5
+<span class="w">  </span><span class="m">557</span><span class="w">  </span>apt<span class="w"> </span>download<span class="w"> </span>libqt5xml5
+<span class="w">  </span><span class="m">558</span><span class="w">  </span>dpkg-deb<span class="w"> </span>-x<span class="w"> </span>libqt5xml5_*_amd64.deb<span class="w"> </span>~/local/klayout
+<span class="w">  </span><span class="m">559</span><span class="w">  </span>tree<span class="w"> </span>.
+<span class="w">  </span><span class="m">560</span><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/x86_64-linux-gnu:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/klayout:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="m">561</span><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">QT_PLUGIN_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/qt5/plugins:</span><span class="nv">$QT_PLUGIN_PATH</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="m">562</span><span class="w">  </span>ldd<span class="w"> </span>~/local/klayout/usr/bin/klayout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;not found&quot;</span>
+<span class="w">  </span><span class="m">563</span><span class="w">  </span>klayout<span class="w"> </span>-v
+<span class="w">  </span><span class="m">564</span><span class="w">  </span><span class="nb">cd</span><span class="w"> </span>~/Downloads
+<span class="w">  </span><span class="m">565</span><span class="w">  </span>apt<span class="w"> </span>download<span class="w"> </span>libqt5printsupport5<span class="w"> </span>libqt5sql5<span class="w"> </span>libqt5designer5<span class="w"> </span>libqt5multimediawidgets5<span class="w"> </span>libqt5multimedia5<span class="w"> </span>libqt5xmlpatterns5<span class="w"> </span>libmbedcrypto3<span class="w"> </span>libmbedtls12<span class="w"> </span>libmbedx509-0<span class="w"> </span>libhttp-parser2.9<span class="w"> </span>libssh2-1
+<span class="w">  </span><span class="m">566</span><span class="w">  </span><span class="k">for</span><span class="w"> </span>pkg<span class="w"> </span><span class="k">in</span><span class="w"> </span>libqt5printsupport5_*<span class="w"> </span>libqt5sql5_*<span class="w"> </span>libqt5designer5_*<span class="w"> </span>libqt5multimediawidgets5_*<span class="w"> </span>libqt5multimedia5_*<span class="w"> </span>libqt5xmlpatterns5_*<span class="w"> </span>libmbedcrypto3_*<span class="w"> </span>libmbedtls12_*<span class="w"> </span>libmbedx509-0_*<span class="w"> </span>libhttp-parser2.9_*<span class="w"> </span>libssh2-1_*<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">     </span>dpkg-deb<span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pkg</span><span class="s2">&quot;</span><span class="w"> </span>~/local/klayout<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="w">  </span><span class="m">567</span><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/x86_64-linux-gnu:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/klayout:</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="m">568</span><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">QT_PLUGIN_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/local/klayout/usr/lib/qt5/plugins:</span><span class="nv">$QT_PLUGIN_PATH</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="m">569</span><span class="w">  </span>ldd<span class="w"> </span>~/local/klayout/usr/bin/klayout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;not found&quot;</span>
+<span class="w">  </span><span class="m">570</span><span class="w">  </span><span class="nb">cd</span><span class="w"> </span>~/Downloads
+<span class="w">  </span><span class="m">571</span><span class="w">  </span>apt<span class="w"> </span>download<span class="w"> </span>libqt5opengl5
+<span class="w">  </span><span class="m">572</span><span class="w">  </span>dpkg-deb<span class="w"> </span>-x<span class="w"> </span>libqt5opengl5_*_amd64.deb<span class="w"> </span>~/local/klayout
+<span class="w">  </span><span class="m">573</span><span class="w">  </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+<span class="w">  </span><span class="m">574</span><span class="w">  </span>ldd<span class="w"> </span>~/local/klayout/usr/bin/klayout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;not found&quot;</span>
+<span class="w">  </span><span class="m">575</span><span class="w">  </span>klayout<span class="w"> </span>-v
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../EDA4PR/" class="btn btn-neutral float-left" title="EDA4PR"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../EDA4PR-Digtal/" class="btn btn-neutral float-right" title="EDA4PR-Digtal">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../EDA4PR/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../EDA4PR-Digtal/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

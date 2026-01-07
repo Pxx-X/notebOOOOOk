@@ -1,11 +1,13 @@
-# Cross-Stage Prediction
+# EDA4PR-Digtal
+
+## Cross-Stage Prediction
 
 - Earlystage prediction can enhance design quality by proactively detecting potential design issues in advance  --cite-->[cluster-net]
 - `Shift left`出处：V. Bhardwaj, “Shift left trends for design convergence in soc: An eda perspective,” International Journal of Computer Applications, vol. 174, no. 16, pp. 22–27, Jan 2021  
 
-## congestion
+### congestion
 
-### background
+#### background
 
 - Routing congestion can overwhelm routing resources and lead to low cell utilization and routing detours  
 
@@ -33,11 +35,10 @@
   tends to be unacceptable when utilizing a **global router** in the placement cycle to obtain the **congestion map**.  
 - Current machine learning models commonly follow a two-phase workflow. First, based on domain knowledge, human experts generate various local features on the circuit using predefined functions on netlist. Then, based on the generated features, a specific model, e.g. convolution neural network (CNN) model is designed to predict either the routing demand map or the congestion map  
 - the emergence of **Graph Neural Network (GNN)** triggered applications of undirected homogeneous graphs models on routing congestion prediction, since a VLSI circuit can be naturally represented by a graph  
-- 
 
-### [RouteNet-DRC Hotspot Prediction-ICCAD-2018-CNN](https://zhiyaoxie.com/files/ICCAD18_RouteNet.pdf)
+#### [RouteNet-DRC Hotspot Prediction-ICCAD-2018-CNN](https://zhiyaoxie.com/files/ICCAD18_RouteNet.pdf)
 
-#### background
+##### background
 
 - Every chip design project must complete routing **without design rule violation** before tapeout. However, this basic requirement is often difficult to be satisfied especially when routability is not adequately considered in early design stages.  
 
@@ -62,33 +63,32 @@
   - ![image-20250205220737891](./assets/image-20250205220737891.png)
   - 有 macro，线性程度低
 
-#### task
+##### task
 
 - predict overall routability (DRC count), 分类任务，预测总的#DRV
 - predict `DRC hotspot` locations.DRC hotspots mean the specific locations with high density of DRVs. like an end-to-end object detection task, which is more difficult to solve. GCell 内#DRV 超过设定值则为 `DRC hotspot`
 
 
 
-#### contribution:
+##### contribution:
 
 ![image-20250205210214325](./assets/image-20250205210214325.png)
 
 - mixed-size macros
 - first systematic study on CNN-based routability prediction  
 - high accuracy and high speed  
-- 
 
 
 
-#### flow
+##### flow
 
 ![image-20250205222502598](./assets/image-20250205222502598.png)
 
 
 
-#### model
+##### model
 
-- #DRV prediction
+- \#DRV prediction
 
   ResNet18-based
 
@@ -112,7 +112,7 @@
 
 
 
-#### data
+##### data
 
 dataset:
 
@@ -124,7 +124,7 @@ different placement made by “obstacle-aware macro placement " algorithm [5].
 
 each floorplan is placed and routed by Cadence Encounter v14.20 [2]  
 
-#### experiment
+##### experiment
 
 ![image-20250205230614878](./assets/image-20250205230614878.png)
 
@@ -140,7 +140,7 @@ we compare the TPR of all methods under the same FPR (error under 1%)
 
 ![image-20250205230816030](./assets/image-20250205230816030.png)
 
-### [CongestionNet-predict congestion hotspots-IFIP-2019-GNN(GAT)-nvidia](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8920342&tag=1)
+#### [CongestionNet-predict congestion hotspots-IFIP-2019-GNN(GAT)-nvidia](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8920342&tag=1)
 
 a **graph**-based deep learning method for predicting **routing congestion hotspots** from a **netlist** before placement.  Predict the ==detail routed== **lower metal layer** congestion values  
 
@@ -151,7 +151,7 @@ graph based network
 
 
 
-#### contribution
+##### contribution
 
 - 阶段早, 只使用网表
 - 由于该模型仅基于网表的逻辑结构而不是任何特定的单元布局进行预测，因此它消除了基于布局的方法中存在的次优布局的伪影 ![image-20241101192504194](./assets/image-20241101192504194.png)
@@ -225,13 +225,13 @@ cell type 不是没起作用吗
 
 
 
-### [-Congestion prediction + embedding + matrix factorization + partition-arXiv-2021-GNN(Sage)-NAL+]()
+#### [-Congestion prediction + embedding + matrix factorization + partition-arXiv-2021-GNN(Sage)-NAL+]()
 
 - a framework that can directly learn embeddings for the given netlist to enhance the quality of our node features  
 - 目的是使用网表数据，减少 placement 迭代
 - The key difference between this work and [CongestionNet]() model lies in our construction of an ==embedding== pipeline for EDA netlists  
 
-#### background
+##### background
 
 - predicting cell congestion due to improper logic combination can reduce the burden of subsequent physical implementations.  
 
@@ -272,7 +272,7 @@ cell type 不是没起作用吗
   >1. 他们的座位整体旋转了某个角度（比如你们班正北方向是讲台，他们班正东方向是讲台）
   >2. 学生的座位编号顺序被打乱了（比如你们班 1 号坐在前排左，他们班 1 号可能坐在后排右）
   >
-  >### 对应到图中的概念：
+  >\# 对应到图中的概念：
   >
   >1. **图嵌入（Node Embedding）**
   >     就像把每个学生用坐标表示，这里的 "坐标" 就是算法生成的 d 维向量 X。这些坐标要保留同学之间的关系（比如经常互动的同学坐标更接近）。
@@ -281,7 +281,7 @@ cell type 不是没起作用吗
   >3. **排列矩阵 P**
   >     相当于重新给座位编号。比如把原本 1 号同学的标签贴到 5 号座位上，但座位本身的位置没变。这就像洗牌一样打乱顺序，但实际座位布局不变。
   >
-  >### 具体到你的问题：
+  >\# 具体到你的问题：
   >
   >- **第一步：对齐旋转/镜像（找 Q）**
   >  假设两个班级座位布局完全一样，但方向不同。我们需要找到一个 "旋转角度" Q，让两个班级的座位表方向一致。
@@ -291,7 +291,7 @@ cell type 不是没起作用吗
   >- **第二步：对齐编号顺序（找 P）**
   >  即使座位方向对齐了，同学的编号可能还是乱的。比如你们班 1 号同学坐在(1,1)，而隔壁班 1 号可能坐在(1,1)的是他们班的 5 号同学。这时候需要一个 "编号重排" 矩阵 P，把他们的编号顺序调整到和你们班一致。
   >
-  >### 实际应用场景：
+  >\# 实际应用场景：
   >
   >假设淘宝和京东都有用户关系网图：
   >
@@ -305,7 +305,7 @@ cell type 不是没起作用吗
   >
   >通过找到 Q 和 P，就能判断 "淘宝用户 A" 对应 "京东用户 X"，实现跨平台用户对齐。
   >
-  >### 再简化总结：
+  >\# 再简化总结：
   >
   >这个数学问题就像在做两件事：
   >
@@ -334,7 +334,7 @@ cell type 不是没起作用吗
 
     ![image-20250301145951825](assets/image-20250301145951825.png)
 
-  - >### **举个例子**
+  - >\# **举个例子**
     >
     >假设你有一个社交网络，有 3 个用户：A、B、C。他们的嵌入向量如下：
     >
@@ -344,13 +344,13 @@ cell type 不是没起作用吗
     >
     >也就是 $X \in \mathbb{R}^{3 \times 2}$
     >
-    >#### **1. 计算相似度**
+    >\# **1. 计算相似度**
     >
     >- A 和 B 的相似度：⟨ *X* 1, *X* 2⟩ = 1×0+0×1 = 0
     >- A 和 C 的相似度：⟨ *X* 1, *X* 3⟩ = 1×1+0×1 = 1
     >- B 和 C 的相似度：⟨ *X* 2, *X* 3⟩ = 0×1+1×1 = 1
     >
-    >#### **2. 构建 PMI 矩阵**
+    >\# **2. 构建 PMI 矩阵**
     >
     >PMI 矩阵就是：
     >
@@ -359,7 +359,7 @@ cell type 不是没起作用吗
     >- 第 (1,2) 项是 0，表示 A 和 B 不相似。
     >- 第 (1,3) 项是 1，表示 A 和 C 相似。
     >
-    >#### **3. 正交矩阵的作用**
+    >\# **3. 正交矩阵的作用**
     >
     >假设我们用一个正交矩阵 *Q* 旋转嵌入向量，比如：
     >
@@ -390,9 +390,8 @@ cell type 不是没起作用吗
   - 后面关于特征向量没看明白
   - 结论是 PMI 矩阵分解比随机游走快
 
-- 
 
-#### contribution
+##### contribution
 
 - an efficient mini-batch training method at the sub-graph level
   - can guarantee parallel training and satisfy the memory restriction for large-scale netlists
@@ -402,7 +401,7 @@ cell type 不是没起作用吗
 
 
 
-#### data
+##### data
 
 ![image-20250301151648940](assets/image-20250301151648940.png)
 
@@ -410,7 +409,7 @@ cell type 不是没起作用吗
 
 
 
-#### task
+##### task
 
 ![image-20241102170157570](./assets/image-20241102170157570.png)
 
@@ -426,7 +425,7 @@ cell type 不是没起作用吗
 
 **contrbution**
 
-#### data
+##### data
 
 DAC2012 contest benchmark
 
@@ -450,7 +449,7 @@ OpenROAD dataset
 
 - ![image-20241102190725383](./assets/image-20241102190725383.png)
 
-- #### flow
+- \#### flow
 
   ![image-20241102193019887](./assets/image-20241102193019887.png)
 
@@ -476,18 +475,17 @@ OpenROAD dataset
 
 
 
-#### model
+##### model
 
 - The key **difference** between this approach and **CongestionNet** lies in **embedding** pipeline 
 
 - graph is undirected complete circuit is too **large** for direct matrix factorization and must be **partitioned** into clusters, use **METIS** partitioning tool   in **ClusterGCN**
 - Sub-graph partition: clusters of ≈ 5000 nodes each
 - Matrix Factorization  ?
-- 
 
 
 
-#### experiment
+##### experiment
 
 three metrics of correlation to measure performance:   **Pearson, Spearman, Kendall** 
 
@@ -503,9 +501,9 @@ Before evaluation, both the prediction and the label have some (very low) **nois
 
 
 
-### [PGNN-DRVs prediction+Pin Proximity Graph-ICCAD-2022-GNN+UNet(CNN)-Korea]()
+#### [PGNN-DRVs prediction+Pin Proximity Graph-ICCAD-2022-GNN+UNet(CNN)-Korea]()
 
-#### background
+##### background
 
 - (1) pin accessibility and (2) routing congestion are two major causes of DRVs (design rule violations)  
 
@@ -520,7 +518,7 @@ Before evaluation, both the prediction and the label have some (very low) **nois
 
 - to optimize the placement before routing.  
 
-#### task
+##### task
 
 a novel ML based DRC hotspot prediction technique,   
 
@@ -531,12 +529,11 @@ a novel ML based DRC hotspot prediction technique,
 - placement 分割为 grid, 长宽 = G-Cell
 - DRVs are extracted as the ground-truth after **detailed routing**  
 
-#### contribution
+##### contribution
 
 - GNN model, base pin proximity graph
-- 
 
-#### model
+##### model
 
 PGNN can adopt pin proximity graph as well as grid-based feature map as input feature  
 
@@ -574,7 +571,7 @@ featrue:
 
 以后也可以这么做, 同一个 benchmark 不同的 config 参数就有不同的数据
 
-#### experiment
+##### experiment
 
 Nangate 15nm library  
 
@@ -611,20 +608,20 @@ positive 和 negative 是什么意思?
 
 ![image-20241108114501484](./assets/image-20241108114501484.png)
 
-### [LHNN-CongestionPrediction-DAC-2022-GNN-CUHK+Huawei+YiboLin]()
+#### [LHNN-CongestionPrediction-DAC-2022-GNN-CUHK+Huawei+YiboLin]()
 
-#### background
+##### background
 
 - 图的节点的设置很新颖
 - with the growth of circuit scale and complexity, time consumption
   tends to be unacceptable when utilizing a **global router** in the placement cycle to obtain the **congestion map**.  
 - due to the need for the **"shift-left"** in circuit design, researchers begin to seek alternative solutions in machine learning [4] [5] to achieve accurate and fast congestion map prediction  
 
-#### task
+##### task
 
 - two related tasks, **routing demand regression** and **congestion classification**  
 
-#### data
+##### data
 
 regard each **G-cell** **as a node** and add an edge between two nodes if the respective two G-cells are adjacent.  
 
@@ -642,7 +639,7 @@ regard each **G-cell** **as a node** and add an edge between two nodes if the re
 
 ISPD 2011 [16] and DAC 2012 [17] contest benchmarks , 
 
-#### model
+##### model
 
 ![image-20241219145252874](./assets/image-20241219145252874.png)
 
@@ -650,7 +647,7 @@ ISPD 2011 [16] and DAC 2012 [17] contest benchmarks ,
 
 他这里说 congestion map 是一个二值化(0/1?)的数据集， 所以是分类任务, 但是为了利用数据，同时防止 routing demand 的信息丢失， 还设置了一个预测 routing demand 的任务？
 
-#### experiment
+##### experiment
 
 15benchmarks: 10 for training and 5 for testing  
 
@@ -680,21 +677,20 @@ run **DREAMPlace** [18] on each of the designs to generate placement solutions
 
 ![image-20241108152104185](./assets/image-20241108152104185.png)
 
-### [ClusterNet- -ICCAD-2023--Korea]()
+#### [ClusterNet- -ICCAD-2023--Korea]()
 
 - Netlist as input
 
 
 
-### [MEDUSA-2D&3D-Trans-2023-CNN-Columbia  ](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/pdf/10.1145/3590768)
+#### [MEDUSA-2D&3D-Trans-2023-CNN-Columbia  ](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/pdf/10.1145/3590768)
 
 - Routing congestion is one of the many factors that need to be minimized during the physical design phase of large integrated circuits. 
 - compare with `c-DCGAN [33]` , which is GAN-based. One of the drawbacks of GANs, however, is that they are generally difficult to train and so the performance benefits that they may yield comes at a significant computing cost.  
-- 
 
 
 
-#### background
+##### background
 
 - feature encoding algorithm.
 
@@ -709,13 +705,12 @@ run **DREAMPlace** [18] on each of the designs to generate placement solutions
 
 - embedded them with two open source routers
 
-#### contribution
-
-- 
+##### contribution
 
 
 
-#### flow
+
+##### flow
 
 ![image-20250419181244276](assets/image-20250419181244276.png)
 
@@ -725,7 +720,7 @@ run **DREAMPlace** [18] on each of the designs to generate placement solutions
 
 
 
-#### model
+##### model
 
 ![image-20250419174928184](assets/image-20250419174928184.png)
 
@@ -760,7 +755,7 @@ The cost functions of CU-GR [21] do not take into consideration the estimated vi
 
 
 
-#### data
+##### data
 
 developed MEDUSA-3D, which is used with `CU-GR [21]` for performing 3D routing on `ICCAD 2019 benchmarks`   
 
@@ -768,7 +763,7 @@ MEDUSA-2D, was also developed to be used for traditional 2D routing using `ISPD 
 
 
 
-#### experiment
+##### experiment
 
 ![image-20250419182310076](assets/image-20250419182310076.png)
 
@@ -786,9 +781,9 @@ PD, NP, ND, LN, GN, and C are abbreviations for pin density, neighborhood pin de
 
 
 
-### [-NN Robustness improve-arXiv-2024- -UC-]()
+#### [-NN Robustness improve-arXiv-2024- -UC-]()
 
-#### background
+##### background
 
 - 最近的工作已经证明神经网络通常是容易受到精心选择的输入小扰动的影响 
 - Our definition of **imperceptibility** is characterized by a guarantee that a perturbation to a layout will not alter its global routing  
@@ -797,14 +792,14 @@ PD, NP, ND, LN, GN, and C are abbreviations for pin density, neighborhood pin de
 
 
 
-#### task
+##### task
 
 - design two efficient methods for finding perturbations that demonstrate brittleness of recently proposed congestion predictors  
 - one potential approach to address the issues by modifying the training procedure to promote robustness
 
 
 
-#### contribution
+##### contribution
 
 
 
@@ -836,13 +831,13 @@ PD, NP, ND, LN, GN, and C are abbreviations for pin density, neighborhood pin de
 
 
 
-## Timing
+### Timing
 
-### background
+#### background
 
 ![image-20241026164128136](./assets/image-20241026164128136.png)
 
-### [TimingGCN-STA prediction-DAC-2022-GNN](https://dl.acm.org/doi/abs/10.1145/3489517.3530597)
+#### [TimingGCN-STA prediction-DAC-2022-GNN](https://dl.acm.org/doi/abs/10.1145/3489517.3530597)
 
 - the first work！
 - opensource
@@ -853,7 +848,7 @@ PD, NP, ND, LN, GN, and C are abbreviations for pin density, neighborhood pin de
 
 - opensource
 
-### [Multimodal Fusion-Restructure tolerant+CNN+Endpoint-wise Masking4Layout -DAC-2023-GNN+CNN-7nm RISCV](D:\MyNotes\EDA\Timing\Multimodal Fusion-Pre Route Timing Prediction-DAC-2023-GNN-7nm RISCV.pdf)
+#### [Multimodal Fusion-Restructure tolerant+CNN+Endpoint-wise Masking4Layout -DAC-2023-GNN+CNN-7nm RISCV](D:\MyNotes\EDA\Timing\Multimodal Fusion-Pre Route Timing Prediction-DAC-2023-GNN-7nm RISCV.pdf)
 
 [slice](https://www.cse.cuhk.edu.hk/~byu/papers/C167-DAC2023-PathPred-poster.pdf)
 
@@ -925,7 +920,7 @@ PD, NP, ND, LN, GN, and C are abbreviations for pin density, neighborhood pin de
 
 
 
-#### other
+##### other
 
 [Ahead RC network-STA prediction-DAC-2022-?](file:///D:/MyNotes/EDA/Timing/aheadRCnetwork.pdf)
 
@@ -935,19 +930,19 @@ PD, NP, ND, LN, GN, and C are abbreviations for pin density, neighborhood pin de
 
 ![image-20241007121002859](./assets/image-20241007121002859.png)
 
-#### not DL
+##### not DL
 
 ![image-20241026164603048](./assets/image-20241026164603048.png) The two-stage approaches [2], [3] first predict localnet/cell delays and then apply PERT traversals [5] to evaluate the global timing metrics, i.e., endpoint arrival time.  
 
 
 
-# Optimization
+## Optimization
 
-## Timing
+### Timing
 
-### [TSteiner - Steiner Points Opt-DAC-2023-GNN-CUHK]()
+#### [TSteiner - Steiner Points Opt-DAC-2023-GNN-CUHK]()
 
-#### background
+##### background
 
   对于 multi-pin net 需要构建 steiner tree 来进行 routing，故 steiner tree 中 steiner points 也会影响 routing
 
@@ -986,7 +981,7 @@ Nevertheless, the impact of random moving is considerately unstable, and its ave
 
 
 
-#### contribution:
+##### contribution:
 
 - first  earlystage timing optimization framework   via Steiner point refinement
 - GNN
@@ -1048,11 +1043,11 @@ The proposed framework can be divided into two stages, **sign-off timing gradien
 
 
 
-## Placement
+### Placement
 
-### [-Pin Accessibility+DRV prediction-DAC-2019-CNN-NTU]()
+#### [-Pin Accessibility+DRV prediction-DAC-2019-CNN-NTU]()
 
-#### background
+##### background
 
 - Standard cells on the lower metal layers severely suffer from low routability due to high pin density, low pin accessibility, and limited routing resources.  
 
@@ -1076,7 +1071,7 @@ The proposed framework can be divided into two stages, **sign-off timing gradien
 
 
 
-#### task
+##### task
 
 - DRV prediction, 二分类
 
@@ -1088,14 +1083,13 @@ The proposed framework can be divided into two stages, **sign-off timing gradien
 
 - 其实也是一个预测模型，一个优化模型
 
-#### contribution
+##### contribution
 
 - first work to apply pin pattern as the input features of `DRV prediction models`.  
-- 
 
 
 
-#### flow
+##### flow
 
 ![image-20250206191224771](./assets/image-20250206191224771.png)
 
@@ -1123,7 +1117,7 @@ Cell Displacement Refinement
 
 
 
-#### data
+##### data
 
 ![image-20250206192552413](./assets/image-20250206192552413.png)
 
@@ -1131,7 +1125,7 @@ Both the width and height of each pixel are set as the **minimum spacing of the 
 
 没看见关于 benchmark 的描述
 
-#### experiment
+##### experiment
 
 ![image-20250206204743555](./assets/image-20250206204743555.png)
 
@@ -1144,15 +1138,14 @@ Both the width and height of each pixel are set as the **minimum spacing of the 
 - flow need routed designs to train, time 
 - The trained model is not necessarily applicable to other designs using different cells or different reference cell libraries  
 - 对于 VLSI，一行一行，一对一对进行，很慢？
-- 
 
 
 
 
 
-### [-Pin Accessibility+activ-ISPD-2020- -NTU+Synopsys](https://pdfs.semanticscholar.org/47f1/5e9fa283faddb8a6853398145d33e2ba9ae1.pdf)
+#### [-Pin Accessibility+activ-ISPD-2020- -NTU+Synopsys](https://pdfs.semanticscholar.org/47f1/5e9fa283faddb8a6853398145d33e2ba9ae1.pdf)
 
-#### background
+##### background
 
 - With the development of advanced process nodes of semiconductor, the problem of ` pin access ` has become one of the major factors to impact the occurrences of design rule violations (DRVs) due to complex design rules and limited routing resource  
 
@@ -1171,28 +1164,26 @@ Both the width and height of each pixel are set as the **minimum spacing of the 
   - flow need routed designs to train, time 
   - The trained model is not necessarily applicable to other designs using different cells or different reference cell libraries  
 
-- 
 
 
 
 
 
-#### contribution
+##### contribution
 
 - first work of ` cell library-based` pin accessibility prediction (PAP), which can be applied to predict other designs referencing to the same cell library set
 - applies **active learning** to train a PAP model  
 - the proposed cell library-based PAP model **can be trained at the earlier stage** in a process development flow: once the cell libraries are provided.  
-- 
 
 
 
-### [Placement Optimization with Deep Reinforcement Learning- -ISPD-2020-RL+GNN-Google]([dl.acm.org/doi/pdf/10.1145/3372780.3378174](https://dl.acm.org/doi/pdf/10.1145/3372780.3378174))
+#### [Placement Optimization with Deep Reinforcement Learning- -ISPD-2020-RL+GNN-Google]([dl.acm.org/doi/pdf/10.1145/3372780.3378174](https://dl.acm.org/doi/pdf/10.1145/3372780.3378174))
 
 
 
-### [PL GNN-Affinity Aware for ICC2- ISPD-2021-GNN-Atlanta](https://dl.acm.org/doi/pdf/10.1145/3439706.3447045)
+#### [PL GNN-Affinity Aware for ICC2- ISPD-2021-GNN-Atlanta](https://dl.acm.org/doi/pdf/10.1145/3439706.3447045)
 
-#### background:
+##### background:
 
 - Placement is one of the most **crucial problems**,  placement directly impacts the final quality of a full-chip design
 
@@ -1216,7 +1207,7 @@ Both the width and height of each pixel are set as the **minimum spacing of the 
 
 
 
-#### task
+##### task
 
 - 基于网表数据，和 floorplan 结果（marco 已经放好）
 - `placement guidance`(grouping information) for commercial placers `ICC2`, by generating **cell clusters** based on **logical affinity** and manually defined attributes of design instances  
@@ -1224,7 +1215,7 @@ Both the width and height of each pixel are set as the **minimum spacing of the 
 
 
 
-#### flow
+##### flow
 
 ![image-20241224111801884](./assets/image-20241224111801884.png)
 
@@ -1238,7 +1229,7 @@ Both the width and height of each pixel are set as the **minimum spacing of the 
 
 ![image-20241007102413593](./assets/image-20241007102413593.png)
 
-#### data
+##### data
 
 two multi-core CPU designs：
 
@@ -1260,7 +1251,7 @@ two multi-core CPU designs：
 
 
 
-#### model
+##### model
 
 - GraphSAGE-based， two layers
 
@@ -1292,7 +1283,7 @@ two multi-core CPU designs：
 
 
 
-#### experiment
+##### experiment
 
 **env**:
 
@@ -1332,7 +1323,7 @@ benchmark 少
 
 
 
-### [-Innovus PPA placement optimize-Neurips-2021-RL ](https://www.semanticscholar.org/paper/A-General-Framework-For-VLSI-Tool-Parameter-with-Agnesina-Pentapati/30c644ffa213418182e795ea5e8132cb15e891c2)
+#### [-Innovus PPA placement optimize-Neurips-2021-RL ](https://www.semanticscholar.org/paper/A-General-Framework-For-VLSI-Tool-Parameter-with-Agnesina-Pentapati/30c644ffa213418182e795ea5e8132cb15e891c2)
 
 
 
@@ -1340,19 +1331,19 @@ benchmark 少
 
 ![image-20241007105134964](./assets/image-20241007105134964.png)
 
-#### contribution:
+##### contribution:
 
 ![image-20241224114117771](./assets/image-20241224114117771.png)
 
 
 
-### [-GP Routability Opt-DAC-2021-FCN-CUHK(SitingLiu BeiYu)+Yibo Lin]()
+#### [-GP Routability Opt-DAC-2021-FCN-CUHK(SitingLiu BeiYu)+Yibo Lin]()
 
-#### background
+##### background
 
 
 
-#### flow
+##### flow
 
 ![image-20241226160945080](./assets/image-20241226160945080.png)
 
@@ -1361,19 +1352,18 @@ benchmark 少
 1. three input features are extracted from the cell placement solution  
 2. Through the inference of the pre-trained routability prediction model, we get the predicted congestion map.  
 3. take `mean squared Frobenius norm` of this congestion map as the congestion penalty
-4. 
 
 ![image-20241226161200384](./assets/image-20241226161200384.png)
 
 
 
-#### data
+##### data
 
 
 
 
 
-#### model
+##### model
 
 ![image-20241226161132128](./assets/image-20241226161132128.png)
 
@@ -1381,7 +1371,7 @@ benchmark 少
 
 
 
-### [Lay-Net- -ICCAD/TCAD-2023/2025-GNN/ViT-CUHK-](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10323800)
+#### [Lay-Net- -ICCAD/TCAD-2023/2025-GNN/ViT-CUHK-](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10323800)
 
 - [OpenSource!](https://github.com/lanchengzou/congPred#)
 - heterogeneous message-passing paradigm better embeds the routing demand into the model by considering both connections between cells and overlaps of nets  
@@ -1389,7 +1379,7 @@ benchmark 少
 
 
 
-#### background:
+##### background:
 
 - To accurately model the congestion, placers commonly integrate routing processes [14]–[17] or analytical models [18]–[21] to estimate the congestion. However, the `routing-based methods` are plagued by considerable runtime overhead while the `model-based approaches` suffer from low accuracy
 
@@ -1412,7 +1402,7 @@ benchmark 少
 
 
 
-#### contribution
+##### contribution
 
 - a ==multimodal== congestion prediction model  
 
@@ -1432,11 +1422,11 @@ benchmark 少
 
 
 
-#### flow
+##### flow
 
 
 
-#### model
+##### model
 
 ![image-20250528222725294](assets/image-20250528222725294.png)
 
@@ -1444,11 +1434,11 @@ benchmark 少
 
 
 
-##### task:
+###### task:
 
 ![image-20250524150554089](assets/image-20250524150554089.png)
 
-##### Multi-scale Feature Extraction  
+###### Multi-scale Feature Extraction  
 
 Lay-Net extracts multi-scale features via `four stages`, which are based on Vision Transformer (ViT) [34] and Swin Transformer [35].   
 
@@ -1462,7 +1452,7 @@ capture ==global information==
 
 
 
-#### graph
+##### graph
 
 ![image-20250524150540133](assets/image-20250524150540133.png)
 
@@ -1474,7 +1464,7 @@ capture ==global information==
 
 > 少见的
 
-#### feature
+##### feature
 
 ![image-20250524155310018](assets/image-20250524155310018.png)
 
@@ -1482,13 +1472,13 @@ capture ==global information==
 
 
 
-##### contrastive learning  
+###### contrastive learning  
 
 ![image-20250528213436733](assets/image-20250528213436733.png)
 
 
 
-##### experiment
+###### experiment
 
 ![image-20250528223510181](assets/image-20250528223510181.png)
 
@@ -1504,13 +1494,13 @@ capture ==global information==
 
 
 
-### [-Congestion+ViT+GNN-TCAD-2025--Southeast]()
+#### [-Congestion+ViT+GNN-TCAD-2025--Southeast]()
 
 - congestion prediction model-based placer optimizer
 - 和`Lay-Net`很像
 - HGCN+CNN
 
-#### background
+##### background
 
 - previous way:
 
@@ -1540,9 +1530,9 @@ capture ==global information==
 
 - the homogeneous GNNs may exhibit poor performance when handling diverse netlists simultaneously  
 
-  > [!WARNING]
-  >
-  > 他没解释这个是为什么，也没引用
+!!! warning
+    
+    他没解释这个是为什么，也没引用
 
 - Recently, `multimodal fusion-based models` have attracted much attention due to their ability to provide various perspectives [19], [20], and current multimodal fusion-based congestion prediction models have demonstrated notable performance [8], [12]. However, they still lack the deep multimodal fusion of placement and netlist features  
 
@@ -1554,7 +1544,7 @@ capture ==global information==
 
 
 
-#### contribution
+##### contribution
 
 ![image-20250920212345656](assets/image-20250920212345656.png)
 
@@ -1564,7 +1554,7 @@ capture ==global information==
 
 
 
-#### flow
+##### flow
 
 ![image-20250921144622709](assets/image-20250921144622709.png)
 
@@ -1572,7 +1562,7 @@ capture ==global information==
 
 
 
-#### model
+##### model
 
 **CNN** input
 
@@ -1610,7 +1600,7 @@ self attention `(SA)` [22] cross-attention `(CA)` [23]
 
 
 
-#### data
+##### data
 
 ![image-20250921142158045](assets/image-20250921142158045.png)
 
@@ -1618,7 +1608,7 @@ ISPD 2015 Contest
 
 ![image-20250921151157723](assets/image-20250921151157723.png)
 
-#### experiment
+##### experiment
 
 - 基于`DREAMPlace`
 
@@ -1638,13 +1628,13 @@ ISPD 2015 Contest
 
 ![image-20250921170418548](assets/image-20250921170418548.png)
 
-## Gate Sizing
+### Gate Sizing
 
-### [-Differentiable Fusion GP&GS-ICCAD-2024--PEK-Du&Guo&Lin]()
+#### [-Differentiable Fusion GP&GS-ICCAD-2024--PEK-Du&Guo&Lin]()
 
 - 最佳论文提名
 
-#### background
+##### background
 
 - 之前是分开做的， current methodologies typically explore `gate sizing` after the `placement` or `routing` is fixed。
 
@@ -1693,7 +1683,7 @@ ISPD 2015 Contest
 
 
 
-#### contribution
+##### contribution
 
 - the ==first== framework that fuses the optimizations of gate positions and gate sizes with ==differentiable== objectives
 - leverages `interpolation`, `gradient descent`, and `GPU-accelerated` computation to optimize `timing` and `power` objectives efficiently
@@ -1701,7 +1691,7 @@ ISPD 2015 Contest
 
 
 
-#### flow
+##### flow
 
 ![image-20250513221047598](assets/image-20250513221047598.png)
 
@@ -1711,9 +1701,9 @@ ISPD 2015 Contest
 
 
 
-#### model
+##### model
 
-##### 优化任务：
+###### 优化任务：
 
 ![image-20250513223757816](assets/image-20250513223757816.png)
 
@@ -1723,13 +1713,13 @@ minimize a design’s total `leakage power` while satisfying `timing` constraint
 
 
 
-##### problem formulation
+###### problem formulation
 
 Given a set of `gates` and an `initial placement layout`, the objective is to minimize total ==leakage power== and the absolute values  of ==TNS and WNS== by simultaneously determining gate positions `x, y` and gate sizes `s`.  
 
 
 
-##### key novelty
+###### key novelty
 
 ![image-20250513225118110](assets/image-20250513225118110.png)
 
@@ -1743,7 +1733,7 @@ Given a set of `gates` and an `initial placement layout`, the objective is to mi
 
 
 
-##### Differentiable Leakage Power
+###### Differentiable Leakage Power
 
 ![image-20250513225550438](assets/image-20250513225550438.png)
 
@@ -1755,7 +1745,7 @@ Given a set of `gates` and an `initial placement layout`, the objective is to mi
 
 
 
-##### Differentiable Timing Objectives  
+###### Differentiable Timing Objectives  
 
 ![image-20250513230732591](assets/image-20250513230732591.png)
 
@@ -1779,7 +1769,7 @@ Given a set of `gates` and an `initial placement layout`, the objective is to mi
 
 ![image-20250513231356433](assets/image-20250513231356433.png)
 
-#### dataset
+##### dataset
 
 CircuitNet-N28  
 
@@ -1787,7 +1777,7 @@ CircuitNet-N28
 
 
 
-#### experiment
+##### experiment
 
 compare our newly developed flow with the open-source OpenROAD [3] flow  
 
@@ -1801,16 +1791,15 @@ compare our newly developed flow with the open-source OpenROAD [3] flow
 
 
 
-### [-Gate Sizing Differentiable-ISEDA-2025--PEK]()
+#### [-Gate Sizing Differentiable-ISEDA-2025--PEK]()
 
 - 2024 ICCAD CAD gate sizing contest  
 
-#### background
+##### background
 
 - `continuity` and `expressivity` limitations  
 
   - continuity: as almost all core VLSI tasks—such as logic optimization, placement, and routing—require discrete solutions that conflict with the continuous nature of differentiable frameworks.  无法梯度下降
-  - 
 
 - Prior research on gate sizing generally falls into the following categories:
   - Dynamic programming-based methods  
@@ -1837,16 +1826,16 @@ compare our newly developed flow with the open-source OpenROAD [3] flow
   
     
 
-#### contribution
+##### contribution
 
 - a  `gradient clipping strategy` to tackle the `continuity limitation`  
 - a  `gradient calibration framework` to address the `expressivity limitation`  
 
 
 
-#### flow
+##### flow
 
-##### problem fomulation
+###### problem fomulation
 
 - a set of gates and detailed placement layout  
 - determine the size `s` of all gates in order to minimize total leakage power while eliminating DRVs and timing violations.   
@@ -1855,35 +1844,35 @@ compare our newly developed flow with the open-source OpenROAD [3] flow
 
 
 
-#### model
+##### model
 
-##### 优化目标：
+###### 优化目标：
 
 ![image-20250514152212165](assets/image-20250514152212165.png)
 
-##### quality score  
+###### quality score  
 
 ![image-20250616153226846](assets/image-20250616153226846.png)
 
 
 
-##### Linear interpolation
+###### Linear interpolation
 
 ![image-20250617010201785](assets/image-20250617010201785.png)
 
 > 线性的。这里感觉还有开发空间
 
-##### Differentiable Power and Area Objectives
+###### Differentiable Power and Area Objectives
 
 ![image-20250617010152468](assets/image-20250617010152468.png)
 
 
 
-##### Differentiable DRV and Timing Objectives  
+###### Differentiable DRV and Timing Objectives  
 
 ![image-20250617005926996](assets/image-20250617005926996.png)
 
-#### continuity limitation
+##### continuity limitation
 
 ![image-20250514152910399](assets/image-20250514152910399.png)
 
@@ -1901,7 +1890,7 @@ With a deeper circuit logic level, this inaccuracy would be amplified
 
 
 
-##### expressivity limitation
+###### expressivity limitation
 
 gradient calibration  
 
@@ -1917,7 +1906,7 @@ gradient calibration
 
 
 
-##### data
+###### data
 
 2024 ICCAD CAD gate sizing contest  
 
@@ -1929,7 +1918,7 @@ post-placement 之后的数据
 
 
 
-#### experiment
+##### experiment
 
 ![image-20250514155419262](assets/image-20250514155419262.png)
 
@@ -1937,9 +1926,9 @@ post-placement 之后的数据
 
 在大规模电路上效果更好：For the first three cases, their smaller scale increases the variability in gate sizing optimization results, thus making it difficult to achieve consistently optimal outcomes  
 
-##  GR
+### GR
 
-### [PROS-Routability Optimizatio
+#### [PROS-Routability Optimizatio
 
 ![image-20241128091405687](./assets/image-20241128091405687.png)
 
@@ -1947,7 +1936,7 @@ post-placement 之后的数据
 
 
 
-#### task
+##### task
 
 - congestion **predictor** and parameter **optimizer**
 - only the data from the placement  
@@ -1955,7 +1944,7 @@ post-placement 之后的数据
 
 
 
-#### contribution
+##### contribution
 
 - with negligible runtime overhead  
 - plug-in
@@ -1963,11 +1952,11 @@ post-placement 之后的数据
 
 
 
-#### model
+##### model
 
 ![image-20241219171627049](./assets/image-20241219171627049.png)
 
-#### data
+##### data
 
 19 different industrial designs  
 
@@ -2026,13 +2015,13 @@ if there are at least six congested G-cells out of the eight in the surrounding 
 
 ![image-20241219165912121](./assets/image-20241219165912121.png)
 
-#### model
+##### model
 
 ![image-20241219163417043](./assets/image-20241219163417043.png)
 
 
 
-#### experiment
+##### experiment
 
 ![image-20241219172158774](./assets/image-20241219172158774.png)
 
@@ -2046,9 +2035,9 @@ if there are at least six congested G-cells out of the eight in the surrounding 
 
 
 
-### [PROS 2.0 - Routability Opt+Route WL estimation-Trans-2023-CNN-CNHK+Cadence]()
+#### [PROS 2.0 - Routability Opt+Route WL estimation-Trans-2023-CNN-CNHK+Cadence]()
 
-#### background
+##### background
 
 - the amount of routing resources on a design is limited.   
 - The quality of a GR solution has a great impact on that of the resulted DR routing solution  
@@ -2061,7 +2050,7 @@ if there are at least six congested G-cells out of the eight in the surrounding 
 
 
 
-#### task
+##### task
 
 - stage: post-placement, pre-route
 - FCN based GR congestion `predictor`, use the predicted GR congestion to optimize the **cost parameters** of GR. 
@@ -2075,7 +2064,7 @@ if there are at least six congested G-cells out of the eight in the surrounding 
 
 
 
-#### contribution
+##### contribution
 
 - plug-in for Innovus:  it can avoid extra runtime overhead of feature preparation  
 - industrial design suite   
@@ -2107,7 +2096,7 @@ if there are at least six congested G-cells out of the eight in the surrounding 
 
 
 
-#### data
+##### data
 
 feature F 
 
@@ -2149,7 +2138,7 @@ PROS does not need a very detailed congestion map
 
 
 
-#### model
+##### model
 
 ![image-20241226133238155](./assets/image-20241226133238155.png)
 
@@ -2181,7 +2170,7 @@ DAC-2012 20 different placements
 
 
 
-#### experiment
+##### experiment
 
 **env**
 
@@ -2232,13 +2221,13 @@ compare with PROBABILISTIC METHODS
 
 ![image-20241226142539173](./assets/image-20241226142539173.png)
 
-### DR
+#### DR
 
-### [-Detailed Router-DATE-2021-RL](https://ieeexplore.ieee.org/document/9474007)
+#### [-Detailed Router-DATE-2021-RL](https://ieeexplore.ieee.org/document/9474007)
 
 ![image-20241012161419196](./assets/image-20241012161419196.png)
 
-### [DPRouter-Detail Routing(package design) Opt+net order decision-ASPADC-2023-RL(MARL)-diagonally route]("D:\MyNotes\EDA\Routing\DPRouter-Detail Routing(package design) Opt+net order decision-ASPADC-2023-RL(MARL)-diagonally route.pdf ")
+#### [DPRouter-Detail Routing(package design) Opt+net order decision-ASPADC-2023-RL(MARL)-diagonally route]("D:\MyNotes\EDA\Routing\DPRouter-Detail Routing(package design) Opt+net order decision-ASPADC-2023-RL(MARL)-diagonally route.pdf ")
 
 ![image-20241027101634534](./assets/image-20241027101634534.png)
 
@@ -2304,9 +2293,9 @@ compare with PROBABILISTIC METHODS
 
     
 
-### [-Detail routing+match+Opt-ISPD-2023-RL+GNN-FinFET ]()
+#### [-Detail routing+match+Opt-ISPD-2023-RL+GNN-FinFET ]()
 
-#### background:
+##### background:
 
 - cutom circuits: a custom detailed router cannot adopt specialized layout strategies for specific circuit classes like human layout experts  
 
@@ -2320,7 +2309,7 @@ compare with PROBABILISTIC METHODS
 
   ![image-20241028224639124](./assets/image-20241028224639124.png)
 
-#### contribution
+##### contribution
 
 - opt roouting, FinFET, sign-off solution
 - 异构图
@@ -2339,37 +2328,37 @@ compare with PROBABILISTIC METHODS
 3. Constraint-based approaches  
    - widely adopted in existing custom routing studies  
 
-# PR Tools
+## PR Tools
 
-## GP_Trad
+### GP_Trad
 
-### [NTUplace4h- -TCAD-2014-]()
-
-
-
-### [ePlace- -TODAES-2015- ]()
+#### [NTUplace4h- -TCAD-2014-]()
 
 
 
-### [Replace- -TCAD-2018-]()
+#### [ePlace- -TODAES-2015- ]()
 
 
 
-### Generalized augmented lagrangian and its applications to vlsi global placement
+#### [Replace- -TCAD-2018-]()
 
 
 
-### [Chip Placement with Deep Reinforcement Learning-marcro-arXiv-2020-RL](https://arxiv.org/pdf/2004.10746)
+#### Generalized augmented lagrangian and its applications to vlsi global placement
+
+
+
+#### [Chip Placement with Deep Reinforcement Learning-marcro-arXiv-2020-RL](https://arxiv.org/pdf/2004.10746)
 
 - first explores the application of artificial intelligence in solving placement with the attempt to ease the difficulties of manual effort, which may indicate a new development stage for physical design  
 
 
 
-### [Differentiable-Timing-Driven Global Placement-global placement-DAC-2022-GNN-](https://dl.acm.org/doi/pdf/10.1145/3489517.3530486)
+#### [Differentiable-Timing-Driven Global Placement-global placement-DAC-2022-GNN-](https://dl.acm.org/doi/pdf/10.1145/3489517.3530486)
 
 
 
-### [Polar 2.0](https://ieeexplore.ieee.org/document/6881450)
+#### [Polar 2.0](https://ieeexplore.ieee.org/document/6881450)
 
  An effective **routability-driven** placer
 
@@ -2377,31 +2366,31 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 
 
-### NTUPlace3
+#### NTUPlace3
 
 
 
-### [DeepPlace](https://github.com/PKUterran/DeepPlace)
+#### [DeepPlace](https://github.com/PKUterran/DeepPlace)
 
-#### flow
-
-
-
-### [RePlAce--TCAD-2018-](https://ieeexplore.ieee.org/abstract/document/8418790)
+##### flow
 
 
 
-## GP_Adv
+#### [RePlAce--TCAD-2018-](https://ieeexplore.ieee.org/abstract/document/8418790)
 
-### [DREAMPlace-GPU Accelerate-DAC+TCAD+ICCAD+DATE-2019~2023](https://github.com/limbo018/DREAMPlace)
 
-#### background
+
+### GP_Adv
+
+#### [DREAMPlace-GPU Accelerate-DAC+TCAD+ICCAD+DATE-2019~2023](https://github.com/limbo018/DREAMPlace)
+
+##### background
 
 - open up new directions for  GP
 - current placement usually takes hours for large designs  
 - Although `analytical placement` can produce high-quality solutions, it is also known to be relatively slow  
 
-#### contribution
+##### contribution
 
 - a totally new perspective of making analogy between placement and deep learning
 - Over `30X` speedup over the CPU implementation ([RePlAce](https://doi.org/10.1109/TCAD.2018.2859220)) is achieved in global placement and legalization on ISPD 2005 contest benchmarks
@@ -2426,11 +2415,10 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 ![image-20241211185244415](./assets/image-20241211185244415.png)
 
-#### flow
+##### flow
 
-- 
 
-#### model
+##### model
 
 - 优化目标
 
@@ -2438,7 +2426,6 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
   ![image-20250323101815867](assets/image-20250323101815867.png)
 
-- 
 
 
 
@@ -2446,21 +2433,21 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 
 
-## GR_Tradictional_sequential   
+### GR_Tradictional_sequential   
 
-### [FastRoute1.0—2006]()
+#### [FastRoute1.0—2006]()
 
 - roposed a simple way to construct **congestion driven Steiner tree** and an edge shifting technique to further refine it  
 
-### [fastroute 2.0-Monotonic–2007]()
+#### [fastroute 2.0-Monotonic–2007]()
 
 - monotonic routing to explore all shortest routing paths for two-pin connections.   
 
-#### task
+##### task
 
 ![image-20241114191327215](./assets/image-20241114191327215.png)
 
-#### flow
+##### flow
 
 **![image-20241114205659503](./assets/image-20241114205659503.png)**
 
@@ -2470,11 +2457,11 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 
 
-### [fastroute 3.0-virtual capacity-ICCAD-2008-]()
+#### [fastroute 3.0-virtual capacity-ICCAD-2008-]()
 
 
 
-### [fastroute 4.0-via min tree+3 bending-ASPDAC-2009-]()
+#### [fastroute 4.0-via min tree+3 bending-ASPDAC-2009-]()
 
 ![image-20241116121010565](./assets/image-20241116121010565.png)
 
@@ -2498,23 +2485,22 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 ![image-20241116125830996](./assets/image-20241116125830996.png)
 
-### [MaizeRouter-]()
+#### [MaizeRouter-]()
 
 - 2nd place of ISPD 2007 contest 2D GR
 - 1st place of ISPD 2007 contest 3D GR
 
 
 
-### [FGR-3d-TCAD-2008-](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4526750)
+#### [FGR-3d-TCAD-2008-](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4526750)
 
 - 1st place of ISPD 2007 contest 2D GR
 - 3rd place of ISPD 2007 contest 3D GR
 - FGR [6] used maze routing to directly rip up & reroute nets, based on the discrete Lagrangian cost framework.   
-- 
 
 
 
-### MGR
+#### MGR
 
 - MGR [8] used pattern routing and layer assignment to obtain a 3D initial solution, and then adopted 3D maze routing to rip up & reroute the nets in congestion areas.   
 
@@ -2522,7 +2508,7 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 
 
-### [-Layer assignment+Via minization-Trans-2008-DP-NTHU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/4603083)
+#### [-Layer assignment+Via minization-Trans-2008-DP-NTHU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/4603083)
 
 - Congestion-Constrained Layer Assignment for Via Minimization in Global Routing
 - CUGR’s rely work
@@ -2533,7 +2519,7 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 
 
-#### background
+##### background
 
 - there are two main approaches  
 
@@ -2572,7 +2558,7 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 
 
-#### model  
+##### model  
 
 - COngestion-constrained Layer Assignment (COLA)’s submodule
 
@@ -2660,7 +2646,7 @@ cells that are estimated to have high congestion are spread out and inflated to 
 
 ​	
 
-#### data
+##### data
 
 six-layer benchmarks from ISPD’07
 
@@ -2668,7 +2654,7 @@ six-layer benchmarks from ISPD’07
 
 
 
-### [GRIP-3d+IP-DAC-2009](https://dl.acm.org/doi/pdf/10.1145/1629911.1629999)
+#### [GRIP-3d+IP-DAC-2009](https://dl.acm.org/doi/pdf/10.1145/1629911.1629999)
 
 基于整数规划
 
@@ -2682,15 +2668,15 @@ slow: Although we see solutions with shorter wirelength generated by full-3D con
 
 
 
-### [BFG~R-3d+Lagrangian-ISPD-2010--UMICH+IBM-](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/10.1145/1735023.1735035)
+#### [BFG~R-3d+Lagrangian-ISPD-2010--UMICH+IBM-](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/10.1145/1735023.1735035)
 
 - 有 net order
 
-#### background
+##### background
 
 
 
-#### contribution
+##### contribution
 
 1. a novel branch-free representation (BFR) for routed nets  
 2. a trigonometric penalty function (TPF)  
@@ -2700,7 +2686,7 @@ slow: Although we see solutions with shorter wirelength generated by full-3D con
 
 
 
-#### flow
+##### flow
 
 ![image-20250328141308281](assets/image-20250328141308281.png)
 
@@ -2708,27 +2694,27 @@ slow: Although we see solutions with shorter wirelength generated by full-3D con
 
 
 
-### [MGR–ICCAD-2011](https://ieeexplore.ieee.org/abstract/document/6105336)
+#### [MGR–ICCAD-2011](https://ieeexplore.ieee.org/abstract/document/6105336)
 
 multi-level （coarsened  and fine-gained）
 
 
 
-### [FastRoute4.1-an efficient and high-quality global router-2012](https://home.engineering.iastate.edu/~cnchu/pubs/j52.pdf)
+#### [FastRoute4.1-an efficient and high-quality global router-2012](https://home.engineering.iastate.edu/~cnchu/pubs/j52.pdf)
 
 https://dl.acm.org/doi/abs/10.1155/2012/608362
 
-#### background
+##### background
 
 FastRoute is a global routing tool for VLSI back-end design. It is based on sequential rip-up and re-route (RRR) and a lot of novel techniques. [FastRoute 1.0](http://home.engineering.iastate.edu/~cnchu/pubs/c36.pdf) first uses **FLUTE** to construct **congestion-driven Steiner trees**, which will later undergo the **edge shifting** process to optimize tree structure to reduce congestion. It then uses **pattern routing and maze routing** with **logistic function** based cost function to solve the congestion problem. [FastRoute 2.0](http://home.engineering.iastate.edu/~cnchu/pubs/c40.pdf) proposed **monotonic routing** and **multi-source multi-sink maze routing** techniques to enhance the capability to reduce congestion. [FastRoute 3.0](http://home.engineering.iastate.edu/~cnchu/pubs/c51.pdf) introduced the **virtual capacity** technique to adaptively change the capacity associated with each global edge to divert wire usage from highly congested regions to less congested regions. [FastRoute 4.0](http://home.engineering.iastate.edu/~cnchu/pubs/c52.pdf) proposed **via-aware Steiner tree**, **3-bend routing** and a **delicate layer assignment algorithm** to effectively reduce via count while maintaining outstanding congestion reduction capability. [FastRoute 4.1](http://home.engineering.iastate.edu/~cnchu/pubs/j52.pdf) simplifies the way the **virtual capacities** are updated and applies a single set of tuning parameters to all benchmark circuits.
 
-#### model
+##### model
 
 ![image-20241211103407310](./assets/image-20241211103407310.png)
 
 
 
-#### flow
+##### flow
 
 ![image-20241211103347856](./assets/image-20241211103347856.png)
 
@@ -2736,21 +2722,20 @@ FastRoute is a global routing tool for VLSI back-end design. It is based on sequ
 
 
 
-### [NTHU Route 1.0- -TVLSI-2010-](https://ieeexplore.ieee.org/document/5703167)
+#### [NTHU Route 1.0- -TVLSI-2010-](https://ieeexplore.ieee.org/document/5703167)
 
 ![image-20241115155033412](./assets/image-20241115155033412.png)
 
-### [NTHU Route 2.0- -TCAD-2013](https://ieeexplore.ieee.org/document/6504553)
+#### [NTHU Route 2.0- -TCAD-2013](https://ieeexplore.ieee.org/document/6504553)
 
 - 2D
 - a history-based cost function.  
 
-### [NCTU GR 1.0-3D-congestion relaxed layer assignment- 2011-](https://ieeexplore.ieee.org/document/5703167)
+#### [NCTU GR 1.0-3D-congestion relaxed layer assignment- 2011-](https://ieeexplore.ieee.org/document/5703167)
 
 - it improved the scheme to estimate the realtime congestion more accurately by using a history term that will gradually wear off as the number of iterations  increases if the overflow disappears.   
-- 
 
-### [NCTU GR 2.0-Multithreaded Collision Aware- CAD-2013-](https://ieeexplore.ieee.org/document/6504553)
+#### [NCTU GR 2.0-Multithreaded Collision Aware- CAD-2013-](https://ieeexplore.ieee.org/document/6504553)
 
 [people.cs.nycu.edu.tw/~whliu/NCTU-GR.htm](https://people.cs.nycu.edu.tw/~whliu/NCTU-GR.htm)
 
@@ -2758,13 +2743,12 @@ FastRoute is a global routing tool for VLSI back-end design. It is based on sequ
 
 - net-level parallel method 
 - RSMT-aware routing scheme  
-- 
 
 
 
 
 
-### [OGRE- new cost function- -2019- -](https://woset-workshop.github.io/PDFs/2019/a18.pdf)
+#### [OGRE- new cost function- -2019- -](https://woset-workshop.github.io/PDFs/2019/a18.pdf)
 
 - [Open source!](https://github.com/AUCOHL/OGRE)
 - **LEF/DEF-based**
@@ -2774,7 +2758,7 @@ FastRoute is a global routing tool for VLSI back-end design. It is based on sequ
 
 
 
-### [SPRoute 1.0: A Scalable Parallel Negotiation-based Global Router-ICCAD-2019](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8942105)
+#### [SPRoute 1.0: A Scalable Parallel Negotiation-based Global Router-ICCAD-2019](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8942105)
 
 - 基于 `net-level` 多线程的并行加速 `迷宫算法`
 - `negotiation-based` rip-up and reroute two-phase maze routing
@@ -2789,7 +2773,7 @@ FastRoute is a global routing tool for VLSI back-end design. It is based on sequ
 
 
 
-#### background
+##### background
 
 总体
 
@@ -2825,7 +2809,7 @@ In many global routers, maze routing is the most time-consuming stage.
 
 
 
-#### data
+##### data
 
 ISPD 2008  contest
 
@@ -2833,7 +2817,7 @@ ISPD 2008  contest
 
 
 
-### [CUGR-3D pattern+Multi level maze routing+patching-DAC-2020-CUHK](https://github.com/cuhk-eda/cu-gr)
+#### [CUGR-3D pattern+Multi level maze routing+patching-DAC-2020-CUHK](https://github.com/cuhk-eda/cu-gr)
 
 - ICCAD 2019 Contest First Place
 
@@ -2859,7 +2843,7 @@ ISPD 2008  contest
 
 
 
-#### background
+##### background
 
 ![image-20241122110742970](./assets/image-20241122110742970.png)
 
@@ -2870,13 +2854,13 @@ ISPD 2008  contest
 
 ![image-20241122113634633](./assets/image-20241122113634633.png)
 
-#### task
+##### task
 
 - detailed-routability-driven  directly-3d multi thread GR
 
 
 
-#### contibution
+##### contibution
 
 - probability-based cost scheme
   - minimizing the possibility of overflow after detailed routing
@@ -2893,7 +2877,7 @@ ISPD 2008  contest
 
 
 
-#### flow
+##### flow
 
 ![image-20241122123825463](./assets/image-20241122123825463.png)
 
@@ -2907,7 +2891,7 @@ In the `multi-level 3D maze routing` phase, the grid graph is `coarsened` to shr
 
 
 
-#### model
+##### model
 
 - Gcell 之间的容量等于 track，一般 GR 表征 via 的容量是无限的，但是在本文中不是
 
@@ -3012,13 +2996,12 @@ In the `multi-level 3D maze routing` phase, the grid graph is `coarsened` to shr
 
          ![image-20250209192310471](assets/image-20250209192310471.png)
 
-       - 
 
-#### data
+##### data
 
 iccad 2019 dataset
 
-#### experiment
+##### experiment
 
 
 
@@ -3037,7 +3020,7 @@ iccad 2019 dataset
 
 
 
-### [VGR-3D+via mini-ASPDAC-2024- -FZU+iEDA](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/10473939)
+#### [VGR-3D+via mini-ASPDAC-2024- -FZU+iEDA](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/document/10473939)
 
 - a 3D global router with via minimization and multi-strategy ==rip-up and rerouting==  
 
@@ -3047,7 +3030,7 @@ iccad 2019 dataset
 
 
 
-#### background
+##### background
 
 - ==Vias== are interconnections between different routing metal layers. A large number of vias can reduce manufacturing yield, cause circuit performance degradation, and increase layout area required for interconnections [1], [2]  In VLSI physical design, meeting the DFM (Design for Manufacturability) constraints is essential, and these constraints often include strict requirements regarding vias.  
 
@@ -3063,7 +3046,7 @@ iccad 2019 dataset
 
 
 
-#### contribution
+##### contribution
 
 - a novel multi-strategy rip-up & rerouting framework  
 - first leverages two proprietary routing techniques  
@@ -3074,15 +3057,15 @@ iccad 2019 dataset
 
 
 
-#### flow
+##### flow
 
 ![image-20250310140059564](assets/image-20250310140059564.png)
 
 
 
-#### model
+##### model
 
-##### Modified Via-Aware Routing Cost Function
+###### Modified Via-Aware Routing Cost Function
 
 - previous works' via penalties are based on a constant cost function, or, the cost of via may decrease over time.  
 
@@ -3098,13 +3081,13 @@ iccad 2019 dataset
 
   ![image-20250310150038994](assets/image-20250310150038994.png)
 
-##### Local Rip-up & Rerouting
+###### Local Rip-up & Rerouting
 
 ![image-20250310150116571](assets/image-20250310150116571.png)
 
 ![image-20250310150130359](assets/image-20250310150130359.png)
 
-##### Global Rip-Up & Rerouting
+###### Global Rip-Up & Rerouting
 
 1. 3D 3-via-stack routing
 
@@ -3125,9 +3108,8 @@ iccad 2019 dataset
    - After completing the 3D 3-via-stack routing algorithm, only a small number of nets have congestion, and we need to use 3D maze routing to process these nets  
    - ![image-20250310153555924](assets/image-20250310153555924.png)
    - ![image-20250310160008974](assets/image-20250310160008974.png)
-   - 
 
-#### experiment
+##### experiment
 
 1. Effectiveness of 3D Monotonic Routing and 3D 3-Via-Stack Routing  
 
@@ -3153,9 +3135,9 @@ iccad 2019 dataset
 
    
 
-## GR_Concurrent
+### GR_Concurrent
 
-### [-Multicommodity Flow-Trans-2001-](https://janders.eecg.utoronto.ca/1387/readings/global_routing.pdf)
+#### [-Multicommodity Flow-Trans-2001-](https://janders.eecg.utoronto.ca/1387/readings/global_routing.pdf)
 
 - first Multicommodity Flow?
 
@@ -3165,7 +3147,7 @@ iccad 2019 dataset
 
 
 
-### [BoxRouter 1.0- -DAC-2006-ILP- -](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/pdf/10.1145/1146909.1147009)
+#### [BoxRouter 1.0- -DAC-2006-ILP- -](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/pdf/10.1145/1146909.1147009)
 
 - 3rd place of ISPD 2007 contest 2D GR
 - 2nd place of ISPD 2007 contest 3D GR
@@ -3173,11 +3155,11 @@ iccad 2019 dataset
 
 
 
-#### background
+##### background
 
 
 
-#### contribution
+##### contribution
 
 - PreRouting step can capture the most ==congested== regions with reasonable accuracy
 - key `BoxRouting` idea   
@@ -3188,13 +3170,13 @@ iccad 2019 dataset
 
 
 
-#### flow
+##### flow
 
 ![image-20250317113717747](assets/image-20250317113717747.png)
 
 
 
-### [sidewinder-scalable ILP-SLIP-2008-ILP- -]()
+#### [sidewinder-scalable ILP-SLIP-2008-ILP- -]()
 
 - 只有 10^4^数量级的 net 数据
 
@@ -3202,24 +3184,23 @@ iccad 2019 dataset
 
 
 
-#### background
+##### background
 
 
 
-#### contribution
+##### contribution
 
 - dynamically-updated congestion map  
-- 
 
 
 
-#### flow
+##### flow
 
 
 
 
 
-### [BoxRouter 2.0- - -2008-ILP- -]()
+#### [BoxRouter 2.0- - -2008-ILP- -]()
 
 - [OpenSource!](https://github.com/Apodead/BoxRouter)
   - ![image-20250317123459126](assets/image-20250317123459126.png)
@@ -3229,11 +3210,11 @@ iccad 2019 dataset
 
 ![image-20241115155857782](./assets/image-20241115155857782.png)
 
-#### background
+##### background
 
 
 
-#### contribution
+##### contribution
 
 - dynamic scaling for robust `negotiation-based` A* search
 - topology-aware wire ripup 
@@ -3242,22 +3223,21 @@ iccad 2019 dataset
 
 
 
-#### flow
+##### flow
 
 ![image-20250317113738643](assets/image-20250317113738643.png)
 
 ​                               
 
-### [GRIP-combination opt-Trans-2009-DP- -NTU](https://jlinderoth.github.io/papers/Wu-Davoodi-Linderoth-10-PP.pdf)
+#### [GRIP-combination opt-Trans-2009-DP- -NTU](https://jlinderoth.github.io/papers/Wu-Davoodi-Linderoth-10-PP.pdf)
 
 - 这个有会议和期刊两个版本
 - GRIP [7] determined 3D routing candidate patterns for each net in advance, and then used ILP for optimal selection.   
 - 基于组合优化
-- 
 
 
 
-### [COALA-concurrent layer assignment -TCAD-2022-]()
+#### [COALA-concurrent layer assignment -TCAD-2022-]()
 
 - 2d
 
@@ -3273,11 +3253,10 @@ iccad 2019 dataset
 
   原文还说：`The candidate segments in Sseg of the current layer are sorted according to three criteria and are sequentially assigned.  `
 
-- 
 
 
 
-#### background
+##### background
 
 - Two-dimensional (2-D) global routing followed by layer assignment is a common and popular strategy to obtain a good tradeoff between runtime and routing performance.   
 
@@ -3299,20 +3278,18 @@ iccad 2019 dataset
 
 - sequential layer assignment approaches suffer from limited solution quality  
 
-- 
 
-#### contribution
+##### contribution
 
 ![image-20250328165901489](assets/image-20250328165901489.png)
 
 一层一层 assign
 
 - capacity of a tile  
-- 
 
 
 
-#### flow
+##### flow
 
 ![image-20250328173807513](assets/image-20250328173807513.png)
 
@@ -3324,15 +3301,15 @@ iccad 2019 dataset
 
 
 
-#### model
+##### model
 
-##### 本文定义的 capacity and demand(都在 GCell 上)
+###### 本文定义的 capacity and demand(都在 GCell 上)
 
 ![image-20250328171752900](assets/image-20250328171752900.png)
 
 ![image-20250328172800671](assets/image-20250328172800671.png)
 
-##### demand congestion map
+###### demand congestion map
 
 用 2d 的 routing 预测 3d demand
 
@@ -3340,7 +3317,7 @@ iccad 2019 dataset
 
 
 
-##### Complete Segment Assignment
+###### Complete Segment Assignment
 
 The complete segments are ==sorted== according to the following three criteria.  
 
@@ -3354,7 +3331,7 @@ The complete segments are ==sorted== according to the following three criteria.
 
    can result in fewer number of vias  
 
-##### Fragmented Segment Assignment
+###### Fragmented Segment Assignment
 
 1) Prediction Map Update for Fragmented Segments  
 
@@ -3367,7 +3344,7 @@ The complete segments are ==sorted== according to the following three criteria.
    - ![image-20250328201342596](assets/image-20250328201342596.png)
    - ![image-20250328203232933](assets/image-20250328203232933.png)
 
-##### 3-D Endpoint Rerouting  
+###### 3-D Endpoint Rerouting  
 
 ![image-20250328203521908](assets/image-20250328203521908.png)
 
@@ -3382,38 +3359,38 @@ four steps：
 
 
 
-##### OBSTACLE-AWARE STRATEGY  
+###### OBSTACLE-AWARE STRATEGY  
 
 
 
 
 
-#### data
+##### data
 
 ISPD18 和 ISPD19
 
 
 
-#### experiment
+##### experiment
 
 对比的模型 CUGR
 
 
 
-### [-Lagrangian based- DAC-2023-FZU-ILP-](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10247969)
+#### [-Lagrangian based- DAC-2023-FZU-ILP-](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10247969)
 
 - integer linear programming   
 - Lagrangian relaxation method  
 - direction-aware weighted A*-algorithm 
 
-#### background
+##### background
 
 - combine the advantages of the two classes of algorithms  （串并行）
 - `BoxRouter 2.0 [5] and Sidewinder [9]` propose a ==maximum routable== ==ILP model==, which routes as many nets as possible without congestion by ==using several routing patterns.==   Due to limited routing patterns for each net, the two routers may cause some nets ==disconnected==, requiring ==post-processing== to produce a legal final result.   `GRIP [6]` proposes an ==ILP formulation== that minimizes the total wire length and the number of vias, which ==includes many routing patterns== . For their ILP, the LP relaxation is ==restricted to a small number of routing patterns== and is solved by the `column generation method`, and then the obtained solution is optimized ==using a local improvement procedure to consider other patterns==.  
 
 
 
-#### contricbution
+##### contricbution
 
 - a novel `ILP based pathfinding model` which does not need to generate candidate routing patterns of nets prior
 - We propose a `Lagrangian relaxation method` combined with a `gradient ascent method` to update the multipliers, in which `direction-aware weighted A*-algorithm` is used to quickly solve a subproblem  
@@ -3421,7 +3398,7 @@ ISPD18 和 ISPD19
 
 
 
-#### flow
+##### flow
 
 ![image-20250328105529319](assets/image-20250328105529319.png)
 
@@ -3432,11 +3409,11 @@ ISPD18 和 ISPD19
 
 
 
-#### model
+##### model
 
 ![image-20250328114329898](assets/image-20250328114329898.png)
 
-##### ILP Based Pathfinding Model
+###### ILP Based Pathfinding Model
 
 没看懂 `ILP Pathfinding model`
 
@@ -3454,17 +3431,17 @@ ISPD18 和 ISPD19
 
 ![image-20250328114420408](assets/image-20250328114420408.png)
 
-##### Lagrangian Relaxation Method and Initial Routing  
+###### Lagrangian Relaxation Method and Initial Routing  
 
 ![image-20250328144717218](assets/image-20250328144717218.png)
 
 ![image-20250328144955900](assets/image-20250328144955900.png)
 
-##### Direction-aware Weighted A*-Algorithm  
+###### Direction-aware Weighted A*-Algorithm  
 
 ![image-20250328145457020](assets/image-20250328145457020.png)
 
-#### Multi-stage Rip-up & Rerouting
+##### Multi-stage Rip-up & Rerouting
 
 ![image-20250328160555252](assets/image-20250328160555252.png)
 
@@ -3472,19 +3449,19 @@ ISPD18 和 ISPD19
 
 
 
-#### data
+##### data
 
 ISPD18
 
 
 
-#### experiment
+##### experiment
 
 
 
 
 
-### [DGR-DAG Routing Forest+2D-DAC-2024-DP-CMU+NVIDA](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/pdf/10.1145/3649329.3656530)
+#### [DGR-DAG Routing Forest+2D-DAC-2024-DP-CMU+NVIDA](https://dl-acm-org-443.webvpn.scut.edu.cn/doi/pdf/10.1145/3649329.3656530)
 
 - [OpenSource!]()
 
@@ -3498,7 +3475,7 @@ ISPD18
 
   
 
-#### backgroun
+##### backgroun
 
 - sequential algorithms do not guarantee optimal solution among all nets because of its sequential heuristic. Moreover, its sequential heuristic falls short in addressing routing congestion from a global perspective, possibly leading to unnecessary iterations of rip-up and reroutes.   
 - ==Combinatorial optimization techniques [4, 5]== could concurrently optimize multiple nets. But they are often ==too slow== for modern VLSI circuits  
@@ -3510,7 +3487,7 @@ ISPD18
 
 
 
-#### contribution
+##### contribution
 
 - `concurrent optimization`  for hundreds of thousands of nets  
 - a routing DAG forest to represent the search space  
@@ -3519,13 +3496,13 @@ ISPD18
 
 
 
-#### flow
+##### flow
 
 ![image-20250310174115344](assets/image-20250310174115344.png)
 
 
 
-#### model
+##### model
 
 routing DAG forest  
 
@@ -3535,7 +3512,7 @@ routing DAG forest
 
 updated through `back-propagation`
 
-1. ##### Routing DAG Forest
+1. \##### Routing DAG Forest
 
    - a mathematical structure to systematically describe the 2D pattern routing space for all the nets.   
    - In contrast to CUGR2 [2], (which addresses one net at a time and focuses on a single Steiner tree topology in each instance,) our routing DAG forest allows ==multiple DAGs for each net== and facilitates the coordination of DAG and DAG edge selection across all nets in a ==global view==.  
@@ -3594,7 +3571,7 @@ updated through `back-propagation`
 
 
 
-#### data
+##### data
 
 Synthetic data is utilized for this experiment since the ISPD’18 and ISPD’19 benchmarks are too large for ILP  
 
@@ -3602,9 +3579,9 @@ Synthetic data is utilized for this experiment since the ISPD’18 and ISPD’19
 
 
 
-#### experiment
+##### experiment
 
-1. ##### 与 ILP 方法的对比
+1. \##### 与 ILP 方法的对比
 
    见上图（data 中）
 
@@ -3630,9 +3607,9 @@ Synthetic data is utilized for this experiment since the ISPD’18 and ISPD’19
 
    The memory result is given in Figure 5b, which shows that both CPU and GPU memory overhead is almost ==linear== with the number of nets.  
 
-## GR_Adv_RL
+### GR_Adv_RL
 
-### [-DRL method-2019-DRL-](https://arxiv.org/pdf/1906.08809)
+#### [-DRL method-2019-DRL-](https://arxiv.org/pdf/1906.08809)
 
 - first DRL related work?
 - RL framework: `DQN` 
@@ -3643,16 +3620,15 @@ Synthetic data is utilized for this experiment since the ISPD’18 and ISPD’19
 
 
 
-#### background
+##### background
 
 - Existing solutions typically consist of `greedy algorithms` and `hard-coded heuristics`.   
 - As such, existing approaches suffer from a `lack of model flexibility` and `non-optimum solutions`
 - current solutions rely primarily on ==heuristically driven== greedy methods  
-- 
 
 
 
-#### contribution
+##### contribution
 
 - 该生成器能够生成具有不同大小和约束的参数化全局路由问题集中，从而能够评估不同的路由算法，并为未来的数据驱动路由方法生成训练数据集。
 - ==the first== attempt to formulate and solve global routing as a deep reinforcement learning problem.   
@@ -3663,7 +3639,7 @@ Synthetic data is utilized for this experiment since the ISPD’18 and ISPD’19
 
 
 
-#### flow
+##### flow
 
 ![image-20241114192055104](./assets/image-20241114192055104.png)
 
@@ -3671,7 +3647,7 @@ A* is executed first in order to provide `burn-in memory` for the DQN solver
 
 using A* as burn-in for DRL allows DRL to converge much faster  
 
-#### model
+##### model
 
 example:
 
@@ -3703,15 +3679,15 @@ Bold edges have zero capacity
 
 
 
-#### experiment
+##### experiment
 
-##### env
+###### env
 
 - python
 
 
 
-##### RESULT
+###### RESULT
 
 参数选择也许可以借鉴一下大概量级
 
@@ -3719,7 +3695,7 @@ Bold edges have zero capacity
 
 
 
-### [Alpha PD Router-MCTS-MLCAD-2019- -Canada Ucalgary Gandhi](https://ieeexplore.ieee.org/document/9142109)
+#### [Alpha PD Router-MCTS-MLCAD-2019- -Canada Ucalgary Gandhi](https://ieeexplore.ieee.org/document/9142109)
 
 - A Reinforcement Learning-Based Framework for Solving Physical Design Routing Problem in the Absence of Large Test Sets
 - 相关硕士论文：[Reinforcement Learning-Based Framework to Generate Routing Solutions and Correct Violations in VLSI Physical Design](https://ucalgary.scholaris.ca/server/api/core/bitstreams/870e141b-ac3f-4125-8b8a-f5f125bbcc52/content#page=102.20)
@@ -3727,31 +3703,29 @@ Bold edges have zero capacity
 - The proposed model has the potential to be used as a framework to develop RL based routing techniques untethered by the scarce availability of large routing data samples or designer expertise.  
 - ==two-player collaborative== game rather than a multiplayer game problem  
 - inspired by `Alpha-Go Zero`
--   
 
 
 
-#### background
+##### background
 
 - the lack of a large number of test cases has been a significant hindrance to obtaining high-quality results, the only design benchmark test sets that are available to academics are the ISPD 2018 and ISPD 2019 benchmarks which in total have 27 circuits [21] [22]  
-- 
 
 
 
-#### contribution
+##### contribution
 
 - Development of a reinforcement model for routing  and RRR
 - Designing a collaborative game-theory model  
 
 
 
-#### flow
+##### flow
 
 
 
-#### model
+##### model
 
-##### two-player
+###### two-player
 
 two players have different strategies and reward    
 
@@ -3777,7 +3751,7 @@ two players have different strategies and reward
 
 If no violations exists and all the nets are routed, both Router and Cleaner win and a design rule violation free solution is produced.   
 
-##### Min-max Game Framework
+###### Min-max Game Framework
 
 这个是什么？不清楚[34-36]
 
@@ -3785,11 +3759,11 @@ this formulation allows us to cast the routing problem into a potentially tracta
 
 
 
-##### experiment
+###### experiment
 
 ![image-20250424130402737](assets/image-20250424130402737.png)
 
-### [-quasi-Newton method  -arxiv-2021-Double DQN-JP](https://arxiv.org/pdf/2010.09465)
+#### [-quasi-Newton method  -arxiv-2021-Double DQN-JP](https://arxiv.org/pdf/2010.09465)
 
 - accelerate the training of deep Q-networks  by introducing a second order Nesterov’s accelerated quasi-Newton method
 - 这篇可以说是一个二阶优化器在GR上的应用
@@ -3797,7 +3771,7 @@ this formulation allows us to cast the routing problem into a potentially tracta
 
 
 
-#### background
+##### background
 
 - why DRL: As the state and action space of the problem increases, the estimation of the state-action value can be slow and time consuming and hence estimated as a function approximation.   These function approximations can be represented as a non-convex, non-linear unconstrained optimization problem and can be solved using deep neural networks (known as deep Q-networks).  
 - Using ==second order curvature information== have shown to improve the performance and convergence speed for non convex optimization problems   
@@ -3810,7 +3784,7 @@ this formulation allows us to cast the routing problem into a potentially tracta
 
 
 
-### [-Steiner point-ISPD-2022-Monte Carlo-NYMCTU-]()
+#### [-Steiner point-ISPD-2022-Monte Carlo-NYMCTU-]()
 
 - 这篇感觉没有在GR上的应用场景
 
@@ -3832,7 +3806,7 @@ this formulation allows us to cast the routing problem into a potentially tracta
 
 
 
-#### background
+##### background
 
 - Recent related works on OARSMT [2-11] can be classified into the following four types of methods:   
   1. ==spanning-graph-based== method [2-5], which builds a routing tree based on a spanning graph containing all pins and corners of obstacles;   
@@ -3843,7 +3817,7 @@ this formulation allows us to cast the routing problem into a potentially tracta
 
 
 
-#### flow
+##### flow
 
 this work focus on first step, step 2 use [8]
 
@@ -3854,9 +3828,9 @@ this work focus on first step, step 2 use [8]
 
 
 
-#### model
+##### model
 
-##### state
+###### state
 
 $H \times V \times 3$ binary array in grid graph
 
@@ -3866,17 +3840,17 @@ $H \times V \times 3$ binary array in grid graph
 
 The input of our policy agent
 
-##### action
+###### action
 
 add a Steiner point at a vertex  
 
 
 
-##### reward
+###### reward
 
 
 
-##### MCTS
+###### MCTS
 
 ![image-20250424101448483](assets/image-20250424101448483.png)
 
@@ -3886,27 +3860,26 @@ add a Steiner point at a vertex
 
 
 
-#### data
+##### data
 
 15x15 and 30x30 grids,  
 
 
 
-#### experiment
+##### experiment
 
 
 
 
 
-### [- -WCMC-2023-DRL-FuZhouU-Genggeng Liu](https://onlinelibrary.wiley.com/doi/epdf/10.1155/2023/6593938)
+#### [- -WCMC-2023-DRL-FuZhouU-Genggeng Liu](https://onlinelibrary.wiley.com/doi/epdf/10.1155/2023/6593938)
 
 - most of the existing methods are heuristic algorithms, which cannot conjointly optimize the subproblems of global routing, resulting in congestion and overflow  
 - DRL 和 RL 的区别：RL often faces the problem of the excessive number of states when dealing with high-dimensional spaces. With the development of deep learning, the Deep Reinforcement Learning (DRL) algorithm is developed by combining artificial neural networks with RL [10], which makes it possible for RL to solve the policy decision in a high-dimensional space   
-- 
 
 
 
-#### background
+##### background
 
 - this paper takes the overflow as the main design goal and optimizes the wire length and congestion based on the overflow as 0.  
 - `Serial routing` usually sorts nets in a specific order and routes them one by one; ==this method is fast==（相对并行组合优化的方法？）. However, there is an unfair phenomenon: the routing difficulty of the earlier nets has sufficient routing resources (meaning that the capacity of each edge in the routing area is large), while most of the later nets have tight routing resources, so the serial routing method usually rips up part of the nets and reroutes them  
@@ -3914,7 +3887,7 @@ add a Steiner point at a vertex
 
 
 
-#### contribution
+##### contribution
 
 - use DDQN instead of DQN
 - an action reduction method  
@@ -3924,7 +3897,7 @@ add a Steiner point at a vertex
 
 
 
-#### model
+##### model
 
 
 
@@ -3956,12 +3929,11 @@ uses a heuristic algorithm to search for the path in advance and burn it into th
 
 
 
-### [-DRL+segment based-ISEDA-2023-DRL+GNN-PEK](https://ieeexplore.ieee.org/abstract/document/10218371)
+#### [-DRL+segment based-ISEDA-2023-DRL+GNN-PEK](https://ieeexplore.ieee.org/abstract/document/10218371)
 
 - DRL(GAT)
 - segment-based feature extraction  
 - pattern routing  enhance
-- 
 
 
 
@@ -3978,15 +3950,14 @@ uses a heuristic algorithm to search for the path in advance and burn it into th
 
 
 
-#### background
+##### background
 
 - many traditional global routing methods lack learning ability.  
 - more and more problems in physical design are searching for automated solutions based on machine learning. One popular application is to adopt machine learning to help early prediction  
-- 
 
 
 
-#### contribution
+##### contribution
 
 - congestion-aware reinforcement learning model  
 - Integrating pattern routing with reinforcement learning  
@@ -3996,7 +3967,7 @@ uses a heuristic algorithm to search for the path in advance and burn it into th
 
 
 
-#### flow
+##### flow
 
 ![image-20250221235557954](assets/image-20250221235557954.png)
 
@@ -4023,13 +3994,13 @@ uses a heuristic algorithm to search for the path in advance and burn it into th
 
 
 
-#### data
+##### data
 
 ISPD18 benchmark  
 
 
 
-#### experiment
+##### experiment
 
 
 
@@ -4042,7 +4013,7 @@ ISPD18 benchmark
 
 
 
-### [- -APCCAS-2024-DRL(DDQN)-CYCU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10808325)
+#### [- -APCCAS-2024-DRL(DDQN)-CYCU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10808325)
 
 - DRL-based A* search algorithm
 - 没有 pattern routing 的环节
@@ -4051,22 +4022,21 @@ ISPD18 benchmark
 
 
 
-#### background
+##### background
 
 - aim to find better solutions to minimize total wire length (WL) and edge overflow (OF)  
 - current solutions mainly rely on heuristic-driven greedy methods, which primarily address situations with strict constraints on the problems to be solved, such as sequential network routing after network sorting [2].   
 - The A* algorithm is based on heuristic search, using a heuristic function to estimate the minimum cost from the current node to the target node. It can be used to find the shortest path from the starting point to the target pin.   
-- 
 
 
 
-### [RL Ripper-RRR-GLSVLSI-2023- -Canada Ucalgary Gandhi]()
+#### [RL Ripper-RRR-GLSVLSI-2023- -Canada Ucalgary Gandhi]()
 
 - In this work[8], an RL agent to rip up nets was trained. The benchmark circuits used in this work were taken from the International Conference on Computer-aided Design [33]. However, only training results were provided, highlighting a gap in the literature regarding the scale of benchmarks and the specific problems addressed in proof-of-concept scenarios.  --cite--> [RL Ripper 2.0]()
 
 
 
-### [RL Ripper 2.0-RRR&VIOs Opt-Trans(TODAES)-2024- -Canada Ucalgary Gandhi]()
+#### [RL Ripper 2.0-RRR&VIOs Opt-Trans(TODAES)-2024- -Canada Ucalgary Gandhi]()
 
 - incorporates a self-learning model called `RL-Ripper`  
 
@@ -4092,7 +4062,7 @@ ISPD18 benchmark
 
   
 
-#### background
+##### background
 
 - Why RL: heuristic solutions are not adaptable to the ever-changing fabrication demands, and the experience and creativity of designers can limit their effectiveness.   Reinforcement learning (RL) is an effective method to tackle sequential optimization problems due to its ability to adapt and learn through `trial and error`.   
 - for net with overflow, the most generic RRR method is to rip all nets with short violations and reroute them. However, this heuristic is not the most efficient way since short violations can highly depend on the respective net routes and the order in which they are ripped and rerouted.  
@@ -4100,7 +4070,7 @@ ISPD18 benchmark
 
 
 
-#### contribution
+##### contribution
 
 - RL-Ripper Framework  
   - a self-learning Ripper agent that relies ==solely on net features==  
@@ -4122,7 +4092,7 @@ ISPD18 benchmark
 
 
 
-#### flow
+##### flow
 
 ![image-20250424185400749](assets/image-20250424185400749.png)
 
@@ -4162,33 +4132,33 @@ ISPD18 benchmark
 
 
 
-#### model
+##### model
 
-##### State： five net feature:
+###### State： five net feature:
 
 1. HPWL
 2. VIOs 
    - calculated by CUGR's pattern routing
 3. VIAs
    - calculated by CUGR's pattern routing
-4. #Pins
+4. \#Pins
 5. WL
    - calculated by CUGR's pattern routing
 
-##### Action
+###### Action
 
 - `Rip`
 - `NotRip`  
 
 
 
-##### Reward
+###### Reward
 
 - based on the number of violations resolved by ripping and re-routing nets  
 
 ![image-20250424194258453](assets/image-20250424194258453.png)
 
-#### data
+##### data
 
 ISPD'18
 
@@ -4199,7 +4169,7 @@ ISPD'18
 
 
 
-#### experiment
+##### experiment
 
 ![image-20250424195528062](assets/image-20250424195528062.png)
 
@@ -4229,13 +4199,13 @@ Detailed Routing.
 
 ![image-20250424202124557](assets/image-20250424202124557.png)
 
-## GR_Adv_Gen
+### GR_Adv_Gen
 
-### [-generative-arXiv-2019-CNN-](https://arxiv.org/pdf/1706.08948)
+#### [-generative-arXiv-2019-CNN-](https://arxiv.org/pdf/1706.08948)
 
 - first CNN
 
-### [-only CNN-DAC-2020-CNN(VAE)-](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9218598)
+#### [-only CNN-DAC-2020-CNN(VAE)-](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9218598)
 
 - no experiment!
 - 只用 CNN 分类结果不会好吧
@@ -4245,24 +4215,23 @@ Detailed Routing.
 
 
 
-#### background
+##### background
 
 - is approach treats the global routing problem as an **image processing** problem and solves it with a deep learning system  
-- 
 
 ![image-20241114161657070](./assets/image-20241114161657070.png)
 
-#### data
+##### data
 
 ISPD’98 ibm01 64x64 circuit  
 
-#### model
+##### model
 
 ![image-20241114162111775](./assets/image-20241114162111775.png)
 
 
 
-### [PRNet- -NeurIPS-2022- -SJTU+Noah’s Ark]()
+#### [PRNet- -NeurIPS-2022- -SJTU+Noah’s Ark]()
 
 - PRNet can generate each route in `one-shot` but **cannot guarantee connectivity** which requires considerable ` post-processing` for failed routes 
 
@@ -4272,11 +4241,10 @@ ISPD’98 ibm01 64x64 circuit
 
   ![image-20250324192922713](assets/image-20250324192922713.png)
 
-- 
 
 
 
-### [HubRouter-generative model-NeurIPS-2023-GAN+RL-SJTU]()
+#### [HubRouter-generative model-NeurIPS-2023-GAN+RL-SJTU]()
 
 - [open source!](https://github.com/Thinklab-SJTU/EDA-AI/tree/main/HubRouter)
 - [a chinese interpretation](https://picrew.github.io/2024/03/10/HubRouter/)
@@ -4287,7 +4255,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### background
+##### background
 
 ![image-20250210234157942](assets/image-20250210234157942.png)
 
@@ -4309,7 +4277,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### contribution
+##### contribution
 
 -  为了解决上述问题，定义了一个新的概念，叫 `hub`。将 pin - pin 问题 --> hub - pin 问题 。
 
@@ -4344,9 +4312,8 @@ ISPD’98 ibm01 64x64 circuit
   - 斯坦纳点(Rectilinear Steiner Point --> RSP)是搜索全局最小总距离，但是 hub 是来确定路径。RSPs are special cases of hubs  
   - RSP 是 Hub 的特例，Hub 可以随意生成不同形状的路径(不仅是最短的)
   - 这里的 `c` 和 `x` 分别代表条件图像和输入图像。条件图像可能包括引脚位置、已经提取的中心点以及条带掩模（stripe mask）。条带掩模是用来指示布线区域的一种方式，它可以帮助模型更好地理解哪些区域可以用于布线
-  - 
 
-#### flow
+##### flow
 
 ![image-20250212201906601](assets/image-20250212201906601.png)
 
@@ -4375,9 +4342,9 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-### [Neural Steiner-AI for Steiner-NeurIPS-2024-Chinese Academy of Sciences-CNN]()
+#### [Neural Steiner-AI for Steiner-NeurIPS-2024-Chinese Academy of Sciences-CNN]()
 
-#### background
+##### background
 
 - the yielded routing paths by the existing approaches often ==suffer from considerable overflow,== thus greatly hindering their application in practice.   
 - two advantgages:
@@ -4391,7 +4358,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### contribution
+##### contribution
 
 1. `Neural Steiner` can effectively scale to ==large== nets
 2. transfer to unseen chip designs without any modifications or fine-tuning without any modifications or fine-tuning  
@@ -4401,7 +4368,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### flow
+##### flow
 
 ![image-20250324192220953](assets/image-20250324192220953.png)
 
@@ -4433,7 +4400,7 @@ ISPD’98 ibm01 64x64 circuit
 
    - Since this method ==may generate additional detours==, we use a ==simple== algorithm to detect potential feasible path reuse to shorten the wirelength.  
 
-#### data
+##### data
 
 - use `CUGR` to perform routing on public benchmarks: `ISPD'07 contest`   
 
@@ -4449,7 +4416,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### experiment
+##### experiment
 
 1. Loss:
 
@@ -4477,7 +4444,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-## GR_Adv_Sequential
+### GR_Adv_Sequential
 
 - GPU-accelerate
 - these approaches rely on “parallelizing " traditional sequential algorithms in GPUs. 
@@ -4487,15 +4454,15 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-### [han-GPU+netlevel parallelism-ICCAD-2011- -]()
+#### [han-GPU+netlevel parallelism-ICCAD-2011- -]()
 
 
 
-### [A global router on GPU architecture- -ICCAD-2013- -]()
+#### [A global router on GPU architecture- -ICCAD-2013- -]()
 
 
 
-### [VFGR-Fat via congestion modeling-ASP DAC-2014--THU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=6742945)
+#### [VFGR-Fat via congestion modeling-ASP DAC-2014--THU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=6742945)
 
 - net-level and region-level parallelization  
 - 有点偏工业
@@ -4504,7 +4471,7 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-### [SPRoute 2.0- detailed routability driven-ASP DAC-2022-](https://ieeexplore.ieee.org/abstract/document/9712557)
+#### [SPRoute 2.0- detailed routability driven-ASP DAC-2022-](https://ieeexplore.ieee.org/abstract/document/9712557)
 
 - [OpenSource!](https://github.com/asyncvlsi/SPRoute/tree/master)
 - 2D
@@ -4516,14 +4483,13 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### background
+##### background
 
 - In terms of parallelization, maze routing is widely used in global routing and ==is the most time-consuming stage== on hardto-route benchmarks.   
-- 
 
 
 
-#### contribution
+##### contribution
 
 - `soft capacity` to reserve space for detailed routability. 
 - parallelize maze routing in a `deterministic bulk synchronous approach`
@@ -4531,15 +4497,15 @@ ISPD’98 ibm01 64x64 circuit
 
 
 
-#### flow
+##### flow
 
 ![image-20250225114628773](assets/image-20250225114628773.png)
 
 
 
-#### model
+##### model
 
-##### soft capacity
+###### soft capacity
 
 ![image-20250225120300741](assets/image-20250225120300741.png)
 
@@ -4551,7 +4517,7 @@ Different layers have different parameters for the ratio function since they are
 
 
 
-##### bulk synchronous deterministic approach
+###### bulk synchronous deterministic approach
 
 就是分 batch，all threads execute one batch of nets at a time  
 
@@ -4563,26 +4529,26 @@ Different layers have different parameters for the ratio function since they are
 
 
 
-#### data
+##### data
 
 ICCAD19 contest
 
 
 
-#### experiment
+##### experiment
 
 
 
 
 
-### [FastGR-GPU pattern routing+ multi thread maze–DATE-2022-PKU+CUHK+HNAL](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9774606)
+#### [FastGR-GPU pattern routing+ multi thread maze–DATE-2022-PKU+CUHK+HNAL](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9774606)
 
 - GPU-accelerated
 - accelerated the 3D pattern routing algorithm of [CUGR](# [CUGR-3D pattern+Multi level maze routing+patching-DAC-2020-CUHK](https://github.com/cuhk-eda/cu-gr)) for initial routing by both `net-level` and `path-level` parallelization on GPU
 
 
 
-#### background
+##### background
 
 - The literature has extensively explored shortest path searching with GPU [11], [12]. However, most studies only consider the most basic single-source shortest path problem and assume only to find one path on a large graph. This is impractical for routing since we need to route millions of nets subjecting to various objectives and constraints like wirelength, number of vias, and design rules  
 
@@ -4590,25 +4556,23 @@ ICCAD19 contest
 
   Fig. 1 shows that it is PATTERN dominated on average since the number of nets which pattern routing stage needs to process is much more than the maze routing stage  
 
-- 
 
 
 
-#### contribution
+##### contribution
 
 - a novel GPU-accelerated `pattern routing algorithm`
 - a high-performance task `graph scheduler` to distribute CPU and GPU tasks for workload balancing and efficiency
-- 
 
 
 
-#### flow
+##### flow
 
 ![image-20250403193046048](assets/image-20250403193046048.png)
 
 
 
-#### model
+##### model
 
 1. task graph scheduler==(没看懂！！！！！！！)==
 
@@ -4627,11 +4591,11 @@ ICCAD19 contest
    - we apply each block to process one single multi-pin net  
    - ![image-20250403200934314](assets/image-20250403200934314.png)
 
-#### data
+##### data
 
 ICCAD2019 benchmarks  
 
-#### experiment
+##### experiment
 
 1. RTX 2080 GPU.  
 
@@ -4647,7 +4611,7 @@ ICCAD2019 benchmarks
 
 
 
-### [Gamer- -ICCAD/Trans-2021/2023- -CUHK-]()
+#### [Gamer- -ICCAD/Trans-2021/2023- -CUHK-]()
 
 - GPU-accelerated
 
@@ -4661,9 +4625,8 @@ ICCAD2019 benchmarks
 
 - integrating `GAMER` into the state-of-the-art academic global router `CUGR` 
 
-- 
 
-#### background
+##### background
 
 - Maze routing is usually the most time-consuming step in `global routing` and `detailed routing`
 - Many of them adopt the `negotiation-based rip-up and reroute` method introduced in [3]. Hard-to-route nets are ripped-up and rerouted many times with incrementally changing history cost until getting a feasible solution.   
@@ -4672,13 +4635,12 @@ ICCAD2019 benchmarks
 - `SPRoute [8]` does not forbid routing in the same region if and only if the region has abundant routing resources.   
 - `NCTU-GR 2.0 [9]` also allows nets with overlapping bounding boxes to be routed simultaneously, but they adopt a more sophisticated technique to avoid the racing situation  
 - However, some extra efforts are needed to resolve `data racing`, which may lead to `unbalanced workloads` and routing performance degradation. Besides, as technology evolves over time, graphics processing units (==GPUs==) are standing out, and can provide better solution to parallelism. There are relatively fewer attempts to load maze routing onto GPUs.  
-- 
 
 
 
 
 
-#### contribution
+##### contribution
 
 1. decomposes the shortest path search into `alternating vertical and horizontal sweep operations`,  
 2. two parallel algorithms are proposed to accelerate a sweep operation ==from O(n2) to O(log2 n)== on a grid graph of n × n.   
@@ -4687,11 +4649,11 @@ ICCAD2019 benchmarks
 
 
 
-#### flow
+##### flow
 
 
 
-#### model
+##### model
 
 1. SWEEP Operation
 
@@ -4705,7 +4667,7 @@ ICCAD2019 benchmarks
 
 
 
-### GGR-pattern and maze gpu accelerated-ICCAD-2022
+#### GGR-pattern and maze gpu accelerated-ICCAD-2022
 
 - [Open source!](https://github.com/cuhk-eda/Xplace/tree/main/cpp_to_py/gpugr)
 
@@ -4715,7 +4677,7 @@ ICCAD2019 benchmarks
 
 
 
-#### background
+##### background
 
 - Routability-driven placement relies on global routing for accurate routability estimation,  and faster global routing can significantly improve both the running time and the quality of routability-driven placement.   他把应用场景明确了，是给placement用的。开源工程中也是这么放的，放到`Xpalce`中
 - Compared to multi-threading with CPU, GPU has more cores and is potentially a good platform for fast global routing.  
@@ -4726,7 +4688,7 @@ ICCAD2019 benchmarks
 
 
 
-#### contribution
+##### contribution
 
 ![image-20250401105951278](assets/image-20250401105951278.png)
 
@@ -4734,7 +4696,7 @@ ICCAD2019 benchmarks
 
 
 
-#### flow
+##### flow
 
 ![image-20241114230008749](./assets/image-20241114230008749.png)
 
@@ -4742,7 +4704,7 @@ ICCAD2019 benchmarks
 
 
 
-#### model
+##### model
 
 - An efficient way to calculate the total cost of a long wire segment is to use `prefix sum`.
 - Parallel L-Shape Routing  
@@ -4754,27 +4716,27 @@ ICCAD2019 benchmarks
 
 
 
-#### data
+##### data
 
 
 
-#### experiment
+##### experiment
 
 - a The global routing quality is evaluated using an academic detailed router Dr. CU[8]  
 
 
 
-### [CUGR 2.0-DAG-based-DAC-2023- -CUHK](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10247702)
+#### [CUGR 2.0-DAG-based-DAC-2023- -CUHK](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10247702)
 
 - [open source! ](https://github.com/cuhk-eda/cu-gr-2)
 
-#### background
+##### background
 
 - many of the aforementioned global routers is that most of them rely heavily on **time-consuming path search algorithms** like maze routing to resolve overflows. These approaches are not efficient enough even with parallilization and may cause lots of unnecessary detours  
 
 
 
-#### contribution
+##### contribution
 
 - a ==DAG-based== generalized pattern routing algorithm
 - a new ==dynamic programming-based== algorithm to calculate the routing cost time complexity from $\mathcal{O}(L^4|V|)$ to $\mathcal{O}(L^2|V|)$
@@ -4785,7 +4747,7 @@ ICCAD2019 benchmarks
 
 
 
-#### flow
+##### flow
 
 1. RSMT 
 
@@ -4813,7 +4775,7 @@ ICCAD2019 benchmarks
 
 
 
-#### model
+##### model
 
 - cost 
 
@@ -4835,7 +4797,7 @@ ICCAD2019 benchmarks
 
 
 
-#### experiment
+##### experiment
 
 - compare with CUGR [12] and SPRoute 2.0 [13]  
 
@@ -4871,7 +4833,7 @@ ICCAD2019 benchmarks
 
 
 
-### [InstantGR-Scalable GPU Parallelization-ICCAD-2024-CUHK](https://shijulin.github.io/files/1239_Final_Manuscript.pdf)
+#### [InstantGR-Scalable GPU Parallelization-ICCAD-2024-CUHK](https://shijulin.github.io/files/1239_Final_Manuscript.pdf)
 
 - [open source! ](https://github.com/cuhk-eda/InstantGR)
 - second place of ISPD25 contest
@@ -4881,13 +4843,12 @@ ICCAD2019 benchmarks
 - 提高了并行度，但是还是有串行的部分
 - 也用了 FLUTE
 - 一定要以 net 为单元吗？是为了用 DP
-- 
 
 
 
 
 
-#### background
+##### background
 
 -  GPU memory is limited  
    - This requires memory-efficient solutions that can minimize CPU-GPU communication while maximizing GPU utilization  
@@ -4896,7 +4857,7 @@ ICCAD2019 benchmarks
 
 
 
-#### task
+##### task
 
 - parallelism for large-scale
 - partitioned  design
@@ -4905,7 +4866,7 @@ ICCAD2019 benchmarks
 
 
 
-#### contribution
+##### contribution
 
 - a new method for `net-level batch generation`. based on 3D fine-grained overlap checking and explores more parallelism by increasing the number of nets per batch
 - `node-level` parallel routing approach. achieves much higher parallelism compared to traditional net-level parallel routing.
@@ -4914,7 +4875,7 @@ ICCAD2019 benchmarks
 
 
 
-#### flow
+##### flow
 
 - In initial routing, we construct a basic `routing DAG` to perform **L-shape pattern routing**.  
 
@@ -5009,7 +4970,7 @@ specific explanation show in [routing2](../routing/routing2.md)
 
     ![image-20250212143140834](assets/image-20250212143140834.png)
 
-#### experiment
+##### experiment
 
 - 4 NVIDIA A800 GPUs and 8 CPU threads.
 
@@ -5036,7 +4997,7 @@ specific explanation show in [routing2](../routing/routing2.md)
 
 
 
-### [HeLEM-GR-Heterogeneous+Linearized Exponential Multiplier Method-ICCAD-2024- -PEK]()
+#### [HeLEM-GR-Heterogeneous+Linearized Exponential Multiplier Method-ICCAD-2024- -PEK]()
 
 - first place of ISPD25 contest
 - not open source 2025/2/6
@@ -5048,16 +5009,15 @@ background
 
 
 
-#### contribution:
+##### contribution:
 
 - `LEM`(linearized exponential multiplier) method for ==2D routing problem== to minimize wirelength and overflow. This LEM framework is ==general to integrate any routing kernels.==  
 - `batched routing kernels`  including ==L shape and 3-bend routing== for GPU parallelization.  
 - `sweep operations`  for GPU-accelerated layer assignment.
-- 
 
 
 
-#### flow
+##### flow
 
 ![image-20250225103529314](assets/image-20250225103529314.png)
 
@@ -5072,15 +5032,15 @@ background
 
 
 
-## RSMT
+### RSMT
 
-### [Hannan grid- - -1966- -]()
+#### [Hannan grid- - -1966- -]()
 
 - has proven that an optimal RSMT can always be constructed on the Hanan grid  
 
 
 
-### [GeoSteiner- - -1998- -]()
+#### [GeoSteiner- - -1998- -]()
 
 - [GeoSteiner Homepage](http://geosteiner.com/), 一直有更新，5.x版本貌似比FLUTE更好了。97年搞到现在（2025）。4.0版本是商用的。
 
@@ -5090,14 +5050,12 @@ background
 
 
 
-### [-Multilayer Obstacle Avoiding+Spanning Graphs-Trans-2008- -](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=6930811)
-
-- 
-- 
+#### [-Multilayer Obstacle Avoiding+Spanning Graphs-Trans-2008- -](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=6930811)
 
 
 
-### [FLUTE- - -2008- -]()
+
+#### [FLUTE- - -2008- -]()
 
 - [OpenSource!](https://home.engineering.iastate.edu/~cnchu/flute.html)
 - The runtime complexity of FLUTE with fixed accuracy is O(n log n) for a net of degree n  
@@ -5109,7 +5067,7 @@ background
 
 ![image-20241116114634422](./assets/image-20241116114634422.png)
 
-#### background
+##### background
 
 - RSMT problem is NP-complete [1].  
 - Most signal nets in VLSI circuits have a low degree. Therefore, in VLSI applications, rather than having a low runtime complexity, it is more important for RSMT algorithms to be simple so that they can be efficient for small nets.   
@@ -5134,23 +5092,22 @@ background
 
 
 
-#### contribution
+##### contribution
 
 - We show that the set of all ==degree-n nets can be partitioned into n! groups== according to the relative positions  of their pins.   
-- 
 
 
 
-#### model
+##### model
 
-1. ##### 制表枚举化简：
+1. \##### 制表枚举化简：
 
 - Note that, although the number of the possible Steiner trees is huge, the number of the possible wirelength vectors is much less. And we notice that not all the wirelength vectors have the potential to produce the optimal wirelength
 - Most vectors are redundant because they have a larger or equal value than that of another vector in all coefficients.  For example, we can ignore the wirelength vector (1, 2, 1, 1, 1, 2) because the wirelength produced by the vector (1, 2, 1, 1, 1, 1) is always v3 less.  
 - We called a vector that can potentially produce the optimal wirelength (i.e., cannot be ignored) a ==POWV==  
 - for every low-degree net, there are only a few POWVs. For example, for all degree-3 nets, the only optimal wirelength vector is (1, 1, 1, 1), which corresponds to the half-perimeter wirelength (HPWL).   
 
-##### group the nets which can share the same set of POWVs
+###### group the nets which can share the same set of POWVs
 
 - 如果每一种 POST 对应一些 POSTs，会有太多种可能，浪费空间
 
@@ -5164,7 +5121,7 @@ background
 
   
 
-2. ##### LUT generateion
+2. \##### LUT generateion
 
 - 如果使用遍历的方法，慢。Even for degree 5, we need to enumerate a Hanan grid consisting of 40 edges（$4 \times 5 \times 2$） for each of the 120 groups(5!)
 
@@ -5221,13 +5178,13 @@ background
 
 
 
-#### data
+##### data
 
 ![image-20250311120818694](assets/image-20250311120818694.png)
 
 
 
-#### experiment
+##### experiment
 
 1. 模型对比 
 
@@ -5253,19 +5210,19 @@ background
 
 
 
-### [-obstacle avoiding+parallel -ICCAD-09- -CUHK-](https://www.cse.cuhk.edu.hk/~fyyoung/paper/iccad09_geosteiner.pdf)
+#### [-obstacle avoiding+parallel -ICCAD-09- -CUHK-](https://www.cse.cuhk.edu.hk/~fyyoung/paper/iccad09_geosteiner.pdf)
 
 
 
 
 
-### [-Obstacle avoiding-Science Direct-2013- -CUHK](https://www.sciencedirect.com/science/article/pii/S0167926013000424)
+#### [-Obstacle avoiding-Science Direct-2013- -CUHK](https://www.sciencedirect.com/science/article/pii/S0167926013000424)
 
 
 
 
 
-### [REST-attention mechanism-ICCAD-2021-RL(AC)-CUHK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9586209)
+#### [REST-attention mechanism-ICCAD-2021-RL(AC)-CUHK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9586209)
 
 - [OpenSource!](https://github.com/cuhk-eda/REST)
 - [github 上有个相关的复现](https://github.com/fugjgjguhih/Solving-VLSI-DRL/tree/40b6c6324927a8ef875558ab6d229a3545a451e6)
@@ -5273,16 +5230,16 @@ background
 
 
 
-#### background
+##### background
 
 - machine learning based approaches have shown several advantages over the traditional heuristics, e.g., shorter time for development, superior quality and speed for small to middle size instances.  
 - previous ML-based combinatorial problem (TSP) work: RNN-based pointer network [6] --> RL-based work [8] --> multi-hand atttention+[8] work [9]
 
 
 
-#### model
+##### model
 
-##### Rectilinear Edge Sequence (RES)
+###### Rectilinear Edge Sequence (RES)
 
 - designed for bridge the gap between machine learning output and RSMT structure.  
 
@@ -5306,14 +5263,13 @@ background
 
 
 
-##### AC model
+###### AC model
 
 ![image-20250227174340598](assets/image-20250227174340598.png)
 
 - 输入是 n 个节点的(x, y)坐标
-- 
 
-#### experiment
+##### experiment
 
 ![image-20250324185340529](assets/image-20250324185340529.png)
 
@@ -5323,13 +5279,13 @@ background
 
 
 
-### [-GPU-Accelerated-ICCAD-2022--PEK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10069158)
+#### [-GPU-Accelerated-ICCAD-2022--PEK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10069158)
 
 - first GPU-accelerated RSMT generation algorithm  
 
 
 
-#### background
+##### background
 
 - Rectilinear Steiner minimum tree (RSMT) generation is a fundamental component in the VLSI design automation flow. Due to its extensive usage in circuit design iterations at early design stages like ==synthesis, placement, and routing==, the performance of RSMT generation is critical for a reasonable design turnaround time.   
 
@@ -5365,7 +5321,7 @@ background
 
 
 
-#### contribution
+##### contribution
 
 - propose a `levelized task decomposition strategy`
   - ensures a balanced workload and enables high-performance data parallelism  
@@ -5377,26 +5333,25 @@ background
 
 
 
-#### flow
+##### flow
 
 ![image-20250226234755100](assets/image-20250226234755100.png)
 
 - break and merge stages work in an `iterative` way rather than the `recursive` mode in FLUTE  
 - There is no extensive data copy between CPU and GPU during the inner algorithm loops which ensures minimal overhead of CPU-GPU communication  
 
-9. 
 
-### [-Obstacle avoiding-ISCAS-2024--SYSU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10558430)
-
+#### [-Obstacle avoiding-ISCAS-2024--SYSU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10558430)
 
 
-### [A_Simple_Fast_and_GPU-friendly_Steiner-Tree_Heuristic](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9835675)
 
+#### [A_Simple_Fast_and_GPU-friendly_Steiner-Tree_Heuristic](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9835675)
 
 
 
 
-### [NN Steiner-Mixed Neural-AAAI-2024-California-]()
+
+#### [NN Steiner-Mixed Neural-AAAI-2024-California-]()
 
 - [OpenSource!](https://github.com/ABKGroup/NN-Steiner)
 - we develop NN-Steiner1, a mixed neural-algorithmic framework that leverages the ideas behind Arora’s PTAS for RSMT (Arora 1998). The costly `DP step` is replaced by a single NN component that outputs a learned embedding of the solutions to the DP subproblems.   
@@ -5406,7 +5361,7 @@ background
 
 
 
-#### background
+##### background
 
 - there has been a surge in use of NNs to help tackle `combinatorial optimization  problems`  
 
@@ -5437,66 +5392,65 @@ background
 
 
 
-#### contribution
+##### contribution
 
 - the first neural architecture of `bounded size` that has capacity to approximately solve the RSMT problem  
 - leads to better practical performance than existing SOTA methods for ==large instances==  
 - one of the first NCO(neural combinatorial optimization) frameworks to use algorithmic alignment to ==remove dependence on problem size==. 
   - Training on large instances is prohibitively expensive: for supervised learning this requires computation of exact solutions to large instances, and for RL and unsupervised learning, training becomes exponentially more challenging as size increases. Thus, size generalization is essential for performance on large instances  
 - pin可以拓展到多维（不只是2,3维空间）, 还可以不用直线（欧几里得空间）
-- 
 
 
 
-#### flow
+##### flow
 
 
 
-#### model
+##### model
 
 
 
-#### data
+##### data
 
 
 
-#### experiment
+##### experiment
 
 ![image-20250422230008874](assets/image-20250422230008874.png)
 
 ![image-20250422230039422](assets/image-20250422230039422.png)
 
-### [-Delay Driven-Trans-2024- - ](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10756606)
+#### [-Delay Driven-Trans-2024- - ](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10756606)
 
 
 
-## DR outdated
+### DR outdated
 
-### [TritonRoute- - - -ILP-]()
-
-
+#### [TritonRoute- - - -ILP-]()
 
 
 
 
 
-### [DRCU]()
+
+
+#### [DRCU]()
 
 - academic DR  
 
 
 
-## DR adv
+### DR adv
 
 
 
 
 
-# Adv-Node
+## Adv-Node
 
-### -Multi Row Standard Cell Layout Synthesis with Enhanced Scalability-ISEDA-2025--PEK
+#### -Multi Row Standard Cell Layout Synthesis with Enhanced Scalability-ISEDA-2025--PEK
 
-#### background
+##### background
 
 - Multi-row standard cells are widely adopted in advanced technology nodes, especially for complicated and large cells like multi-bit flip-flops(MBFFs).   
 
@@ -5514,15 +5468,14 @@ background
 
 - 相关工作比较少，之前解决这个问题使用的基于one-row的算法然后通过折叠等方式变成multi-row, 难以获得全局最优解
 
-- 
 
 
 
 
 
-# Circuit Representation
+## Circuit Representation
 
-### [NetlistGNN-GNN Congestion-NIPS-2022-GNN-Ark]()
+#### [NetlistGNN-GNN Congestion-NIPS-2022-GNN-Ark]()
 
 - [OpenSource!](https://github.com/PKUterran/NetlistGNN)
 - can be a post-placement congestion predictor, also for some other task, not like LHNN。也做了Net WL预测的实验
@@ -5533,7 +5486,7 @@ background
 
 
 
-#### background
+##### background
 
 - the two most informative ones: the netlist and the design layout; handling each information source independently is sub-optimal  
 
@@ -5545,20 +5498,20 @@ background
 
   
 
-#### contribution
+##### contribution
 
 - `Circuit Graph`: a heterogeneous graph  with a linear time consumption to the scale of the design  
 - `Circuit GNN`:  
 
 
 
-#### flow
+##### flow
 
 ![image-20250921000705159](assets/image-20250921000705159.png)
 
 
 
-#### model
+##### model
 
 graph：
 
@@ -5566,7 +5519,7 @@ graph：
 
 > shift-window的线性复杂度实现！
 
-#### data
+##### data
 
 Congestion Prediction  [ISPD2011  Contest](http://www.ispd.cc/contests/11/ispd2011_contest.html )
 
@@ -5574,99 +5527,96 @@ Net Wirelength Prediction  [DAC2012  contest](http://archive.sigda.org/dac2012/c
 
 
 
-#### experiment
+##### experiment
 
 ![image-20250921001533660](assets/image-20250921001533660.png)
 
 ![image-20250921001953449](assets/image-20250921001953449.png)
 
-> [!WARNING]
->
-> 但是没有说这些对比模型是怎么设计的
+!!! warning
+    
+    但是没有说这些对比模型是怎么设计的
 
 
 
-# Floorplan
+## Floorplan
 
 
 
-### [IncreDFlip-dataflow driven Macro filp-ISEDA-2025-SJTU-]()
+#### [IncreDFlip-dataflow driven Macro filp-ISEDA-2025-SJTU-]()
 
 - a methodology that leverages dataflow information to narrow the search space and utilizes dataflow decomposition from the synthesized netlist to guide flipping decisions.  
-- 
 
-#### background
+##### background
 
 - 传统macro都是用手摆的, macro 越来越多
 - Typically, mixed-size placers [2], [8], [9] or macro placers [10], [7], [11] consider flipping as one among several co-optimization strategies during placement which will lead to sub-optimal placement outcomes.   
-- 
 
 
 
-#### contribution
+##### contribution
 
 - a ==dataflow-driven== flipping approach to reduce the ==search space== and ==time complexity==
-- 
 
-#### flow
-
-
-
-#### model
+##### flow
 
 
 
-#### data
+##### model
 
 
 
-#### experiment
+##### data
 
+
+
+##### experiment
 
 
 
 
-# toread
 
-### [Algorithms_and_data_structures_for_fast_and_good_VLSI_routing](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=6241546)
+## toread
+
+#### [Algorithms_and_data_structures_for_fast_and_good_VLSI_routing](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=6241546)
 
 
 
-### 一堆关于 RSMT 的论文
+#### 一堆关于 RSMT 的论文
 
-### DR ISPD contest: TritonRoute, Dr. CU, DRAPS, RDTA
+#### DR ISPD contest: TritonRoute, Dr. CU, DRAPS, RDTA
 
 TritonRoute [15] adopted integer linear programming (ILP) for parallel intralayer routing. DRAPS [18] developed an A*-interval-based path search algorithm to handle complicated design rules. Dr. CU [16], [17], [21] proposed an optimal correct-by-construction path search algorithm and a two-level sparse data structure for runtime and memory efficiency. RDTA [19] developed an analytical approach to solve the track assignment problem following the global routing guides.   
 
-### DR Pin Acess: A multithreaded initial detailed routing algorithm considering global routing guides
+#### DR Pin Acess: A multithreaded initial detailed routing algorithm considering global routing guides
 
-### [SALT- -TCAD-2020- -CUHK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=8624460)
+#### [SALT- -TCAD-2020- -CUHK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=8624460)
 
-### [Timing-Driven Routing-ICCAD-2023-USTC](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10323981)
+#### [Timing-Driven Routing-ICCAD-2023-USTC](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10323981)
 
-### [TIMING-ICCAD-2024_Guo](..\..\..\Download\TIMING_ICCAD2024_Guo.pdf)
+#### [TIMING-ICCAD-2024_Guo](..\..\..\Download\TIMING_ICCAD2024_Guo.pdf)
 
-### [GPU-Accelerated_Static_Timing_Analysis](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9256516)
-
-
-
-### [An Optimization-aware Pre-Routing Timing Prediction Framework Based on Multi-modal Learning](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10909720)
+#### [GPU-Accelerated_Static_Timing_Analysis](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9256516)
 
 
 
-### [-Chip Placement-arxiv-2020-GNN+RL-Google](https://arxiv.org/pdf/2004.10746)
-
-### [-DRL ROSMT-Trans-2023-DRL-FZU+PEK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10816669)
+#### [An Optimization-aware Pre-Routing Timing Prediction Framework Based on Multi-modal Learning](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10909720)
 
 
 
-### [-Adaptive Route Guides-ASP DAC-2024-XU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10473934)
+#### [-Chip Placement-arxiv-2020-GNN+RL-Google](https://arxiv.org/pdf/2004.10746)
+
+#### [-DRL ROSMT-Trans-2023-DRL-FZU+PEK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10816669)
 
 
 
-### [-Asynchronous RL+Knowledge Transfer-Trans-2023-RL-PEK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9557780)
+#### [-Adaptive Route Guides-ASP DAC-2024-XU](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=10473934)
 
-#### background
+
+
+#### [-Asynchronous RL+Knowledge Transfer-Trans-2023-RL-PEK](https://ieeexplore-ieee-org-443.webvpn.scut.edu.cn/stamp/stamp.jsp?tp=&arnumber=9557780)
+
+##### background
 
 - 串行布线下的 net order 对布线收敛结果影响很大，尤其在先进工艺节点下，设计规则愈加复杂且布线规模庞大，到时 net order 的影响更大
 
@@ -5698,7 +5648,7 @@ TritonRoute [15] adopted integer linear programming (ILP) for parallel intralaye
   - the number of the total used vias  
   - the number of DRC violations.  
 
-#### contribution
+##### contribution
 
 1. **异步强化学习框架**：
    - 提出基于 **A3C（异步优势演员-评论家）** 的异步 RL 框架，支持多智能体并行训练，加速策略搜索。 
@@ -5712,9 +5662,9 @@ TritonRoute [15] adopted integer linear programming (ILP) for parallel intralaye
 
 
 
-#### model
+##### model
 
-##### enviroment
+###### enviroment
 
 `Dr. Cu`
 
@@ -5722,7 +5672,7 @@ TritonRoute [15] adopted integer linear programming (ILP) for parallel intralaye
 
 而且什么时候 episode 结束？
 
-##### state
+###### state
 
 is the collective representation of features for ==all nets==.
 
@@ -5732,13 +5682,13 @@ is the collective representation of features for ==all nets==.
 
 state 很大啊
 
-##### action
+###### action
 
 An action a is a real number vector. Each number is defined as an ordering score of a net.  
 
 `之前做的都是很少个的action`
 
-##### reward
+###### reward
 
 ![image-20250316161153277](assets/image-20250316161153277.png)
 
@@ -5752,7 +5702,7 @@ An action a is a real number vector. Each number is defined as an ordering score
 
 it will speed up the training, but not limit the exploration space to the heuristic ordering strategy used in `Dr.CU`.   
 
-##### A3C
+###### A3C
 
 ![image-20250316163725745](assets/image-20250316163725745.png)
 
@@ -5770,7 +5720,7 @@ Intuitively, the policy network tells us the ordering scores of the nets and the
 
 ![image-20250316164738691](assets/image-20250316164738691.png)
 
-##### TRANSFER LEARNING ALGORITHM  
+###### TRANSFER LEARNING ALGORITHM  
 
 - Our task is to mine the knowledge from the pretrained policy and adapt to a target design to improve the performance  
 - If we can customize the policy for each design with low overhead, there is an opportunity to improve the performance further.  
@@ -5780,20 +5730,19 @@ Intuitively, the policy network tells us the ordering scores of the nets and the
 
 
 
-### [DieRouter+- FPGA Die Routing-DP-ShanDong-]()
+#### [DieRouter+- FPGA Die Routing-DP-ShanDong-]()
 
-#### background
+##### background
 
 - ![image-20250614235302025](assets/image-20250614235302025.png)
 - 大型数字设计往往需要使用多块`FPGA（MFS）`进行原型验证
 - `2.5D FPGA` integrates ==multiple dies== and offers significantly higher capacity than a traditional ==single-die== FPGA  
 - Super Long Lines (SLLs)  
 - Time-Division Multiplexing (TDM)  多路分时复用，是一种串并-并串转换IP. 缓解FPGA的外部Pin不够问题。这个IP可以调节等效Pin个数，Ratio越大，延时越大。
-- 
 
 
 
-#### contribution
+##### contribution
 
 - a simpler yet more effective initial routing method based on `shortest path trees`
 - a `Second-Order Cone Programming formulation` of an extended relaxed TDM assignment problem to compute ==optimal continuous TDM ratios==
@@ -5801,7 +5750,7 @@ Intuitively, the policy network tells us the ordering scores of the nets and the
 
 
 
-#### flow
+##### flow
 
 ![image-20250615112501557](assets/image-20250615112501557.png)
 
@@ -5809,7 +5758,7 @@ Intuitively, the policy network tells us the ordering scores of the nets and the
 
 
 
-#### data
+##### data
 
 2023 EDA Elite Design Challenge  
 
@@ -5819,9 +5768,9 @@ Intuitively, the policy network tells us the ordering scores of the nets and the
 
 
 
-# 综述
+## 综述
 
-## ML4PR
+### ML4PR
 
 [Towards Machine Learning for Placement and Routing in Chip Design: a Methodological Overview](https://blog.csdn.net/SP_FA/article/details/134063224)
 
@@ -5869,11 +5818,11 @@ routing:
 
   - ![image-20241101180029509](./assets/image-20241101180029509.png)
 
-## 超大规模集成电路布线算法综述  
+### 超大规模集成电路布线算法综述  
 
 [超大规模集成电路布线算法综述](https://www.sciengine.com/MNEIM/doi/10.19816/j.cnki.10-1594/TN.2021.02.086)
 
-#### background
+##### background
 
 ![image-20241116095906162](./assets/image-20241116095906162.png)
 
@@ -5883,13 +5832,13 @@ routing:
 
 布线相关详细看 routing2.md, 详细布线、面向可制造性设计的布线算法 还没记录
 
-## EDA+GNN
+### EDA+GNN
 
 详细看 [A Comprehensive Survey on Electronic Design Automation and Graph Neural Networks](.\notebak\EDA+GNN.md)
 
 
 
-# 参考
+## 参考
 
 1. [AI 技术带给 EDA 的机遇和挑战](AI技术带给EDA的机遇和挑战-Yibo Lin.pdf)
 1. [Towards Machine Learning for Placement and Routing in Chip Design: a Methodological Overview]([[读论文\] Towards Machine Learning for Placement and Routing in Chip Design: a Methodological Overview_toward machine learning....lake-CSDN博客](https://blog.csdn.net/SP_FA/article/details/134063224))
@@ -5899,7 +5848,7 @@ routing:
 
 
 
-# bak
+## bak
 
 [CongestionNet-Congestion Prediction-IFIP-2019-GNN]()
 
@@ -5925,7 +5874,7 @@ routing:
 
 德雷塞尔大学电气与计算机工程系 Pratik Shrestha 和 Ioannis Savidis
 
-#### background
+##### background
 
 VLSI : traditional methodologies -> ML, Graph representation learning  ability to capture complex relationships in graph-structured data  
 
@@ -5935,15 +5884,15 @@ GNN：
 
 ![image-20241116142052562](./assets/image-20241116142052562.png)
 
-#### task
+##### task
 
 ![image-20241116143449696](./assets/image-20241116143449696.png)
 
-#### flow
+##### flow
 
 ![image-20241116144708326](./assets/image-20241116144708326.png)
 
-#### data
+##### data
 
 ![image-20241116155309167](./assets/image-20241116155309167.png)
 

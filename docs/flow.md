@@ -1,11 +1,13 @@
-# 模拟设计流程
+# flow
+
+## 模拟设计流程
 
 - 以一个环振PLL的模拟部分为例
 - PDK: SMIC 28nm
 - 工具链：virtuoso
 - 环境: 学院服务器, 使用服务器的脚本source 相关的软件环境
 
-## 1. PDK install
+### 1. PDK install
 
 一般会给多个工艺库选项，这次SMIC 28 项目中:SPDK28HKCPlus==LG==_0925_OA_CDS_V1和SPDK28HKCPlus==RF==_0925_OA_CDS_V1.0_REV5_1需要选择一个进行安装
 
@@ -63,13 +65,13 @@ How to Install:
 
 ![image-20250604144320130](assets/image-20250604144320130.png)
 
-### 1.1 导入数字库
+#### 1.1 导入数字库
 
 第一次做的时候所有的基本逻辑门都是自己搭的，这是不需要的，至少对于大多数非关键性能的逻辑门。
 
 数字标准库中的器件相比自己手画，往往具有更高的性能，所以要导入数字库
 
-#### 1.1.1 导入symbol
+##### 1.1.1 导入symbol
 
 - 可以使用Verilog In(`SMIC28 `不知道为什么导入是`VDD!, VSS!`)，
 
@@ -100,13 +102,13 @@ How to Install:
     echo "Done."
     ```
 
-#### 1.1.2 导入layout
+##### 1.1.2 导入layout
 
 使用Stream In， 导入gds 文件
 
 > 和倒数数字模块一样
 
-#### 1.1.3 导入schematic
+##### 1.1.3 导入schematic
 
 有的标准库的verilog文件是可以在Verilog In 的时候导入的，但是有些不行（至少SMIC28不行）。
 使用Spice In, 通过`.cdl`文件导入
@@ -131,18 +133,18 @@ How to Install:
 >
 > 
 
-> [!WARNING]
->
-> 发现这部分器件长宽对不上的情况
+!!! warning
+    
+    发现这部分器件长宽对不上的情况
 
-##### 参考
+###### 参考
 
 - [数字标准单元库cdl导入virtuoso_virtuoso导入cdl-CSDN博客](https://blog.csdn.net/weixin_45894265/article/details/143484308)
 - [通过virtuoso的spice in功能批量将数字标准单元库网表转换成schematic的方法 - 知乎](https://zhuanlan.zhihu.com/p/678951019)
 
-## 2. New Liabrary
+### 2. New Liabrary
 
-### 1. new `cds.lib`
+#### 1. new `cds.lib`
 
 ```bash
 DEFINE cdsDefTechLib $CDSHOME/tools/dfII/etc/cdsDefTechLib 
@@ -156,7 +158,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 - analogLib: : 模拟组件库，包含用于模拟电路仿真的==理想化组件==。这个库中有理想电压源/电流源、无源元件(电阻、电容、电感)、各种分析模型，以及基本的数字组件如缓冲器、反相器等。这些组件都是与工艺无关的，通常用于初始设计探索和仿真。
 - smic28hkmg: PDK 安装后生成的路径
 
-### 2. run virtuoso
+#### 2. run virtuoso
 
 - 当前文件夹
 
@@ -201,7 +203,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
   >
   > 右边的`View`就是每个`Cell`的一些原理图`schematic`, 图标`symbol`, 版图`layout`, 测试环境`state`&`maestro`, `constraint`等
 
-###  3. new `Library`
+#### 3. new `Library`
 
   ![image-20250526113012974](assets/image-20250526113012974.png)
 
@@ -265,7 +267,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
   > DEFINE test_library /SM05/home/phd2024/phd202411094979/project/cpicp25/mylib/test_library
   > ```
 
-## 3. new Cell‘s schematic and symbol
+### 3. new Cell‘s schematic and symbol
 
 > import basic logic gate from imported digtal library
 
@@ -345,9 +347,8 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   > NOR + INV = OR
 
-- 
 
-## 4. 搭建`testbench`
+### 4. 搭建`testbench`
 
 - 新建原理图
 
@@ -363,7 +364,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-## 5. ADE前仿
+### 5. ADE前仿
 
 - 简单的任务可以用`ADE L`, 复杂了可以用`ADE Explorer` 和`ADE Assembler`, 具体使用查看[这里](# simulation ADE)
 
@@ -443,11 +444,11 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
   然后在这个`Cell`的`Veiw`里面就会有个`state`, 这个也可以导入到`ADE Explorer`
 
-## 6.前仿PVT验证
+### 6.前仿PVT验证
 
-> [!NOTE]
->
-> 感觉这一步可以不做？如果没时间，或者性能卡得很死才做
+!!! note
+    
+    感觉这一步可以不做？如果没时间，或者性能卡得很死才做
 
 1. 获取`corner.scs`
 
@@ -641,7 +642,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 - [cadence的工艺角仿真、蒙特卡洛仿真、PSRR-CSDN博客](https://blog.csdn.net/qq_42702596/article/details/124285118)
 
-## 7.画版图
+### 7.画版图
 
 [Cadence Virtuoso Layout 快捷键_virtuoso镜像翻转快捷键-CSDN博客](https://blog.csdn.net/weixin_42221495/article/details/128989819)
 
@@ -679,7 +680,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-#### 常用技巧
+##### 常用技巧
 
 [ 模拟集成电路版图要点小结 - 知乎](https://zhuanlan.zhihu.com/p/523707257)
 
@@ -687,7 +688,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-### 一个能够较快手动布线的技巧
+#### 一个能够较快手动布线的技巧
 
 相隔的层使用不同的走线方向（类似数字的方法），这样可以不用仔细看是否会短路。
 
@@ -695,7 +696,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-### 源漏共用
+#### 源漏共用
 
 [12-源漏共用_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV18FcmeGEK8?vd_source=ea5f077dc692dc32725d05ff92da61a5&spm_id_from=333.788.player.switch&p=12)
 
@@ -703,39 +704,39 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 ![image-20251010164558832](D:\My2025\MyNotes\flow\assets\image-20251010164558832.png)
 
-> [!TIP]
->
-> 应该也可以用数字库的版图，就是没有那么general了
+!!! tip
+    
+    应该也可以用数字库的版图，就是没有那么general了
 
 
 
-### MOS匹配
+#### MOS匹配
 
 
 
 
 
-### Tips
+#### Tips
 
 - 注意每一个module分开画，画完尽量加上boundry然后左下角放到坐标原点
 
 
 
-## 8.DRC, LVS
+### 8.DRC, LVS
 
 ![image-20250905111303616](assets/image-20250905111303616.png)
 
-> [!NOTE]
->
-> 要通过脚本才能把这个calibre放到菜单栏的，calibre是西门子的，virtuoso是
+!!! note
+    
+    要通过脚本才能把这个calibre放到菜单栏的，calibre是西门子的，virtuoso是
 
 和数字的没区别，都是选pdk里面的rule文件（后缀为`.drc`, `.lvs`）
 
-> [!WARNING]
->
-> 现在的比较先进的工艺都对方向有要求，不能一些mos水平一些mos垂直放置
+!!! warning
+    
+    现在的比较先进的工艺都对方向有要求，不能一些mos水平一些mos垂直放置
 
-## 9.寄生参数提取（PEX）
+### 9.寄生参数提取（PEX）
 
 1. 找到`.pex`文件
 
@@ -747,17 +748,17 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
    ![image-20250905114644234](assets/image-20250905114644234.png)
 
-   > [!NOTE]
-   >
-   > spectre方式提取的网表进行后仿真，是使==用带有寄生参数的网表替换原理图网表==，按照原理图仿真方式进行仿真。
-   >
-   > 也可以使用`Calibreview`·
-   >
-   > Spectre是仿真器仿真时读取的网表格式。
-   >
-   > Calibreview会将产生的网表封装在一个schematic文件中，同时其后续选项中也可以选择生成对应的spectre网表。
-   >
-   > [模拟IC仿真验证：基于Cadence Virtuoso的电路寄生参数提取与后仿真 - 哔哩哔哩](https://www.bilibili.com/opus/888360753381244962)
+!!! note
+    
+    spectre方式提取的网表进行后仿真，是使==用带有寄生参数的网表替换原理图网表==，按照原理图仿真方式进行仿真。
+    
+    也可以使用`Calibreview`·
+    
+    Spectre是仿真器仿真时读取的网表格式。
+    
+    Calibreview会将产生的网表封装在一个schematic文件中，同时其后续选项中也可以选择生成对应的spectre网表。
+    
+    [模拟IC仿真验证：基于Cadence Virtuoso的电路寄生参数提取与后仿真 - 哔哩哔哩](https://www.bilibili.com/opus/888360753381244962)
 
 4. 其他设置
 
@@ -775,7 +776,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
    ![image-20250925224930287](assets/image-20250925224930287.png)
 
-## 10.后仿
+### 10.后仿
 
 1. 导入寄生提取后的网表
 
@@ -793,13 +794,13 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-## 参考：
+### 参考：
 
 1. *CMOS模拟集成电路全流程设计，李金城，机械工业出版社，第7章*
 
 
 
-# 数字设计流程
+## 数字设计流程
 
 - 以一个DSM模块为例
 - 参考始终 24MHz
@@ -814,18 +815,18 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-## 前端
+### 前端
 
-### 0. 系统级仿真
+#### 0. 系统级仿真
 
 大型项目要做，在类似`Matlab`的平台
 
-### 1. 写HDL
+#### 1. 写HDL
 
 - 现在貌似都是用的`verilog`
 - 注意根据系统需求优化逻辑面积时序，我是不太懂
 
-### 2. 写testbench, 用vcs编译仿真，用verdi看波形
+#### 2. 写testbench, 用vcs编译仿真，用verdi看波形
 
 - 可以用AI写，快。 可以直接用脚本来运行，简单的使用还是非常方便的
 - 善用断言, 这样就不用人工去检查波形了，这也是AI的强项，不熟悉不太确定的还是最好人工看看波形
@@ -933,11 +934,11 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
     ```
 
 
-### 3. FPGA上板验证
+#### 3. FPGA上板验证
 
 - 最好做这一步，这次小项目没做
 
-## 综合
+### 综合
 
 - 使用`DC`, 主要脚本：
   - constraint.sdc：约束文件
@@ -1200,7 +1201,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 - > hjf师兄在紫光就是做这个
 
-## 后端
+### 后端
 
 书籍推荐：CMOS集成电路后端设计与实战 (刘峰, 2015)
 
@@ -1770,7 +1771,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
      
 
-### 参考
+#### 参考
 
    - [修复Hold Violation的方法_专栏_易百纳技术社区](https://www.ebaina.com/articles/140000013451#:~:text=RTL设计实现时，尤其是算法RTL，综合阶段或者Place阶段遇到setup timing不满足时，我们可以通过插入pipeline的方式修改RTL来解决setup violation，但是hold timing vioation往往CTS后才能发现且只能通过后端修复。,遇到hold violation时检查以下几点： 首先，检查SDC约束； 其次，检查CTS阶段后clock skew是否合理范围内； 再次，对CTS友好的FloorPlan和Placement也非常重要；)
    - [用脚本进行Innovus设计 - 白发戴花君莫笑 - 博客园](https://www.cnblogs.com/li2000/p/18269818/IC-digital-Innovus-tcl)
@@ -1778,15 +1779,15 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-## Formality
+### Formality
 
 > 这次没用了。。。
 
-## DRC
+### DRC
 
 > DFM 和[DRC](https://zhida.zhihu.com/search?content_id=259887039&content_type=Article&match_order=1&q=DRC&zhida_source=entity) 的区别在于，DRC 满足不了芯片大概率会废了，DFM 满足不了顶多是良率受损。所以有些关于DFM的DRC violation 可以选择waive掉
 
-### 忽略部分violation
+#### 忽略部分violation
 
 有很多violation需要在最后才能解决，前期calibre drc 可以选择忽略部分calibre
 
@@ -1794,13 +1795,13 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 <img src="assets/image-20250904225316636.png" alt="image-20250904225316636" style="zoom: 60%;" />
 
-### 参考
+#### 参考
 
 [芯片漫谈—— DFM是个什么东西 - 知乎](https://zhuanlan.zhihu.com/p/1924235105657942639)
 
 
 
-## LVS
+### LVS
 
 导入了数字的schematic，然后添加drc rule文件就可以直接run了
 
@@ -1818,7 +1819,7 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-### buglist
+#### buglist
 
 1. ERC报错：check n/pwell_not_to_power/ground 或者 Warining: There is no data for layout net name
 
@@ -1842,13 +1843,13 @@ DEFINE smic28hkmg ~/pdk/SMIC28_uncomp/PDK/SPDK28HKCPlusRF_0925_OA_CDS_V1.0_REV5_
 
 
 
-### 参考
+#### 参考
 
 [virtuoso中数模混合版图的lvs教程_版图lvs教程-CSDN博客](https://blog.csdn.net/weixin_44729325/article/details/132030722)
 
 
 
-## StartRC
+### StartRC
 
 > 注意有很多提取spef的方式
 > [后仿XRC、QRC 和 StarRC 的区别与联系_pex提取工具qrc-CSDN博客](https://blog.csdn.net/weixin_44996615/article/details/149334506)
@@ -1902,50 +1903,50 @@ OPERATING_TEMPERATURE       : -40
 
 ```
 
-> [!CAUTION]
->
-> 这个脚本本来想在`.sh`里面设置环境变量然后在`.tcl`中使用的，但是报错了，找不到文件，不知道为什么。留给后人解决吧
+!!! caution
+    
+    这个脚本本来想在`.sh`里面设置环境变量然后在`.tcl`中使用的，但是报错了，找不到文件，不知道为什么。留给后人解决吧
 
-### 参考
+#### 参考
 
 - [【StarRC】StarRC抽取寄生RC-CSDN博客](https://blog.csdn.net/zxhtiger84/article/details/135001829)
 
-## PrimeTime
+### PrimeTime
 
 
 
 
 
-## 后仿
+### 后仿
 
 > 如果是单纯的数字模块可以在VCS上面跑
 >
 > 如果是数模混仿的一部分，感觉在virtuoso上跑比较好
 
-### VCS-纯数字
+#### VCS-纯数字
 
 ![image-20250903160724253](assets/image-20250903160724253.png)
 
 使用和前仿相同的testbench，主要区别是反标时序
 
-### virtuoso
+#### virtuoso
 
 >  参考数模混合流程中的后仿方法
 
 
 
-# 数字芯片流片工具链
+## 数字芯片流片工具链
 
 <img src="assets/image-20250609120413875.png" alt="image-20250609120413875" style="zoom:50%;" />
 
-## VCS
+### VCS
 
-### 简介
+#### 简介
 
 - Synopsys
 - 要VCS与Verdi联合仿真，需要在testbench里面必须加入``ifdef FSDB`到`endif`的代码，这样才能生成fsdb文件提供Verdi读取，不然不会输出波形
 
-### 运行脚本示例
+#### 运行脚本示例
 
 ```bash
 #!/bin/bash
@@ -1972,24 +1973,24 @@ vcs -full64 -sverilog -timescale=1ns/1ps \
 # ./sim_spi_1kb_reg -gui
 ```
 
-### command
+#### command
 
 - AI to generate scripts is all you need
 
 
-### 参考
+#### 参考
 
 [Linux下VCS与Verdi联合仿真简易教程及例子示范_vcs和verdi-CSDN博客](https://blog.csdn.net/JasonFuyz/article/details/107508893)
 
 
 
-## DC
+### DC
 
-### 简介
+#### 简介
 
 
 
-### 流程
+#### 流程
 
 ![image-20250409095425550](assets/image-20250409095425550.png)
 
@@ -2001,7 +2002,7 @@ vcs -full64 -sverilog -timescale=1ns/1ps \
 
 
 
-### 基本脚本
+#### 基本脚本
 
 ```tcl
 ## 设置工艺库
@@ -2050,7 +2051,7 @@ write_sdc -version 2.0 $syn_dc_path/outputs/${design_name}_syn.sdc
 
 
 
-### 时序约束
+#### 时序约束
 
 时序路径是一个点到点的数据通路， 数据沿着时序路径进行传递。每条时序路径有一个起点(Startpoint)和一个终点(Endpoint)。
 
@@ -2064,11 +2065,11 @@ write_sdc -version 2.0 $syn_dc_path/outputs/${design_name}_syn.sdc
 
 
 
-#### 实战
+##### 实战
 
 ![image-20250411111304568](assets/image-20250411111304568.png)
 
-##### 时钟的约束（寄存器和寄存器之间的路径约束）
+###### 时钟的约束（寄存器和寄存器之间的路径约束）
 
 ```tcl
 create_clock -period my_period_value [get_ports my_clk]
@@ -2088,7 +2089,7 @@ set_clock_transition 0.12 [get_clocks clk]
 
 ```
 
-#### 输入/输出延迟约束（输入路径的约束）
+##### 输入/输出延迟约束（输入路径的约束）
 
 没看懂，感觉没道理，他怎么知道`dalay of S` 和 `register set up time`"：[Tcl与Design Compiler （六）——基本的时序路径约束 - IC_learner - 博客园](https://www.cnblogs.com/IClearner/p/6624722.html)
 
@@ -2099,7 +2100,7 @@ set_output_delay
 
 
 
-### 面积约束
+#### 面积约束
 
 如果不设置面积的约束，Design Compiler将**做最小限度的面积优化**
 
@@ -2115,13 +2116,13 @@ set_max_area my_area
 
 
 
-### 驱动强度、电容负载约束
+#### 驱动强度、电容负载约束
 
 这些约束是要经验的，一方面是对I/O口进行约束，属于I/O口的约束，为时序约束与时序分析提供了路径，更是为输入/输出路径延时约束的精确性提供保证；一方面是对I/O口对外的环境进行约束，可以算是**属于环境约束**
 
 
 
-### 设置设计规则约束
+#### 设置设计规则约束
 
 ```tcl
 set_max_transition
@@ -2133,13 +2134,13 @@ set_max_capacitance
 
 
 
-#### 参考
+##### 参考
 
 [Tcl与Design Compiler （六）——基本的时序路径约束 - IC_learner - 博客园](https://www.cnblogs.com/IClearner/p/6624722.html)
 
 
 
-### 综合编译
+#### 综合编译
 
 电路综合优化包括三个阶段
 
@@ -2160,11 +2161,10 @@ comand: `compile`
 
 - **自顶向下（Top-Down）：** 整体优化，适用于中小型设计
 - **自底向上（Bottom-Up）：** 分层编译，适合大型设计==（需设置 dont_touch 保护子模块）==
-- 
 
-### notes
+#### notes
 
-#### target_library 和 link_library 的区别
+##### target_library 和 link_library 的区别
 
 target_library:
 
@@ -2196,7 +2196,7 @@ link_library:
 
 
 
-#### link_library中的“*”
+##### link_library中的“*”
 
 `* `的具体含义：
 
@@ -2212,7 +2212,7 @@ link_library:
 
 
 
-#### 两种编译策略
+##### 两种编译策略
 
 `top down` & `bottom up`
 
@@ -2220,9 +2220,9 @@ link_library:
 
 
 
-### command补充解释
+#### command补充解释
 
-#### list_libs
+##### list_libs
 
 ```tcl
 Logical Libraries:
@@ -2247,7 +2247,7 @@ Library         File                    Path
   - 提供单元的可视化表示
   - 路径：/SM01/eda/synopsys/syn/R-2020.09-SP4/libraries/syn
 
-#### search path
+##### search path
 
 可以通过`search_path`减少文件路径前缀
 
@@ -2267,7 +2267,7 @@ lappend search_path "ip"
 lappend search_path "memory"
 ```
 
-#### set_addribute
+##### set_addribute
 
 许多设计者都会抱怨工艺库中对单元的DRC属性设置不当，这是由于库的能力是有限的所致。对于一个设计，综合库的DRC设置可能很合适，而对于另一个设计就可能不太合适。这时候，需要设**计者对综合库进行“剪裁”**。当然，这种**“剪裁”必须比库中的定义更为严格**。如将一个库中buffd0的Z端的max_fanout由4.0改为2.0的命令：
 
@@ -2275,7 +2275,7 @@ lappend search_path "memory"
 
 
 
-#### change_names
+##### change_names
 
 `change_names` 命令是 Design Compiler 中的一个重要功能，主要用于修改设计中的名称以符合特定硬件描述语言或工具的命名规则。具体作用如下：
 
@@ -2317,26 +2317,26 @@ lappend search_path "memory"
 
 
 
-#### redirect
+##### redirect
 
 重定向
 
 `redirect -file file.rpt {command}`
 
-### 参考
+#### 参考
 
 - [Design Compiler (DC) 工具基本综合流程_design compiler教程-CSDN博客](https://blog.csdn.net/jiangyezhou110/article/details/146161891)
 - [Design Compiler - 标签 - IC_learner - 博客园](https://www.cnblogs.com/IClearner/tag/Design Compiler/)
 
 
 
-## Innovus_
+### Innovus_
 
 [详细内容](# innovus)
 
 
 
-## Cerebrus
+### Cerebrus
 
 - PR tool
 - Cadence
@@ -2344,7 +2344,7 @@ lappend search_path "memory"
 
 
 
-## StarRC
+### StarRC
 
 - Synopsys
 - Sign-off级别RC参数提取
@@ -2354,7 +2354,7 @@ lappend search_path "memory"
 
 
 
-## Formality
+### Formality
 
 - Synopsys
 
@@ -2447,41 +2447,41 @@ lappend search_path "memory"
 
 
 
-### 参考
+#### 参考
 
 [Formality 快速上手指南 | EasyFormal](https://easyformal.com/lec/formality_guide/)
 
 
 
-## Calibre
+### Calibre
 
 - Synopsys
 - DRC/LVS/ERC验证事实标准，支持先进封装（3DIC）
 
 
 
-## Prime Time
+### Prime Time
 
 
 
-# 模拟芯片流片工具链
+## 模拟芯片流片工具链
 
-## Virtuoso
+### Virtuoso
 
-### schematic
+#### schematic
 
-### simulation ADE
+#### simulation ADE
 
-#### 简介
+##### 简介
 
 早期的仿真环境主要包含 `ADE L` 和 `ADE XL`，但是在 Virtuoso `IC617 版本`后，Cadence 公司新推出了两款仿真工具 `ADE Explorer` 和 `ADE Assembler`，用于替代原本的 ADE L、ADE XL 以及 ADE GXL 环境。相比于原本的 ADE L 仿真环境，ADE Explorer 将单次仿真、corners、sweeps、蒙特卡罗以及参数对比等功能都整合在了 ADE Explorer 中，而 ADE Assembler 则主要取代了之前的 ADE XL 以及 ADE GXL 功能。
 
-#### ADE Explorer
+##### ADE Explorer
 
 - 是`ADE Assembler`的子集，直接用`ADE Assembler`吧
 - ADE Assembler 的操作逻辑和 ADE Explorer 类似，可以认为是全局设置和局部设置的区别
 
-#### ADE Assembler
+##### ADE Assembler
 
 - Assembler 具有极高的自由度，可以在右侧同时添加多个 ADE Explorer，而每个 ADE Explorer 就对应着一个 Test。
 
@@ -2517,15 +2517,15 @@ lappend search_path "memory"
 
 
 
-#### 参考
+##### 参考
 
 - [Cadence maestro 快速仿真实用教程（ADE Explorer 与 ADE Assembler） – Analog-Life](https://www.analog-life.com/2025/02/improve-simulation-efficiency-with-cadence-maestro/)
 
 
 
-### Layout
+#### Layout
 
-#### 相关设置
+##### 相关设置
 
 - 注意一定要新建原理图需要attach对应的PDK才行
 
@@ -2543,13 +2543,13 @@ lappend search_path "memory"
 
 ​	
 
-#### 自动布线
+##### 自动布线
 
 > 注意要打上pin
 
 [自动布局布线使用说明 - 小小桂花糕 - 博客园](https://www.cnblogs.com/jinzbr/p/18235464)
 
-### tips
+#### tips
 
 - 没有连接的，默认会警告，可以用`basic--> noCon`替代
 
@@ -2585,13 +2585,12 @@ lappend search_path "memory"
 
 - 可以导出数字标准单元的layout查看
 
-- 
 
-### 相关快捷键
+#### 相关快捷键
 
 - 对一个symbol按空格可以快速引出label
 
-#### 原理图编辑器 (Schematic Editor)
+##### 原理图编辑器 (Schematic Editor)
 
 - i: 放置实例/组件
 
@@ -2627,7 +2626,7 @@ lappend search_path "memory"
 
 - Tab: 在对象之间循环选择
 
-#### 版图编辑器 (Layout Editor)
+##### 版图编辑器 (Layout Editor)
 
 - Ctrl+a: 创建新图层
 
@@ -2653,7 +2652,7 @@ lappend search_path "memory"
 
 - Ctrl+l: LVS检查
 
-#### 全局快捷键
+##### 全局快捷键
 
 - Ctrl+s: 保存
 
@@ -2665,7 +2664,7 @@ lappend search_path "memory"
 
 - v: 粘贴
 
-#### ADE (模拟设计环境)
+##### ADE (模拟设计环境)
 
 - Alt+s: 仿真
 
@@ -2680,9 +2679,9 @@ lappend search_path "memory"
 
 
 
-# 混合仿真流程
+## 混合仿真流程
 
-## 前仿
+### 前仿
 
 前提：模拟模块和数字模块(综合前)分别搭好
 
@@ -2729,13 +2728,13 @@ lappend search_path "memory"
 
 
 
-### 参考
+#### 参考
 
 - [Cadence Virtuoso数模混合仿真流程 - 知乎](https://zhuanlan.zhihu.com/p/8280687951)
 
-## LVS
+### LVS
 
-### buglist
+#### buglist
 
 1. 同时拥有数字和模拟电源/地的情况下，保证数字和模拟地没有连线，也出现短路，同时有soft check
 
@@ -2751,13 +2750,13 @@ lappend search_path "memory"
 
    后面不分数字模拟地了，也被NWell去掉了，clean了
 
-   > [!WARNING]
-   >
-   > 但是原因是什么？不分会有什么后果？
+!!! warning
+    
+    但是原因是什么？不分会有什么后果？
 
-## DRC
+### DRC
 
-### Buglist
+#### Buglist
 
 - LU3.
 
@@ -2781,13 +2780,13 @@ lappend search_path "memory"
 
 
 
-## 后仿
+### 后仿
 
-> [!WARNING]
->
-> 注意，数字模块理论上可以进行晶体管级的（动态？）仿真，但是项目大的话千万不要怎么做！很卡
+!!! warning
+    
+    注意，数字模块理论上可以进行晶体管级的（动态？）仿真，但是项目大的话千万不要怎么做！很卡
 
-### 数字模块时序反标
+#### 数字模块时序反标
 
 `simulation –>option -->AMS simulator`中点击`SDF`，在`sdf command file`中输入`.sdf`文件路径即可
 
@@ -2795,19 +2794,19 @@ lappend search_path "memory"
 
 ![image-20250904222140233](assets/image-20250904222140233.png)
 
-> [!WARNING]
->
-> ![image-20250905150113750](assets/image-20250905150113750.png)
->
-> 貌似跑一次`.sdf`文件只能选一个，这样不好在plot出来的图上比较。不知道怎么解决
+!!! warning
+    
+    ![image-20250905150113750](assets/image-20250905150113750.png)
+    
+    貌似跑一次`.sdf`文件只能选一个，这样不好在plot出来的图上比较。不知道怎么解决
 
-### 模拟模块提取寄生参数并替换网表
+#### 模拟模块提取寄生参数并替换网表
 
 同[9.寄生参数提取（PEX）](# 9.寄生参数提取（PEX）)
 
 
 
-### 设置corner
+#### 设置corner
 
 同[前仿PVT验证](# 6.前仿PVT验证)
 
@@ -2815,7 +2814,7 @@ lappend search_path "memory"
 
 
 
-## 加I/O PAD
+### 加I/O PAD
 
 ![image-20250901204825112](assets/image-20250901204825112.png)
 
@@ -2838,7 +2837,7 @@ IO 电路的作用有几方面：ESD保护，level shifter，施密特触发器�
 
 
 
-### 基础知识
+#### 基础知识
 
 <img src="assets/Weixin Image_20250907213857_79_50.jpg" alt="Weixin Image_20250907213857_79_50" style="zoom: 35%;" />
 
@@ -2865,11 +2864,11 @@ IO 电路的作用有几方面：ESD保护，level shifter，施密特触发器�
 <img src="assets/Weixin Image_20250907213844_70_50.jpg" alt="Weixin Image_20250907213844_70_50" style="zoom:35%;" />
 
 
-### 结构
+#### 结构
 
 <img src="assets/image-20250901221210220.png" alt="image-20250901221210220" style="zoom: 90%;" />
 
-#### pre-driver
+##### pre-driver
 
 Pre-driver  provides  logic operation  for  I/O  circuit
 
@@ -2877,13 +2876,13 @@ The  pre-driver  section  contains  `VDD`  and  `VSS`  ports.
 
  `VDD` is  connecting  to  the  0.9V power ring
 
-####  post-driver
+##### post-driver
 
 post-driver  provides  large  driving  capability  and  ESD  protection ability.
 
 The  post-driver  section  contains  various  ports  and  their  functions  are  connecting  to  the  `3.3V  or 1.8V` power, and connecting to various `guard rings` for latch-up and `ESD `protection purposes
 
-#### FP
+##### FP
 
 FP stands for ‘From Power Pad’. FP and FPB pin  is for ==global signal==
 
@@ -2895,19 +2894,19 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
 
 
-### Cell categories
+#### Cell categories
 
-#### Digital I/O Cells
+##### Digital I/O Cells
 
-#### Analog I/O Cells
+##### Analog I/O Cells
 
-#### ESD clamp Cells
+##### ESD clamp Cells
 
-#### Filler Cells 
+##### Filler Cells 
 
 
 
-### DC and AC Specification
+#### DC and AC Specification
 
 ![image-20250901222717978](assets/image-20250901222717978.png)
 
@@ -2915,11 +2914,11 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
 > 有很多，需要具体在文档看
 
-#### Data Sheet 
+##### Data Sheet 
 
 ![image-20250901223543565](assets/image-20250901223543565.png)
 
-##### 3-state output  pad（都是数字的）
+###### 3-state output  pad（都是数字的）
 
 - PBSxRNC_X/_Y 
 - PBCDxRNC_X/_Y
@@ -2928,11 +2927,11 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
 
 
-> [!WARNING]
->
-> 这次SMIC28PAD，没有原理图，做不了LVS
+!!! warning
+    
+    这次SMIC28PAD，没有原理图，做不了LVS
 
-### 技巧：
+#### 技巧：
 
 1. layout 里面可以使用快捷键对齐工具![image-20250907101341304](assets/image-20250907101341304.png)与快捷键`a`在某个金属层上实现对齐与吸附
 
@@ -2942,16 +2941,16 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
    <img src="assets/image-20250907101526804.png" alt="image-20250907101526804" style="zoom: 70%;" />
 
-   > [!WARNING]
-   >
-   >  又不会依旧会对不齐，不知道为什么，最后的小部分手动解决了
+!!! warning
+    
+     又不会依旧会对不齐，不知道为什么，最后的小部分手动解决了
 
    
 
 
 
 
-### 参考
+#### 参考
 
 - [一点的关于pad的基础知识分享 - 知乎](https://zhuanlan.zhihu.com/p/572630948)
 - [模拟集成电路设计流程--ESD保护电路和PAD电路-电子工程专辑](https://www.eet-china.com/mp/a44030.html)
@@ -2959,11 +2958,11 @@ FP and FPB rail  will  be automatically  connected while joining  with other dig
 
 
 
-## LVS/DRC
+### LVS/DRC
 
 > 再次做LVS和DRC
 
-## 加seal ring
+### 加seal ring
 
 在整个芯片的外围，一般还要求**放置一圈Seal Ring**
 
@@ -2979,7 +2978,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-### SMIC28实例
+#### SMIC28实例
 
 1. 导入seal ring的`.gds`文件到新的library
 2. 会有一个长条和一个拐角模块
@@ -2987,13 +2986,13 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-### 参考
+#### 参考
 
 - [保护神——Seal ring - 知乎](https://zhuanlan.zhihu.com/p/44729829)
 
-## 运行dummy脚本填充FIller
+### 运行dummy脚本填充FIller
 
-### SMIC28 流程示例
+#### SMIC28 流程示例
 
 1. 在顶层中画一个``BORDER`层盖住设计整个设计
 
@@ -3168,13 +3167,13 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 4. 根据文档`TD-LO28-DT-2074v4.pdf`示例cmd运行脚本，得到`Dummy.gds`
 
-   > [!WARNING]
-   >
-   > 微电子学院的服务器的启动指令和文档的calibre指令不一样：
-   >
-   > ![image-20250909010020584](assets/image-20250909010020584.png)
-   >
-   > `calibre -64 -drc -hier -turbo 8 ../SMIC_Cal_Model_Based_Dummy_28HKCPlusLG_091825_V1.0_REV1_0_20210819.tvf`
+!!! warning
+    
+    微电子学院的服务器的启动指令和文档的calibre指令不一样：
+    
+    ![image-20250909010020584](assets/image-20250909010020584.png)
+    
+    `calibre -64 -drc -hier -turbo 8 ../SMIC_Cal_Model_Based_Dummy_28HKCPlusLG_091825_V1.0_REV1_0_20210819.tvf`
 
 5. `Stream In`生成的`Dummy.gds`, 注意生成的是一个同名的`cellview`, 要新建一个library，避免覆盖（我没试过是否会被覆盖）
 
@@ -3186,31 +3185,30 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-## 再次后仿
+### 再次后仿
 
-> [!TIP]
->
-> 导入IO的原理图
-> PAD没有网表。。这次是没做了
+!!! tip
+    
+    导入IO的原理图
+    PAD没有网表。。这次是没做了
 
 
 
-## 提交
+### 提交
 
 - 多于foundary沟通
   - DRC waive list
   - Sealring 之间最短距离
 - 加密，会给脚本，跑一下就好
 - 提交用到的器件列表
-- 
 
-> [!TIP]
->
-> 不知道是不是都需要
-
+!!! tip
+    
+    不知道是不是都需要
 
 
-## tips
+
+### tips
 
 - rst_n信号也可以用vdc来做，设成变量
 
@@ -3228,11 +3226,11 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-# innovus
+## innovus
 
 15年后 Encounter --> Innovus
 
-## flow
+### flow
 
 <img src="assets/image-20250608182648061.png" alt="image-20250608182648061" style="zoom:50%;" />
 
@@ -3244,9 +3242,9 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 <img src="assets/image-20250608183024360.png" alt="image-20250608183024360" style="zoom:50%;" />
 
-### floorplan
+#### floorplan
 
-#### 考虑因素
+##### 考虑因素
 
 - 封装形式
 - 面积、绕通性、电源完整性、时序性能、功耗
@@ -3254,9 +3252,9 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
  ![image-20240930141615916](assets/image-20240930141615916.png)
 
-#### 基础概念
+##### 基础概念
 
-##### Box
+###### Box
 
 ![image-20240930141500405](assets/image-20240930141500405.png)
 
@@ -3270,7 +3268,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-##### site, row, 
+###### site, row, 
 
 ![image-20240930141709762](assets/image-20240930141709762.png)
 
@@ -3311,7 +3309,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-##### EndCap, WellTap, Decap
+###### EndCap, WellTap, Decap
 
 在后端物理设计中，除了与，非，或等一些常见的标准单元外，还有一些特殊的物理单元(physical cell)，它们通常 **没有逻辑电路**，不存在与 netlist 当中，但是对整个芯片的运行，稳定却起着举足轻重的作用。
 
@@ -3338,7 +3336,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 - Decap cell，去耦单元，这是一种特殊的 **Filler cell**。
 - 当电路中大量单元同时翻转时会导致冲放电瞬间电流增大，使得电路 **动态供电电压下降** 或地线电压升高，引起动态电压降俗称 **IR-drop**。为了避免 IR-drop 对电路性能的影响，通常在电源和地线之间放置 **由 MOS 管构成的电容**，这种电容被称为去耦电容或者去耦单元，它的作用是在瞬态电流增大，电压下降时向电路补充电流以保持电源和地线之间的电压稳定，防止电源线的电压降和地线电压的升高。
 
-##### Filler
+###### Filler
 
 缓解 dynamic IR drop, eco
 
@@ -3364,7 +3362,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-##### **hard IP**
+###### **hard IP**
 
 - hard IP 就是 macro
 
@@ -3386,7 +3384,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
-##### backbox
+###### backbox
 
 BlackBox 类似于一个 HardMacro，它内部的东西完全看不见，只是一个黑盒子，但是它又类似于一个 ModuleBoundary。它可以被改变形状，而且它可以被分配 pin 和被分割出去(partition)。如下图所示，灰色的形状就是 Black Box。
 
@@ -3394,7 +3392,7 @@ BlackBox 类似于一个 HardMacro，它内部的东西完全看不见，只是�
 
 BlackBox 是一种较为粗糙的模型，由于它看不见里面的东西，这样的结构使得它做任何 implementation 速度都很快，取而代之的精准度就会相对较低
 
-##### track, pitch
+###### track, pitch
 
 ###### track
 
@@ -3423,18 +3421,18 @@ WIDTH 0.032;
 
 
 
-##### **Grid**
+###### **Grid**
 
 - Litho Grid，中文名，光刻格点。又被称为制造单元格点，这是 **最基本的网格单元**，任何元件都要对 Litho Grid 上，不然就无法被制造
 - 它定义在 design 的 **technology LEF**. e.g.: `MANUFACTURINGGRID 0.001;`. 这就代表着改设计的制造单元格点间距为 0.001, 起始点是 Die Box 的 lower left 角上
 
 ![image-20240930142930084](assets/image-20240930142930084.png)
 
-##### Blockage, halo
+###### Blockage, halo
 
 ![image-20240930143227587](assets/image-20240930143227587.png)
 
-##### Net, Wire
+###### Net, Wire
 
 ###### Net
 
@@ -3449,7 +3447,7 @@ Wire
   - Special Wire 就是电源接地线，平常我们所见到的 power ring，stripes，power rail 等都是 Special Wire。**一般用高层金属走线.**
   - Patch Wire，我们称之为补丁线。这是先进工艺中的一种走线，用于修复 Min Area，MinStep 等 DRC，不属于任何 net。
 
-##### Pin
+###### Pin
 
 - 引脚
 
@@ -3469,7 +3467,7 @@ Wire
 
     ![image-20241002204339153](assets/image-20241002204339153.png)
 
-##### Power Rings (电源环) & Power Stripes
+###### Power Rings (电源环) & Power Stripes
 
 <img src="assets/image-20250608194740791.png" alt="image-20250608194740791" style="zoom: 30%;" />
 
@@ -3515,7 +3513,7 @@ Wire
 - 提供供电网格：形成覆盖整个芯片的电源网格
 - 降低电迁移风险：通过提供多路径供电减少单一金属线的电流密度
 
-### placement
+#### placement
 
 ![image-20241005160434746](assets/image-20241005160434746.png)
 
@@ -3523,7 +3521,7 @@ Wire
 
 会删掉综合后加入的 buffer
 
-#### 基础概念
+##### 基础概念
 
 - Tie High/Low
 
@@ -3537,7 +3535,7 @@ Wire
 
   
 
-### CTS
+#### CTS
 
 placement 后的 clock tree 是理想的（没有延时）
 
@@ -3551,23 +3549,23 @@ innouvs 的 CTS 工具叫 ccopt
 
 评价指标：(latency (insertion delay), skew, clock power, clock em, long common path(cppr), duty cycle)
 
-#### 基本概念
+##### 基本概念
 
 
 
-### route
+#### route
 
 三个步骤：global route, track assignment（分配 global route 的 track 给对应的 net）, detail route
 
-#### 基本知识
+##### 基本知识
 
-##### nano
+###### nano
 
-##### SI
+###### SI
 
-##### Antenna
+###### Antenna
 
-##### eco route
+###### eco route
 
 工艺制造，栅极放电破坏
 
@@ -3575,11 +3573,11 @@ signoff 的时候会检查这个问题，工具会加上
 
 连接到栅极的面积不要太大
 
-### sign off
+#### sign off
 
-#### 基本知识
+##### 基本知识
 
-##### mode
+###### mode
 
 ###### function
 
@@ -3611,7 +3609,7 @@ signoff 的时候会检查这个问题，工具会加上
 
 
 
-## common command
+### common command
 
 ```tcl
 #gui
@@ -3634,9 +3632,9 @@ killall -9 innovus
 
 
 
-## 实战
+### 实战
 
-### 0_所需文件：
+#### 0_所需文件：
 
 - netlist
 
@@ -3672,7 +3670,7 @@ killall -9 innovus
 
     
 
-### 1_数据初始化
+#### 1_数据初始化
 
 - 设置 netlist
 
@@ -3740,7 +3738,7 @@ set welltap_ref     "DECAP8"
 
 ```
 
-### 2_import
+#### 2_import
 
 ```tcl
 set init_top_cell $design  #给该design赋一个名字
@@ -3841,7 +3839,7 @@ set_analysis_view -setup [list func_slow_rcworst] -hold [list func_fast_rcbest]
 
 
 
-### 3_floorPlan
+#### 3_floorPlan
 
 ```tcl
 floorPlan -site CoreSite -d 930 600.28 0 1.71 0 1.71 -fplanOrigin llcorner	#-d <W H Left Bottom Right Top> 得到的是Die size; -s 得到的是Core size;  #-fplanOrigin llcorner 设置原点坐标
@@ -3943,7 +3941,7 @@ addWellTap -prefix $welltap_prefix -cell $welltap_ref -cellInterval 70 -checkerB
 
 ```
 
-### 4_powerPlan
+#### 4_powerPlan
 
 ```tcl
 ### remove all existing power routing
@@ -4017,7 +4015,7 @@ deleteRouteBlk -name $rblkg_prefix
 
 
 
-### 5_place_opt
+#### 5_place_opt
 
 - setDesignMode
 
@@ -4126,7 +4124,7 @@ deleteRouteBlk -name $rblkg_prefix
 
   -  -prefix ”innovus_placeopt“
 
-### 6_CTS
+#### 6_CTS
 
 - set_ccopt_property
 
@@ -4153,17 +4151,17 @@ deleteRouteBlk -name $rblkg_prefix
 ```tcl
 ```
 
-### 7_cts_opt
+#### 7_cts_opt
 
 `optDesign -expandedViews -setup -hold -drv -outDir "myreports/${current_step}/innovus_clockopt" -postCTS -prefix "innovus_clockopt"`
 
-### 8_route
+#### 8_route
 
 
 
-## 优化
+### 优化
 
-### 优化目标
+#### 优化目标
 
 时序(Performance)
 
@@ -4179,7 +4177,7 @@ deleteRouteBlk -name $rblkg_prefix
 
 DFM: 电迁移(EM)
 
-### innovus 优化流程
+#### innovus 优化流程
 
 ![image-20241005210209336](assets/image-20241005210209336.png)
 
@@ -4189,7 +4187,7 @@ DFM: 电迁移(EM)
 
 在 placement 就存在的 vio 很难在后面的优化中去掉
 
-## 文件名称
+### 文件名称
 
 ![image-20240930112843520](assets/image-20240930112843520.png)
 
@@ -4199,13 +4197,13 @@ DFM: 电迁移(EM)
 
  
 
-## install
+### install
 
 **环境：ubuntu20.04, innovus20**
 
 安装包：[innovus20_install](E:\installer\innovus20_installer.7z)
 
-### 依赖
+#### 依赖
 
 ```bash
 sudo apt-get -y install openjdk-11-jdk
@@ -4224,7 +4222,7 @@ sudo apt install libncurses5
 
 ![image-20240929161609281](assets/image-20240929161609281.png)
 
-### 解压
+#### 解压
 
 ```bash
 #解压3个innovus20压缩包
@@ -4232,7 +4230,7 @@ sudo apt install libncurses5
 sh iscape.sh
 ```
 
-### 安装
+#### 安装
 
 ![image-20240929161325074](assets/image-20240929161325074.png)
 
@@ -4246,7 +4244,7 @@ sh iscape.sh
 
 等待，弹出终端选 no，然后回车结束
 
-### 破解
+#### 破解
 
 ```bash
 #在crack文件夹中
@@ -4261,7 +4259,7 @@ cdslicgen.py 破解改动在这里，我只是发现了别人的脚本在这里�
 
 ![image-20240929160603054](assets/image-20240929160603054.png)
 
-### 环境变量
+#### 环境变量
 
 根据你的安装路径和 license 路径对应修改
 
@@ -4279,7 +4277,7 @@ export PATH=${PATH}:${INNOVUS_HOME}/tools.lnx86/bin
 
 
 
-### 大致结束
+#### 大致结束
 
 ```bash
 innovus &
@@ -4289,7 +4287,7 @@ innovus &
 
 ![image-20240929160148358](assets/image-20240929160148358.png)
 
-### 其他相关 bug
+#### 其他相关 bug
 
 1.libstdc++.so.6
 
@@ -4386,7 +4384,7 @@ ptrace: Operation not permitted.
 
 
 
-### 参考
+#### 参考
 
 [Cadence Innovus2020 在Ubuntu20.04上的安装教程【超详细】_innovus安装-CSDN博客](https://blog.csdn.net/qq_44447544/article/details/122698979?ops_request_misc=%7B%22request%5Fid%22%3A%22A2277519-6B4E-4DD3-952A-1958A9EA40EA%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&request_id=A2277519-6B4E-4DD3-952A-1958A9EA40EA&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-122698979-null-null.142^v100^control&utm_term=innovus安装&spm=1018.2226.3001.4187)
 
@@ -4396,7 +4394,7 @@ ptrace: Operation not permitted.
 
 
 
-## 参考
+### 参考
 
 1. 官方文档：UserGuide, Command reference 
 
@@ -4410,7 +4408,7 @@ ptrace: Operation not permitted.
 
 
 
-# PDK
+## PDK
 
 DK即Process Design Kit 工艺设计包，是连接IC设计公司、代工厂和EDA公司的桥梁. PDK包含了从芯片设计到制造的各个环节所需的数据和信息，为了更直观地了解它，我们可以将**PDK比作芯片设计过程中的“指导手册”**
 
@@ -4418,7 +4416,7 @@ PDK的主要作用是将晶圆代工厂的制造工艺要求转化为芯片设�
 
 A Process Design Kit (PDK) serves as the fundamental building block for integrated circuit (IC) design, playing a crucial role in transforming chip designs  into **silicon reality**. These files serve as essential  inputs for Electronic Design Automation (EDA) tools during chip design. Clients engage with a foundry's PDKs before production to ensure that their chip  designs align with the foundry's capabilities and intended functionality.EDA Tool Ecosystem and PDK Integration. These tools rely on  **accurate PDK data to generate layouts, verify designs, and simulate performance.** **Standardized interfaces** across diverse technology platforms enhance  PDK usability.
 
-## 概述
+### 概述
 
 ![image-20241030144210841](assets/image-20241030144210841.png)
 
@@ -4430,7 +4428,7 @@ A Process Design Kit (PDK) serves as the fundamental building block for integrat
 
 
 
-### 生态
+#### 生态
 
 ![image-20241030142942533](assets/image-20241030142942533.png)
 
@@ -4438,7 +4436,7 @@ A Process Design Kit (PDK) serves as the fundamental building block for integrat
 
 ![image-20241030143150122](assets/image-20241030143150122.png)
 
-## 金属层
+### 金属层
 
 ![image-20251117151847166](assets/image-20251117151847166.png)
 
@@ -4446,17 +4444,17 @@ A Process Design Kit (PDK) serves as the fundamental building block for integrat
 
 ![PDK中的Design Layer和Mask Layer以及FEOL和BEOL](assets/v2-83dcd40e286b632da263586dc9ca8dd8_1440w.png)
 
-> [!WARNING]
->
-> 每个PDK名称会有些不一样
+!!! warning
+    
+    每个PDK名称会有些不一样
 
-### AA
+#### AA
 
 离子注入的主要位置
 
 
 
-### POLY
+#### POLY
 
 多晶硅材质，电压就是压在他上面
 
@@ -4466,47 +4464,47 @@ A Process Design Kit (PDK) serves as the fundamental building block for integrat
 > 在很多尺寸的工艺中，mos管的栅极是用poly这种材料制作的。
 > 但是poly不仅可以用在栅极这个地方，在一些小的cell中，poly可以用来做短距离的导线起连接的作用，以此来减少这个cell所用的metal的层数。
 
-### PC
+#### PC
 
 poly connect layer
 
 
 
-### CT
+#### CT
 
 下面晶体管Drain/Source跟上面金属线的连接层
 
 
 
-### GT
+#### GT
 
 gate
 
 
 
-### Mx
+#### Mx
 
 金属层
 
-### Vx
+#### Vx
 
 过孔
 
-### Fin
+#### Fin
 
 for FinFET
 
 
 
-## 文件汇总
+### 文件汇总
 
-### sp/cdl
+#### sp/cdl
 
 - 模拟网表
 - `cdl`基本是`spcie`格式的，略有不同，主要是用来做LVS的，只包含`LVS`中需要比较的参数。通过子电路的形式来写的，即使是顶层单元，也要用子电路形式。
 - spice则略有不同，顶层模块没有子电路的外框。也可以用来做LVS，需要手动提取。直接提取的为cdl形式的。spice还可以用来==仿真==。
 
-#### 语法
+##### 语法
 
 - **行类型**：以 `*` 开头为注释，`+` 表示上一行续行；`.` 开头是控制语句，如 `.TITLE`、`.LIB`、`.PARAM`、`.OP`、`.AC`、`.TRAN`、`.TEMP`、`.OPTION`、`.PRINT` 等。
 - **元件语法**：首字母区分器件类型，后接节点列表和参数；常见如 `Rname n1 n2 value`、`Cname n1 n2 value`、`Mname nd ng ns nb model L=... W=...`、`Vname n+ n- type(...)`。
@@ -4522,7 +4520,7 @@ for FinFET
 
 
 
-### LEF
+#### LEF
 
 - （library exchange format）, 叫库交换格式，
 
@@ -4544,7 +4542,7 @@ for FinFET
   
     0.0005 微米 = 1/2000 微米，说明最小网格是 1 DBU。
   
-  - ```
+  -   ```
     LAYER Metal1
       TYPE ROUTING ;
       DIRECTION HORIZONTAL ;
@@ -4561,7 +4559,7 @@ for FinFET
     END Metal1
     ```
   
-  - ```
+  -   ```
     LAYER Via1
       TYPE CUT ;
       SPACING 0.07 ;
@@ -4569,16 +4567,15 @@ for FinFET
     END Via1
     ```
     
-  - ````
+  -   ````
     SITE CoreSite
       CLASS CORE ;
       SIZE 0.2 BY 1.71 ;
     END CoreSite
     ````
   
-  - 
 
-### DEF
+#### DEF
 
 - （design exchange format），叫设计交换格式
 
@@ -4624,7 +4621,7 @@ for FinFET
     >
     > 这个可以不等于diearea
   
-  - ````
+  -   ````
     GCELLGRID X 0 DO 65 STEP 6000 ;
     GCELLGRID X 384000 DO 2 STEP 6800 ;
     ````
@@ -4635,7 +4632,7 @@ for FinFET
     >
     > 384000+6800 = 390800 == die_are.width
 
-### Lib
+#### Lib
 
 - 文本格式: .lib 文件通常是文本文件，使用人类可读的 ASCII 文本来描述。
 
@@ -4671,22 +4668,21 @@ for FinFET
   - 输入引脚的fanout-load属性、输出引脚的max_fanout属性、输入或输出引脚的max_transition属性、输出或者inout引脚的max_capacitance属性
   - 如果某个单元的输出最大只能接0.2pF的负载，但在实际综合的网表中却连接了0.3pF的负载，这时候综合工具就会报出DRC错误
   - 通常，fanout_load与max_fanout一起使用max_transition与max_capacitance一起使用。 如果一个节点的扇出为4，它驱动3个与非门，每个与非门的fanout-load是2，则这三个与非门无法被驱动(因为3*2>4)。
-  - 
 
-#### 参考
+##### 参考
 
 - [Tcl与Design Compiler （五）——综合库（时序库）和DC的设计对象 - IC_learner - 博客园](https://www.cnblogs.com/IClearner/p/6622524.html)
 
 
 
-### DB
+#### DB
 
 - .lib文件，经过LC编译后，产生.db文件。
 - 不可读
 
 
 
-### ITF, ICT
+#### ITF, ICT
 
 - 工艺参数文件，记录了每层材料的电阻率、介电常数、温度系数、最小宽度等详细信息。EDA工具没有直接使用这类文件进行RC的抽取，因为计算量是巨大的，将严重影响EDA工具的速度。
 - `itf`（S家工具用到的互联工艺格式文件）
@@ -4697,7 +4693,7 @@ for FinFET
 - `ICT`和`ITF`文件可以相互转换
 - 不同金属层有不同的对应`.ict/itf`文件
 
-#### tluplus, capTable
+##### tluplus, capTable
 
 2D model
 
@@ -4721,13 +4717,13 @@ for FinFET
 
     - captable的生成过程就是由ict中的工艺参数按照一些特定的导线尺寸计算出相应电阻电容值的过程。
 
-    - ```tcl
+    -   ```tcl
       generateCapTbl -lef tech.lef -ict LIB/ICT/qrc_min.ict -output LIB/captable/cmin.captbl
       generateCapTbl -lef tech.lef -ict LIB/ICT/qrc_typ.ict -output LIB/captable/typ.captbl
       generateCapTbl -lef tech.lef -ict LIB/ICT/qrc_max.ict -output LIB/captable/cmax.captbl
       ```
 
-#### nxtgrd，qrcTechFile
+##### nxtgrd，qrcTechFile
 
 3D model
 
@@ -4741,13 +4737,13 @@ for FinFET
 
 
 
-### SDF
+#### SDF
 
 -    (Standard delay format), 叫标准延时格式，是 IEEE 标准，它描述设计中的时序信息，指明了模块管脚和管脚之间的延迟、时钟到数据的延迟和内部连接延迟。
 
 
 
-### GDS
+#### GDS
 
 通用的版图文件，可以认为该文件不受限于EDA工具和厂商。
 
@@ -4755,7 +4751,7 @@ for FinFET
 
  
 
-### map
+#### map
 
 版图转换文件
 
@@ -4765,7 +4761,7 @@ for FinFET
 
  
 
-### Innovus.dat
+#### Innovus.dat
 
 保存文件
 
@@ -4773,7 +4769,7 @@ for FinFET
 
 
 
-### 各种map, layermap
+#### 各种map, layermap
 
 在gds导入导出的时候会用到一些map（映射）文件
 
@@ -4781,13 +4777,13 @@ for FinFET
 
 
 
-### spef
+#### spef
 
 寄生参数网表
 
 
 
-### nxtgrd
+#### nxtgrd
 
 和寄生参数提取相关，在`starRC`中使用
 
@@ -4795,13 +4791,13 @@ for FinFET
 
 
 
-## 工艺类型
+### 工艺类型
 
-### Planar
+#### Planar
 
 
 
-### FinFET
+#### FinFET
 
 [Finfet电流模型里fin, finger, multiplier指的是什么啊？ - 知乎](https://www.zhihu.com/question/426949421)
 
@@ -4847,7 +4843,7 @@ w=(nfin-1)finpitch + findrawnwidth(单个fin的width，这里wdith=10nm)
 
 
 
-### GAA
+#### GAA
 
 
 
@@ -4855,15 +4851,15 @@ w=(nfin-1)finpitch + findrawnwidth(单个fin的width，这里wdith=10nm)
 
 
 
-## SMIC
+### SMIC
 
-### 文件目录简要介绍
+#### 文件目录简要介绍
 
-#### liberty
+##### liberty
 
 下文会介绍
 
-#### verilog
+##### verilog
 
 包含标准单元的逻辑功能模型，用于逻辑仿真和综合。
 
@@ -4877,7 +4873,7 @@ w=(nfin-1)finpitch + findrawnwidth(单个fin的width，这里wdith=10nm)
 
   - 带有电源/地和负载的Verilog模型(_neg_pg.v)
 
-#### lef
+##### lef
 
 包含物理设计所需的单元布局信息。
 
@@ -4885,13 +4881,13 @@ w=(nfin-1)finpitch + findrawnwidth(单个fin的width，这里wdith=10nm)
 
 - scc28nhkcp_hdc30p140_pmk_rvt_ant.lef - 带有天线规则的描述
 
-#### gds
+##### gds
 
 包含标准单元的物理版图数据，用于流片。
 
 - 文件：scc28nhkcp_hdc30p140_pmk_rvt.gds(版图数据库文件)
 
-#### 其他
+##### 其他
 
 - cdl/ - 包含电路描述语言文件，用于LVS验证
 
@@ -4907,7 +4903,7 @@ w=(nfin-1)finpitch + findrawnwidth(单个fin的width，这里wdith=10nm)
 
 - icc2_ndm/ - 包含ICC2所需的NDM库
 
-### 标准单元库
+#### 标准单元库
 
 　　绝大多数的数字设计流程都是基于标准单元的半定制设计流程。标准单元库包含了==反相器、缓冲、与非、或非、与或非、锁存器、触发器等等逻辑单元综合模型的物理信息==，标准单元是完成通用功能的逻辑，==具有同等的高度（宽度可以不同）==，这样方便了数字后端的自动布局布线。
 
@@ -4923,7 +4919,7 @@ STDCELL文件夹下是不同类型的标准单元库
 
 
 
-#### 命名方式
+##### 命名方式
 
 >SCC28NHKCP_12T25OD33_RVT_V0p2
 >│   │  │   │  │   │   │   │
@@ -4943,13 +4939,13 @@ STDCELL文件夹下是不同类型的标准单元库
 
 ![image-20250408200930992](assets/image-20250408200930992.png)
 
-#### 应用场景
+##### 应用场景
 
 ![image-20250408201158248](assets/image-20250408201158248.png)
 
 
 
-#### 注意
+##### 注意
 
 - 不同库之间不能混用! 不过可以在不同模块使用不同库，但要注意接口匹配（AI生成·）
 
@@ -4959,11 +4955,11 @@ STDCELL文件夹下是不同类型的标准单元库
 
     ![image-20250408201451971](assets/image-20250408201451971.png)
 
-### 同一标准单元库下不同时序模型和PVT条件组合
+#### 同一标准单元库下不同时序模型和PVT条件组合
 
 在`liberty`文件夹下
 
-#### 命名规则
+##### 命名规则
 
 >scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_basic.lib
 >│   │  │   │  │  │  │  │  │  │
@@ -5030,9 +5026,9 @@ set_operating_conditions -library scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_ccs.db tt
 
 
 
-## TSMC
+### TSMC
 
-#### 参考
+##### 参考
 
 [tsmc28nm数字工艺库介绍 - 知乎](https://zhuanlan.zhihu.com/p/243485197)
 
@@ -5042,9 +5038,9 @@ set_operating_conditions -library scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_ccs.db tt
 
 
 
-## 开源PDK
+### 开源PDK
 
-### sky130
+#### sky130
 
 
 
@@ -5078,23 +5074,23 @@ set_operating_conditions -library scc28nhkcp_12t25od33_rvt_tt_v3p3_25c_ccs.db tt
 
 
 
-### GF180
+#### GF180
 
-### FreePDK45
+#### FreePDK45
 
-### [nangate45](https://github.com/rbarzic/platform_nangate45)
+#### [nangate45](https://github.com/rbarzic/platform_nangate45)
 
 
 
 FreePDK45 是**北卡罗来纳州立大学**的电子设计自动化实验室提供的免费开源的45nm工艺库，使用了MOSIS工艺
 
-### IHP Open Source PDK
+#### IHP Open Source PDK
 
-### ASAP7 
+#### ASAP7 
 
 7nm Predictive PDK
 
-### ASAP5
+#### ASAP5
 
 5nm
 
@@ -5106,7 +5102,7 @@ FreePDK45 是**北卡罗来纳州立大学**的电子设计自动化实验室提
 
 
 
-## 参考
+### 参考
 
 [DesignAutomationConference_SFO_2024](DesignAutomationConference_SFO_2024.pdf) 
 
@@ -5116,13 +5112,13 @@ FreePDK45 是**北卡罗来纳州立大学**的电子设计自动化实验室提
 
 
 
-# OpenROAD/ORFS/OpenLane
+## OpenROAD/ORFS/OpenLane
 
 数字后端EDA领域的开源工具
 
-## 特点
+### 特点
 
-### 优点
+#### 优点
 
 - 开源，可以自定义修改
 
@@ -5136,21 +5132,21 @@ FreePDK45 是**北卡罗来纳州立大学**的电子设计自动化实验室提
 
   ![image-20241216092602072](assets/image-20241216092602072.png)
 
-### 缺点
+#### 缺点
 
 - 有一些商用工具有的功能他没有
 
 
 
-## relation between openroad/SRFS/openlane
+### relation between openroad/SRFS/openlane
 
-### openroad
+#### openroad
 
 - basic model
 - netlist2gds, 也可以hdl2gds，但是比较麻烦， 用abc做综合
 - 越来越流行了，比赛也开始用了
 
-### ORFS
+#### ORFS
 
 - hdl2gds
 - pdk friendly， 可以直接跑7nm
@@ -5159,23 +5155,22 @@ FreePDK45 是**北卡罗来纳州立大学**的电子设计自动化实验室提
 - 内置AutoTuner，一个扫参自动优化PPA的工具
 - 支持在线使用（Colab）
 
-### **openlance**
+#### **openlance**
 
 - hdl2gds
 - most auto
 - 内置只有sky130 PDK
 - 不支持重新编译OpenROAD
-- 
 
 
 
-## Architecture
+### Architecture
 
 **openlane**
 
 ![image-20241012145943913](assets/image-20241012145943913.png)
 
-## OpenLane Flow Stages
+### OpenLane Flow Stages
 
 OpenLane flow consists of several stages. By default all flow steps are run in sequence. Each stage may consist of multiple sub-stages. OpenLane can also be run interactively as shown [here][25].
 
@@ -5209,7 +5204,7 @@ All tools in the OpenLane flow are free, libre and open-source software. While O
 
 > Everything in Floorplanning through Routing is done using [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) and its various sub-utilities, hence the name “OpenLane.”
 
-## PDK
+### PDK
 
 The OpenROAD application is PDK independent. However, it has been tested and validated with specific PDKs in the context of various flow controllers.
 
@@ -5217,14 +5212,14 @@ OpenLane supports SkyWater 130nm and GlobalFoundries 180nm.
 
 OpenROAD-flow-scripts supports several public and private PDKs including:
 
-#### Open-Source PDKs
+##### Open-Source PDKs
 
 - `GF180` - 180nm
 - `SKY130` - 130nm
 - `Nangate45` - 45nm
 - `ASAP7` - Predictive FinFET 7nm
 
-#### Proprietary PDKs
+##### Proprietary PDKs
 
 These PDKS are supported in **OpenROAD-flow-scripts only**. They are used to test and calibrate OpenROAD against commercial platforms and ensure good QoR. The PDKs and platform-specific files for these kits cannot be provided due to NDA restrictions. However, if you are able to access these platforms independently, you can create the necessary platform-specific files yourself.
 
@@ -5234,7 +5229,7 @@ These PDKS are supported in **OpenROAD-flow-scripts only**. They are used to tes
 - `Intel16` - 16nm
 - `TSMC65` - 65nm
 
-## Basic Run
+### Basic Run
 
 ``` bash
 openroad [-help] [-version] [-no_init] [-exit] [-gui]
@@ -5259,14 +5254,14 @@ OpenROAD then sources the command file `cmd_file` if it is specified on the comm
 
 A list of the available tools/modules included in the OpenROAD app and their descriptions are available [here](https://openroad.readthedocs.io/en/latest/contrib/Logger.html#openroad-tool-list).
 
-## Basic Command
+### Basic Command
 
-### area
+#### area
 
 ord::get_die_area
 ord::get_core_area
 
-### Save Image[#](https://openroad.readthedocs.io/en/latest/main/src/gui/README.html#save-image)
+#### Save Image[#](https://openroad.readthedocs.io/en/latest/main/src/gui/README.html#save-image)
 
 This command can be both be used when the GUI is active and not active to save a screenshot with various options.
 
@@ -5281,7 +5276,7 @@ save_image
 
 
 
-#### Options
+##### Options
 
 | Switch Name       | Description                                                  |
 | ----------------- | ------------------------------------------------------------ |
@@ -5291,7 +5286,7 @@ save_image
 | `-width`          | width of the output image in pixels, default will be computed from the resolution. Cannot be used with `-resolution`. |
 | `-display_option` | specific setting for a display option to show or hide specific elements. For example, to hide metal1 `-display_option {Layers/metal1 false}`, to show routing tracks `-display_option {Tracks/Pref true}`, or to show everthing `-display_option {* true}` |
 
-### Select Objects
+#### Select Objects
 
 This command selects object based on options. Returns: number of objects selected.
 
@@ -5306,7 +5301,7 @@ select
 
 
 
-#### Options
+##### Options
 
 | Switch Name  | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
@@ -5315,7 +5310,7 @@ select
 | `-filter`    | (optional) filter selection based on the objects’ properties. `attribute` represents the property’s name and `value` the property’s value. In case the property holds a collection (e. g. BTerms in a Net) or a table (e. g. Layers in a Generate Via Rule) `value` can be any element within those. A special case exists for checking whether a collection is empty or not by using the value `CONNECTED`. This can be useful to select a specific group of elements (e. g. BTerms=CONNECTED will select only Nets connected to Input/Output Pins). |
 | `-highlight` | (optional) add the selection to the specific highlighting group. Values can be 0 to 7. |
 
-### Add a single net to selection
+#### Add a single net to selection
 
 To add a single net to the selected items:
 
@@ -5326,13 +5321,13 @@ gui:: selection_add_net
 
 
 
-#### Options
+##### Options
 
 | Switch Name | Description             |
 | ----------- | ----------------------- |
 | `name`      | name of the net to add. |
 
-### Add multiple nets to selection
+#### Add multiple nets to selection
 
 To add several nets to the selected items using a regex:
 
@@ -5343,13 +5338,13 @@ name_regex
 
 
 
-#### Options
+##### Options
 
 | Switch Name  | Description                                 |
 | ------------ | ------------------------------------------- |
 | `name_regex` | regular expression of the net names to add. |
 
-### Add a single inst to selection
+#### Add a single inst to selection
 
 To add a single instance to the selected items:
 
@@ -5360,13 +5355,13 @@ gui:: selection_add_inst
 
 
 
-#### Options
+##### Options
 
 | Switch Name | Description                  |
 | ----------- | ---------------------------- |
 | `name`      | name of the instance to add. |
 
-### Add multiple insts to selection
+#### Add multiple insts to selection
 
 To add several instances to the selected items using a regex:
 
@@ -5377,13 +5372,13 @@ gui:: selection_add_insts
 
 
 
-#### Options
+##### Options
 
 | Switch Name  | Description                                      |
 | ------------ | ------------------------------------------------ |
 | `name_regex` | regular expression of the instance names to add. |
 
-### Select at point or area
+#### Select at point or area
 
 To add items at a specific point or in an area:
 
@@ -5412,7 +5407,7 @@ gui:: select_at
 
 
 
-#### Options
+##### Options
 
 | Switch Name      | Description                                                  |
 | ---------------- | ------------------------------------------------------------ |
@@ -5420,7 +5415,7 @@ gui:: select_at
 | `x0, y0, x1, y1` | first and second corner of the layout area in microns.       |
 | `append`         | if `true` (the default value) append the new selections to the current selection list, else replace the selection list with the new selections. |
 
-### Select next item from selection
+#### Select next item from selection
 
 To navigate through multiple selected items: Returns: current index of the selected item.
 
@@ -5428,7 +5423,7 @@ To navigate through multiple selected items: Returns: current index of the selec
 gui:: select_next
 ```
 
-### Select previous item from selection
+#### Select previous item from selection
 
 To navigate through multiple selected items: Returns: current index of the selected item.
 
@@ -5438,7 +5433,7 @@ gui:: select_previous
 
 
 
-### Clear Selection
+#### Clear Selection
 
 To clear the current set of selected items:
 
@@ -5448,7 +5443,7 @@ gui:: clear_selections
 
 
 
-### Set Heatmap
+#### Set Heatmap
 
 To control the settings in the heat maps:
 
@@ -5471,7 +5466,7 @@ gui:: set_heatmap
 
 
 
-#### Options
+##### Options
 
 | Switch Name | Description                                                  |
 | ----------- | ------------------------------------------------------------ |
@@ -5479,7 +5474,7 @@ gui:: set_heatmap
 | `option`    | is the name of the option to modify. If option is `rebuild` the map will be destroyed and rebuilt. |
 | `value`     | is the new value for the specified option. This is not used when rebuilding map. |
 
-### Dump Heatmap to file
+#### Dump Heatmap to file
 
 To save the raw data from the heat maps ins a comma separated value (CSV) format:
 
@@ -5491,7 +5486,7 @@ gui:: dump_heatmap
 
 
 
-#### Options
+##### Options
 
 | Switch Name | Description                            |
 | ----------- | -------------------------------------- |
@@ -5500,23 +5495,23 @@ gui:: dump_heatmap
 
 
 
-## init
+### init
 
 
 
-## floorplant
+### floorplant
 
 
 
-## placement
+### placement
 
 
 
-## Routing
+### Routing
 
-### globle routing
+#### globle routing
 
-#### Write Guides
+##### Write Guides
 
 This command writes global routing guides, which can be used as input for global routing.
 
@@ -5528,7 +5523,7 @@ write_guides file_name
 
 
 
-#### Options
+##### Options
 
 | Switch Name | Description      |
 | ----------- | ---------------- |
@@ -5540,9 +5535,9 @@ write_guides file_name
 
 
 
-## report and dump
+### report and dump
 
-### Write Macro Placement
+#### Write Macro Placement
 
 This command writes macro placement.
 
@@ -5554,7 +5549,7 @@ write_macro_placement file_name
 
 
 
-## Global Routing - FastRoute4.1
+### Global Routing - FastRoute4.1
 
 [OpenROAD/src/grt at master · The-OpenROAD-Project/OpenROAD](https://github.com/the-openroad-project/openroad/tree/master/src/grt)
 
@@ -5573,15 +5568,15 @@ write_macro_placement file_name
 
 
 
-## Using Macro in openlane
+### Using Macro in openlane
 
 
 
 
 
-## debug in openroad
+### debug in openroad
 
-#### make as follow
+##### make as follow
 ```bash
 cd OpenROAD
 mkdir build_debug
@@ -5592,7 +5587,7 @@ make
 #make  -j $thread_to_make
 ```
 
-### my lancun.json
+#### my lancun.json
 ```
 {
     "configurations": [
@@ -5633,7 +5628,7 @@ then you can input you command to debug openroad in terminal
 
 I just found out how to do that too, holp this help.
 
-## install
+### install
 
 [Installing OpenROAD — OpenROAD documentation](https://openroad.readthedocs.io/en/latest/user/Build.html#install-dependencies)
 
@@ -5692,7 +5687,7 @@ build in docker, not in locally
 
 
 
-# iEDA
+## iEDA
 
 [OSCC-Project/iEDA: An open-source EDA infrastructure and tools from netlist to GDS](https://github.com/OSCC-Project/iEDA)
 
@@ -5700,7 +5695,7 @@ build in docker, not in locally
 
 
 
-# Magical
+## Magical
 
 [magical-eda/MAGICAL: Machine Generated Analog IC Layout](https://github.com/magical-eda/MAGICAL?tab=readme-ov-file)
 
@@ -5711,7 +5706,7 @@ maintain seperate components, such as constraint generation, placement and routi
 
 
 
-# ALIGN
+## ALIGN
 
 [ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public)
 
@@ -5725,5 +5720,5 @@ maintain seperate components, such as constraint generation, placement and routi
 
 
 
-# KLayout
+## KLayout
 

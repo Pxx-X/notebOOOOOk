@@ -1,20 +1,22 @@
-# Windows
+# OS
 
-## 系统重装
+## Windows
 
-### 下载ISO
+### 系统重装
+
+#### 下载ISO
 
 [Windows 11 ISO Download – Official Direct Download Links - TechPP](https://techpp.com/2024/09/02/windows-11-iso-download/)
 
 [原版软件 (itellyou.cn)](https://next.itellyou.cn/Original/)
 
-### 制作PE
+#### 制作PE
 
 [纯净无广告，又强又趁手的维护工具，FirPE使用和DIY指南_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Ez421R7iY/?spm_id_from=333.337.search-card.all.click)
 
 FirPE:默认,全新制作
 
-### 跳过联网
+#### 跳过联网
 
 （Fn+）Shift+F10快捷键调出命令提示符窗口
 
@@ -22,7 +24,7 @@ FirPE:默认,全新制作
 
 > 如果一开始就连了网线就没有这个步骤
 
-### windows激活&office激活
+#### windows激活&office激活
 
 office安装直接去官网
 
@@ -30,7 +32,7 @@ power shell 下打开输入`irm win.zyqq.top | iex`,然后根据提示
 
 或者`irm https://get.activated.win | iex`
 
-### 相关初始化设置
+#### 相关初始化设置
 
 使用[dism++](https://github.com/Chuyu-Team/Dism-Multi-language/releases)
 
@@ -38,13 +40,13 @@ power shell 下打开输入`irm win.zyqq.top | iex`,然后根据提示
 
 
 
-### 系统备份及还原方法
+#### 系统备份及还原方法
 
 [win11一键备份还原系统方法_系统之家一键重装系统官网 (163987.com)](https://chongzhuang.163987.com/faq/17160.html)
 
 
 
-### 桌面右键改回win10
+#### 桌面右键改回win10
 
 [修改win11右键菜单、右键选项、还原win10右键菜单-CSDN博客](https://blog.csdn.net/dancehole/article/details/135852853)
 
@@ -62,7 +64,7 @@ win+r打开运行
 
 
 
-### 关闭自动更新
+#### 关闭自动更新
 
 在运行中输入“services.msc”回车确定打开服务栏。
 
@@ -80,15 +82,29 @@ win+r打开运行
 
 
 
-## win11配置windows ssh server
+### win11配置windows ssh server
 
 [Windows 上的 OpenSSH：安装、配置和服务器连接指南 - 系统极客](https://www.sysgeek.cn/openssh-windows/)
 
 
 
-# Linux
+### 体验优化插件
 
-## SHELL
+#### [dism++](https://github.com/Chuyu-Team/Dism-Multi-language/releases)
+
+> 貌似很久没有更新了
+
+#### [PowerToy](https://github.com/microsoft/PowerToys?tab=readme-ov-file#-installation)
+
+> 看了一下感觉作用不大
+
+#### Geek
+
+#### Everything
+
+## Linux
+
+### SHELL
 
 命令解释器
 
@@ -98,7 +114,7 @@ win+r打开运行
 
 ![image-20251212112945914](assets/image-20251212112945914.png)
 
-### 分类
+#### 分类
 
 参考：https://www.jianshu.com/p/a891af6f87e0
 
@@ -124,13 +140,13 @@ win+r打开运行
 
   bash由 GNU 组织开发，保持了对 sh shell 的兼容性，是各种 Linux 发行版默认配置的 shell。bash 兼容 sh 意味着，==针对 sh 编写的 shell 代码可以不加修改地在 bash 中运行==。尽管如此，bash 和 sh 还是有一些不同之处：一方面，bash 扩展了一些命令和参数；另一方面，bash 并不完全和 sh 兼容，它们有些行为并不一致，但在大多数企业运维的情况下区别不大，特殊场景可以使用 bash 代替 sh。
 
-### csh和bash的语法区别
+#### csh和bash的语法区别
 
 [csh和bash的语法对比_bash csh-CSDN博客](https://blog.csdn.net/u013082364/article/details/117397037)
 
 
 
-## centos和ubuntu的命令区别
+### centos和ubuntu的命令区别
 
 [一图看懂centos和ubuntu命令区别-腾讯云开发者社区-腾讯云](https://cloud.tencent.com/developer/article/1779433)
 
@@ -138,7 +154,7 @@ win+r打开运行
 
 
 
-## FileSystem
+### FileSystem
 
 - /：根目录，所有其他目录和文件的起始点。
 
@@ -185,14 +201,14 @@ win+r打开运行
 
 
 
-## 文件权限
+### 文件权限
 
 7 代表 rwx（读、写、执行）
 6 代表 rw-（读、写）
 5 代表 r-x（读、执行）
 4 代表 r--（读）
 
-## 无sudo权限安装软件到个人目录下
+### 无sudo权限安装软件到个人目录下
 
 两种方法：
 
@@ -201,9 +217,9 @@ win+r打开运行
 
 
 
-## .sh脚本
+### .sh脚本
 
-### shebang开头特殊行
+#### shebang开头特殊行
 
 这行告诉系统应该使用哪个解释器来执行脚本
 
@@ -215,11 +231,13 @@ win+r打开运行
 
 对于Python脚本`#!/usr/bin/env python3`.使用 `/usr/bin/env` 是为了确保系统能够在任何安装了Python的位置找到Python解释器，而不是硬编码路径。
 
+> 类似的，也可以使用 `#!your/python/path`处理python脚本
 
 
-## 环境变量
 
-### 设置环境变量
+### 环境变量
+
+#### 设置环境变量
 
 ```bash
 export var
@@ -242,23 +260,23 @@ export 变量名
 
 
 
-### 设置系统环境变量
+#### 设置系统环境变量
 
-#### 在/etc/profile文件中设置
+##### 在/etc/profile文件中设置
 
 用户登录时执行/etc/profile文件中设置系统的环境变量。但是，Linux不建议在/etc/profile文件中设置系统环境变量。
 
-#### 在/etc/profile.d目录下设置
+##### 在/etc/profile.d目录下设置
 
 可以对不同的项目用.sh/.csh文件设置环境变量
 
 这是Linux推荐的方法，不想要什么变量直接删除 /etc/profile.d下对应的 shell 脚本即可
 
-#### 在/etc/bashrc文件中设置环境变量
+##### 在/etc/bashrc文件中设置环境变量
 
 该文件配置的环境变量将会影响全部用户使用的bash shell。但是，Linux也不建议在/etc/bashrc文件中设置系统环境变量。
 
-### 设置用户环境变量
+#### 设置用户环境变量
 
 - .bash_profile
   - 当用户登录时执行，每个用户都可以使用该文件来配置专属于自己的环境变量。
@@ -267,7 +285,7 @@ export 变量名
   - 当用户登录时以及每次打开新的Shell时该文件都将被读取，不推荐在里面配置用户专用的环境变量，因为**每开一个Shell，该文件都会被读取一次**，效率肯定受影响。
   - 但是现在都这么做0.0
 
-### PATH
+#### PATH
 
 - ==可执行程序的搜索目录==，可执行程序包括Linux系统命令和用户的应用程序。如果可执行程序的目录不在PATH指定的目录中，执行时需要指定目录。
 - PATH环境变量存放的是目录列表，目录之间==用冒号`:`分隔==
@@ -277,21 +295,21 @@ export 变量名
 - 在用户的.bashrc文件中，会对PATH进行扩充
   - 比如：`export PATH=$PATH:$HOME/bin`
 
-### LD_LIBRARY_PATH
+#### LD_LIBRARY_PATH
 
 C/C++语言**动态链接库文件搜索的目录**
 
 与PATH的格式相同
 
-### 参考 
+#### 参考 
 
 [linux环境变量 - a龙 - 博客园 (cnblogs.com)](https://www.cnblogs.com/wusl123/p/18009598)
 
 
 
-## 安装方式的不同
+### 安装方式的不同
 
-### ubuntu
+#### ubuntu
 
 1. 使用`apt`：
 
@@ -329,7 +347,7 @@ C/C++语言**动态链接库文件搜索的目录**
 
 
 
-## bsub
+### bsub
 
 `bsub` 是一个在许多 Unix-like 系统中用于提交作业到批处理系统（如 LSF、PBS 或 Slurm）的命令。它允许用户在后台运行程序，而不会占用终端。
 
@@ -351,13 +369,13 @@ bsub -W 01:00 < job_script.sh #设置作业的运行时间限制
 
 
 
-## 虚拟内存
+### 虚拟内存
 
 之前说的程序的堆栈都是和虚拟内存交互的，具体的虚拟内存又依赖于操作系统
 
 ![image-20250910115329968](assets/image-20250910115329968.png)
 
-### /proc
+#### /proc
 
 /proc 是内核在运行时导出的==虚拟文件系统==（procfs），用于呈现内核和进程的实时状态信息。它==不是磁盘上的真实文件==，而是内存中由内核动态生成的视图，常用于系统监控与调试。
 
@@ -365,13 +383,13 @@ bsub -W 01:00 < job_script.sh #设置作业的运行时间限制
 
 
 
-### 参考
+#### 参考
 
 [深入理解虚拟内存和malloc原理 | 图解内存分配全过程 | C++ 编程指南](https://chengxumiaodaren.com/docs/c-basic/c-malloc/)
 
 
 
-## 后台程序返回前台
+### 后台程序返回前台
 
 ```
 jobs –l 查看后台运行的进程
@@ -382,7 +400,7 @@ fg %n 让后台运行的进程n到前台来
 
 
 
-## core文件
+### core文件
 
 在一个程序崩溃时，它一般会在指定目录下生成一个core文件。core文件仅仅是一个内存映象(同时加上调试信息)，主要是用来调试的。
 
@@ -405,13 +423,13 @@ fg %n 让后台运行的进程n到前台来
 >>
 >> 永久生效要写到`.cshrc`
 
-### ref
+#### ref
 
 - [linux下core文件详解 - 知乎](https://zhuanlan.zhihu.com/p/144648339)
 
-# WSL
+## WSL
 
-## cmd
+### cmd
 
 ```bash
 wsl -l -v
@@ -426,7 +444,7 @@ wsl --set-default <DistroName> # 重新指定默认发行版
 
 
 
-## 环境配置
+### 环境配置
 
 - windows 设置打开： **适用于 Linux 的 Windows 子系统** 和 **虚拟机平台** 
 
@@ -438,7 +456,7 @@ wsl --set-default <DistroName> # 重新指定默认发行版
 - Linux 内核更新包：https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
 
-- ```bash
+-   ```bash
   wsl --list --verbose # 查看已安装的发行版、WSL 版本信息和当前状态
   wsl --set-default <DistroName> # 重新指定默认发行版
   ```
@@ -449,21 +467,21 @@ wsl --set-default <DistroName> # 重新指定默认发行版
 
 [Win11 安装 Docker Desktop 和 WSL2 并进行安装位置迁移_windows 11 wsl 修改安装位置-CSDN 博客](https://blog.csdn.net/cn_ljr/article/details/132047516)
 
-## 常见问题
+### 常见问题
 
-### VmmemWSL 占用 CPU 或内存资源过高
+#### VmmemWSL 占用 CPU 或内存资源过高
 
 [Vmmem 进程(WSL)占用 CPU 或内存资源过高的解决办法-CSDN 博客](https://blog.csdn.net/Power_Blogger/article/details/128158694)
 
-### 代理问题
+#### 代理问题
 
 [WSL2 如何解决 clash 代理问题 - VariantConst](https://blog.variantconst.com/posts/wsl2-clash/)
 
 
 
-# 远程
+## 远程
 
-## 公网远程
+### 公网远程
 
 UU远程/向日葵/ToDesk
 
@@ -471,30 +489,30 @@ UU远程/向日葵/ToDesk
 
 
 
-## VNC
+### VNC
 
-### 常用软件
+#### 常用软件
 
 - TigerVNC(开源免费)
 - RealVNC (个人免费)
 
 
 
-### 设置
+#### 设置
 
 [windows环境安装VNC及远程连接linux(centos7) - 银河星光 - 博客园 (cnblogs.com)](https://www.cnblogs.com/dkblogs/p/15955305.html)
 
 
 
-### vnc和ssh的区别
+#### vnc和ssh的区别
 
 主要**区别：VNC**服务器**和SSH**服务器有一些显著的区别。 首先，VN**C**服务器提供图形界面的远程访问和控制，可以让用户直观地操作计算机。 而**SSH**服务器主要用于远程命令行访问和文件传输，对于不需要图形界面的操作更为适用。 其次，**VN**C服务器在传输图形界面时消耗较多的网络带宽，因为它需要传输图像数据。 相比之下，**SSH**服务器的传输开销较小，因为它主要传输文本和命令。 此外，**SSH**服务器采用了加密和身份验证机制，提供了更高的安全性，而**VN**C服务器的安全性相对较弱，需要通过额外的措施来增强其安全性。 使用场景：**VN**C服务器适合需要通过==图形界面==进行远程操作的场景，例如远程协助、远程教学和讲座、远程演示等
 
 
 
-## ssh+设置DISPLAY可视化
+### ssh+设置DISPLAY可视化
 
-### mobaxterm启用X11 server
+#### mobaxterm启用X11 server
 
 MobaXterm上
 
@@ -518,17 +536,33 @@ export DISPLAY=$windows_host:0
 #export LIBGL_ALWAYS_INDIRECT=1
 ```
 
+#### xlaunch(VcXsrv/xming)
 
+VcXsrv是实际的X11服务器，而Xlaunch是一个用于配置和启动VcXsrv的工具。
 
-### Pycharm设置DISPLAY
+![image-20260107171739438](assets/image-20260107171739438.png)
+
+![image-20260107171749135](assets/image-20260107171749135.png)
+
+![image-20260107171755637](assets/image-20260107171755637.png)
+
+![image-20260107171804905](assets/image-20260107171804905.png)
+
+然后登陆就行了（登陆以后再打开也可以）。不需要在 `.bashrc`中定义 `DISPLAY`
+
+详细参考：
+
+[Windows通过X11转发显示远程Linux上的图形界面-CSDN博客](https://blog.csdn.net/chentuo2000/article/details/144892375)
+
+#### Pycharm设置DISPLAY
 
 ![image-20241022194814099](assets/image-20241022194814099.png)
 
 ![image-20241022194903224](assets/image-20241022194903224.png)
 
-## 文件传输与同步
+### 文件传输与同步
 
-### 将本地文件复制到另一台服务器
+#### 将本地文件复制到另一台服务器
 
 scp/sftp/ftp
 
@@ -538,7 +572,41 @@ scp/sftp/ftp
 
 
 
-### 主机和服务器文件同步
+#### 主机和服务器文件同步
 
 [使用rsync命令同步两台服务器之间的文件_rsync -avpz-CSDN博客](https://blog.csdn.net/yxyc666/article/details/142331896)
 
+
+
+### 通过ssh让远程主机使用本地主机的网络代理
+
+#### 使用场景
+
+为了使内网中的服务器访问到github,我需要通过ssh的远程端口转发，让服务器使用本地的网络代理
+
+#### 使用命令
+
+##### 主机登陆
+
+ `ssh -R remote_proxy_port:localhost:local__proxy_port user_name@remote_ip -p remote_ssh_port`
+我的remote_proxy_port和local__proxy_port均设置为`7897`
+
+`-p`指定端口，一般 `remote_ssh_port`为默认值 22
+
+> 貌似`clash`是7890， `clash verge`是 7897
+
+##### 服务器配置
+
+比如放到`.bashrc`
+
+```bash
+export http_proxy="http://127.0.0.1:7897"
+export https_proxy="http://127.0.0.1:7897"
+export no_proxy="localhost,127.0.0.1,.local"
+```
+
+
+
+#### ref
+
+- [通过ssh让远程主机使用本地主机的网络代理 | 彩虹岛](https://mill413.github.io/posts/通过ssh让远程主机使用本地主机的网络代理/)

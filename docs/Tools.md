@@ -1,6 +1,8 @@
-# vscode
+# Tools
 
-## 通过ssh连接服务器
+## vscode
+
+### 通过ssh连接服务器
 
 1. 下载`vscode`
 
@@ -30,19 +32,19 @@
 
 
 
-## 离线安装remote_ssh server
+### 离线安装remote_ssh server
 
 https://blog.csdn.net/qq_43623902/article/details/136258880
 
 
 
-## 免密登录（win2linux）
+### 免密登录（win2linux）
 
 ![image-20250825142256493](assets/image-20250825142256493.png)
 
 
 
-## Copilot
+### Copilot
 
 - [use rules](https://code.visualstudio.com/docs/copilot/getting-started?originUrl=%2Fdocs%2Fcopilot%2Fsetup#_create-custom-instructions)
 
@@ -79,13 +81,12 @@ https://blog.csdn.net/qq_43623902/article/details/136258880
 
 - [Agent tools](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode?originUrl=%2Fdocs%2Fcopilot%2Fchat%2Fcopilot-edits#_agent-mode-tools)
 
-- 
 
 
 
-## buglist
+### buglist
 
-### [cpptools-srv](https://github.com/microsoft/vscode-cpptools/issues/12956#top) 疯狂生成core* 崩溃文件
+#### [cpptools-srv](https://github.com/microsoft/vscode-cpptools/issues/12956#top) 疯狂生成core* 崩溃文件
 
 安装新的cpp插件
 
@@ -93,9 +94,9 @@ https://blog.csdn.net/qq_43623902/article/details/136258880
 
 
 
-# Codex CLI
+## Codex CLI
 
-### tutorial
+#### tutorial
 
 在 `~/.codex/config.toml` 文件中进行基础配置：
 
@@ -123,7 +124,7 @@ sandbox_mode = "workspace-write"
 network_access = true                      # 允许网络访问
 ````
 
-#### 恢复对话
+##### 恢复对话
 
 Codex 的对话历史保存在本地目录 `~/.codex/sessions` 下：
 
@@ -143,7 +144,7 @@ codex --continue  # 无需选择，自动继续上次对话
 
 
 
-#### **[AGENTS.md](http://agents.md/)**
+##### **[AGENTS.md](http://agents.md/)**
 
 Codex 支持 **层级化的 [AGENTS.md](http://AGENTS.md) 配置**，在不同目录层级定义不同规则：
 
@@ -172,28 +173,27 @@ project-root/
 
 
 
-### install
+#### install
 
 - [远程 SSH 使用 Codex：转发本地 Clash 代理到服务器 | Welcome to Enoch's Blog!](https://cccignore.github.io/2025/06/21/远程 SSH 使用 Codex：转发本地 Clash 代理到服务器/index.html)
 - [(67 封私信 / 80 条消息) 解决Codex插件在Remote SSH中的登录403报错问题 - 知乎](https://zhuanlan.zhihu.com/p/1964064988537808306)
 
 
 
-# Gemini
+## Gemini
 
-## Ref
+### Ref
 
 - [在remote ssh上登录gemini cli的临时解决方案 - 搞七捻三 - LINUX DO](https://linux.do/t/topic/752327)
 
   > 通过复制本地的`.gemini`到远端也可以
 
-- 
 
 
 
-# conda
+## conda
 
-## 基本命令
+### 基本命令
 
 conda不止是能创建python相关的环境，还可以是cpp的环境等！
 
@@ -227,7 +227,7 @@ conda env list                      # 列出所有Conda虚拟环境
 
 
 
-## 环境配置
+### 环境配置
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
@@ -240,14 +240,14 @@ bash Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
 
 
 
-## 环境迁移
+### 环境迁移
 
 - [【conda】实现conda环境迁移的4种方式-CSDN博客](https://blog.csdn.net/baidu_35692628/article/details/136519579)
 -  [使用conda pack进行环境迁移（步骤很详细）-CSDN博客](https://blog.csdn.net/ds1302__/article/details/120027173)
 
 
 
-## 常见问题
+### 常见问题
 
 - 安装以后要重启才能生效！
 
@@ -259,31 +259,31 @@ bash Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
 
 
 
-# cuda 驱动，cuda-toolkit, cudnn
+## cuda 驱动，cuda-toolkit, cudnn
 
-## 环境配置
+### 环境配置
 
 [Windows 11/10 WSL2 Ubuntu 20.04 下配置 Cuda 及 Pytorch_win11 的 cuda 和 ubuntu 对比-CSDN 博客](https://blog.csdn.net/iwanvan/article/details/122119595)
 
-### 安装 WSL Cuda 驱动
+#### 安装 WSL Cuda 驱动
 
-### cudatoolkit
+#### cudatoolkit
 
 [CUDA Toolkit 12.6 Update 1 Downloads | NVIDIA Developer](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64)
 
 ![image-20240910154615669](C:\Users\Pxmmmm\AppData\Roaming\Typora\typora-user-images\image-20240910154615669.png)
 
-### cudnn
+#### cudnn
 
 [cuDNN Archive | NVIDIA Developer](https://developer.nvidia.com/rdp/cudnn-archive)
 
-## 重装
+### 重装
 
 [CUDA 的正确安装/升级/重装/使用方式 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/520536351)
 
 
 
-# pytorch, dgl, PyG
+## pytorch, dgl, PyG
 
 [PyTorch](https://pytorch.org/)
 
@@ -308,11 +308,11 @@ python -c "import torch; print(torch.version.cuda)"
 
 
 
-# docker
+## docker
 
-## 使用 dockerfile
+### 使用 dockerfile
 
-### dockerfile
+#### dockerfile
 
 Dockerfile 是一个文本文件，包含一系列指令来组装 [Docker 镜像](https://so.csdn.net/so/search?q=Docker 镜像&spm=1001.2101.3001.7020)。每个指令执行一个特定动作，例如安装包、复制文件或定义启动命令。
 
@@ -339,7 +339,7 @@ docker run -v <主机目录>:<镜像目录> -it <镜像名称>:<标签> bash #�
 docker run -it --gpus all my_cugr_image #启用所有GPU
 ```
 
-## container 内的C++项目debug
+### container 内的C++项目debug
 
 linux下vscode支持的调试器为gdb
 
@@ -361,14 +361,13 @@ linux下vscode支持的调试器为gdb
 
 
 
-#### 参考
+##### 参考
 
 - [VSCode调试docker中的程序(C++) 和离线安装VSCode插件的方法_vs code docker插件dev container下载-CSDN博客](https://blog.csdn.net/xianxjm/article/details/112250699)
 - launch.json官方教程https://go.microsoft.com/fwlink/?linkid=830387
 - launch.json教程[VScode 调试教程 tasks.json和launch.json的设置（超详细）-CSDN博客](https://blog.csdn.net/qq_59084325/article/details/125662393)
-- 
 
-## centos 容器无法联网问题
+### centos 容器无法联网问题
 
 >Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=container error was
 >14: curl#6 - "Could not resolve host: mirrorlist.centos.org; Unknown error"
@@ -377,7 +376,7 @@ linux下vscode支持的调试器为gdb
 #还是不行。。。
 ```
 
-## 修改vscode docker容器内终端没有颜色
+### 修改vscode docker容器内终端没有颜色
 
 ![image-20241130203639869](assets/image-20241130203639869.png)
 
@@ -385,19 +384,19 @@ linux下vscode支持的调试器为gdb
 
 
 
-## install
+### install
 
 [Ubuntu 安装 Docker_ubuntu 重新安装 docker-CSDN 博客](https://blog.csdn.net/breakaway_01/article/details/141285685)
 
 
 
-# Git
+## Git
 
-## Gerrit-Git
+### Gerrit-Git
 
 [公司教程](https://cloud.italent.cn/PageHome/Index?product=Learning&keyName=Nusion&pageCode=LearningPlanDetailPage&appCode=Learning&id=e88cc4a6-2dc1-4df0-b284-40890ad35dfb&_qsrcapp=Learning&_qrt=html&quark_s=92885ba2bcb8c01354166887f7d1ce2dd3555ef5a4e3a3754f9b5e18dcf584c1#/viewDynamic?t=t&quark_s=bd841178dfbc1b9adb121eeadd71bfd241cc74cd78cfa6e159950402224c9010)
 
-## base
+### base
 
 - 全局配置文件：~/.gitconfig
 
@@ -412,7 +411,7 @@ linux下vscode支持的调试器为gdb
 
 
 
-## branch
+### branch
 
 ```
 git config --global init.defaultBranch <name> # change init branch name
@@ -420,11 +419,11 @@ git branch -m <name> #change the just-created branch
 
 ```
 
-## .gitignore
+### .gitignore
 
 
 
-## check
+### check
 
 - `git status`
 
@@ -446,9 +445,8 @@ git branch -m <name> #change the just-created branch
   | **工作区** ↔ **暂存区**          | `git diff`                                | 查看已修改但**未使用 `git add`暂存**的变更。                 |
   | **暂存区** ↔ **上次提交** (HEAD) | `git diff --cached`或 `git diff --staged` | 查看已使用 `git add`暂存，但**未提交**的变更。               |
 
-- 
 
-## commit and push
+### commit and push
 
 In VS Code, go to the Source Control view (left sidebar, Git icon). You’ll see the untracked files.
   - Click + (stage) on files or use the terminal: `git add .`
@@ -458,17 +456,17 @@ In VS Code, go to the Source Control view (left sidebar, Git icon). You’ll see
 
 
 
-## clone & pull
+### clone & pull
 
 https://blog.csdn.net/Lakers2015/article/details/111871196
 
-### git clone
+#### git clone
 
 从远程服务器克隆一个一模一样的版本库到本地,复制的是整个版本库，叫做`git clone`。简单讲，`git clone`就是将一个库复制到本地，**是一个本地从无到有的过程**。包括里面的日志信息，git项目里的分支，你也可以直接切换、使用里面的分支等等。
 
 
 
-### git pull
+#### git pull
 
 从远程服务器获取到一个branch分支的更新到本地，并更新本地库，叫做git pull.（pull是指同步一个你在本地有版本的库内容更新的部分到你的本地库）。
 
@@ -482,15 +480,15 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 该命令相当于 `git fetch origin` + `git merge origin/next`
 
-> [!WARNING]
->
-> 每次从本地仓库`push`到远程仓库之前都要先进行`git pull`操作，保证push到远程仓库时没有版本冲突。
+!!! warning
+    
+    每次从本地仓库`push`到远程仓库之前都要先进行`git pull`操作，保证push到远程仓库时没有版本冲突。
 
 
 
 
 
-## Connect to Remote
+### Connect to Remote
 
   1. ==Create a repository== on GitHub/Gitee/etc. (==without initializing== it with files if you already have local content).
   2. Copy its HTTPS or SSH URL.
@@ -501,11 +499,11 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 
 
-## pull
+### pull
 
 
 
-## 分支管理
+### 分支管理
 
 - `git checkout -b <new_branch_name> origin/<new_branch_name>`指令创建一个 `new_branch_name` 分支并切换到 `new_branch_name` 分支上，并建立远端`new_branch_name`分支的追踪关系
 
@@ -513,17 +511,16 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
   ![image-20251127200036610](assets/image-20251127200036610.png)
 
-- 
 
 
 
-## 参考
+### 参考
 
 - [如何使用 Git 进行多人协作开发（全流程图解）_git多人协作开发流程-CSDN博客](https://blog.csdn.net/whc18858/article/details/133209975)
 
 
 
-## ssh 设置密钥
+### ssh 设置密钥
 
 >fatal: unable to access 'https://github.com/xx/xxx.git/': GnuTLS recv error (-110): The TLS connection was non-properly terminated.
 
@@ -535,7 +532,7 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 
 
-## auto upload project to github
+### auto upload project to github
 
 1. new repo in web
 
@@ -553,15 +550,15 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
   > remember to set git user
 
-### reference
+#### reference
 
 - [vscode上传代码到github_vscode上传github-CSDN博客](https://blog.csdn.net/2203_75380431/article/details/147686301)`
 
 
 
-# Latex
+## Latex
 
-## latex in vscode
+### latex in vscode
 
 [华工课程论文和毕设Latex模板](https://github.com/mengchaoheng/SCUT_thesis)
 
@@ -732,7 +729,7 @@ LaTeX 配置（放到 `settings.json`)
 
   
 
-## ppt
+### ppt
 
 > 感觉Beamer缺点就是插入图片太麻烦
 
@@ -747,9 +744,9 @@ LaTeX 配置（放到 `settings.json`)
 
 
 
-# taskflow
+## taskflow
 
-## introduction
+### introduction
 
 ![image-20250225170020363](assets/image-20250225170020363.png)
 
@@ -772,7 +769,7 @@ faster, 1.5 less memory, and 1.9 higher throughput than the industrial system, o
 
 
 
-## Project Motivation
+### Project Motivation
 
 [Cookbook » Project Motivation | Taskflow QuickStart](https://taskflow.github.io/taskflow/ProjectMotivation.html)
 
@@ -782,9 +779,9 @@ faster, 1.5 less memory, and 1.9 higher throughput than the industrial system, o
 
 
 
-## command
+### command
 
-### 编译
+#### 编译
 
 `g++ -std=c++20 simple.cpp -I taskflow/ -O2 -pthread -o simple`
 
@@ -794,7 +791,7 @@ faster, 1.5 less memory, and 1.9 higher throughput than the industrial system, o
 
 
 
-#### 编译两个文件
+##### 编译两个文件
 
 `nvcc -std=c++17 --extended-lambda -x cu -arch=sm_86 -I path/to/taskflow -dc cudaflow.cpp -o cudaflow.o` ## now we have the two compiled .o objects, main.o and cudaflow.o
 
@@ -807,9 +804,9 @@ faster, 1.5 less memory, and 1.9 higher throughput than the industrial system, o
 
 
 
-## module
+### module
 
-### Taskflow
+#### Taskflow
 
 `taskflow.emplace([](){})`	//add task
 
@@ -819,9 +816,9 @@ faster, 1.5 less memory, and 1.9 higher throughput than the industrial system, o
 
 
 
-#### trick
+##### trick
 
-##### std::move()
+###### std::move()
 
 ```c++
 tf::Taskflow taskflow1, taskflow3;
@@ -843,7 +840,7 @@ assert(taskflow3.num_tasks() == 1 && taskflow2.num_tasks() == 0);
 
 
 
-### Task
+#### Task
 
 `task.name("")`	//set name
 
@@ -869,7 +866,7 @@ my_task.for_each_dependent([d=0] (tf::Task dependent) mutable {
 });
 ```
 
-#### condition task
+##### condition task
 
 ```c++
 tf::Taskflow taskflow;
@@ -913,13 +910,13 @@ taskflow.dump(std::cout);
 
 
 
-#### AsyncTask
+##### AsyncTask
 
 ![image-20250226204953475](assets/image-20250226204953475.png)
 
 
 
-### Executor
+#### Executor
 
 `executor.this_worker_id()`
 
@@ -1004,7 +1001,7 @@ Taskflow库中的异步任务机制允许在任务执行过程中动态生成并
 
 
 
-### Future
+#### Future
 
 `future.get()`
 
@@ -1014,7 +1011,7 @@ Taskflow库中的异步任务机制允许在任务执行过程中动态生成并
 
 
 
-### cudaFlow
+#### cudaFlow
 
 - `cudaflow.kernel(grid_dim, block_dim, Ns, kernel_function, N, other_args)`//<<<(N+255)/256, 256, 0>>>(N, 2.0f, dx, dy)
 - `cudaflow.run(stream)`
@@ -1025,7 +1022,7 @@ Taskflow库中的异步任务机制允许在任务执行过程中动态生成并
 
 
 
-#### [Integrate a cudaFlow into Taskflow](https://taskflow.github.io/taskflow/GPUTaskingcudaFlow.html#IntegrateCudaFlowIntoTaskflow)
+##### [Integrate a cudaFlow into Taskflow](https://taskflow.github.io/taskflow/GPUTaskingcudaFlow.html#IntegrateCudaFlowIntoTaskflow)
 
 ```c++
 tf::Executor executor;
@@ -1051,7 +1048,7 @@ taskflow.emplace([](){
 
 
 
-### cudaStream
+#### cudaStream
 
 `cudastream.synchronize()`
 
@@ -1059,11 +1056,11 @@ taskflow.emplace([](){
 
 
 
-#### [Run a cudaFlow on Specific GPU](https://taskflow.github.io/taskflow/GPUTaskingcudaFlow.html#run_a_cudaflow_on_a_specific_gpu)
+##### [Run a cudaFlow on Specific GPU](https://taskflow.github.io/taskflow/GPUTaskingcudaFlow.html#run_a_cudaflow_on_a_specific_gpu)
 
 
 
-### Subflow
+#### Subflow
 
 没看懂有什么用
 
@@ -1071,7 +1068,7 @@ taskflow.emplace([](){
 
 
 
-### Runtime
+#### Runtime
 
 `runtime.schedule(task)`	//forcefully run task
 
@@ -1102,7 +1099,7 @@ When the condition task `A` completes and returns `0`, the scheduler moves on to
 
 
 
-### Semaphore
+#### Semaphore
 
  limit the concurrency or the maximum number of workers in your Taskflow applications.https://taskflow.github.io/taskflow/LimitTheMaximumConcurrency.html#DefineASemaphore
 
@@ -1110,7 +1107,7 @@ When the condition task `A` completes and returns `0`, the scheduler moves on to
 
 
 
-## install
+### install
 
 Taskflow is *header-only* and there is no wrangle with installation. To compile the program, clone the Taskflow project and tell the compiler to include the headers under `taskflow/`.
 
@@ -1154,29 +1151,29 @@ TaskD
 
 
 
-## 参考
+### 参考
 
 1. [Taskflow QuickStart](https://taskflow.github.io/taskflow/pages.html)
 2. [Taskflow: A General-purpose Task-parallel Programming System](https://taskflow.github.io/)
 3. [Modern C++ Parallel Task Programming | Taskflow QuickStart](https://taskflow.github.io/taskflow/index.html)
 
-# 代理
+## 代理
 
 [windows11 搭建 WSL2 运行环境（2024）-CSDN 博客](https://blog.csdn.net/qq_39316962/article/details/139927197)
 
 
 
-# Hugo/mkdoc
+## Hugo/mkdoc
 
 > hugo 有点麻烦，mkdoc简单点
 
-### 参考
+#### 参考
 
 [如何用 GitHub Pages + Hugo 搭建个人博客 · KrislinBlog](https://krislinzhao.github.io/docs/create-a-wesite-using-github-pages-and-hugo/#9-reference)
 
 
 
-# Jira
+## Jira
 
 软件产品管理
 

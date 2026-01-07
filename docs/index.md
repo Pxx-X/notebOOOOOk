@@ -30,10 +30,10 @@
 
 ### Other
 
-- [Good Thing](Literature.md)
+- [Good Things](Literature.md)
 
 ## TODO
-- 随手记，格式将就一下
+- 随手记，格式将就一下，很多typora的样式无法应用
 - 单个页面太多，有时间分一下
 - Page's bug:
 ```
