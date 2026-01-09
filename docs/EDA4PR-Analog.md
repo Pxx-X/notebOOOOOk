@@ -186,6 +186,11 @@ layout dependent effect can affect device `threshold voltage V_th` , `mobility` 
 
 ![image-20251118173042930](assets/image-20251118173042930.png)
 
+!!! note
+    ![image-20260108194405187](assets/image-20260108194405187.png)
+    
+    其实竖直方向也要考虑
+
 <img src="assets/image-20251118173032364.png" alt="image-20251118173032364" style="zoom: 90%;" />
 
 ![image-20251204093624077](assets/image-20251204093624077.png)

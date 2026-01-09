@@ -1417,7 +1417,7 @@ int main() {
 
 [【83】C++的小字符串优化_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=84)
 
-### 模版Template
+### Template
 
 #### 背景
 
@@ -3643,14 +3643,310 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 #### Dear ImGui
 
+
+
+#### OpenMP
+
+多线程库
+
+常用在不想自己管理线程，只是在某一些循环中使用的时候
+
+##### 教程
+
+- 查看当前线程：`omp_get_thread_num()`
+
+- `omp_set_dynamic(0)`
+      关闭==动态线程调整==。也就是告诉运行时：不要根据系统负载自动减少/增加线程数，严格按你给的数量来。
+      等价于设置环境变量 OMP_DYNAMIC=FALSE。注意：实际线程数仍可能受系统/运行时限制（比如嵌套并行、资源不足）。
+
+- 控制线程的个数(两种方法)
+
+  -   ```c++
+    #pragma omp parallel num_threads(5)
+    	{
+    		cout << "Hello, world!" << endl;
+    	}
+    ```
+
+  -   ```c++
+    	omp_set_num_threads(5);
+    #pragma omp parallel
+    	{
+    		cout << "Hello, world!" << endl;
+    	}
+    ```
+
+- for循环并行
+
+  - 在并行域里面用以下命令，在这条语句之后的一个for循环语句中每一个要循环的任务将被分配给不同的线程去执行。
+
+  - 两种方法
+
+    - \#pragma omp for
+
+      ```c++
+      int main()
+      {
+      	omp_set_num_threads(2);
+      #pragma omp parallel
+      	{
+      #pragma omp for
+      		for(int i=0;i<4;i++)
+      		 cout << omp_get_thread_num() << endl;
+      	}
+      }
+      ```
+
+      !!! note
+          注意`for`里面的`i`一定要是内部定义的：https://blog.csdn.net/qq_34488063/article/details/53177078
+
+    - 也可以直接把for写在parallel后面
+
+      ```c++
+      #pragma omp parallel for
+      ```
+
+- for循环语句的分配模式
+
+  - `schedule(type, size)`, type 有四种：1.static, 2.dynamic, 3.guided, 4.runtime
+
+  - static
+
+    - 静态调度，不用size参数时分配给每个程序的都是n/t次连续迭代，n为迭代次数，t为并行的线程数目。
+
+    -   ```c++
+      {
+      	omp_set_num_threads(2);
+      #pragma omp parallel for schedule(static)
+      		for(int i=0;i<8;i++)
+      		 cout << omp_get_thread_num();
+      }
+      ```
+
+    - !!! note
+    -     00001111
+
+  - dynamic
+
+    - 先到先得的方式进行任务分配
+
+    - 不用size参数的时候，先把任务干完的线程先取下一个任务
+
+    - 使用size参数的时候，分配的任务以size为单位，一次性分配size个。
+
+    - 在任务难度不均衡的时候适合用dynamic，否则会引起过多的任务动态申请的开销
+
+    -   ```c++
+          omp_set_num_threads(2);
+      #pragma omp parallel for schedule(dynamic)
+          for (int i = 0; i < 8; i++) cout << omp_get_thread_num();
+      ```
+
+    - !!! note
+    -     00000001
+
+  - guided
+
+    - 刚开始每个线程会分配到比较大的迭代块，后来分配到的迭代块逐渐递减，没有指定size就会降到1，否则降到size。
+
+  - runtime
+
+    - 基本不会用到，需要了解的可以自行了解。
+
+- sections制导指令
+
+  - 用sections把不同的区域交给不同的线程去执行
+
+  -   ```c++
+    int main()
+    {
+    	omp_set_num_threads(3);
+    #pragma omp parallel sections
+    	{
+    #pragma omp section
+    		{
+    			cout <<omp_get_thread_num();
+    		}
+    #pragma omp section
+    		{
+    			cout << omp_get_thread_num();
+    		}
+    #pragma omp section
+    		{
+    			cout << omp_get_thread_num();
+    		}
+    	}
+    }
+    ```
+
+- single制导指令
+
+  - single制导指令所包含的代码段只有一个线程执行，别的线程跳过该代码，如果没有nowait子句，那么其他线程将会在single制导指令结束的隐式同步点等待。有nowait子句其他线程将跳过等待往下执行。
+
+  -   ```c++
+    int main()
+    {
+    	omp_set_num_threads(4);
+    #pragma omp parallel
+    	{
+    #pragma omp single
+    		{
+    			cout << "single thread=" << omp_get_thread_num()<<endl;
+    		}
+    		cout << omp_get_thread_num() << endl;
+    	}
+    		
+    }
+    ```
+
+
+
+##### example
+
+编译器自带的
+
+```cmake
+cmake_minimum_required(VERSION 3.16)
+project(OpenMPDemo LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+find_package(OpenMP REQUIRED)
+
+add_executable(omp_demo main.cpp)
+target_link_libraries(omp_demo PRIVATE OpenMP::OpenMP_CXX)
+
+```
+
+```c++
+#include <bits/stdc++.h>
+#include <omp.h>
+
+namespace {
+constexpr int kIters = 100000;
+constexpr std::size_t kVecSize = 64;
+
+struct BenchmarkResult {
+  double seconds = 0.0;
+  double checksum = 0.0;
+};
+
+/**
+ * @brief Run a simple OpenMP benchmark on a vector.
+ *
+ * Each element is multiplied by a random number kIters times. A per-thread
+ * RNG is used to avoid contention and data races.
+ *
+ * @param base Input vector that provides initial values.
+ * @param thread_count Number of OpenMP threads to use.
+ * @return BenchmarkResult Timing and checksum of the resulting vector.
+ */
+BenchmarkResult run_benchmark(const std::vector<double>& base, int thread_count) {
+  std::vector<double> v = base;
+
+  omp_set_dynamic(0);
+  omp_set_num_threads(thread_count);
+
+  const auto start = std::chrono::steady_clock::now();
+
+#pragma omp parallel
+  {
+    std::mt19937_64 rng(0x9e3779b97f4a7c15ULL + static_cast<unsigned>(omp_get_thread_num()));
+    std::uniform_real_distribution<double> dist(0.999, 1.001);
+
+#pragma omp for schedule(static)
+    for (int i = 0; i < static_cast<int>(v.size()); ++i) {
+      double x = v[i];
+      for (int k = 0; k < kIters; ++k) {
+        x *= dist(rng);
+      }
+      v[i] = x;
+    }
+  }
+
+  const auto end = std::chrono::steady_clock::now();
+
+  BenchmarkResult result;
+  result.seconds = std::chrono::duration<double>(end - start).count();
+  result.checksum = std::accumulate(v.begin(), v.end(), 0.0);
+  return result;
+}
+}  // namespace
+
+int main() {
+  std::vector<double> base(kVecSize, 1.0);
+
+  std::cout << std::fixed << std::setprecision(6);
+  std::cout << "OpenMP vector benchmark (size=" << kVecSize
+            << ", iters=" << kIters << ")\n";
+
+  for (int threads = 2; threads <= 64; threads *= 2) {
+    const auto result = run_benchmark(base, threads);
+    std::cout << "threads=" << std::setw(2) << threads
+              << "  time=" << result.seconds << "s"
+              << "  checksum=" << result.checksum << '\n';
+  }
+
+  return 0;
+}
+
+```
+
+!!! note
+    106服务器
+    
+    (base) pengxuan@user-Super-Server:~/Project/xapr/.demo$ lscpu | egrep 'Socket|Core|Thread|CPU'
+    CPU op-mode(s):                       32-bit, 64-bit
+    CPU(s):                               256
+    On-line CPU(s) list:                  0-255
+    Thread(s) per core:                   2
+    Core(s) per socket:                   64
+    Socket(s):                            2
+    CPU family:                           25
+    Model name:                           AMD EPYC 7713 64-Core Processor
+    CPU MHz:                              1500.000
+    CPU max MHz:                          3720.7029
+    CPU min MHz:                          1500.0000
+    NUMA node0 CPU(s):                    0-63,128-191
+    NUMA node1 CPU(s):                    64-127,192-255
+    
+    结果：
+    
+    (cenv) pengxuan@user-Super-Server:~/Project/xapr/.demo/OpenMP$ ./build/omp_demo 
+    OpenMP vector benchmark (size=64, iters=100000)
+    threads= 2  time=0.041390s  checksum=64.393026
+    threads= 4  time=0.025458s  checksum=64.022197
+    threads= 8  time=0.014953s  checksum=62.895657
+    threads=16  time=0.006674s  checksum=66.079603
+    threads=32  time=0.006011s  checksum=65.901653
+    threads=64  time=0.004688s  checksum=67.003091
+
+##### 参考
+
+[OpenMP教程——从0开始一小时写出并行程序！ - 知乎](https://zhuanlan.zhihu.com/p/397670985)
+
+#### protobuf
+
+序列化
+
+Protocol Buffers - Google's data interchange format
+
 #### 参考
 
 - [C++知识库 | 收录各种各样的 C++ 优质内容](https://cpp-reference.com/)
 - [程序喵/cpp-learning](https://gitee.com/chengxumiaodaren/cpp-learning)
 
+
+
 ### 多线程
 
-#### 进程与线程的区别
+
+
+#### Tips
+
+##### 进程与线程的区别
 
 ![image-20241023224153349](assets/image-20241023224153349.png)
 
@@ -3667,7 +3963,7 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-#### 并发和并行
+##### 并发和并行
 
 **并发**： 指的是两个(或以上)的线程同时请求执行，但是同一瞬间CPU只能执行一个，于是CPU就安排他们**交替**执行，我们看起来好像是同时执行的，其实不是。并发可认为是一种逻辑结构的设计模式。你可以用并发的设计方式去设计模型，然后运行在一个单核系统上，通过系统动态地逻辑切换制造出并行的假象。
 
@@ -3678,7 +3974,7 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-#### Deadlock问题与解决方法
+##### Deadlock问题与解决方法
 
 **死锁（Deadlock）** 是最危险的并发问题之一，指两个或多个线程因互相等待对方释放资源而永久阻塞。以下是关于死锁的完整解析、典型场景及解决方案：
 
@@ -3701,7 +3997,7 @@ target_compile_features(spdlog_demo PRIVATE cxx_std_20)
 
 
 
-#### 多线程与核心数查看
+##### 多线程与核心数查看
 
 ```bash
 # ubuntu下查看电脑CPU核数，CPU个数，最大线程数(逻辑CPU的数量)
@@ -3713,9 +4009,81 @@ cat /proc/cpuinfo| grep "cpu cores"| uniq      # 6
 
 ## 查看最大线程数(逻辑CPU的数量)
 more /proc/cpuinfo |grep "physical id"|grep "0"|wc -l    # 12
+
+## 总逻辑 CPU 数
+lscpu | egrep 'Socket|Core|Thread|CPU'
 ```
 
+!!! note
+    公司：2， 4， 4
+    
+      - physical id 唯一值个数 = 2 → 有 2 个物理 CPU（2 个 socket）
+      - cpu cores = 4 → 每个物理 CPU 有 4 个物理核心
+      - physical id = 0 的条目数 = 4 → 该 socket 上有 4 个逻辑 CPU（说明没开超线程）
+    
+    由此可知：
+    
+      - 物理核心总数 = 2 * 4 = 8
+      - 逻辑 CPU 总数 = 2 * 4 = 8
+      - 理论上 CPU 密集型程序的“最大有效线程数”≈ 逻辑 CPU 数 = 8
+        （实际最佳线程数还取决于任务类型、内存带宽、I/O 等）
 
+!!! note
+    106服务器
+    
+    >CPU op-mode(s):                       32-bit, 64-bit
+    >CPU(s):                               256
+    >On-line CPU(s) list:                  0-255
+    >Thread(s) per core:                   2
+    >Core(s) per socket:                   64
+    >Socket(s):                            2
+    >CPU family:                           25
+    >Model name:                           AMD EPYC 7713 64-Core Processor
+    >CPU MHz:                              1500.000
+    >CPU max MHz:                          3720.7029
+    >CPU min MHz:                          1500.0000
+    >NUMA node0 CPU(s):                    0-63,128-191
+    >NUMA node1 CPU(s):                    64-127,192-255
+    
+      - 2 个物理 CPU（Socket）：Socket(s): 2
+      - 每个 CPU 64 个物理核心：Core(s) per socket: 64
+      - 每个核心 2 个线程（SMT/超线程）：Thread(s) per core: 2
+      - 总逻辑 CPU 数 = 2 * 64 * 2 = 256：CPU(s): 256 / On-line CPU(s) list: 0-255
+    
+      所以这台机器是 AMD EPYC 7713 双路，物理核心总数 128，逻辑线程总数 256。
+    
+    - 理论最大并行线程数（逻辑 CPU 数）= 256
+      - CPU 密集型任务的最佳线程数通常不超过 256，有时甚至接近 128（只用物理核）反而更稳。
+      - IO 密集或大量阻塞任务可以适当超过 256，但收益不一定明显。
+
+##### 使用`OpenMP库`和使用标准库实现多线程有什么区别和优缺点
+
+  - 编程模型
+      - OpenMP：编译器指令（#pragma omp），偏数据并行/循环并行/任务并行。
+      - 标准库：显式线程/任务（std::thread/std::jthread/std::async），偏通用并发。
+  - 易用性
+      - OpenMP：对循环并行最省事，改动小。
+      - 标准库：需要自己管理线程生命周期、任务切分与同步，代码量更大。
+  - 控制粒度
+      - OpenMP：调度、亲和、归约等由运行时控制，细节可配但受限于标准。
+      - 标准库：==完全自控==，可实现自定义线程池/工作窃取/优先级等。
+  - 性能与开销
+      - OpenMP：对规则循环很高效；但线程模型由运行时决定，可能有额外调度开销。
+      - 标准库：性能依赖你的实现（线程池/任务划分），可优化也可能写得很慢。
+  - 依赖与可移植性
+      - OpenMP：需要编译器支持和链接运行时（如 -fopenmp）。
+      - 标准库：只要有 C++20 标准库即可，无额外运行时依赖。
+  - 可维护性与可读性
+      - OpenMP：指令式，逻辑清晰但容易隐藏共享数据的竞争问题。
+      - 标准库：并发逻辑显式，容易审计，但代码更繁琐。
+  - 调试/错误处理
+      - OpenMP：调试工具支持不一；异常跨线程处理有限制。
+      - 标准库：C++ 异常语义明确（需自己捕获），调试更接近常规 C++。
+
+  什么时候选哪个？
+
+  - 规则循环/矩阵/数值计算：OpenMP 快速省力。
+  - 复杂任务调度/异步 I/O/需要细粒度控制：标准库更灵活。
 
 
 
@@ -4536,7 +4904,7 @@ https://www.cnblogs.com/newtonltr/p/18867195
 
 ###### find_package
 
-如果第三方库安装在==系统标准路径==（如 `/usr/local`）或者提供了 CMake 支持，这是最标准的方法。
+如果第三方库安装在==系统标准路径==（如 `/usr/local`）或者提供了 CMake 支持，这是==最标准==的方法。
 
 ```cmake
 find_package(fmt REQUIRED)# 1. 查找库
@@ -4544,10 +4912,33 @@ find_package(fmt REQUIRED)# 1. 查找库
 ```
 
  * 结果：你可以直接 #include <fmt/core.h>。
-
  * 优点：不需要手动管理路径，路径变化也不怕。
 
-   
+###### 案例
+
+```
+find_package(OpenMP REQUIRED)
+target_link_libraries(omp_demo PRIVATE OpenMP::OpenMP_CXX)
+```
+
+!!! note
+    find_package(OpenMP REQUIRED)是在系统安装路近上找动态库吗？
+    
+    >  - find_package(OpenMP REQUIRED) 调用 CMake 的 FindOpenMP 模块。
+    >  - 它会尝试：
+    >      - 给编译器加上正确的 编译参数（如 GCC/Clang 的 -fopenmp）。
+    >  - 结果会提供 OpenMP::OpenMP_CXX 这个目标，用于正确设置编译/链接参数。
+    >
+    >  查找路径主要依赖：
+    >
+    >  - 编译器默认搜索路径
+    >  - 系统标准库目录
+    >  - 你显式设置的 OpenMP_ROOT / CMAKE_PREFIX_PATH
+    >
+    >  在 Ubuntu 上常见依赖：
+    >
+    >  - GCC：通常自带 libgomp
+    >  - Clang：可能需要安装 libomp-dev
 
 ###### target_include_directories
 
@@ -4717,6 +5108,41 @@ add_executable(main main.cpp)
 - CMAKE_BINARY_DIR	项目实际构建路径，假设在build目录进行的构建，那么得到的就是这个目录的路径
 
 ##### CMakePresets
+
+
+
+##### Debug和Release与运行时间
+
+###### Debug vs Release 的核心区别
+
+  - 优化等级：Debug 通常是 ==-O0（几乎不优化）==，Release 通常是 ==-O2/-O3（大量优化、向量化、内联）==。
+  - 调试信息：Debug 带完整符号==（-g）==，Release 可能去符号或只保留少量。
+  - ==断言==与检查：Debug 常开启 assert/运行时检查；Release 常定义 NDEBUG 关闭断言。
+  - 容器/迭代器检查：某些库在 Debug 会启用额外边界或迭代器安全检查。
+  - 可观测性：Debug 更易调试但慢；Release 更快但不易单步和观察局部变量。
+
+###### 什么时候运行时间差别很大
+
+  - 计算密集型：大**量循环、矩阵运算、数值计算、图算法**等。Debug 可能慢 5–100x。
+  - 可内联/可向量化代码：Release 会内联、展开、**SIMD**，Debug 通常不会。
+  - 内存访问优化空间大：Release 会做寄存器分配、消除冗余、循环优化。
+  - Debug 额外检查多：边界检查、日志、断言、迭代器安全会显著拖慢。
+
+###### 什么时候差别不大
+
+  - I/O 或系统调用占主导：==读写文件、网络、数据库、等待外部资源==。
+  - 线程阻塞/睡眠：CPU 不忙，优化影响小。
+
+###### 额外提醒
+
+  - Release 会改变 ==UB==（未定义行为）下的表现，可能“看起来正常”或更容易出错。
+  - ==Debug 结果 ≠ Release 结果时，优先怀疑 UB/数据竞争。==
+
+
+
+##### 定义宏
+
+
 
 
 

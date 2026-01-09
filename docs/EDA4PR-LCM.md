@@ -1,24 +1,25 @@
 # EDA4PR-LCM
 
+## Tools
 
-## Agent
+### Agent
 
-### Codex
+#### Codex
 
 - rust
 - [OpenSource](https://github.com/openai/codex)
 
-### Claude code
+#### Claude code
 
 - [OpenSource](https://github.com/anthropics/claude-code)
 - python
 
-### Gemini CLI
+#### Gemini CLI
 
 - typscript
 
 
-### OpenCode
+#### OpenCode
 
 - [OpenSource](https://github.com/anomalyco/opencode?tab=readme-ov-file)
 - typescript
@@ -28,13 +29,21 @@
 - Out of the box ==LSP support==
 - A focus on ==TUI==
 
-### Aider
+
+
+##### Oh my open code
+
+- plug in
+
+
+
+#### Aider
 
 - [OpenSource](https://github.com/Aider-AI/aider)
 - Aider works best with Claude 3.7 Sonnet, DeepSeek R1 & Chat V3, OpenAI o1, o3-mini & GPT-4o, but can connect to almost any LLM, including ==local models==.
 - Use aider from within your favorite IDE or editor. 
 
-### DeepCode
+#### DeepCode
 
 - HKU
 
@@ -44,25 +53,33 @@
 
 
 
-### Kiro
+#### Kiro
 
 - [closed]()
 
-### GitHub Copilot
+#### GitHub Copilot
 
 
 
-## RAG
+### RAG
 
-### PageIndex
+#### PageIndex
 
 https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
 
 
-## Circuit-Gen
+### Plug-in
 
-### [AnalogCoder- -AAAI-2025--CUHK]()
+#### claude-mem
+
+https://github.com/thedotmack/claude-mem
+
+## Paper
+
+### Circuit-Gen
+
+#### [AnalogCoder- -AAAI-2025--CUHK]()
 
 - [OpenSource!](https://github.com/laiyao1/AnalogCoder)
 - the ==first== training-free LLM agent for designing analog circuits through Python code generation  
@@ -70,7 +87,7 @@ https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
 
 
-#### background
+##### background
 
 - Existing ==LLM-related research== primarily focuses on two tasks
 
@@ -91,7 +108,7 @@ https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
 
 
-#### contribution
+##### contribution
 
 - the first LLM-based agent for analog integrated circuit design
   - establishes a new paradigm by generating Python code to design analog circuits.   
@@ -101,7 +118,7 @@ https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
 
 
-#### flow
+##### flow
 
 ![image-20250512212824564](assets/image-20250512212824564.png)
 
@@ -117,9 +134,9 @@ PySpice: python转SPICE?
 
 ![image-20250512213930665](assets/image-20250512213930665.png)
 
-#### Model
+##### Model
 
-##### Prompt Engineering
+###### Prompt Engineering
 
 Our approach to prompt engineering encompasses three main aspects: 
 
@@ -131,13 +148,13 @@ circuit tool library:
 
 ![image-20250512215817509](assets/image-20250512215817509.png)
 
-#### data
+##### data
 
 ![image-20250512215914599](assets/image-20250512215914599.png)
 
 
 
-#### experiment
+##### experiment
 
 ![image-20250512223031711](assets/image-20250512223031711.png)
 
@@ -147,7 +164,7 @@ circuit tool library:
 
 ![image-20250512223148028](assets/image-20250512223148028.png)
 
-### [ANALOGGENIE--ICLR-2025--NEU]()
+#### [ANALOGGENIE--ICLR-2025--NEU]()
 
 - [OpenSource!](https://github.com/xz-group/AnalogGenie?tab=readme-ov-file)
 
@@ -155,16 +172,16 @@ circuit tool library:
 
 
 
-#### background
+##### background
 
 
 
 
 
 
-## Layout
+### Layout
 
-### [LayoutCopilot-Multi Agent-TCAD-2025--PEK]()  
+#### [LayoutCopilot-Multi Agent-TCAD-2025--PEK]()  
 
 - LayoutCopilot框架中的每个智能体都配备了针对其指定任务量身定制的Prompt。能够接收设计人员用自然语言表达的高层设计意图和具体需求，并将其转化为==精确可执行的指令==。这些指令旨在直接操控版图设计工具，确保设计意图被准确转化为版图调整。
 - integrates various ==Prompt Engineering== techniques  
@@ -174,7 +191,7 @@ circuit tool library:
 
 
 
-#### background
+##### background
 
 <img src="assets/image-20251207212553089.png" alt="image-20251207212553089" style="zoom: 70%;" />
 
@@ -196,14 +213,14 @@ circuit tool library:
 
   ![image-20251207214202439](assets/image-20251207214202439.png)
 
-#### contribution
+##### contribution
 
 - ==the first== LLM-powered interactive analog layout design framework
 - a multiagent collaborative framework  
 
 
 
-#### flow
+##### flow
 
 ![image-20251207214940327](assets/image-20251207214940327.png)
 
@@ -221,13 +238,13 @@ Solution Adapter Agent
 
 
 
-##### model
+###### model
 
 ![image-20251207223209019](assets/image-20251207223209019.png)
 
 ![image-20251207223245717](assets/image-20251207223245717.png)
 
-##### 支持的指令
+###### 支持的指令
 
 ![image-20251207223511757](assets/image-20251207223511757.png)
 
@@ -236,7 +253,7 @@ Solution Adapter Agent
 
 
 
-#### experiment
+##### experiment
 
 实验中采用成熟的交互式模拟电路布局设计工具[Interactive Analog Layout Editing with Instant Placement
 Legalization]()进行演示
@@ -249,7 +266,7 @@ Legalization]()进行演示
 
 
 
-##### 实验二
+###### 实验二
 
 ![image-20251207225450834](assets/image-20251207225450834.png)
 
@@ -262,15 +279,15 @@ Legalization]()进行演示
 !!! note
     怎么把Magical的版图搬到Virtuoso做后仿的？
 
-## Dataset
+### Dataset
 
-### [DeepCircuitX-RTL code understanding, Generation, PPA analysis-arXiv-2025- -CUHK-]()
+#### [DeepCircuitX-RTL code understanding, Generation, PPA analysis-arXiv-2025- -CUHK-]()
 
 - [Open Source](https://zeju.gitbook.io/lcm-team)
 - a multimodal and comprehensive repository-level circuit dataset for deep learning in EDA  
 - more than 4,000 circuit design   
 
-#### background-
+##### background-
 
 - existing datasets that are limited to either filelevel RTL code or physical layout data  
 - 已经有相关工作：employs large language models (LLMs) to understand and describe RTL designs in natural language to assist engineers.  
@@ -279,7 +296,7 @@ Legalization]()进行演示
 
 
 
-#### contribution
+##### contribution
 
 - DeepCircuitX provides a holistic, multilevel resource that spans repository, file, module, and block-level RTL code.   
 - Enables more nuanced training and evaluation of large language models (LLMs) for RTL-specific tasks  

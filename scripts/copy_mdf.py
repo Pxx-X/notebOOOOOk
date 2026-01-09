@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+from datetime import datetime
 
 
 SOURCE_FILES = [
@@ -24,6 +25,10 @@ ASSET_SOURCES = [
 
 DEST_DOCS = r"D:\My2025\MyBlog\docs"
 DEST_ASSETS = r"D:\My2025\MyBlog\docs\assets"
+INDEX_FILES = [
+    r"D:\My2025\MyBlog\docs\index.md",
+    r"D:\My2025\MyBlog\demo\docs\index.md",
+]
 
 
 def detect_encoding(data):
@@ -232,6 +237,41 @@ def copy_assets(src_dir, dst_dir):
             shutil.copy2(os.path.join(root, name), os.path.join(target_dir, name))
 
 
+def update_latest_update_date(md_path, timestamp):
+    if not os.path.exists(md_path):
+        return
+    with open(md_path, "rb") as f:
+        data = f.read()
+    encoding = detect_encoding(data)
+    text = data.decode(encoding)
+    newline = "\r\n" if "\r\n" in text else "\n"
+    lines = text.splitlines()
+    updated = False
+    marker_re = re.compile(r"^(\s*[-*+]\s+Latest update date:\s*)(.*)$")
+    for i, line in enumerate(lines):
+        match = marker_re.match(line)
+        if match:
+            lines[i] = f"{match.group(1)}{timestamp}"
+            updated = True
+            break
+    if not updated:
+        insert_at = None
+        for i, line in enumerate(lines):
+            if line.strip().startswith("## "):
+                insert_at = i
+                break
+        if insert_at is None:
+            insert_at = len(lines)
+        lines.insert(insert_at, f"- Latest update date: {timestamp}")
+        if insert_at < len(lines) - 1 and lines[insert_at + 1].strip().startswith("##"):
+            lines.insert(insert_at + 1, "")
+    new_text = newline.join(lines)
+    if text.endswith(("\n", "\r\n")):
+        new_text += newline
+    with open(md_path, "wb") as f:
+        f.write(new_text.encode("utf-8"))
+
+
 def main():
     os.makedirs(DEST_DOCS, exist_ok=True)
     os.makedirs(DEST_ASSETS, exist_ok=True)
@@ -241,6 +281,10 @@ def main():
 
     for src in ASSET_SOURCES:
         copy_assets(src, DEST_ASSETS)
+
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+    for path in INDEX_FILES:
+        update_latest_update_date(path, timestamp)
 
 
 if __name__ == "__main__":

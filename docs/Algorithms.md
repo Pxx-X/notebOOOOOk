@@ -1992,7 +1992,9 @@ SA是一种相对而言比较好实现的算法，
 
 ## 优化理论
 
+#### 凸优化
 
+#### 多目标优化问题（Multi-Objective Optimization Problem, MOOP）
 
 
 
