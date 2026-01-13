@@ -27,7 +27,6 @@ DEST_DOCS = r"D:\My2025\MyBlog\docs"
 DEST_ASSETS = r"D:\My2025\MyBlog\docs\assets"
 INDEX_FILES = [
     r"D:\My2025\MyBlog\docs\index.md",
-    r"D:\My2025\MyBlog\demo\docs\index.md",
 ]
 
 
