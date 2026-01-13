@@ -1,4 +1,4 @@
-# EDA4PR-LCM
+# PR-LCM
 
 ## Tools
 
@@ -33,9 +33,21 @@
 
 ##### Oh my open code
 
-- plug in
+- plug in of OpenCode
+- ==multi-agent== 并行
+- <img src="assets/image-20260111231903283.png" alt="image-20260111231903283" style="zoom: 70%;" />
+
+![image-20260111231612634](assets/image-20260111231612634.png)
+
+![image-20260111231648670](assets/image-20260111231648670.png)
+
+ 
 
 
+
+###### 参考
+
+- [OpenCode + oh-my-opencode 深度技术评估报告_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1jL69BVEFW/?spm_id_from=333.337.search-card.all.click&vd_source=ea5f077dc692dc32725d05ff92da61a5)
 
 #### Aider
 
@@ -73,7 +85,29 @@ https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
 #### claude-mem
 
+- claude code only
+
 https://github.com/thedotmack/claude-mem
+
+#### superpowers
+
+- CC, Codex, OpenCode
+
+[obra/superpowers: Claude Code superpowers: core skills library](https://github.com/obra/superpowers?tab=readme-ov-file)
+
+#### ralph-claude-code
+
+- claude code only
+
+[frankbria/ralph-claude-code: Autonomous AI development loop for Claude Code with intelligent exit detection](https://github.com/frankbria/ralph-claude-code?tab=readme-ov-file)
+
+
+
+### others
+
+#### ChatDev
+
+[OpenBMB/ChatDev: ChatDev 2.0: Dev All through LLM-powered Multi-Agent Collaboration](https://github.com/OpenBMB/ChatDev)
 
 ## Paper
 

@@ -225,24 +225,121 @@ conda activate [env-name]           # 进入名为[env-name]的Conda虚拟环境
 conda deactivate                    # 退出当前的Conda虚拟环境
 conda env remove --name [env-name]  # 删除名为[env-name]的Conda虚拟环境
 conda env list                      # 列出所有Conda虚拟环境
+
 ```
 
+.condarc 清华源
 
+```bash
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+  - defaults
+envs_dirs:
+  - /mnt/disk/storage/pengxuan/venvs/
+env_prompt: '({name}) '
+show_channel_urls: true
+channel_priority: strict
+solver: libmamba
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+```
 
-### 环境配置
+!!! warning
+    
+    这里把default删掉了
+
+### install
 
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
 bash Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
 ```
 
-
-
 安装以后要重启才能生效！
 
 
 
 ### 环境迁移
+
+#### 本地迁移
+
+```bash
+  1) 在旧 conda 下打包环境（离线快照）
+  先确保打包文件不在  /home/pengxuan/Software/miniconda3 里，避免卸载时被删。
+
+  # 进入旧 conda
+  source /home/pengxuan/Software/miniconda3/etc/profile.d/conda.sh
+  conda activate base
+
+  # 安装 conda-pack（只需一次）
+  conda install -n base conda-pack
+
+  # 建议备份目录
+  mkdir -p /xxx/xxx/env_backups
+
+  # 以 cenv 为例
+  conda pack -n cenv -o /xxx/xxx/env_backups/cenv.tar.gz
+
+  如果有多个环境，按环境名重复 conda pack -n <env> -o ... 即可。
+  conda-pack 会把 pip 包一起打进来，恢复后与原环境一致。
+
+  2) change .bashrc
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  export MINICONDA_HOME=/xxx/xxx/miniconda3
+  __conda_setup="$("$MINICONDA_HOME/bin/conda" "shell.bash" "hook" 2> /dev/
+  null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "$MINICONDA_HOME/etc/profile.d/conda.sh" ]; then
+          . "$MINICONDA_HOME/etc/profile.d/conda.sh"
+      else
+          export PATH="$MINICONDA_HOME/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+
+  或者直接执行：
+
+  /xxx/xxx/miniconda3/bin/conda init bash
+
+  然后重新开一个 shell，让它自动写正确的初始化块。
+
+  3) 删除旧 conda（确认备份完成后）
+
+  conda deactivate
+  rm -rf /xxx/xxx/Software/miniconda3
+
+  4) 用新 conda 恢复环境（离线，不下载）
+  # 新 conda 初始化
+  source /xxx/xxx/miniconda3/etc/profile.d/conda.sh
+
+  # 解包环境
+  mkdir -p ~/.conda/envs/cenv
+  tar -xzf /home/xxx/env_backups/cenv.tar.gz -C ~/.conda/envs/cenv
+
+  # 修复前缀（只需一次）
+  ~/.conda/envs/cenv/bin/conda-unpack
+
+  # 激活环境（路径方式）
+  conda activate ~/.conda/envs/cenv
+
+  5) 简单验证（可选）
+
+  python -c "import sys; print(sys.executable)"
+  conda list | head
+```
+
+
 
 - [【conda】实现conda环境迁移的4种方式-CSDN博客](https://blog.csdn.net/baidu_35692628/article/details/136519579)
 -  [使用conda pack进行环境迁移（步骤很详细）-CSDN博客](https://blog.csdn.net/ds1302__/article/details/120027173)

@@ -3153,7 +3153,17 @@ auto min_it = std::min_element(vec.begin(), vec.end());
 auto max_it = std::max_element(vec.begin(), vec.end());
 ```
 
+##### 10. std::rotate
 
+```cpp
+void rotate( ForwardIt first, ForwardIt middle, ForwardIt last );
+```
+
+!!! note
+    - first 是指向序列起始位置的迭代器。
+    - middle 是指向序列中某个位置的迭代器，该位置之后的元素将移动到 first 之前。
+    - last 是指向序列结束位置的迭代器。
+    - 函数没有返回值，它执行的是就地操作（in-place operation）
 
 #### numeric库
 
@@ -4891,8 +4901,12 @@ https://www.cnblogs.com/newtonltr/p/18867195
       - 依据项目里的 install(TARGETS|FILES|DIRECTORY ...) 规则，将已编译好的可执行/库、头文件、
         资源、pkgconfig/cmake 包配置等复制到安装前缀（默认 CMAKE_INSTALL_PREFIX，可用 --prefix
         覆盖；支持 DESTDIR 重定位）。
-      - 不重新编译，只做拷贝、创建目录和必要的 RPATH/权限调整。
-      - 产物面向“被系统或其他项目使用”，与构建目录分离。
+          - 不重新编译，只做拷贝、创建目录和必要的 RPATH/权限调整。
+              - 产物面向“被系统或其他项目使用”，与构建目录分离。
+
+###### build vs install
+
+![image-20260113215156559](assets/image-20260113215156559.png)
 
 ##### 基本用法
 

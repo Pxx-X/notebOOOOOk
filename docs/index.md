@@ -8,7 +8,7 @@
 
 - Email: [icpengxuan@scut.edu.cn]()
 
-- Latest update date: 2026-01-09
+- Latest update date: 2026-01-13
 
 - 笔记，随手记, 格式将就
 
@@ -17,10 +17,10 @@
 
 ### EDA
 
-- [EDA4PR](EDA4PR.md)
-- [EDA4PR-Analog](EDA4PR-Analog.md)
-- [EDA4PR-Digtal](EDA4PR-Digtal.md)
-- [EDA4PR-LCM](EDA4PR-LCM.md)
+- [EDA](EDA.md)
+- [PR-Analog](PR-Analog.md)
+- [PR-Digtal](PR-Digtal.md)
+- [PR-LCM](PR-LCM.md)
 - [Flow](flow.md)
 
 ### Tools
