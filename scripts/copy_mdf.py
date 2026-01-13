@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 SOURCE_FILES = [
-    r"D:\My2025\MyNotes\flow\EDA4PR.md",
-    r"D:\My2025\MyNotes\flow\EDA4PR-Analog.md",
-    r"D:\My2025\MyNotes\flow\EDA4PR-Digtal.md",
-    r"D:\My2025\MyNotes\flow\EDA4PR-LCM.md",
+    r"D:\My2025\MyNotes\flow\EDA.md",
+    r"D:\My2025\MyNotes\flow\PR-Analog.md",
+    r"D:\My2025\MyNotes\flow\PR-Digtal.md",
+    r"D:\My2025\MyNotes\flow\PR-LCM.md",
     r"D:\My2025\MyNotes\flow\flow.md",
     r"D:\My2025\MyNotes\Other\Algorithms.md",
     r"D:\My2025\MyNotes\Other\Hardware.md",
