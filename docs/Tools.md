@@ -547,13 +547,24 @@ git branch -m <name> #change the just-created branch
   | **暂存区** ↔ **上次提交** (HEAD) | `git diff --cached`或 `git diff --staged` | 查看已使用 `git add`暂存，但**未提交**的变更。               |
 
 
-### commit and push
+### commit
 
 In VS Code, go to the Source Control view (left sidebar, Git icon). You’ll see the untracked files.
   - Click + (stage) on files or use the terminal: `git add .`
   - if u `add` some files you don't want to `add`, you can change your `.gitignore`, then use `git reset`
       `git rm -r --cached .`
   - `git commit -m "…"`
+
+
+
+### push
+
+设置远端url
+
+```bash
+git remote set-url origin https://github.com/Pxx-X/notebOOOOOk.git #http
+git remote set-url origin git@github.com:Pxx-X/notebOOOOOk.git #
+```
 
 
 
