@@ -106,6 +106,10 @@ win+r打开运行
 
 #### Everything
 
+#### RemoveWindowsAI
+
+[zoicware/RemoveWindowsAI: Force Remove Copilot, Recall and More in Windows 11](https://github.com/zoicware/RemoveWindowsAI)
+
 ## Linux
 
 ### SHELL

@@ -563,7 +563,7 @@ In VS Code, go to the Source Control view (left sidebar, Git icon). You’ll see
 
 ```bash
 git remote set-url origin https://github.com/Pxx-X/notebOOOOOk.git #http
-git remote set-url origin git@github.com:Pxx-X/notebOOOOOk.git #
+git remote set-url origin git@github.com:Pxx-X/notebOOOOOk.git #ssh
 ```
 
 

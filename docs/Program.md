@@ -4195,7 +4195,85 @@ int main() {
 }
 ```
 
+#### view视图
 
+C++ 的视图（或称为“范围适配器”）是 ==C++20== 范围库（Ranges Library）的核心[组成部分](https://so.csdn.net/so/search?q=组成部分&spm=1001.2101.3001.7020)。它提供了一种对序列（如容器、数组等）进行**非拥有（non-owning）、延迟计算（lazy-evaluation）** 的转换和组合的方式。
+
+!!! note
+    python 也有 `veiw` 的概念，比如 `torch.expand` 不会拷贝数据（只创建 view）
+
+##### 特性
+
+- 不分配（Non-owning）：视图本身不持有底层序列的数据。它只是==引用或“观察”已有的数据源==（如 std::vector, std::list, 原始数组等）。因此，创建视图的==开销通常很小==。因为它不包含数据本身，所以**构造和复制视图的成本非常低**，通常只是复制几个指针或[迭代器](https://so.csdn.net/so/search?q=迭代器&spm=1001.2101.3001.7020)。
+
+  ```c++
+  #include <ranges>
+  #include <vector>
+  #include <iostream>
+  
+  int main() {
+      std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  
+      // 创建一个 `take_view`，它只“观察”前5个元素
+      auto first_five = numbers | std::views::take(5);
+  
+      // 此时，first_five 只是一个轻量级视图
+      // 它内部可能只存储了：
+      // - numbers.begin()
+      // - numbers.begin() + 5
+      // 它没有复制任何numbers的数据
+  
+      for (int num : first_five) { // 迭代时，它直接使用numbers的迭代器
+          std::cout << num << ' '; // 输出：1 2 3 4 5
+      }
+  }
+  
+  ```
+
+- 延迟计算（Lazy Evaluation）：对视图应用的转换操作（如过滤、变换）并不会立即执行。==只有在真正需要计算结果==（例如，开始迭代时）时，这些操作才会按需进行。视图的操作（如 `filter`, `transform`）并不会立即遍历整个数据集。相反，它返回一个特殊的**视图对象**，这个对象重载了 `begin()` 和 `end()` 方法。
+
+  ```c++
+  #include <ranges>
+  #include <vector>
+  #include <iostream>
+  
+  int main() {
+      std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  
+      // 创建一个管道：先过滤出偶数，再将每个偶数平方
+      auto processed_view = numbers
+                          | std::views::filter([](int n) { return n % 2 == 0; })
+                          | std::views::transform([](int n) { return n * n; });
+  
+      // 注意：到这里为止，没有任何计算发生！
+      // 没有遍历，没有创建新的容器。
+      // `processed_view` 只是一个轻量级对象，它存储了：
+      // - 指向numbers的引用
+      // - 两个lambda函数
+  
+      std::cout << "开始计算:\n";
+      for (int result : processed_view) { // 迭代在这里开始！
+          // 第一次迭代：从numbers.begin()开始，找到第一个偶数2，然后计算2*2=4，输出4。
+          // 下一次迭代：继续在numbers中找下一个偶数4，然后计算4*4=16，输出16。
+          // ... 以此类推，直到遍历结束。
+          std::cout << result << ' '; // 输出：4 16 36 64 100
+      }
+  }
+  
+  ```
+
+- 可组合（Composable）：多个视图适配器可以通过管道操作符 | 连接起来，形成一个操作管道，代码非常清晰且表达力强。
+
+- ![image-20260115105146093](assets/image-20260115105146093.png)
+
+##### 应用场景
+
+
+
+
+##### ref
+
+- [C++ 20 视图view笔记_c++ view-CSDN博客](https://blog.csdn.net/yinminsumeng/article/details/151356299)
 
 #### others
 
@@ -4318,7 +4396,6 @@ int main() {
 
   c++标准库的头文件在编译器中，linux中的默认路径为：`/usr/include/c++/${g++ version}/`, **libstdc++.so** (动态!)库在`/usr/lib/gcc/<target-triplet>/<gcc-version>/`
 
-  
 
 ### Bugs
 
@@ -5477,6 +5554,36 @@ func(1, 2, 3, a=4, b=5)  # 输出:
 # a = 4
 # b = 5
 ```
+
+#### dataclasses
+
+##### 创建数据类
+
+要创建一个数据类，我们==只需要使用 `@dataclass` 装饰器==，并定义类的属性即可。`dataclass` 会自动为我们生成 `__init__`、`__repr__`、`__eq__` 等方法。
+
+- **`__init__` 方法**：自动生成并根据类的属性定义初始化方法。
+- **`__repr__` 方法**：自动生成一个可读性很强的字符串表示，用于打印对象。
+- **`__eq__` 方法**：自动生成比较方法，使得数据类的实例可以通过 `==` 进行比较。
+- **`__hash__` 方法**：如果所有字段都是不可变的（如整数、字符串等），则自动生成一个 `__hash__` 方法，使对象可用于集合等需要哈希值的场景。
+
+##### 可选的参数：`field` 函数
+
+`dataclass` 提供了 `field` 函数，让我们可以进一步定制每个字段的行为，例如设置默认值、指定字段是否参与比较、定义字段的默认工厂函数等。
+
+##### 支持不可变数据类（`frozen`）
+
+##### 为数据类添加自定义方法
+
+##### 应用场景
+
+1. **数据传输对象（DTO）**：`dataclass` 非常适合用于表示==数据传输对象==， 比如==强化学习的经验池==。
+2. **[配置管理](https://zhida.zhihu.com/search?content_id=255874777&content_type=Article&match_order=1&q=配置管理&zhida_source=entity)**：`dataclass` 可以用来管理应用配置，尤其是当配置项较多且具有层次结构时。
+3. **简化数据存储**：如果你的类主要是用来存储数据并提供一些方法来操作这些数据，`dataclass` 可以大大减少代码量。
+4. **[自动化数据验证](https://zhida.zhihu.com/search?content_id=255874777&content_type=Article&match_order=1&q=自动化数据验证&zhida_source=entity)**：结合类型注解和自定义验证逻辑，`dataclass` 可以用于简单的字段验证和数据清理。
+
+##### ref
+
+[2316-Python 数据类（dataclasses）：简化类定义和数据管理 - 知乎](https://zhuanlan.zhihu.com/p/1890503834708714486)
 
 #### collections
 

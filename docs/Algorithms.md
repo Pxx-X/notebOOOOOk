@@ -2012,3 +2012,33 @@ Sequence Pair (SP) is a floorplan representation by a pair of module-name sequen
 
 
 
+### Zobrist 哈希
+
+- Zobrist 散列
+- 佐布里斯特 
+- Zobrist 哈希是一种专门针对==棋类游戏==而提出来的编码方式,以其发明者 Albert L.Zobrist 的名字命名。
+- Zobrist 哈希通过一种特殊的置换表,也就是对==棋盘上每一位置的各个可能状态赋予一个编码索引值==,来实现在极==低冲突率==的前提下在一个整型数据上对棋盘进行编码。其编码步骤描述如下:
+
+
+
+#### 实例
+
+https://www.bilibili.com/video/BV1D94y1D7mF?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=6
+
+![image-20260114192344887](assets/image-20260114192344887.png)
+
+![image-20260114192358500](assets/image-20260114192358500.png)
+
+
+
+#### 参考
+
+- [alphago 实战](https://www.bilibili.com/video/BV1D94y1D7mF?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=6)
+- https://zhuanlan.zhihu.com/p/605462944
+- [gobang/docs/Zobrist.md at main · arcturus-school/gobang](https://github.com/arcturus-school/gobang/blob/main/docs/Zobrist.md)
+- [七：Zobrist缓存 - 《五子棋AI教程 第二版》 - 书栈网 · BookStack](https://www.bookstack.cn/read/lihongxun945-gobang-ai/fddd888addab81b9.md)
+
+
+
+
+
