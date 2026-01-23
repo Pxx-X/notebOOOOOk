@@ -3250,6 +3250,58 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
 
 
+### 回片
+
+1. 提交PAD的相对位置和长宽
+
+   1. 新建脚本
+
+      ![image-20260121205307060](assets/image-20260121205307060.png)
+
+   2. 写脚本
+
+      ```
+      procedure(getPADCoord()
+        let( (cv inst master shapes shape lbbox gbbox ll ur center)
+          cv = geGetEditCellView()
+          unless(cv
+            printf("No edit cellView found.\n")
+            return(nil)
+          )
+          foreach( inst cv~>instances
+            master = inst~>master
+            when(master
+              shapes = setof( s master~>shapes
+                              s~>layerName == "ALPA" && s~>purpose == "drawing" )
+              when(shapes
+                foreach( shape shapes
+                  lbbox = shape~>bBox
+                  gbbox = dbTransformBBox(lbbox inst~>transform)
+                  ll = car(gbbox)
+                  ur = cadr(gbbox)
+                  center = list( (car(ll)+car(ur))/2.0 (cadr(ll)+cadr(ur))/2.0 )
+                  printf("inst=%s center=%L\n" inst~>name center)
+                )
+              )
+            )
+          )
+        )
+      )
+      ```
+
+      !!! note
+          `geGetEditCellView`是获取当前打开的CellView, 所以你需要打开当前的 layout
+
+   3. load
+
+      ![image-20260121205442104](assets/image-20260121205442104.png)
+
+   4. 命令行中运行
+   
+      <img src="assets/image-20260121205550844.png" alt="image-20260121205550844" style="zoom: 50%;" />
+   
+   
+
 ### tips
 
 - rst_n信号也可以用vdc来做，设成变量
@@ -3259,14 +3311,6 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
   ![image-20250603233216567](assets/image-20250603233216567.png)
 
   
-
-
-
-
-
-
-
-
 
 ## innovus
 

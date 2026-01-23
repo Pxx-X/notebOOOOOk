@@ -8,6 +8,7 @@
 
 - rust
 - [OpenSource](https://github.com/openai/codex)
+- 诟病推理相对慢 GPT 5.2 26/01/19 
 
 #### Claude code
 
@@ -22,6 +23,8 @@
 #### OpenCode
 
 - [OpenSource](https://github.com/anomalyco/opencode?tab=readme-ov-file)
+- [Docs | OpenCode](https://opencode.ai/docs)
+- [Zen | OpenCode](https://opencode.ai/docs/zen) (for model id config)
 - typescript
 - OpenCode can be used with Claude, OpenAI, Google or even ==local models==. 
 -  also available as a desktop application
@@ -79,6 +82,22 @@
 
 https://github.com/VectifyAI/PageIndex?tab=readme-ov-file
 
+The first human-like document-analysis agent [platform](https://chat.pageindex.ai/) built for professional long documents. Can also be integrated via [MCP](https://pageindex.ai/mcp) or [API](https://docs.pageindex.ai/quickstart) (beta).
+
+![image-20260122135613067](assets/image-20260122135613067.png)
+
+#### LEANN
+
+https://github.com/yichuan-w/LEANN
+
+
+
+### Prompt Engineering
+
+#### Skill
+
+总的来说还是提示词工程，只是一种通用接口，优化上下文。
+
 
 
 ### Plug-in
@@ -101,6 +120,31 @@ https://github.com/thedotmack/claude-mem
 
 [frankbria/ralph-claude-code: Autonomous AI development loop for Claude Code with intelligent exit detection](https://github.com/frankbria/ralph-claude-code?tab=readme-ov-file)
 
+#### Agent Lightning
+
+- [Repo | Agent Lightning](https://github.com/microsoft/agent-lightning?tab=readme-ov-file)
+- 微软亚洲研究院
+
+
+
+![image-20260121133159909](assets/image-20260121133159909.png)
+
+![image-20260121133326073](assets/image-20260121133326073.png)
+
+![image-20260121133354502](assets/image-20260121133354502.png)
+
+ 
+
+
+
+##### ref
+
+- [【零代码强化学习】 Agent Lightning 开源！ 让任何 AI 智能体瞬间变强_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1njJDzVEWG/?spm_id_from=333.337.search-card.all.click&vd_source=ea5f077dc692dc32725d05ff92da61a5)
+
+#### compound-engineering-plugin
+
+https://github.com/EveryInc/compound-engineering-plugin
+
 
 
 ### others
@@ -109,15 +153,21 @@ https://github.com/thedotmack/claude-mem
 
 [OpenBMB/ChatDev: ChatDev 2.0: Dev All through LLM-powered Multi-Agent Collaboration](https://github.com/OpenBMB/ChatDev)
 
+
+
 ## Paper
 
-### Circuit-Gen
+### Schematic
 
 #### [AnalogCoder- -AAAI-2025--CUHK]()
 
 - [OpenSource!](https://github.com/laiyao1/AnalogCoder)
 - the ==first== training-free LLM agent for designing analog circuits through Python code generation  
 - users can describe their desired analog circuit functionalities in ==natural language==. AnalogCoder automatically generates the corresponding ==Python== code for the designed circuit, leveraging the LLM’s strong Python programming capabilities.   
+- AnalogCoder-==Pro==
+  - [OpenSource!](https://github.com/laiyao1/AnalogCoderPro)
+  - add sizing
+  - add multi modal (image)
 
 
 
@@ -201,117 +251,120 @@ circuit tool library:
 #### [ANALOGGENIE--ICLR-2025--NEU]()
 
 - [OpenSource!](https://github.com/xz-group/AnalogGenie?tab=readme-ov-file)
-
-
-
-
-
-##### background
-
-
-
-
-
-
-### Layout
-
-#### [LayoutCopilot-Multi Agent-TCAD-2025--PEK]()  
-
-- LayoutCopilot框架中的每个智能体都配备了针对其指定任务量身定制的Prompt。能够接收设计人员用自然语言表达的高层设计意图和具体需求，并将其转化为==精确可执行的指令==。这些指令旨在直接操控版图设计工具，确保设计意图被准确转化为版图调整。
-- integrates various ==Prompt Engineering== techniques  
-  - Chain-of-thought  
-  - Least-to-most prompting  
-  - Self-refine strategy  
+- not LLM
+- Eulerian circuit（欧拉回路）， 结合token，很棒的建模！
+  - 序列化欧拉回路：将图转换为序列，支持高效自回归生成
 
 
 
 ##### background
 
-<img src="assets/image-20251207212553089.png" alt="image-20251207212553089" style="zoom: 70%;" />
+- 论文针对模拟集成电路（Analog IC）设计中最具挑战性的部分——电路拓扑自动生成。模拟IC拓扑定义器件（如晶体管、电阻）之间的连接关系，传统上依赖人工设计，耗时且缺乏自动化。
+- 现有生成AI方法（如CktGNN、LaMAGIC、AnalogCoder）存在缺陷：
 
-- Prompt Engineering :提示工程为利用大模型解决现实问题提供了轻量级解决方案。不同于需要创建海量数据集、进行微调和重复调整参数的传统方法，提示工程允许实践者通过精心设计的提示词来引导模型行为。这种方法在数据采集与清洗成本高昂的场景中尤为适用。
+  - 局限于==小规模电路（==如器件数少于10）或单一类型（如仅运算放大器）。
+  - 电路表示模糊（如基于代码生成易出错，或图表示忽略引脚细节导致连接不明确）。
+  - 缺乏大规模、多样化的==数据集==支持可扩展生成。
 
-- 提示词工程：
 
-  - Chain-of-thought  
-  - Least-to-most prompting  
-  - Self-refine strategy  
-
-- retrieval-augmented generation (RAG)   
-
-- multi agent:
-
-  <img src="assets/image-20251207213951947.png" alt="image-20251207213951947" style="zoom: 60%;" />
-
-  采用多智能体分工而非单智能体方案的核心原因在于==缓解提示词稀释效应==，避免大语言模型的注意力分散。
-
-  ![image-20251207214202439](assets/image-20251207214202439.png)
 
 ##### contribution
 
-- ==the first== LLM-powered interactive analog layout design framework
-- a multiagent collaborative framework  
+- 可扩展的序列化图表示，将电路拓扑编码为欧拉回路，避免邻接矩阵的空间浪费
+- 基于GPT的自回归生成，支持从零生成大规模、多样拓扑，而非局限于预定义模板。
+- 解决EDA特有挑战——模拟电路缺乏层次化抽象和系统数据集，通过引脚级表示消除连接模糊性，并通过数据增强缓解数据稀缺。
 
 
 
 ##### flow
 
-![image-20251207214940327](assets/image-20251207214940327.png)
+数据接口：
 
-该系统包含两个核心组件：抽象请求处理器和具体请求处理器。抽象请求处理器启动请求处理流程，将其转换为符合布局工具手册规范的具体请求。这些具体请求随后传递至具体请求处理器，该组件生成可执行命令以促进版图编辑。
+- 输入：电路拓扑数据（从教科书、论文收集的示意图），经手工绘制为SPICE网表用于仿真。
+- 输出：生成的电路拓扑（序列形式），可转换为SPICE网表进行性能验证。
 
- 分类器代理：作为过滤器的作用是根据版图工具手册判断设计需求属于具体请求还是抽象请求。
+关键步骤：
 
-分析器代理：分析与知识检索任务. 这个智能体专注于知识检索，The Analyzer Agent operates within a vast knowledge base that 涵盖模拟电路与版图设计的专业文献、布局工具手册以及历史任务与解决方案档案。在向大语言模型传输知识库时，可通过两种方式输入：直接作为提示词组成部分，或经由大语言模型供应商提供的检索接口。
+- 数据准备：收集3350个独特拓扑，增强70倍序列数据（文档3.3节）。
+- 图表示转换：将拓扑转换为引脚级无向图，再序列化为欧拉回路（文档3.2节）。
+- 模型训练：预训练GPT模型预测序列中下一个引脚连接，后微调针对特定电路类型。
+- 生成与验证：从起始节点"VSS"自回归生成序列，通过SPICE仿真检查正确性（文档4.1节）。
 
-解决方案精炼代理（Solution Refiner Agent）最复杂的代理. 根据设计者的修改建议进行细化调整。若设计者对结果不满意，系统将重新调用分析器代理。包含设计者修改建议的修订请求会从解决方案精炼代理发回，作为分析器代理生成优化后高层解决方案的新输入。该机制确保系统能够融合设计者反馈，通过迭代改进设计方案以获得更精确且更具针对性的结果。这使得设计师能够理解每个解决方案背后的逻辑依据，评估其可行性并做出明智决策。
+##### model
 
-![image-20251207222608765](assets/image-20251207222608765.png)
+模型超参数：GPT架构包含6隐藏层、6注意力头、1182万参数；词汇量1029；序列最大长度1024
 
-Solution Adapter Agent  
+##### data
 
+基准电路：自建数据集包含==3350个独特模拟电路拓扑，涵盖11种类型（如运算放大器、LDO、PLL等）==，从公开资源（Razavi等教科书）收集（文档3.3节和附录A.1）。
 
+电路尺度：最大电路包含54个器件
 
-###### model
+数据分布：
 
-![image-20251207223209019](assets/image-20251207223209019.png)
+![image-20260123223345232](assets/image-20260123223345232.png)
 
-![image-20251207223245717](assets/image-20251207223245717.png)
+数据增强：通过==欧拉回路排列和BFS排序==，减少排列不变性偏差，提升模型泛化（文档3.3节）。
 
-###### 支持的指令
+数据增强作用：
 
-![image-20251207223511757](assets/image-20251207223511757.png)
-
-!!! note
-    只支持这些？感觉也不多
-
-
+![image-20260123223830939](assets/image-20260123223830939.png)
 
 ##### experiment
 
-实验中采用成熟的交互式模拟电路布局设计工具[Interactive Analog Layout Editing with Instant Placement
-Legalization]()进行演示
+###### compare
 
-![image-20251207224824214](assets/image-20251207224824214.png)
-
-![image-20251207224214607](assets/image-20251207224214607.png)
-
-![image-20251207224839963](assets/image-20251207224839963.png)
+![image-20260123223757191](assets/image-20260123223757191.png)
 
 
 
-###### 实验二
+#### [Atelier-Multi Agent+GoT-TCAD-25--Fudan]()
 
-![image-20251207225450834](assets/image-20251207225450834.png)
+- Multi Agent
+- SOTA BlackBox method (compare with BO/RL)
+- **GoT（Graph of Thoughts）**：思维图，将多代理推理组织为图结构，支持回溯和协作。
+- pycma调用CMA-ES优化器
+- LangChain框架管理代理
 
-![image-20251207225621564](assets/image-20251207225621564.png)
 
-![image-20251207225300350](assets/image-20251207225300350.png)
 
-![image-20251207225237502](assets/image-20251207225237502.png)
+##### background
 
-!!! note
-    怎么把Magical的版图搬到Virtuoso做后仿的？
+- In the case of commonly utilized analog circuit modules, experts often need to invest substantial time and effort into iterative trial-and-error procedures to tailor these components for specific applications.
+- 论文针对模拟电路设计自动化中的拓扑合成（topology synthesis）问题，包括拓扑设计和参数调优（sizing）。模拟电路设计依赖大量领域知识，且设计空间巨大（如三阶段运放有25^10种可能拓扑），传统方法效率低下。
+- 现有黑盒优化方法（如贝叶斯优化BO、强化学习RL）存在两大缺陷：
+  - **低效性**：缺乏领域知识引导，在稀疏解空间中易陷入局部最优，需大量试错（模拟次数超10万次）。
+  - **不可解释性**：设计决策不透明，工程师难以信任自动化结果
+
+##### contribution
+
+- 传统方法需大量数据训练领域专用LLM（如Artisan需1.9亿令牌），而Atelier仅用通用LLM（如GLM-4）结合紧凑知识库（1082令牌），无需微调，解决数据稀缺问题。
+- 首次将多LLM代理与GoT架构结合，实现自反（self-reflection）、回溯（backtracking）和工具集成（如CMA-ES优化器）。
+
+##### flow
+
+![image-20260123214143232](assets/image-20260123214143232.png)
+
+![image-20260123214534331](assets/image-20260123214534331.png)
+
+
+
+
+
+##### model
+
+##### dataset
+
+- 运放（opamp）设计：采用SMIC 180nm工艺，5组规格（S-1至S-5，见表III），负载电容10pF-1000pF。
+- 比较器（comparator）设计：SMIC 40nm工艺，目标延迟<100ps、功耗<100μW。
+
+##### experiment
+
+
+
+### Layout
+
+
 
 ### Dataset
 

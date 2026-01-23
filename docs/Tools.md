@@ -44,6 +44,29 @@ https://blog.csdn.net/qq_43623902/article/details/136258880
 
 
 
+### user-data-dir
+
+[Linux_VSCode中--user-data-dir参数具体作用？ - 多课网](https://duoke360.com/post/13555)
+
+```
+user-data-dir/
+├── User/                  # 用户配置
+│   ├── settings.json      # 主配置文件
+│   ├── keybindings.json   # 快捷键配置
+│   └── snippets/          # 代码片段
+├── extensions/            # 已安装扩展
+├── CachedData/            # 缓存数据
+├── CachedExtensions/      # 扩展缓存
+└── GPUCache/              # GPU相关缓存
+
+```
+
+
+
+
+
+
+
 ### Copilot
 
 - [use rules](https://code.visualstudio.com/docs/copilot/getting-started?originUrl=%2Fdocs%2Fcopilot%2Fsetup#_create-custom-instructions)
@@ -85,11 +108,13 @@ https://blog.csdn.net/qq_43623902/article/details/136258880
 
 
 
+
+
 ### buglist
 
 #### [cpptools-srv](https://github.com/microsoft/vscode-cpptools/issues/12956#top) 疯狂生成core* 崩溃文件
 
-安装新的cpp插件
+fix: 安装新的cpp插件
 
 
 

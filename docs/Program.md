@@ -1437,6 +1437,10 @@ public:
 
 
 
+#### 相关文件
+
+
+
 #### 参考
 
 - [【53】C++的模板_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.videopod.episodes&vd_source=ea5f077dc692dc32725d05ff92da61a5&p=54)
@@ -3422,7 +3426,8 @@ C++ 的 `<valarray>` 库是一个用于数值计算的库
 ##### 安装
 
 ```bash
-
+conda install -c conda-forge libboost-headers #head only
+conda install -c conda-forge boost	#完整
 ```
 
 
@@ -3545,11 +3550,10 @@ Gurobi 是一款强大的==商业==优化求解器，能够高效地解决线性
   target_link_libraries(YourTarget
       pybind11::embed
   )
-  
   ```
-
+  
   - build以后生成一个`name.cpython-311-x86_64-linux-gnu.so`， 然后python就可以直接`import name`
-
+  
 - 也可以使用setuptool, 通过`pip install .`来分装为一个python库
 
   - TODO
@@ -4602,9 +4606,17 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 
 #### VSCode
 
+大型项目最好使用`code --user-data-dir <> --extensions-dir <>` 设置好用户配置目录和插件目录
+
 ##### install extension
 
 公司里面通过`.vsix`文件安装（离线）
+
+###### c/c++ 插件
+
+对于大型项目，可能刚开始无法跳转到定义，是正常现象，需要等至少一小时（大概，我是放了一晚上）
+
+最好把插件的cache目录设置到指定目录下
 
 
 
@@ -4651,6 +4663,8 @@ UB(未定义行为)可能会crash也可能不会？反正一定要避免UB
 ##### Theme
 
 之前一些关键字一直没有高亮，以为是include_path的问题，后来发现是主题有问题。不过确实发现如果把include_path去掉，会导致一些关键字不会高亮
+
+
 
 
 
@@ -5392,9 +5406,20 @@ debug脚本`json.json`
     
     感觉还是不够好用
 
+
+
+##### GDB调试Core文件
+
+- [gdb调试coredump文件从原理到应用 - 知乎](https://zhuanlan.zhihu.com/p/1960406458081444720)
+- [Linux下gdb如何调试coredump文件 - guanyubo - 博客园](https://www.cnblogs.com/yubo-guan/p/18010818)
+
 #### 参考
 
 [【Linux】GDB保姆级调试指南（什么是GDB？GDB如何使用？）_gdb教程-CSDN博客](https://blog.csdn.net/weixin_45031801/article/details/134399664)
+
+
+
+##### 
 
 
 
@@ -5496,6 +5521,16 @@ Valgrind
 ## Python
 
 ### basic
+
+#### How to Learn Python
+
+Some links to learn about Python programming and Scientific Framework:
+
+- [The Python Tutorial](https://docs.python.org/2.7/tutorial/index.html)
+- [Pyplot tutorial](http://matplotlib.org/users/pyplot_tutorial.html)
+- [Python Scientific Lecture Notes](https://scipy-lectures.github.io/)
+- [Scientific Python Lectures](http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/tree/master/)
+- [microsoft/Data-Science-For-Beginners: 10 Weeks, 20 Lessons, Data Science for All!](https://github.com/microsoft/Data-Science-For-Beginners?tab=readme-ov-file)
 
 #### 直接赋值、浅拷贝和深度拷贝
 
@@ -6002,6 +6037,14 @@ method:
 - [Single Machine Multi-GPU Minibatch Node Classification — DGL 2.4.0 documentation](https://www.dgl.ai/dgl_docs/en/2.4.x/tutorials/multi/2_node_classification.html)
 - [pytorch单机多卡训练--完整示例代码_torchrun 单机多卡-CSDN博客](https://blog.csdn.net/weixin_42655901/article/details/131324593)
 
+#### 自动混合精度
+
+
+
+##### ref
+
+https://zhuanlan.zhihu.com/p/165152789
+
 
 
 ### DGL
@@ -6089,6 +6132,9 @@ print(out_feats[('user', 'follows', 'user')].shape)
 [dgl与torch版本不兼容以及解决方法_dgl torch-CSDN博客](https://blog.csdn.net/qq_64076181/article/details/143184101)
 
 ### Tensorflow
+
+!!! note
+    貌似用的人越来越少了
 
 #### 基本操作
 
@@ -6221,6 +6267,220 @@ OpenMMLab 是一个用于学术研究和工业应用的开源算法体系，于2
 [timm](https://www.bing.com/ck/a?!&&p=72cd6c6b998ed2c235756a386b2f07fe90e1ea694831b54205dbfd0ff6a69315JmltdHM9MTc1OTE5MDQwMA&ptn=3&ver=2&hsh=4&fclid=0fb3f3a8-cef7-65cf-0799-e5eecf916483&psq=timm+package&u=a1aHR0cHM6Ly9naXRodWIuY29tL2h1Z2dpbmdmYWNlL3B5dG9yY2gtaW1hZ2UtbW9kZWxz)
 
 timm库，全称pytorch-image-models，是最前沿的PyTorch图像模型、预训练权重和实用脚本的开源集合库，其中的模型可用于训练、推理和验证。
+
+
+
+#### PySpice
+
+- [Repo | PySpice](https://github.com/FabriceSalvaire/PySpice.git)
+
+- PySpice is an open source Python module which provides a [Python](http://python.org/) interface to the [Ngspice](http://ngspice.sourceforge.net/) and [Xyce](https://xyce.sandia.gov/) circuit simulators.
+
+  - [Ngspice](http://ngspice.sourceforge.net/) is a fork of the famous [SPICE](https://en.wikipedia.org/wiki/SPICE) circuit simulator
+
+    - [Ngspice](http://ngspice.sourceforge.net/) is a mixed-level/mixed-signal circuit simulator, based on three open source software packages: Spice3f5, Cider1b1 and Xspice.
+
+      *Spice3f5* is the last Berkeley’s release of Spice3 simulator family.
+
+      *Cider* couples Spice3f5 circuit level simulator to DSIM device simulator to provide greater simulation accuracy of critical devices. DSIM devices are described in terms of their structures and materials.
+
+      *Xspice* is an extension to Ngspice that provides code modeling support and simulation of digital components through an embedded event driven algorithm.
+
+      The main ==drawback== of Ngspice is to inherit the old C code base of Berkeley SPICE.
+
+      To read more on Ngspice, look at the [Ngspice documentation page](http://ngspice.sourceforge.net/docs.html).
+
+    - Which version of Ngspice is required ?
+
+      !!! note
+          You should use the ==latest version== of Ngspice and take care it was compiled according to the Ngspice manual, i.e. you should check somebody didn’t enable experimental features which could break PySpice, generate a wrong simulation, or produce bugs.
+
+      *Note that Ngspice is not distributed with PySpice !*
+
+  - [Xyce](https://xyce.sandia.gov/) is a SPICE compatible simulator developed by the [Sandia National Laboratories](http://www.sandia.gov/).
+
+    - [Xyce](https://xyce.sandia.gov/) is an open source, SPICE-compatible, high-performance analog circuit simulator, capable of solving extremely large circuit problems developed at [Sandia National Laboratories](http://www.sandia.gov/).
+
+      Sandia is a US laboratory involved in the national nuclear weapons program. Its French counterpart is the Alternative Energies and Atomic Energy Commission or CEA.
+
+      Sandia has released several open source programs, you can find a list on its [Wikipedia page](https://en.wikipedia.org/wiki/Sandia_National_Laboratories).
+
+      Xyce was developed from scratch at Sandia in order to meet special needs like the simulation of chips under radiations. Xyce is developed in ==C++==.
+
+- You can watch [Circuit Simulation using Python](https://www.slideshare.net/PoleSystematicParisRegion/pyparis2017-circuit-simulation-using-python-by-fabrice-salvaire) given at the [PyParis 2017](http://pyparis.org/) conference ([PDF file](https://pyspice.fabrice-salvaire.fr/pyparis-2017-talk.pdf))
+
+##### install
+
+```bash
+
+# conda install -c conda-forge pyspice # conda
+pip install PySpice
+conda install -c conda-forge ngspice # conda, however, not latest verstion. 
+# sudo apt-get install ngspice libngspice0 (sometimes libngspice0-dev) # system install
+pyspice-post-installation --check-install	# check
+```
+
+
+
+###### build laetst version of ngspice
+
+- [Ngspice, the open source Spice circuit simulator - Downloads (ngspice nightly and others)](https://ngspice.sourceforge.io/download.html)
+- https://pyspice.fabrice-salvaire.fr/releases/v1.4/installation.html#ngspice-compilation
+
+```bash
+mkdir -p /tmp/ngspice-45.2-build
+cd /tmp/ngspice-45.2-build
+sudo /home/pengxuan/Software/ngspice-45.2/configure \
+  --prefix=/usr/local/ngspice-45.2 \
+  --enable-xspice \
+  --disable-debug \
+  --enable-cider \
+  --with-readline=yes \
+  --enable-openmp \
+  --with-ngshared
+  
+sudo make -j4
+sudo make install
+```
+
+!!! note
+    装完发现其实是pyspice只支持到ngspice 34版本。。直接用`conda install -c conda-forge ngspice` 就行了
+    
+    pyspice 已经很久没更新了
+
+##### 模型支持参数
+
+```python
+#!/usr/bin/env python3
+"""
+List PySpice element parameters by introspection.
+
+This uses PySpice's element metadata to show Python parameter names and
+SPICE aliases for each supported device class.
+"""
+
+"""
+MOSFET
+  - multiplier (m)：并联倍乘系数，相当于把器件复制 m 份并联，电流、面积、电容等按比例放大。
+  - length (l)：沟道长度 L。
+  - width (w)：沟道宽度 W。
+  - drain_area (ad)：漏结面积，用于结电容/结泄漏相关计算。
+  - source_area (as)：源结面积。
+  - drain_perimeter (pd)：漏结周长，用于边缘结电容/泄漏。
+  - source_perimeter (ps)：源结周长。
+  - drain_number_square (nrd)：漏端扩散电阻的方块数（串联电阻模型用）。
+  - source_number_square (nrs)：源端扩散电阻的方块数。
+  - ic：初始条件，格式为 ic=vds,vgs,vbs，常用于瞬态分析初值或帮助收敛。
+  - off：强制器件在初始 DC 解时关断（求解起点用）。
+  - temperature (temp)：器件实例温度，覆盖全局温度设置。
+  - nfin：鳍片数量（FinFET），PySpice 标注为仅 Xyce；NgSpice 常不支持。
+"""
+
+from __future__ import annotations
+
+from typing import Iterable, List, Tuple
+
+from PySpice.Spice.Netlist import ElementParameterMetaClass, PinDefinition
+
+# Import modules so their element classes are registered with the metaclass.
+import PySpice.Spice.BasicElement  # noqa: F401
+import PySpice.Spice.HighLevelElement  # noqa: F401
+
+
+def _format_pin(pin: PinDefinition) -> str:
+    name = pin.name if pin.name is not None else "?"
+    if pin.alias:
+        name = f"{name}/{pin.alias}"
+    if pin.optional:
+        name += "?"
+    return name
+
+
+def _format_positional(cls) -> List[str]:
+    positional = []
+    for name, param in cls.positional_parameters.items():
+        if getattr(param, "key_parameter", False):
+            positional.append(f"{name} [pos+kw]")
+        else:
+            positional.append(f"{name} [pos]")
+    return positional
+
+
+def _format_optional(cls) -> List[str]:
+    optional = []
+    for name, param in cls.optional_parameters.items():
+        spice_name = getattr(param, "spice_name", name)
+        if spice_name == name:
+            optional.append(name)
+        else:
+            optional.append(f"{name} ({spice_name})")
+    return optional
+
+
+def _iter_element_classes() -> Iterable[Tuple[str, type]]:
+    items = []
+    for prefix, classes in ElementParameterMetaClass._classes.items():
+        for cls in classes:
+            items.append((prefix, cls))
+
+    seen = set()
+    for prefix, cls in sorted(items, key=lambda x: (x[0], x[1].__name__)):
+        if cls in seen:
+            continue
+        seen.add(cls)
+        yield prefix, cls
+
+
+def main() -> int:
+    for prefix, cls in _iter_element_classes():
+        parts = [f"{prefix} ({cls.__name__})"]
+        alias = getattr(cls, "ALIAS", None)
+        long_alias = getattr(cls, "LONG_ALIAS", None)
+        if alias and alias != cls.__name__:
+            parts.append(f"alias={alias}")
+        if long_alias:
+            parts.append(f"name={long_alias}")
+
+        print("Element:", ", ".join(parts))
+
+        pins = getattr(cls, "PINS", None)
+        if pins:
+            pin_list = ", ".join(_format_pin(pin) for pin in pins)
+        else:
+            pin_list = "-"
+        print("  Pins:", pin_list)
+
+        positional = _format_positional(cls)
+        print("  Positional:", ", ".join(positional) if positional else "-")
+
+        optional = _format_optional(cls)
+        print("  Optional:", ", ".join(optional) if optional else "-")
+        print()
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+```
+
+!!! warning
+    
+    这些是器件实例参数，真正是否有效取决于你用的模型类型（如 BSIM、level=1 等）和仿真器（NgSpice/Xyce）。
+    
+    > • 在 SPICE 里，“模型类型/level”就是器件的数学模型版本：同一个 MOS 器件，仿真器可以用不同复杂度的方程来
+    >   描述它的电流、电容、温度效应、短沟道效应等。
+    >
+    >   - level=1：最基础的 Shichman‑Hodges 模型，参数少、速度快，但精度低，主要用于教学或粗略估算。
+    >   - level=3：更复杂一些，加入了部分短沟道效应和更真实的行为。
+    >   - BSIM 系列（如 BSIM3/BSIM4）：工业级模型，参数非常多，能更准确描述深亚微米器件。
+    >       - 在 NgSpice 中常见映射：level=49 通常指 BSIM3v3，level=54 指 BSIM4。
+    >   - 不同模型支持的参数也不同：比如 nf（多指）在 BSIM 模型里常见，但在 level=1 里可能完全不识别或被忽
+    >     略。
+
+!!! note
+    可惜不支持SA，SB这些关于LDE的参数
 
 
 
@@ -6610,6 +6870,8 @@ Top-K稀疏注意力
 
 
 ### 数据
+
+
 
 
 
