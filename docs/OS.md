@@ -424,14 +424,15 @@ fg %n 让后台运行的进程n到前台来
     
     # 查看特定资源限制（如 core 文件大小）
     limit coredumpsize
-    # 设置 core 文件大小为 0
-    limit coredumpsize 0
+    limit coredumpsize 0 # 设置 core 文件大小为 0
+    limit coredumpsize unlimited      # 允许生成 core
     
     ```
     
     [!CAUTION]
     
     永久生效要写到`.cshrc`
+    
 
 #### ref
 
