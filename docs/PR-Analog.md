@@ -394,6 +394,8 @@ can be reduced by identifying sensitive wires and using ==multiple parallel conn
 
 - common centroid layout provides ==better matching== as in this method gradients are canceled in ==both X and Y direction==. Interdigitized method provides gradient cancellation in ==one direction only==.
 
+- [Layout MOS晶体管的匹配规则](https://mp.weixin.qq.com/s/davwZ7X-JcQ3yhVMR5tkSA)
+
 - virtuoso的操作https://youtu.be/mca7NKcTlhU?list=PL0oLvNvFrW9xbe26NgdX-HsknCJ4ioGT7
 
 - Commoncentroid (CC) is a special layout technique which has been shown to be beneficial in reducing first-order variations [6] [7] [8] [9]

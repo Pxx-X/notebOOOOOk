@@ -623,3 +623,16 @@ export no_proxy="localhost,127.0.0.1,.local"
 #### ref
 
 - [通过ssh让远程主机使用本地主机的网络代理 | 彩虹岛](https://mill413.github.io/posts/通过ssh让远程主机使用本地主机的网络代理/)
+
+
+
+
+
+### Bug
+
+我无法在windows主机通过vpn远程ssh登录 校园网内部服务器 pengx@202.38.247.108, 但是我可以先登录
+  pengxuan@202.38.247.106（另一台服
+    务器）然后通过ssh登录 pengx@202.38.247.108.可能是什么原因？是windows主机的ip被封了吗？如何解决？
+
+!!! note
+    啊，换一下vpn就行了[捂脸]

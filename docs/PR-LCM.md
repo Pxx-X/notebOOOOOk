@@ -2,6 +2,8 @@
 
 ## Tools
 
+- [awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps)
+
 ### Agent
 
 #### Codex
@@ -89,6 +91,10 @@ The first human-like document-analysis agent [platform](https://chat.pageindex.a
 #### LEANN
 
 https://github.com/yichuan-w/LEANN
+
+#### UltraRAG
+
+https://github.com/OpenBMB/UltraRAG
 
 
 

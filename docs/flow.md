@@ -3262,7 +3262,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
 
       ```
       procedure(getPADCoord()
-        let( (cv inst master shapes shape lbbox gbbox ll ur center)
+        let( (cv inst master shapes shape lbbox gbbox ll ur center width height)
           cv = geGetEditCellView()
           unless(cv
             printf("No edit cellView found.\n")
@@ -3280,7 +3280,9 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
                   ll = car(gbbox)
                   ur = cadr(gbbox)
                   center = list( (car(ll)+car(ur))/2.0 (cadr(ll)+cadr(ur))/2.0 )
-                  printf("inst=%s center=%L\n" inst~>name center)
+                  width = car(ur) - car(ll)
+                  height = cadr(ur) - cadr(ll)
+                  printf("inst=%s center=%L w=%.6g h=%.6g\n" inst~>name center width height)
                 )
               )
             )
@@ -3295,7 +3297,7 @@ Seal Ring是一种**氧化、钝化层结构**，在版图上Seal Ring是一个�
    3. load
 
       ![image-20260121205442104](assets/image-20260121205442104.png)
-
+   
    4. 命令行中运行
    
       <img src="assets/image-20260121205550844.png" alt="image-20260121205550844" style="zoom: 50%;" />

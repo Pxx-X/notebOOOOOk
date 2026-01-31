@@ -527,6 +527,12 @@ class UnionFind:
 
 基于数组的排序算法[在这](./Algorithms.md/)
 
+
+
+##### List or Vector?
+
+https://www.zhihu.com/question/1997631452192466334/answer/1999052955018629727?share_code=NAfz87h3RZw1&utm_psn=1999106994599126130
+
 ##### 参考
 
 [2.1 链表基础 | 算法通关手册（LeetCode）](https://algo.itcharge.cn/02_linked_list/02_01_linked_list_basic/#_2-5-插入节点)

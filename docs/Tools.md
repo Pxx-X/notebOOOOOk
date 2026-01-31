@@ -384,6 +384,10 @@ bash Miniconda3-py38_23.5.2-0-Linux-x86_64.sh
 
 
 
+## uv
+
+python 包管理，类似conda，但是貌似只支持python，用不太上
+
 ## cuda 驱动，cuda-toolkit, cudnn
 
 ### 环境配置
@@ -534,6 +538,21 @@ linux下vscode支持的调试器为gdb
        git config --global user.name "你的名字"
        git config --global user.email "你的邮箱"
   ```
+
+
+
+### init
+
+```bash
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:Pxx-X/xAnalogAgent.git
+git push -u origin main
+```
+
+
 
 
 

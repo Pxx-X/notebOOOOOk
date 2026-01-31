@@ -1031,7 +1031,7 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) {
 
 
 
-#### find
+#### find, find_if
 
  - 有序/无序关联容器（std::map / std::unordered_map / std::set / std::unordered_set）：
 
@@ -1097,6 +1097,29 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) {
 
 !!! note
     注意：find 返回 end 表示未找到；访问前先检查。
+
+
+
+#### erase, erase_if
+
+```c++
+// erase two element at back
+src.erase(src.end() - 2, src.end());
+```
+
+
+
+```c++
+  int main() {
+    vector<pair<int, string>> v = {{1,"a"}, {0,"x"}, {2,"b"}, {0,"y"}};
+
+    erase_if(v, [](const auto &p){ return p.first == 0; });
+
+    // v 现在只剩下 first != 0 的元素
+  }
+```
+
+
 
 
 
@@ -1386,6 +1409,14 @@ int main() {
     tmp emplaced <moved-from> <moved-from> 
 
 - https://zhuanlan.zhihu.com/p/213853588
+
+
+
+!!! tip
+    
+    值得注意的是，基础数据类型（int, float, ptr) 移动=拷贝，也就是说是一样的。
+    
+    string这种才可以移动。
 
 
 
@@ -2178,6 +2209,9 @@ int c = reinterpret_cast<int>(ra);
 #### auto
 
 关键字 `auto` 允许编译器自动推导变量的类型，从而使程序员不必显式地指定它们。这一特性在处理复杂类型或[模板编程](https://zhida.zhihu.com/search?content_id=240865199&content_type=Article&match_order=1&q=模板编程&zhida_source=entity)时尤为有用，能够使代码==更加简洁明了==。
+
+!!! note
+    auto 指示一个数据类型，不会自动推断``const, & `等
 
 **应用场景**
 
@@ -6481,6 +6515,8 @@ if __name__ == "__main__":
 
 !!! note
     可惜不支持SA，SB这些关于LDE的参数
+
+
 
 
 
