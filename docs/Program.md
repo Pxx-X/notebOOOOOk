@@ -1422,6 +1422,62 @@ int main() {
 
 
 
+#### std::array 与 [] 区别
+
+##### UB区别
+
+```c++
+#include <iostream>
+#include <string>
+#include <exception>
+using namespace std;
+
+int main(){
+    string str = "http://c.biancheng.net";
+  
+    try{
+        char ch1 = str[100];
+        cout<<ch1<<endl;
+    }catch(exception e){
+        cout<<"[1]out of bound!"<<endl;
+    }
+
+    try{
+        char ch2 = str.at(100);
+        cout<<ch2<<endl;
+    }catch(exception &e){  //exception类位于<exception>头文件中
+        cout<<"[2]out of bound!"<<endl;
+    }
+
+    return 0;
+}
+```
+
+!!! note
+    output:
+    
+    
+    
+    [2]out of bound!
+    
+    > [1]不会throw
+    >
+    > [2]会throw
+    >
+    > string.at()源码：
+    >
+    > ```c++
+    > at(size_type __n)
+    > {
+    > 	if (__n >= size())
+    > 	  __throw_out_of_range_fmt(__N("basic_string::at: __n "
+    > 				       "(which is %zu) >= this->size() "
+    > 				       "(which is %zu)"),
+    > 				   __n, this->size());
+    > 	return _M_data()[__n];
+    > }
+    > ```
+
 #### 参考
 
 [C++ 迭代器(iterator)超详解+实例演练_c++ iterator-CSDN博客](https://blog.csdn.net/qq_52324409/article/details/121048486)
@@ -2688,59 +2744,82 @@ try{
 !!! note
     这就好比，catch 告诉 try：你去检测一下程序有没有错误，有错误的话就告诉我，我来处理，没有的话就不要理我！
 
+
+
 ```c++
-#include <iostream>
-#include <string>
-#include <exception>
-using namespace std;
-
-int main(){
-    string str = "http://c.biancheng.net";
-  
-    try{
-        char ch1 = str[100];
-        cout<<ch1<<endl;
-    }catch(exception e){
-        cout<<"[1]out of bound!"<<endl;
+int main() {
+    try {
+        throw std::out_of_range("Out of range error");
+        throw std::runtime_error("An error occurred");
+        // throw std::exception("An error occurred");   // can not call like it
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    try{
-        char ch2 = str.at(100);
-        cout<<ch2<<endl;
-    }catch(exception &e){  //exception类位于<exception>头文件中
-        cout<<"[2]out of bound!"<<endl;
-    }
-
+    std::cout << "Done" << std::endl;
     return 0;
 }
 ```
 
+
+
+#### std::exception
+
+列出 实际经常捕获的，以及它们的基类关系。
+
+  1) 运行时错误（最常用）
+
+  - std::runtime_error
+      - std::range_error
+      - std::overflow_error
+      - std::underflow_error
+  - std::logic_error
+      - std::invalid_argument
+      - std::domain_error
+      - std::length_error
+      - std::out_of_range
+
+  2) 内存/分配
+
+  - std::bad_alloc
+  - std::bad_array_new_length
+
+  3) 类型转换/类型信息
+
+  - std::bad_cast
+  - std::bad_typeid
+  - std::bad_any_cast
+  - std::bad_optional_access
+  - std::bad_variant_access
+
+  4) 线程/并发
+
+  - std::system_error（更广泛）
+      - std::future_error（std::future/promise）
+      - std::thread 抛 std::system_error
+      - std::mutex / std::lock 相关也可能抛 std::system_error
+
+  5) 文件系统（C++17）
+
+  - std::filesystem::filesystem_error（继承 std::system_error）
+
+  6) 其他
+
+  - std::ios_base::failure（IO 流）
+  - std::regex_error
+  - std::format_error（C++20）
+  - std::bad_exception（unexpected 相关，历史遗留）
+
+#### std::cerr 和 std::cout 的区别
+
+  - 你可以分别重定向输出：
+      - ./a.out > out.txt（只重定向 cout）
+      - ./a.out 2> err.txt（只重定向 cerr）
+      - ./a.out > out.txt 2> err.txt（分开）
+      - ./a.out > all.txt 2>&1（合并）
+
 !!! note
-    output:
-    
-    
-    
-    [2]out of bound!
-    
-    > [1]不会throw
-    >
-    > [2]会throw
-    >
-    > string.at()源码：
-    >
-    > ```c++
-    >       at(size_type __n)
-    >       {
-    > 	if (__n >= size())
-    > 	  __throw_out_of_range_fmt(__N("basic_string::at: __n "
-    > 				       "(which is %zu) >= this->size() "
-    > 				       "(which is %zu)"),
-    > 				   __n, this->size());
-    > 	return _M_data()[__n];
-    >       }
-    > ```
-
-
+    - std::clog：也是 stderr，但有缓冲，适合日志。
 
 #### 场景
 
@@ -2761,21 +2840,6 @@ int main(){
     return 0;
 }
 ```
-
-自定义 `exception`
-
-```c++
-```
-
-
-
-
-
-
-
-
-
-
 
 
 

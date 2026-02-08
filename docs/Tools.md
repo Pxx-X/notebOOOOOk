@@ -539,8 +539,6 @@ linux下vscode支持的调试器为gdb
        git config --global user.email "你的邮箱"
   ```
 
-
-
 ### init
 
 ```bash
@@ -552,16 +550,27 @@ git remote add origin git@github.com:Pxx-X/xAnalogAgent.git
 git push -u origin main
 ```
 
+```bash
+#http
+  git init
+  git add .
+  git commit -m "first commit"
+  git branch -M main
+  git remote add origin https://github.com/Pxx-X/git_test2.git
+  git push -u origin main
+```
 
-
-
+!!! note
+    设置远端url
+    
+    git remote set-url origin https://github.com/Pxx-X/notebOOOOOk.git #http
+    git remote set-url origin git@github.com:Pxx-X/notebOOOOOk.git #ssh
 
 ### branch
 
 ```
 git config --global init.defaultBranch <name> # change init branch name
 git branch -m <name> #change the just-created branch
-
 ```
 
 ### .gitignore
@@ -591,27 +600,6 @@ git branch -m <name> #change the just-created branch
   | **暂存区** ↔ **上次提交** (HEAD) | `git diff --cached`或 `git diff --staged` | 查看已使用 `git add`暂存，但**未提交**的变更。               |
 
 
-### commit
-
-In VS Code, go to the Source Control view (left sidebar, Git icon). You’ll see the untracked files.
-  - Click + (stage) on files or use the terminal: `git add .`
-  - if u `add` some files you don't want to `add`, you can change your `.gitignore`, then use `git reset`
-      `git rm -r --cached .`
-  - `git commit -m "…"`
-
-
-
-### push
-
-设置远端url
-
-```bash
-git remote set-url origin https://github.com/Pxx-X/notebOOOOOk.git #http
-git remote set-url origin git@github.com:Pxx-X/notebOOOOOk.git #ssh
-```
-
-
-
 ### clone & pull
 
 https://blog.csdn.net/Lakers2015/article/details/111871196
@@ -619,8 +607,6 @@ https://blog.csdn.net/Lakers2015/article/details/111871196
 #### git clone
 
 从远程服务器克隆一个一模一样的版本库到本地,复制的是整个版本库，叫做`git clone`。简单讲，`git clone`就是将一个库复制到本地，**是一个本地从无到有的过程**。包括里面的日志信息，git项目里的分支，你也可以直接切换、使用里面的分支等等。
-
-
 
 #### git pull
 
@@ -642,23 +628,6 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
 
 
-
-
-### Connect to Remote
-
-  1. ==Create a repository== on GitHub/Gitee/etc. (==without initializing== it with files if you already have local content).
-  2. Copy its HTTPS or SSH URL.
-  3. Back in VS Code terminal:
-      - `git remote add origin <remote-url>`
-      - `git branch -M main` (if you want main instead of master)
-      - `git push -u origin <branch_name>`
-
-
-
-### pull
-
-
-
 ### 分支管理
 
 - `git checkout -b <new_branch_name> origin/<new_branch_name>`指令创建一个 `new_branch_name` 分支并切换到 `new_branch_name` 分支上，并建立远端`new_branch_name`分支的追踪关系
@@ -667,6 +636,147 @@ git pull 作用是，==取回远程主机某个分支的更新==，再与本地�
 
   ![image-20251127200036610](assets/image-20251127200036610.png)
 
+
+
+
+### 本地改了，但是远程有新的热补丁
+
+#### Terminal workflow (recommended to learn Git)
+
+##### 1) Check current status
+
+  `git status`
+  `git branch --show-current`
+
+##### 2) Save your local work (choose one)
+
+  **Option A:** Commit your changes (best if you want to keep them)
+
+  `git add .`
+
+!!! note
+    可以先``git status`看那些要commit
+    
+    对于部分不想add的，可以`git rm --cached <filename>`
+    
+    > `git rm -f <filename>`会删除本地文件
+
+  `git commit -m "user2 changes"`
+
+  **Option B**: Stash them (if not ready to commit)
+
+  `git stash`
+
+!!! note
+    git stash 会把你当前工作区的改动临时保存到一个==“栈”==里，然后把工作区恢复成“干净状态”。所以你看到“==源码不见了==”是正常的——改动被收起来了，并没有丢。
+    
+      `git stash list`   #查看有哪些 stash
+    
+      `git stash show -p stash@{0}` #  查看某个 stash 的具体改动
+    
+      `git stash apply stash@{0} ` #  恢复（保留 stash 记录）
+    
+      `git stash pop` #   恢复并删除这条 stash（最常用）
+
+##### 3) Get latest from remote (no merge yet)
+
+  `git fetch origin`
+
+!!! note
+    • git fetch origin 的意思是：从远程仓库 origin 拉取最新的提交信
+    息和分支指针，但不把这些改动合并到你当前分支。
+    
+    常见流程：
+    
+    ```bash
+    git fetch origin
+    git diff HEAD..origin/main      # 看远程和本地差异
+    ```
+    
+
+![image-20260203191905435](assets/image-20260203191905435.png)
+
+##### 4) Inspect differences
+
+  `git diff --stat HEAD..origin/main`
+  `git diff HEAD..origin/main`
+
+!!! note
+    在vscode 直接用`source control` 看方便很多
+
+##### 5) Bring remote changes into your branch
+
+  Choose one:
+
+  **Rebase (clean history)**
+
+  `git pull --rebase origin main`
+
+!!! note
+    Rebase（git pull --rebase origin main）
+    把你本地的提交“挪到”远程最新提交的后面，不会产生合并提交。
+    好处：历史更直线、干净。
+    坏处：会重写本地提交的哈希（仅影响你本地的那些提交）。
+
+  **Merge (keeps merge commit)**
+
+  `git merge origin/main`
+
+!!! note
+    Merge（git pull origin main）
+     把远程分支合并进来，会生成一个新的“合并提交”。
+     好处：历史保留“谁在什么时候合并了什么”，更真实。
+     坏处：历史会有合并节点，看起来更“乱”。
+
+<img src="assets/image-20260203193215865.png" alt="image-20260203193215865" style="zoom: 40%;" />
+
+!!! note
+    ### 具体例子
+    
+     假设远程有新提交 B，你本地有提交 C：
+    
+     Rebase：
+    
+     A---B---C'
+    
+     C' 是把你本地的提交“挪过来”之后的新提交（哈希变了）。
+    
+     Merge：
+    
+     A---B---M   (M 是合并提交)
+      \         /
+       C----
+    
+     ### 选择建议
+    
+       - 个人或小团队：通常用 rebase（历史清爽）
+       - 多人协作、公共分支：多用 merge（保留真实合并）
+
+##### 6) Resolve conflicts (if any)
+
+  Open ==conflicted files==, choose which code to keep,
+
+!!! note
+    use vscode is useful
+
+ then:
+
+  If **rebase**:
+
+  `git rebase --continue`
+
+  If **merge**:
+
+  `git commit`
+
+<img src="assets/image-20260203193630446.png" alt="image-20260203193630446" style="zoom: 90%;" />
+
+##### 7) If you stashed earlier
+
+  `git stash pop`
+
+## 然后再决定
+  git pull --rebase origin main   # 或 git merge origin/main
 
 
 
